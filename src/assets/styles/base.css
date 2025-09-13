@@ -1,0 +1,141 @@
+@font-face {
+  font-family: "Nunito";
+  src:
+    url("../fonts/Nunito-VariableFont_wght.ttf") format("truetype"),
+    url("../fonts/Nunito-VariableFont_wght.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+html,
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: normal;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.container {
+  max-width: 125rem;
+  margin: 0 auto;
+  padding-inline: clamp(0rem, 4vw, 3rem);
+  transition: padding-inline 0.18s ease;
+}
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap {
+  gap: 1rem;
+}
+.gap20 {
+  gap: 2rem;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.jcb {
+  justify-content: space-between;
+}
+
+.aic {
+  align-items: center;
+}
+
+.pb {
+  padding-block: 3rem;
+}
+
+.tac {
+  text-align: center;
+}
+
+.mb {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.primary {
+  color: var(--color-blue);
+  font-size: var(--size-20);
+}
+
+.active {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.blue_small {
+  font-size: var(--size-16);
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.spooky {
+  width: 100%;
+  border: 1px solid var(--color-white);
+}
+
+.serviceFlex {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.feedback {
+  background-color: var(--color-gray);
+  color: var(--color-white);
+  font-size: var(--size-20);
+  border-radius: var(--radius-15);
+  padding: 3rem;
+}
+
+.icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.icon_contact {
+  width: 6rem;
+  height: 6rem;
+  background: #2d36de;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  -webkit-animation: up 3s;
+  animation: up 3s;
+}
+
+.icon_contact:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 12px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.icon_contact:active {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 850px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 40%;
+  }
+}

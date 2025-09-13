@@ -1,0 +1,115 @@
+/* ========= Modern Practical Reset ========= */
+/* 1) Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2) Убираем отступы у корневых элементов и body */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 3) Базовые шрифты: наследуем у body, обеспечиваем текстовую контрастность */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Liberation Sans",
+    sans-serif;
+  color: #111;
+  background: #fff;
+  text-rendering: optimizeLegibility;
+}
+
+/* 4) Удаляем стандартные отступы у заголовков и параграфов */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: inherit;
+}
+
+/* 5) Списки без маркеров по умолчанию */
+ul[class],
+ol[class] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 6) Сбрасываем ссылку: сохраняем фокусируемость */
+a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+/* 8) Формы: наследуем шрифты и убираем нативные отступы */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+/* 9) Кнопки: убираем дефолтный стиль, но не трогаем фокус */
+button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* 10) Устанавливаем доступные outline/фокус (не удаляем) */
+:focus {
+  outline: none;
+}
+
+/* 11) Таблицы: компактное поведение */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 12) Скрытые элементы (не ломаем SR) */
+[hidden] {
+  display: none !important;
+}
+
+/* 13) Удобные утилиты по умолчанию */
+.container,
+.wrapper {
+  box-sizing: content-box; /* если нужны специфичные контейнеры */
+}
+
+/* 14) Легкий сброс элементов формы с типовыми стилями */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+/* 15) Предотвращаем гладкую прокрутку на мобильных браузерах */
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}

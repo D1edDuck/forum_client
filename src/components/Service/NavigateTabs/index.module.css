@@ -1,0 +1,6 @@
+.border {
+  border-radius: 1.5rem;
+  padding: 0.5rem;
+  border: 0.1rem solid var(--color-blue);
+  justify-content: space-between;
+}

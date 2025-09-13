@@ -1,0 +1,29 @@
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.buttons {
+  justify-self: end;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.mb {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bottom {
+  max-width: 70rem;
+  line-height: 1.7;
+}
+
+.title {
+  font-weight: 700;
+}

@@ -1,0 +1,20 @@
+.title {
+  font-size: var(--size-32);
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  background-color: aqua;
+  font-size: var(--size-16);
+  font-weight: 700;
+}
+
+.price {
+  font-size: var(--size-24);
+}
