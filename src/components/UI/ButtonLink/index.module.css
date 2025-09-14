@@ -1,6 +1,6 @@
 .cta {
-  display: inline-flex;
   align-items: center;
+  display: inline-block;
   gap: 0.8rem;
   padding: 0.8rem 4.2rem;
   /* background: var(--color-white);

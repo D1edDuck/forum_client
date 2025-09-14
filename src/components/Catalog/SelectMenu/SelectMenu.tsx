@@ -1,17 +1,14 @@
 import { useCategories } from "@/app/hooks/useCategories";
 import { Link } from "react-router-dom";
 import s from "./index.module.css";
+import LoadingError from "@/components/UI/LoadingError/LoadingError";
 
 const SelectMenu = () => {
   const { data: catalog, loading, error } = useCategories();
 
   return (
     <div className={s.grid}>
-      {loading && <p className={s.loading}>Загрузка категорий…</p>}
-      {error && <p>Ошибка: {error}</p>}
-      {!loading && !error && catalog.length === 0 && (
-        <p>Категории не найдены.</p>
-      )}
+      <LoadingError loading={loading} error={error} />
 
       {!loading &&
         !error &&

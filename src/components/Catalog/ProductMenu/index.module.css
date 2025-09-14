@@ -9,12 +9,11 @@
   gap: 2rem;
 }
 
-.card {
-  background-color: aqua;
+.count {
   font-size: var(--size-16);
-  font-weight: 700;
+  opacity: 70%;
 }
 
-.price {
-  font-size: var(--size-24);
+.find {
+  font-size: var(--size-20);
 }

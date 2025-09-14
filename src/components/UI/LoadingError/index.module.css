@@ -1,0 +1,9 @@
+.error {
+  color: var(--color-red);
+  font-size: var(--size-20);
+  font-weight: 800;
+}
+
+.find {
+  font-size: var(--size-20);
+}

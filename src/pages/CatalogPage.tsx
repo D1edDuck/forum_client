@@ -4,7 +4,7 @@ import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
 const CatalogPage: React.FC = () => {
   return (
     <section>
-      <div className="container">
+      <div className="container mb4 pb4">
         <NavigateLine />
         <SelectMenu />
       </div>
