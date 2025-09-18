@@ -3,10 +3,18 @@ import { useCategory } from "@/app/hooks/useCategory";
 import s from "./index.module.css";
 import ProductCard from "@/components/UI/ProductCard/ProductCard";
 import LoadingError from "@/components/UI/LoadingError/LoadingError";
+import { useSelector } from "react-redux";
+import { selectFilteredProducts } from "@/features/catalog/catalogSelector";
+import { RootState } from "@/app/store";
+import useResetFiltersOnRouteChange from "@/app/hooks/resetFilter";
 
 const ProductMenu = () => {
   const { id } = useParams<{ id: string }>();
   const { category, products, count, loading, error } = useCategory(id);
+  const filteredProducts = useSelector((state: RootState) =>
+    selectFilteredProducts(state, products)
+  );
+  useResetFiltersOnRouteChange();
 
   return (
     <div className="mb">
@@ -17,11 +25,11 @@ const ProductMenu = () => {
 
       <LoadingError loading={loading} error={error} />
 
-      {products.length === 0 && !loading ? (
+      {filteredProducts.length === 0 && !loading ? (
         <p className={s.list}>Продукты не найдены</p>
       ) : (
         <div className={s.grid}>
-          {products.map((p) => (
+          {filteredProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>

@@ -1,12 +1,18 @@
+import { useFilterForm } from "@/app/hooks/useFilterForm";
 import s from "./index.module.css";
 
 interface IProps {
-  handleSubmit: () => void;
+  toggle: () => void;
   names: string[];
-  variant: string;
+  variant: "brand" | "stock";
 }
 
-const FilterForm = ({ handleSubmit, names, variant }: IProps) => {
+const FilterForm = ({ toggle, names, variant }: IProps) => {
+  const { select, addFilter, handleSubmit } = useFilterForm({
+    toggle,
+    variant,
+  });
+
   return (
     <div className={s.form}>
       <ul className={s.ul}>
@@ -14,15 +20,16 @@ const FilterForm = ({ handleSubmit, names, variant }: IProps) => {
 
         {names.map((name, idx) => {
           const safeId = `filter-${variant}-${idx}`;
-
           return (
             <li key={safeId} className={s.item}>
-              <input id={safeId} type="checkbox" className={s.checkbox} />
-              <label
-                htmlFor={safeId}
-                id={`label-${safeId}`}
-                className={s.label}
-              >
+              <input
+                id={safeId}
+                type="checkbox"
+                className={s.checkbox}
+                checked={select.includes(name)}
+                onChange={() => addFilter(name)}
+              />
+              <label htmlFor={safeId} className={s.label}>
                 <span className={s.box} />
                 <span className={s.text}>{name}</span>
               </label>

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 const ProductCatalogPage = () => {
   const { id } = useParams<{ id: string }>();
   const { products } = useCategory(id);
+
   return (
     <div className="container pb4 mb">
       <NavigateLine />

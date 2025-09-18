@@ -7,33 +7,36 @@ import FilterForm from "./FilterForm";
 interface IProps {
   title: string;
   products: IProduct[];
-  variant: string;
+  variant: "brand" | "stock";
 }
+
+const optionsMap = {
+  brand: (products: IProduct[]) =>
+    Array.from(new Set(products.map((p) => p.brand))),
+  stock: () => ["Да", "Нет"],
+};
 
 const FilterBar = ({ title, products, variant }: IProps) => {
   const { open, toggle, ref } = useFilterPrice();
 
   const names = useMemo(() => {
-    if (variant === "brand") {
-      return Array.from(new Set(products.map((p) => p.brand)));
-    }
-    if (variant === "stock") {
-      return ["Да", "Нет"];
-    }
-    return [];
+    const getOptions = optionsMap[variant];
+    return getOptions ? getOptions(products) : [];
   }, [products, variant]);
 
   return (
     <div className={s.block} ref={ref}>
       <div className={s.filter}>
-        <div className="flex gap" onClick={toggle}>
-          <p>{title}</p>
-          <p>{open ? "▴" : "▾"}</p>
-        </div>
+        <button
+          type="button"
+          className="flex gap items-center"
+          onClick={toggle}
+        >
+          <span>{title}</span>
+          <span>{open ? "▴" : "▾"}</span>
+        </button>
 
-        {open && (
-          <FilterForm handleSubmit={toggle} names={names} variant={variant} />
-        )}
+        {open && <FilterForm toggle={toggle} names={names} variant={variant} />}
       </div>
     </div>
   );

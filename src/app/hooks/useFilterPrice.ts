@@ -5,7 +5,9 @@ export const useFilterPrice = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const toggle = () => setOpen((prev) => !prev);
+  const toggle = () => {
+    setOpen((prev) => !prev);
+  };
 
   useClickOutside(ref, () => setOpen(false), open);
 

@@ -17,3 +17,7 @@
 .find {
   font-size: var(--size-20);
 }
+
+.list {
+  font-size: var(--size-24);
+}
