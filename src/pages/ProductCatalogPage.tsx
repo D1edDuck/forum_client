@@ -2,6 +2,7 @@ import { useCategory } from "@/app/hooks/useCategory";
 import ProductMenu from "@/components/Catalog/ProductMenu/ProductMenu";
 import FilterBar from "@/components/UI/FilterBar/FilterBar";
 import FilterList from "@/components/UI/FilterPrice/FilterPrice";
+import FindProduct from "@/components/UI/FindProduct/FindProduct";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
 import { useParams } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const ProductCatalogPage = () => {
         <FilterList title="Цена" />
         <FilterBar title="Бренд" products={products} variant="brand" />
         <FilterBar title="В наличии" products={products} variant="stock" />
+        <FindProduct />
       </div>
       <ProductMenu />
     </div>

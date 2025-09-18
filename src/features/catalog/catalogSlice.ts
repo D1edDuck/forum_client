@@ -18,7 +18,7 @@ const catalogSlice = createSlice({
       state.minValue = action.payload;
     },
     inputMax(state, action) {
-      state.minValue = action.payload;
+      state.maxValue = action.payload;
     },
   },
 });

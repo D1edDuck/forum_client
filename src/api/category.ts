@@ -9,11 +9,11 @@ export interface ICatalog {
 export interface IProduct {
   id: number;
   name: string;
+  brand: string;
+  model: string;
+  price: number;
+  stock: number;
   description?: string | null;
-  price?: number | null;
-  stock?: number | null;
-  brand?: string | null;
-  attributes?: { character: string };
 }
 
 export interface ICategory {
