@@ -1,0 +1,7 @@
+.tag {
+  background: var(--color-gray-light);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-15);
+  font-size: var(--size-20);
+  opacity: 70%;
+}

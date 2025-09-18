@@ -4,6 +4,7 @@ import FilterBar from "@/components/UI/FilterBar/FilterBar";
 import FilterList from "@/components/UI/FilterPrice/FilterPrice";
 import FindProduct from "@/components/UI/FindProduct/FindProduct";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
+import TagsFilters from "@/components/UI/TagsFilters/TagsFilters";
 import { useParams } from "react-router-dom";
 
 const ProductCatalogPage = () => {
@@ -19,6 +20,9 @@ const ProductCatalogPage = () => {
         <FilterBar title="В наличии" products={products} variant="stock" />
         <FindProduct />
       </div>
+
+      <TagsFilters />
+
       <ProductMenu />
     </div>
   );
