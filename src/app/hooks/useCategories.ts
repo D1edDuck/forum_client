@@ -11,7 +11,7 @@ export function useCategories() {
     setError(null);
 
     getCategories()
-      .then(setData)
+      .then(setData) // получаем все категории
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
       .finally(() => setLoading(false));
   }, []);

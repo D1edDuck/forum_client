@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import s from "./index.module.css";
 import { IProduct } from "@/api/category";
-import { useFilterPrice } from "@/app/hooks/useFilterPrice";
+import { useOpenFilter } from "@/app/hooks/useOpenFilter";
 import FilterForm from "./FilterForm";
 
 interface IProps {
@@ -17,7 +17,7 @@ const optionsMap = {
 };
 
 const FilterBar = ({ title, products, variant }: IProps) => {
-  const { open, toggle, ref } = useFilterPrice();
+  const { open, toggle, ref } = useOpenFilter();
 
   const names = useMemo(() => {
     const getOptions = optionsMap[variant];

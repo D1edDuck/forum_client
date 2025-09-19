@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/app/store";
 import { setBrand, setStock } from "@/features/catalog/catalogSlice";
+import { useFilterProduct } from "./useFilterProduct";
 
 interface IUseFilterFormProps {
   toggle: () => void;
@@ -12,6 +13,7 @@ export const useFilterForm = ({ toggle, variant }: IUseFilterFormProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const values = useSelector((state: RootState) => state.catalog[variant]);
   const [select, setSelect] = useState<string[]>(values);
+  const { applyFilter } = useFilterProduct();
 
   useEffect(() => {
     setSelect(values);
@@ -29,6 +31,7 @@ export const useFilterForm = ({ toggle, variant }: IUseFilterFormProps) => {
     } else {
       dispatch(setStock(select));
     }
+    applyFilter({ brand: select });
     toggle();
   }
 

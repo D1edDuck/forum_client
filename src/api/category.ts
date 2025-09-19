@@ -19,12 +19,12 @@ export interface IProduct {
 export interface ICategory {
   id: number;
   name: string;
-  products?: IProduct[];
+  products: IProduct[];
   _count?: { products: number } | null;
 }
 
 export async function getCategories(): Promise<ICatalog[]> {
-  return fetchJSON("/api/category");
+  return fetchJSON("/api/category"); // получаем все категории
 }
 
 export async function getCategory(id: string): Promise<ICategory> {

@@ -5,6 +5,7 @@ interface IState {
   maxValue: number | null;
   brand: string[];
   stock: string[];
+  search: string;
 }
 
 const initialState: IState = {
@@ -12,6 +13,7 @@ const initialState: IState = {
   maxValue: null,
   brand: [],
   stock: [],
+  search: "",
 };
 
 const catalogSlice = createSlice({
@@ -30,15 +32,25 @@ const catalogSlice = createSlice({
     setStock(state, action: PayloadAction<string[]>) {
       state.stock = action.payload;
     },
-    resetFilters(state) {
+    setSearch(state, action: PayloadAction<string>) {
+      state.search = action.payload;
+    },
+    resetOptions(state) {
       state.brand = [];
       state.stock = [];
       state.minValue = null;
       state.maxValue = null;
+      state.search = "";
     },
   },
 });
 
 export default catalogSlice.reducer;
-export const { inputMin, inputMax, setBrand, setStock, resetFilters } =
-  catalogSlice.actions;
+export const {
+  inputMin,
+  inputMax,
+  setBrand,
+  setStock,
+  resetOptions,
+  setSearch,
+} = catalogSlice.actions;

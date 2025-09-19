@@ -9,15 +9,15 @@ import { useParams } from "react-router-dom";
 
 const ProductCatalogPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { products } = useCategory(id);
+  const { product } = useCategory(id);
 
   return (
     <div className="container pb4 mb">
       <NavigateLine />
       <div className="flex gap">
         <FilterList title="Цена" />
-        <FilterBar title="Бренд" products={products} variant="brand" />
-        <FilterBar title="В наличии" products={products} variant="stock" />
+        <FilterBar title="Бренд" products={product} variant="brand" />
+        <FilterBar title="В наличии" products={product} variant="stock" />
         <FindProduct />
       </div>
 

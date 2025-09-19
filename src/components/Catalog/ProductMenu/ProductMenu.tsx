@@ -4,17 +4,17 @@ import s from "./index.module.css";
 import ProductCard from "@/components/UI/ProductCard/ProductCard";
 import LoadingError from "@/components/UI/LoadingError/LoadingError";
 import { useSelector } from "react-redux";
-import { selectFilteredProducts } from "@/features/catalog/catalogSelector";
 import { RootState } from "@/app/store";
 import useResetFiltersOnRouteChange from "@/app/hooks/resetFilter";
 
 const ProductMenu = () => {
   const { id } = useParams<{ id: string }>();
-  const { category, products, count, loading, error } = useCategory(id);
-  const filteredProducts = useSelector((state: RootState) =>
-    selectFilteredProducts(state, products)
+  const { category, count, loading, error } = useCategory(id); // получение категории и товаров из нее
+
+  const filteredProducts = useSelector(
+    (state: RootState) => state.product.filterProducts
   );
-  useResetFiltersOnRouteChange();
+  useResetFiltersOnRouteChange(); // сброс фильтров
 
   return (
     <div className="mb">

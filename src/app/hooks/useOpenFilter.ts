@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useClickOutside } from "@/app/hooks/useClickOutSide";
 
-export const useFilterPrice = () => {
+export const useOpenFilter = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

@@ -1,4 +1,4 @@
-import { useFilterPrice } from "@/app/hooks/useFilterPrice";
+import { useOpenFilter } from "@/app/hooks/useOpenFilter";
 import s from "./index.module.css";
 import { PriceForm } from "./PriceForm";
 
@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const FilterPrice = ({ title }: IProps) => {
-  const { open, toggle, ref } = useFilterPrice();
+  const { open, toggle, ref } = useOpenFilter();
 
   return (
     <div className={s.block} ref={ref}>

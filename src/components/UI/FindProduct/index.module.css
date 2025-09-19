@@ -1,0 +1,19 @@
+.input {
+  border: 0.2rem solid var(--color-blue);
+  outline: none;
+  border-radius: var(--radius-15);
+  height: 100%;
+  width: 30rem;
+  font-size: var(--size-20);
+  font-weight: 700;
+  padding: 1rem 2rem;
+}
+
+.find {
+  background: var(--color-blue);
+  border-radius: var(--radius-15);
+  color: var(--color-white);
+  font-size: var(--size-20);
+  height: 100%;
+  padding: 1rem 2rem;
+}
