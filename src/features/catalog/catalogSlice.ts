@@ -2,8 +2,8 @@ import { IFilter } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IFilter = {
-  minValue: null,
-  maxValue: null,
+  minValue: 0,
+  maxValue: 0,
   brand: [],
   stock: [],
   search: "",
@@ -13,10 +13,10 @@ const catalogSlice = createSlice({
   name: "catalogSlice",
   initialState,
   reducers: {
-    inputMin(state, action: PayloadAction<number | null>) {
+    inputMin(state, action: PayloadAction<number>) {
       state.minValue = action.payload;
     },
-    inputMax(state, action: PayloadAction<number | null>) {
+    inputMax(state, action: PayloadAction<number>) {
       state.maxValue = action.payload;
     },
     setBrand(state, action: PayloadAction<string[]>) {
@@ -31,8 +31,8 @@ const catalogSlice = createSlice({
     resetOptions(state) {
       state.brand = [];
       state.stock = [];
-      state.minValue = null;
-      state.maxValue = null;
+      state.minValue = 0;
+      state.maxValue = 0;
       state.search = "";
     },
   },

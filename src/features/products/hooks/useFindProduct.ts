@@ -1,12 +1,14 @@
-import { AppDispatch, RootState } from "@/app/store";
-import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/app/store";
+import { useDispatch } from "react-redux";
 import { getFindProducts } from "../productsSlice";
 import { fetchJSON } from "@/api/fetchJSON";
 import { setSearch } from "@/features/catalog/catalogSlice";
+import { useState } from "react";
 
 export const useFindProduct = () => {
-  const query = useSelector((state: RootState) => state.catalog.search);
   const dispatch = useDispatch<AppDispatch>();
+
+  const [query, setQuery] = useState<string>("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,12 +19,9 @@ export const useFindProduct = () => {
       `/api/products/search?q=${encodeURIComponent(query)}`
     );
 
+    dispatch(setSearch(query));
     dispatch(getFindProducts(data));
   }
 
-  function setValue(e: React.ChangeEvent<HTMLInputElement>) {
-    dispatch(setSearch(e.target.value));
-  }
-
-  return { handleSubmit, query, setValue };
+  return { handleSubmit, query, setQuery };
 };

@@ -4,7 +4,7 @@ import s from "./index.module.css";
 import ResetFilters from "../ResetFilters/ResetFilters";
 
 const TagsFilters = () => {
-  const { brand, stock, minValue, maxValue } = useSelector(
+  const { brand, stock, minValue, maxValue, search } = useSelector(
     (state: RootState) => state.catalog
   );
 
@@ -18,7 +18,13 @@ const TagsFilters = () => {
     );
   };
 
-  if (brand.length === 0 && stock.length === 0 && !minValue && !maxValue)
+  if (
+    brand.length === 0 &&
+    stock.length === 0 &&
+    minValue === 0 &&
+    maxValue === 0 &&
+    search === ""
+  )
     return null;
 
   return (
@@ -31,8 +37,10 @@ const TagsFilters = () => {
 
       {stock.map((name, i) => renderStockTag(name, i))}
 
-      {minValue !== null && <div className={s.tag}>{minValue} ₽</div>}
-      {maxValue !== null && <div className={s.tag}>{maxValue} ₽</div>}
+      {minValue !== 0 && <div className={s.tag}>{minValue} ₽</div>}
+      {maxValue !== 0 && <div className={s.tag}>{maxValue} ₽</div>}
+
+      <div className={s.tag}>{search}</div>
 
       <ResetFilters />
     </div>
