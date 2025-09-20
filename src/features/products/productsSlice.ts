@@ -38,11 +38,15 @@ const productSlice = createSlice({
       state.products = action.payload;
       state.filterProducts = action.payload;
     },
+    getFindProducts(state, action: PayloadAction<IProduct[]>) {
+      state.filterProducts = action.payload;
+    },
   },
 });
 
 export default productSlice.reducer;
-export const { getProducts, filterData } = productSlice.actions;
+export const { getProducts, filterData, getFindProducts } =
+  productSlice.actions;
 
 function filter(
   brand: string[],
