@@ -40,7 +40,7 @@ const TagsFilters = () => {
       {minValue !== 0 && <div className={s.tag}>{minValue} ₽</div>}
       {maxValue !== 0 && <div className={s.tag}>{maxValue} ₽</div>}
 
-      <div className={s.tag}>{search}</div>
+      {search !== "" && <div className={s.tag}>{search}</div>}
 
       <ResetFilters />
     </div>
