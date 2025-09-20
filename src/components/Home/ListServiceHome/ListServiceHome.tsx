@@ -1,5 +1,5 @@
 import ButtonConnect from "../../UI/ButtonConnect/ButtonConnect";
-import ServiceCard from "../../UI/ServiceCard/ServiceCard";
+import ServiceCard from "../../Service/ServiceCard/ServiceCard";
 import s from "./index.module.css";
 
 const service = {

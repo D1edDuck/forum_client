@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import s from "./index.module.css";
 import type { FC } from "react";
+
 type path = {
   path?: string;
   title: string;

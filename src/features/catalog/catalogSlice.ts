@@ -1,14 +1,7 @@
+import { IFilter } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IState {
-  minValue: number | null;
-  maxValue: number | null;
-  brand: string[];
-  stock: string[];
-  search: string;
-}
-
-const initialState: IState = {
+const initialState: IFilter = {
   minValue: null,
   maxValue: null,
   brand: [],

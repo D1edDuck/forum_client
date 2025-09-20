@@ -1,5 +1,5 @@
 import ProductMenu from "@/features/products/UI/ProductMenu/ProductMenu";
-import FilterBar from "@/features/products/UI/FilterBar/FilterBar";
+import FilterBar from "@/features/products/UI/FilterBrandStock/FilterBar";
 import FilterList from "@/features/products/UI/FilterPrice/FilterPrice";
 import FindProduct from "@/features/products/UI/FindProduct/FindProduct";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";

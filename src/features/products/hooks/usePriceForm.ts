@@ -25,7 +25,7 @@ export const usePriceForm = ({ onSubmit }: { onSubmit: () => void }) => {
 
     applyFilter({
       minValue: min === "" ? 0 : Number(min),
-      maxValue: max === "" ? Infinity : Number(max),
+      maxValue: max === "" ? 0 : Number(max),
     });
 
     onSubmit();

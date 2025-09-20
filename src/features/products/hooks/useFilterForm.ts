@@ -4,12 +4,12 @@ import { RootState, AppDispatch } from "@/app/store";
 import { setBrand, setStock } from "@/features/catalog/catalogSlice";
 import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
 
-interface IUseFilterFormProps {
+interface IProps {
   toggle: () => void;
   variant: "brand" | "stock";
 }
 
-export const useFilterForm = ({ toggle, variant }: IUseFilterFormProps) => {
+export const useFilterForm = ({ toggle, variant }: IProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const values = useSelector((state: RootState) => state.catalog[variant]);
   const [select, setSelect] = useState<string[]>(values);

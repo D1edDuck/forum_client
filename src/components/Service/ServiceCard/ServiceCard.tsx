@@ -1,5 +1,5 @@
 import s from "./index.module.css";
-import ButtonLink from "../ButtonLink/ButtonLink";
+import ButtonLink from "../../UI/ButtonLink/ButtonLink";
 
 interface IInfo {
   path: string;

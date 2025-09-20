@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import s from "./index.module.css";
-import { IProduct } from "@/api/fetchCategory";
 import { useOpenFilter } from "@/app/hooks/useOpenFilter";
 import FilterForm from "./FilterForm";
+import { IProduct } from "@/api/type";
 
 interface IProps {
   title: string;

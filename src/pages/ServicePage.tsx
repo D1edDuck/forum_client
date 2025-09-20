@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
-import NavigateTabs from "@/components/Service/NavigateTabs";
+import { useMemo } from "react";
+import NavigateTabs from "@/components/Service/NavigateTabs/NavigateTabs";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
-import ServiceBlock from "@/components/UI/ServiceBlock/ServiceBlock";
+import ServiceBlock from "@/components/Service/ServiceBlock/ServiceBlock";
 import { useParams } from "react-router-dom";
 import { services } from "@/api/mockProducts";
 import type { ServiceI } from "@/api/mockProducts";
 import FeedBack from "@/components/Service/FeedBackForm/FeedBack";
 
-const ServicePage: React.FC = () => {
+const ServicePage = () => {
   const { name } = useParams<{ name?: string }>();
 
   const selected: ServiceI | undefined = useMemo(

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCategory, ICategory, IProduct } from "@/api/fetchCategory";
+import { getCategory } from "@/api/fetchCategory";
 import { useDispatch } from "react-redux";
 import { getProducts } from "@/features/products/productsSlice";
 import { AppDispatch } from "@/app/store";
+import { ICategory, IProduct } from "@/api/type";
 
 export function useProductsCategory(id?: string) {
   const [category, setCategory] = useState<ICategory | null>(null);
@@ -28,7 +29,7 @@ export function useProductsCategory(id?: string) {
         if (data) {
           setCategory(data);
           setProduct(data.products ?? []);
-          setCount(data._count?.products ?? data.products?.length ?? 0);
+          setCount(data.count?.products ?? data.products?.length ?? 0);
           dispatch(getProducts(data.products)); //записываем в стейт товары
         } else {
           setCategory(null);

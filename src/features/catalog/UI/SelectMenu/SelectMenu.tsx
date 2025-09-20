@@ -1,7 +1,7 @@
 import { useCategories } from "@/features/catalog/hooks/useCategories";
-import { Link } from "react-router-dom";
 import s from "./index.module.css";
 import LoadingError from "@/components/UI/LoadingError/LoadingError";
+import LinkCategory from "../Link/LinkCategory";
 
 const SelectMenu = () => {
   const { data: catalog, loading, error } = useCategories();
@@ -10,14 +10,7 @@ const SelectMenu = () => {
     <div className={s.grid}>
       <LoadingError loading={loading} error={error} />
 
-      {!loading &&
-        !error &&
-        catalog.map((cat) => (
-          <div className={s.category} key={cat.id}>
-            <p>{cat.name}</p>
-            <Link to={`${cat.id}/${cat.slug}`}>{">"}</Link>
-          </div>
-        ))}
+      {!loading && !error && catalog.map((cat) => <LinkCategory cat={cat} />)}
     </div>
   );
 };

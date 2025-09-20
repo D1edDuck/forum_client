@@ -1,7 +1,7 @@
 import SelectMenu from "@/features/catalog/UI/SelectMenu/SelectMenu";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
 
-const CatalogPage: React.FC = () => {
+const CatalogPage = () => {
   return (
     <section>
       <div className="container mb4 pb4">

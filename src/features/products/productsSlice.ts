@@ -1,22 +1,14 @@
-import { IProduct } from "@/api/fetchCategory";
+import { IFilter, IProduct } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IFilter {
-  brand: string[];
-  stock: string[];
-  minValue: number;
-  maxValue: number;
-}
 interface IProductData {
   products: IProduct[];
   filterProducts: IProduct[];
-  filterInput: string;
 }
 
 const initialState: IProductData = {
   products: [],
   filterProducts: [],
-  filterInput: "",
 };
 
 const productSlice = createSlice({
@@ -24,15 +16,8 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     filterData(state, action: PayloadAction<IFilter>) {
-      const { brand, stock, maxValue, minValue } = action.payload; //инициализируем параметры
       console.log(action.payload);
-      state.filterProducts = filter(
-        brand,
-        stock,
-        minValue,
-        maxValue,
-        state.products
-      ); // отправляем фильтроваться
+      state.filterProducts = filter(action.payload, state.products); // отправляем фильтроваться
     },
     getProducts(state, action: PayloadAction<IProduct[]>) {
       state.products = action.payload;
@@ -44,13 +29,9 @@ const productSlice = createSlice({
   },
 });
 
-function filter(
-  brand: string[],
-  stock: string[],
-  minValue: number,
-  maxValue: number,
-  products: IProduct[]
-): IProduct[] {
+function filter(filter: IFilter, products: IProduct[]): IProduct[] {
+  const { brand, stock, minValue, maxValue } = filter;
+
   return products.filter((p) => {
     if (brand.length > 0 && !brand.includes(p.brand)) return false;
 
