@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useClickOutside } from "@/app/hooks/useClickOutSide";
+import { useClickOutside } from "@/features/products/hooks/useClickOutSide";
 
 export const useOpenFilter = () => {
   const [open, setOpen] = useState(false);

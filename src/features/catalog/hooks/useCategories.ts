@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCategories, ICatalog } from "@/api/category";
+import { getCategories, ICatalog } from "@/api/fetchCategory";
 
 export function useCategories() {
   const [data, setData] = useState<ICatalog[]>([]);

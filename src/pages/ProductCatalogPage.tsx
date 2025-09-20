@@ -1,15 +1,15 @@
-import { useCategory } from "@/app/hooks/useCategory";
-import ProductMenu from "@/components/Catalog/ProductMenu/ProductMenu";
-import FilterBar from "@/components/UI/FilterBar/FilterBar";
-import FilterList from "@/components/UI/FilterPrice/FilterPrice";
-import FindProduct from "@/components/UI/FindProduct/FindProduct";
+import ProductMenu from "@/features/products/UI/ProductMenu/ProductMenu";
+import FilterBar from "@/features/products/UI/FilterBar/FilterBar";
+import FilterList from "@/features/products/UI/FilterPrice/FilterPrice";
+import FindProduct from "@/features/products/UI/FindProduct/FindProduct";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
-import TagsFilters from "@/components/UI/TagsFilters/TagsFilters";
+import TagsFilters from "@/features/products/UI/TagsFilters/TagsFilters";
 import { useParams } from "react-router-dom";
+import { useProductsCategory } from "@/features/products/hooks/useProductsCategory";
 
 const ProductCatalogPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { product } = useCategory(id);
+  const { product } = useProductsCategory(id);
 
   return (
     <div className="container pb4 mb">

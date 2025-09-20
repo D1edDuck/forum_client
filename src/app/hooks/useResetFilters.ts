@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetOptions } from "@/features/catalog/catalogSlice";
 
-const useResetFiltersOnRouteChange = () => {
+const useResetFilters = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -12,4 +12,4 @@ const useResetFiltersOnRouteChange = () => {
   }, [location.pathname, dispatch]);
 };
 
-export default useResetFiltersOnRouteChange;
+export default useResetFilters;

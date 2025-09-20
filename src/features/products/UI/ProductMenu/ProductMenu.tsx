@@ -1,20 +1,20 @@
 import { useParams } from "react-router-dom";
-import { useCategory } from "@/app/hooks/useCategory";
 import s from "./index.module.css";
-import ProductCard from "@/components/UI/ProductCard/ProductCard";
+import ProductCard from "@/features/products/UI/ProductCard/ProductCard";
 import LoadingError from "@/components/UI/LoadingError/LoadingError";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
-import useResetFiltersOnRouteChange from "@/app/hooks/resetFilter";
+import useResetFilters from "@/app/hooks/useResetFilters";
+import { useProductsCategory } from "../../hooks/useProductsCategory";
 
 const ProductMenu = () => {
   const { id } = useParams<{ id: string }>();
-  const { category, count, loading, error } = useCategory(id); // получение категории и товаров из нее
+  const { category, count, loading, error } = useProductsCategory(id); // получение категории и товаров из нее
 
   const filteredProducts = useSelector(
     (state: RootState) => state.product.filterProducts
   );
-  useResetFiltersOnRouteChange(); // сброс фильтров
+  useResetFilters(); // сброс фильтров
 
   return (
     <div className="mb">

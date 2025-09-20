@@ -1,4 +1,4 @@
-import { IProduct } from "@/api/category";
+import { IProduct } from "@/api/fetchCategory";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IFilter {
@@ -25,7 +25,7 @@ const productSlice = createSlice({
   reducers: {
     filterData(state, action: PayloadAction<IFilter>) {
       const { brand, stock, maxValue, minValue } = action.payload; //инициализируем параметры
-
+      console.log(action.payload);
       state.filterProducts = filter(
         brand,
         stock,
@@ -43,10 +43,6 @@ const productSlice = createSlice({
     },
   },
 });
-
-export default productSlice.reducer;
-export const { getProducts, filterData, getFindProducts } =
-  productSlice.actions;
 
 function filter(
   brand: string[],
@@ -69,3 +65,7 @@ function filter(
     return true;
   });
 }
+
+export default productSlice.reducer;
+export const { getProducts, filterData, getFindProducts } =
+  productSlice.actions;

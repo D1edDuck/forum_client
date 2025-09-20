@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getCategory, ICategory, IProduct } from "@/api/category";
+import { getCategory, ICategory, IProduct } from "@/api/fetchCategory";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
 import { getProducts } from "@/features/products/productsSlice";
+import { AppDispatch } from "@/app/store";
 
-export function useCategory(id?: string) {
+export function useProductsCategory(id?: string) {
   const [category, setCategory] = useState<ICategory | null>(null);
   const [product, setProduct] = useState<IProduct[]>([]);
   const [count, setCount] = useState<number>(0);

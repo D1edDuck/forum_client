@@ -1,4 +1,4 @@
-import { useCategories } from "@/app/hooks/useCategories";
+import { useCategories } from "@/features/catalog/hooks/useCategories";
 import { Link } from "react-router-dom";
 import s from "./index.module.css";
 import LoadingError from "@/components/UI/LoadingError/LoadingError";

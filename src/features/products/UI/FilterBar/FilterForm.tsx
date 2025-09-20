@@ -1,4 +1,4 @@
-import { useFilterForm } from "@/app/hooks/useFilterForm";
+import { useFilterForm } from "@/features/products/hooks/useFilterForm";
 import s from "./index.module.css";
 
 interface IProps {

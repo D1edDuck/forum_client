@@ -1,4 +1,4 @@
-import SelectMenu from "@/components/Catalog/SelectMenu/SelectMenu";
+import SelectMenu from "@/features/catalog/UI/SelectMenu/SelectMenu";
 import NavigateLine from "@/components/UI/NavigateLine/NavigateLine";
 
 const CatalogPage: React.FC = () => {

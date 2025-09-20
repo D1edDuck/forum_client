@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useFilterProduct } from "./useFilterProduct";
-import { AppDispatch, RootState } from "../store";
+import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
+import { AppDispatch, RootState } from "../../../app/store";
 import { useState } from "react";
 import { inputMax, inputMin } from "@/features/catalog/catalogSlice";
 

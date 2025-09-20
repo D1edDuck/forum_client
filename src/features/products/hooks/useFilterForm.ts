@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/app/store";
 import { setBrand, setStock } from "@/features/catalog/catalogSlice";
-import { useFilterProduct } from "./useFilterProduct";
+import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
 
 interface IUseFilterFormProps {
   toggle: () => void;
@@ -28,10 +28,11 @@ export const useFilterForm = ({ toggle, variant }: IUseFilterFormProps) => {
   function handleSubmit() {
     if (variant === "brand") {
       dispatch(setBrand(select));
+      applyFilter({ brand: select });
     } else {
       dispatch(setStock(select));
+      applyFilter({ stock: select });
     }
-    applyFilter({ brand: select });
     toggle();
   }
 

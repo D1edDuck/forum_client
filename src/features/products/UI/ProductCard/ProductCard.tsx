@@ -1,6 +1,6 @@
-import { IProduct } from "@/api/category";
+import { IProduct } from "@/api/fetchCategory";
 import s from "./index.module.css";
-import ButtonLink from "../ButtonLink/ButtonLink";
+import ButtonLink from "../../../../components/UI/ButtonLink/ButtonLink";
 interface Props {
   product: IProduct;
 }
