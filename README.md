@@ -1,54 +1,123 @@
-# React + TypeScript + Vite
+# Forum Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Frontend-часть веб-форума / сервиса**  
+Реализовано на **React + TypeScript + Vite**.
 
-Currently, two official plugins are available:
+Проект предоставляет интерфейс для поиска и отображения продуктов/услуг, а в будущем будет расширен до полноценной платформы с личным кабинетом и сервисом для управления услугами и квитанциями.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📁 Стек технологий
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Redux Toolkit** (глобальное состояние)
+- **React Router v6** (`RouterProvider`)
+- **fetch** (для API-запросов)
+- **CSS Modules** (модульные стили)
+- **ESLint + Prettier** (линтинг и форматирование)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Установка и запуск
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Клонировать репозиторий
+   ```bash
+   git clone https://github.com/D1edDuck/forum_client.git
+   cd forum_client
+   Установить зависимости
+   ```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+bash
+Копировать код
+npm install
+
+# или
+
+yarn
+Запуск в режиме разработки
+
+bash
+Копировать код
+npm run dev
+
+# или
+
+yarn dev
+Сборка для продакшена
+
+bash
+Копировать код
+npm run build
+
+# или
+
+yarn build
+Просмотр собранного проекта
+
+bash
+Копировать код
+npm run preview
+🏗 Структура проекта
+csharp
+Копировать код
+forum_client/
+│
+├─ public/ # статические файлы
+├─ src/
+│ ├─ api/ # API-запросы и типы
+│ ├─ app/ # конфигурация (store, router, хуки)
+│ ├─ features/ # Redux-slices (catalog, products и т.д.)
+│ ├─ hooks/ # кастомные хуки React
+│ ├─ pages/ # страницы приложения
+│ ├─ components/ # UI-компоненты
+│ └─ styles/ # глобальные стили
+├─ index.html
+├─ vite.config.ts
+├─ package.json
+└─ tsconfig.json
+🔍 Реализованный функционал
+📦 Поиск и фильтрация продуктов
+
+По бренду
+
+По цене (min/max)
+
+По наличию
+
+🔄 Глобальное состояние через Redux Toolkit
+
+🔎 Поиск продуктов через API (/api/products/search)
+
+⬆️ ScrollToTop — сброс позиции скролла при переходах между страницами
+
+🧩 Полная типизация компонентов, хуков и API-запросов
+
+🛠 В планах (Roadmap)
+В ближайших обновлениях планируется:
+
+🔑 Авторизация и регистрация пользователей
+
+📝 Запись на услугу
+
+📄 Сервис для отслеживания квитанций (управление счетами и оплатами)
+
+👤 Личный кабинет пользователя
+
+🛠 Админ-панель для управления контентом и пользователями
+
+📦 Сервер (бэкенд)
+Данный репозиторий — только клиентская часть.
+Серверная часть с API, которая предоставляет:
+
+поиск продуктов /api/products/search
+
+управление пользователями (будет реализовано позже)
+
+сервис для учёта квитанций (будет реализовано позже)
+
+👤 Автор
+Автор: Igor Mazurenko
+
+GitHub: https://github.com/D1edDuck
