@@ -1,0 +1,27 @@
+.icon {
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.icon_contact {
+  width: 6rem;
+  height: 6rem;
+  background: #2d36de;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  -webkit-animation: up 3s;
+  animation: up 3s;
+}
+
+.icon_contact:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 12px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.icon_contact:active {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}

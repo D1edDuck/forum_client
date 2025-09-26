@@ -2,9 +2,7 @@
   color: var(--color-white);
   font-size: var(--size-20);
   font-weight: 600;
-  padding-block: 1.8rem;
   padding-inline: 5rem;
-  border-radius: 5rem;
   background-color: var(--color-blue);
 }
 .btn_connect :hover {
@@ -15,4 +13,14 @@
 .btn_connect :active {
   transform: translateY(-0.2rem);
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.soft {
+  border-radius: 5rem;
+  padding-block: 1.8rem;
+}
+
+.hard {
+  border-radius: var(--radius-15);
+  padding-block: 1rem;
 }

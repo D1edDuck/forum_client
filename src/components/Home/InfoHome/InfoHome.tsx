@@ -13,7 +13,7 @@ const InfoHome = () => {
           компьютерной техники
         </p>
         <div className={`${s.buttons} ${s.btn_connect_anim}`}>
-          <ButtonConnect />
+          <ButtonConnect title="Связаться с нами" primary="soft" />
           <SvgLink name={"mop"} />
           <SvgLink name={"contacts"} />
         </div>

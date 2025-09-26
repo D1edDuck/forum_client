@@ -4,10 +4,10 @@ import s from "./index.module.css";
 const NavigateTabs = () => {
   return (
     <div className={`flex gap ${s.border}`}>
-      <ButtonLink path={"/service/repair"} title="ремонт" variant="primary" />
+      <ButtonLink path={"/service/repair"} title="Ремонт" variant="primary" />
       <ButtonLink
         path={"/service/cleaning"}
-        title="профчистка"
+        title="Профчистка"
         variant="primary"
       />
       <ButtonLink
@@ -17,12 +17,12 @@ const NavigateTabs = () => {
       />
       <ButtonLink
         path={"/service/consultation"}
-        title="консультация"
+        title="Консультация"
         variant="primary"
       />
       <ButtonLink
         path={"/service/modernization"}
-        title="модернизация"
+        title="Модернизация"
         variant="primary"
       />
     </div>

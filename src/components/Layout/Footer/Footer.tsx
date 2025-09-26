@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className={s.footer}>
       <div className={`container pb ${s.grid}`}>
-        <h1 className={s.title}>Контакты</h1>
+        <h2 className={s.title}>Контакты</h2>
 
         <div>
           <p className={s.accent}>Время работы</p>

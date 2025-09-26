@@ -4,7 +4,7 @@ import s from "./index.module.css";
 
 const FeedBack = () => {
   return (
-    <div className={`feedback ${s.grid}`}>
+    <div className={s.grid}>
       <div className={s.mb}>
         <h2 className={s.title}>Форум.ру</h2>
         <p className={s.bottom}>
