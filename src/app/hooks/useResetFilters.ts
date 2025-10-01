@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { resetOptions } from "@/features/catalog/catalogSlice";
+import { useAppDispatch } from "./useAppDispatch";
 
 const useResetFilters = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(resetOptions()); //сбрасываем фильтры при переходах страницы

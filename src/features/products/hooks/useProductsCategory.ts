@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCategory } from "@/api/fetchCategory";
-import { useDispatch } from "react-redux";
 import { getProducts } from "@/features/products/productsSlice";
-import { AppDispatch } from "@/app/store";
 import { ICategory, IProduct } from "@/api/type";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 export function useProductsCategory(id?: string) {
   const [category, setCategory] = useState<ICategory | null>(null);
@@ -11,7 +10,7 @@ export function useProductsCategory(id?: string) {
   const [count, setCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!id) {

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/app/store";
+import { RootState } from "@/app/store";
 import { setBrand, setStock } from "@/features/catalog/catalogSlice";
 import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 interface IProps {
   toggle: () => void;
@@ -10,8 +11,8 @@ interface IProps {
 }
 
 export const useFilterForm = ({ toggle, variant }: IProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const values = useSelector((state: RootState) => state.catalog[variant]);
+  const dispatch = useAppDispatch();
+  const values = useAppSelector((state: RootState) => state.catalog[variant]);
   const [select, setSelect] = useState<string[]>(values);
   const { applyFilter } = useFilterProduct();
 

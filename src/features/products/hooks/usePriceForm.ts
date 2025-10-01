@@ -1,27 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
-import { AppDispatch, RootState } from "../../../app/store";
+import { useFilterProduct } from "@/app/hooks/useFilterProduct";
+import { RootState } from "@/app/store";
 import { useState } from "react";
 import { inputMax, inputMin } from "@/features/catalog/catalogSlice";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 export const usePriceForm = ({ onSubmit }: { onSubmit: () => void }) => {
   const { applyFilter } = useFilterProduct();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
-  const options = useSelector((state: RootState) => state.catalog);
+  const options = useAppSelector((state: RootState) => state.catalog);
 
   const [min, setMin] = useState<string>(
-    options.minValue !== null ? String(options.minValue) : ""
+    options.minValue !== 0 ? String(options.minValue) : ""
   );
   const [max, setMax] = useState<string>(
-    options.maxValue !== null ? String(options.maxValue) : ""
+    options.maxValue !== 0 ? String(options.maxValue) : ""
   );
 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
 
-    dispatch(inputMin(min === "" ? null : Number(min)));
-    dispatch(inputMax(max === "" ? null : Number(max)));
+    dispatch(inputMin(min === "" ? 0 : Number(min)));
+    dispatch(inputMax(max === "" ? 0 : Number(max)));
 
     applyFilter({
       minValue: min === "" ? 0 : Number(min),

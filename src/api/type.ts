@@ -26,5 +26,14 @@ export interface IFilter {
   stock: string[];
   minValue: number;
   maxValue: number;
-  search: string;
+  search?: string;
+}
+
+export interface IBooking {
+  name: string;
+  phone: string;
+  email?: string;
+  cause: string;
+  date: string;
+  comment: string;
 }

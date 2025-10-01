@@ -1,8 +1,12 @@
+import useForm from "../../hooks/useForm";
 import s from "./index.module.css";
 
 const BookingForm = () => {
+  const { name, cause, comment, date, email, phone, onSubmit, setValue } =
+    useForm();
+
   return (
-    <form className={s.form}>
+    <form className={s.form} onSubmit={onSubmit}>
       <div className="dlex">
         <label htmlFor="name">Имя и Фамилия</label>
         <input
@@ -11,6 +15,8 @@ const BookingForm = () => {
           className={s.input}
           placeholder="Имя Фамилия"
           required
+          value={name}
+          onChange={(e) => setValue("name", e.target.value)}
         />
       </div>
 
@@ -22,6 +28,8 @@ const BookingForm = () => {
           className={s.input}
           placeholder="+7 000 000 00 00"
           required
+          value={phone}
+          onChange={(e) => setValue("phone", e.target.value)}
         />
       </div>
 
@@ -32,12 +40,21 @@ const BookingForm = () => {
           id="email"
           className={s.input}
           placeholder="template@domain.com"
+          value={email}
+          onChange={(e) => setValue("email", e.target.value)}
         />
       </div>
 
       <div className="dlex">
         <label htmlFor="cause">Причина обращения</label>
-        <select id="cause" defaultValue="" className={s.input} required>
+        <select
+          id="cause"
+          defaultValue=""
+          className={s.input}
+          required
+          onChange={(e) => setValue("cause", e.target.value)}
+          value={cause}
+        >
           <option value="" disabled>
             Выберите причину
           </option>
@@ -48,7 +65,13 @@ const BookingForm = () => {
 
       <div className="dlex">
         <label htmlFor="date">Дата</label>
-        <input type="date" id="date" className={s.input} />
+        <input
+          type="date"
+          id="date"
+          className={s.input}
+          value={date}
+          onChange={(e) => setValue("date", e.target.value)}
+        />
       </div>
 
       <div className="dlex">
@@ -58,6 +81,8 @@ const BookingForm = () => {
           id="comment"
           placeholder="Кратко опишите проблему или пожелания"
           className={`${s.input} ${s.area}`}
+          value={comment}
+          onChange={(e) => setValue("comment", e.target.value)}
         ></textarea>
       </div>
 

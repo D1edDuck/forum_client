@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store";
 import { filterData } from "@/features/products/productsSlice";
 import { IFilter } from "@/api/type";
+import { useAppSelector } from "./useAppSelector";
+import { useAppDispatch } from "./useAppDispatch";
 
 export const useFilterProduct = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const options = useSelector((state: RootState) => state.catalog);
+  const dispatch = useAppDispatch();
+  const options = useAppSelector((state) => state.catalog);
 
   const applyFilter = (customFilters?: Partial<IFilter>) => {
     const filters = {

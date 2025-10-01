@@ -1,10 +1,10 @@
 import { RootState } from "@/app/store";
-import { useSelector } from "react-redux";
 import s from "./index.module.css";
 import ResetFilters from "../ResetFilters/ResetFilters";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const TagsFilters = () => {
-  const { brand, stock, minValue, maxValue, search } = useSelector(
+  const { brand, stock, minValue, maxValue, search } = useAppSelector(
     (state: RootState) => state.catalog
   );
 

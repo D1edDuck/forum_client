@@ -1,12 +1,11 @@
-import { AppDispatch } from "@/app/store";
-import { useDispatch } from "react-redux";
 import { getFindProducts } from "../productsSlice";
 import { fetchJSON } from "@/api/fetchJSON";
 import { setSearch } from "@/features/catalog/catalogSlice";
 import { useState } from "react";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 export const useFindProduct = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const [query, setQuery] = useState<string>("");
 

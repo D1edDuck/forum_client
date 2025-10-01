@@ -1,11 +1,10 @@
-import { AppDispatch } from "@/app/store";
 import { resetOptions } from "@/features/catalog/catalogSlice";
-import { useDispatch } from "react-redux";
 import s from "./index.module.css";
 import { useFilterProduct } from "@/app/hooks/useFilterProduct";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 const ResetFilters = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { resetFilters } = useFilterProduct();
 
   function reset() {
