@@ -5,7 +5,7 @@ import { inputValue } from "../bookingSlice";
 
 const useForm = () => {
   const dispatch = useAppDispatch();
-  const { name, comment, date, email, phone, cause } = useAppSelector(
+  const { name, comment, email, phone, cause } = useAppSelector(
     (state) => state.booking
   );
 
@@ -21,7 +21,6 @@ const useForm = () => {
     name,
     cause,
     comment,
-    date,
     email,
     phone,
     onSubmit,

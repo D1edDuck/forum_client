@@ -34,6 +34,5 @@ export interface IBooking {
   phone: string;
   email?: string;
   cause: string;
-  date: string;
   comment: string;
 }

@@ -2,8 +2,7 @@ import useForm from "../../hooks/useForm";
 import s from "./index.module.css";
 
 const BookingForm = () => {
-  const { name, cause, comment, date, email, phone, onSubmit, setValue } =
-    useForm();
+  const { name, cause, comment, email, phone, onSubmit, setValue } = useForm();
 
   return (
     <form className={s.form} onSubmit={onSubmit}>
@@ -61,17 +60,6 @@ const BookingForm = () => {
           <option value="repair">Ремонт компьютера</option>
           <option value="cartridge">Заправка картриджа</option>
         </select>
-      </div>
-
-      <div className="dlex">
-        <label htmlFor="date">Дата</label>
-        <input
-          type="date"
-          id="date"
-          className={s.input}
-          value={date}
-          onChange={(e) => setValue("date", e.target.value)}
-        />
       </div>
 
       <div className="dlex">

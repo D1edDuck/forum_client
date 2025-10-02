@@ -6,7 +6,6 @@ const initialState: IBooking = {
   phone: "",
   email: "",
   cause: "",
-  date: "",
   comment: "",
 };
 
