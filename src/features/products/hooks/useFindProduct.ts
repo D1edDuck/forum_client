@@ -15,7 +15,7 @@ export const useFindProduct = () => {
     if (!query.trim()) return;
 
     const data = await fetchJSON(
-      `/api/products/search?q=${encodeURIComponent(query)}`
+      `/products/search?q=${encodeURIComponent(query)}`
     );
 
     dispatch(setSearch(query));

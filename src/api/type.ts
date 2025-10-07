@@ -36,3 +36,19 @@ export interface IBooking {
   cause: string;
   comment: string;
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  phone: string;
+  email?: string;
+  role: "user" | "admin";
+}
+
+export interface IRepair {
+  id?: number;
+  userId?: number;
+  cause: string;
+  comment: string;
+  status: "pending" | "rejected";
+}
