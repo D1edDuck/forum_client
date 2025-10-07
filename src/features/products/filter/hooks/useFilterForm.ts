@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { RootState } from "@/app/store";
-import { setBrand, setStock } from "@/features/catalog/catalogSlice";
-import { useFilterProduct } from "../../../app/hooks/useFilterProduct";
+import { useFilterProduct } from "../../../../app/hooks/useFilterProduct";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { setBrand, setStock } from "../filterSlice";
 
 interface IProps {
   toggle: () => void;
@@ -12,7 +12,7 @@ interface IProps {
 
 export const useFilterForm = ({ toggle, variant }: IProps) => {
   const dispatch = useAppDispatch();
-  const values = useAppSelector((state: RootState) => state.catalog[variant]);
+  const values = useAppSelector((state: RootState) => state.filter[variant]);
   const [select, setSelect] = useState<string[]>(values);
   const { applyFilter } = useFilterProduct();
 

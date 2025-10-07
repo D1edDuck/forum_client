@@ -1,15 +1,15 @@
 import { useFilterProduct } from "@/app/hooks/useFilterProduct";
 import { RootState } from "@/app/store";
 import { useState } from "react";
-import { inputMax, inputMin } from "@/features/catalog/catalogSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { inputMax, inputMin } from "../filterSlice";
 
 export const usePriceForm = ({ onSubmit }: { onSubmit: () => void }) => {
   const { applyFilter } = useFilterProduct();
   const dispatch = useAppDispatch();
 
-  const options = useAppSelector((state: RootState) => state.catalog);
+  const options = useAppSelector((state: RootState) => state.filter);
 
   const [min, setMin] = useState<string>(
     options.minValue !== 0 ? String(options.minValue) : ""

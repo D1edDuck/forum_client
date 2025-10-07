@@ -5,7 +5,7 @@ import { useAppDispatch } from "./useAppDispatch";
 
 export const useFilterProduct = () => {
   const dispatch = useAppDispatch();
-  const options = useAppSelector((state) => state.catalog);
+  const options = useAppSelector((state) => state.filter);
 
   const applyFilter = (customFilters?: Partial<IFilter>) => {
     const filters = {

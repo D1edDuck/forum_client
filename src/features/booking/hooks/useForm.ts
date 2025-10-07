@@ -2,7 +2,7 @@ import { IBooking, IRepair } from "@/api/type";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { inputValue } from "../bookingSlice";
-import { fetchBookingPOST } from "@/api/fetchBooking";
+import { apiClient } from "@/app/apiClient";
 
 const useForm = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ const useForm = () => {
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const repair: IRepair = { cause, comment, status: "pending", userId: 1 }; // ИЗМЕНИТЬ USERID, ВРЕМЕННАЯ КОНСТАНТА
-    fetchBookingPOST(repair);
+    apiClient("repair", "POST", repair);
   }
 
   return {

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { resetOptions } from "@/features/catalog/catalogSlice";
 import { useAppDispatch } from "./useAppDispatch";
+import { resetOptions } from "@/features/products/filter/filterSlice";
 
 const useResetFilters = () => {
   const location = useLocation();

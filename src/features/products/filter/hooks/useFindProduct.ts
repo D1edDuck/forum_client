@@ -1,8 +1,7 @@
-import { getFindProducts } from "../productsSlice";
-import { fetchJSON } from "@/api/fetchJSON";
-import { setSearch } from "@/features/catalog/catalogSlice";
 import { useState } from "react";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { fetchProductsSearch } from "../../productsThunks";
+import { setSearch } from "../filterSlice";
 
 export const useFindProduct = () => {
   const dispatch = useAppDispatch();
@@ -14,12 +13,8 @@ export const useFindProduct = () => {
 
     if (!query.trim()) return;
 
-    const data = await fetchJSON(
-      `/products/search?q=${encodeURIComponent(query)}`
-    );
-
     dispatch(setSearch(query));
-    dispatch(getFindProducts(data));
+    dispatch(fetchProductsSearch(query));
   }
 
   return { handleSubmit, query, setQuery };

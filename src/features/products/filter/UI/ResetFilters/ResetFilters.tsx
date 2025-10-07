@@ -1,7 +1,7 @@
-import { resetOptions } from "@/features/catalog/catalogSlice";
 import s from "./index.module.css";
 import { useFilterProduct } from "@/app/hooks/useFilterProduct";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { resetOptions } from "../../filterSlice";
 
 const ResetFilters = () => {
   const dispatch = useAppDispatch();

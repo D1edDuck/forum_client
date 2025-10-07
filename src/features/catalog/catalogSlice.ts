@@ -1,49 +1,38 @@
-import { IFilter } from "@/api/type";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ICatalog } from "@/api/type";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchCatalog } from "./catalogThunk";
 
-const initialState: IFilter = {
-  minValue: 0,
-  maxValue: 0,
-  brand: [],
-  stock: [],
-  search: "",
+interface IState {
+  category: ICatalog[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: IState = {
+  category: [],
+  loading: false,
+  error: null,
 };
 
 const catalogSlice = createSlice({
   name: "catalogSlice",
   initialState,
-  reducers: {
-    inputMin(state, action: PayloadAction<number>) {
-      state.minValue = action.payload;
-    },
-    inputMax(state, action: PayloadAction<number>) {
-      state.maxValue = action.payload;
-    },
-    setBrand(state, action: PayloadAction<string[]>) {
-      state.brand = action.payload;
-    },
-    setStock(state, action: PayloadAction<string[]>) {
-      state.stock = action.payload;
-    },
-    setSearch(state, action: PayloadAction<string>) {
-      state.search = action.payload;
-    },
-    resetOptions(state) {
-      state.brand = [];
-      state.stock = [];
-      state.minValue = 0;
-      state.maxValue = 0;
-      state.search = "";
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCatalog.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCatalog.fulfilled, (state, action) => {
+        state.loading = false;
+        state.category = action.payload;
+      })
+      .addCase(fetchCatalog.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ?? "Неизвестная ошибка";
+      });
   },
 });
 
 export default catalogSlice.reducer;
-export const {
-  inputMin,
-  inputMax,
-  setBrand,
-  setStock,
-  resetOptions,
-  setSearch,
-} = catalogSlice.actions;

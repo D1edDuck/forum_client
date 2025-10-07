@@ -1,35 +1,77 @@
-import { IFilter, IProduct } from "@/api/type";
+import { ICategory, IFilter, IProduct } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchProducts, fetchProductsSearch } from "./productsThunks";
 
 interface IProductData {
   products: IProduct[];
   filterProducts: IProduct[];
+  loading: boolean;
+  error: null | string;
 }
 
 const initialState: IProductData = {
   products: [],
   filterProducts: [],
+  loading: false,
+  error: null,
 };
 
 const productSlice = createSlice({
   name: "productSlice",
   initialState,
   reducers: {
-    filterData(state, action: PayloadAction<IFilter>) {
+    filterData(
+      state,
+      action: PayloadAction<Omit<IFilter, "loading" | "error">>
+    ) {
       console.log(action.payload);
       state.filterProducts = filter(action.payload, state.products); // отправляем фильтроваться
     },
-    getProducts(state, action: PayloadAction<IProduct[]>) {
-      state.products = action.payload;
-      state.filterProducts = action.payload;
-    },
-    getFindProducts(state, action: PayloadAction<IProduct[]>) {
-      state.filterProducts = action.payload;
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchProducts.fulfilled,
+        (state, action: PayloadAction<ICategory>) => {
+          console.log("payload:", action.payload);
+          state.loading = false;
+          state.products = action.payload.products;
+          state.filterProducts = action.payload.products; // сразу показываем все
+        }
+      )
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = (action.payload as string) || "Ошибка загрузки";
+      });
+
+    builder
+      .addCase(fetchProductsSearch.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchProductsSearch.fulfilled,
+        (state, action: PayloadAction<IProduct[]>) => {
+          state.loading = false;
+          state.filterProducts = action.payload; // сразу показываем все
+        }
+      )
+      .addCase(fetchProductsSearch.rejected, (state, action) => {
+        state.loading = false;
+        state.error = (action.payload as string) || "Ошибка загрузки";
+      });
   },
 });
 
-function filter(filter: IFilter, products: IProduct[]): IProduct[] {
+function filter(
+  filter: Omit<IFilter, "loading" | "error">,
+  products: IProduct[]
+): IProduct[] {
+  console.log(filter);
   const { brand, stock, minValue, maxValue } = filter;
 
   return products.filter((p) => {
@@ -48,5 +90,4 @@ function filter(filter: IFilter, products: IProduct[]): IProduct[] {
 }
 
 export default productSlice.reducer;
-export const { getProducts, filterData, getFindProducts } =
-  productSlice.actions;
+export const { filterData } = productSlice.actions;

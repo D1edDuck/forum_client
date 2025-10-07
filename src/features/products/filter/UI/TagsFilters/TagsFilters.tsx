@@ -5,7 +5,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const TagsFilters = () => {
   const { brand, stock, minValue, maxValue, search } = useAppSelector(
-    (state: RootState) => state.catalog
+    (state: RootState) => state.filter
   );
 
   const renderStockTag = (name: string, i: number) => {

@@ -27,6 +27,8 @@ export interface IFilter {
   minValue: number;
   maxValue: number;
   search?: string;
+  loading: boolean;
+  error: string | null;
 }
 
 export interface IBooking {

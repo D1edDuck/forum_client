@@ -1,5 +1,5 @@
 import s from "./index.module.css";
-import { usePriceForm } from "@/features/products/hooks/usePriceForm";
+import { usePriceForm } from "@/features/products/filter/hooks/usePriceForm";
 
 export const PriceForm = ({ onSubmit }: { onSubmit: () => void }) => {
   const { min, max, setMax, setMin, handleSubmit } = usePriceForm({ onSubmit });
