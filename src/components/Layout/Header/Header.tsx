@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Hamburger from "../../UI/Humburger/Hamburger";
 import s from "./index.module.css";
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
+  let linkText = "Личный кабинет";
+  let linkTo = "/profile";
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,6 +18,17 @@ const Header = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const { pathname } = useLocation();
+
+  if (
+    pathname === "/registration" ||
+    pathname === "/profile" ||
+    pathname === "/login"
+  ) {
+    linkText = "Главная";
+    linkTo = "/";
+  }
 
   return (
     <header className={s.header}>
@@ -43,9 +56,9 @@ const Header = () => {
         ) : (
           <Hamburger />
         )}
-        <svg className={`${s.icon}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-logo"></use>
-        </svg>
+        <Link to={linkTo} className={s.profile}>
+          {linkText}
+        </Link>
       </div>
     </header>
   );

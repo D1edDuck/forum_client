@@ -3,6 +3,7 @@ import CatalogSlice from "@/features/catalog/catalogSlice";
 import productSlice from "@/features/products/productsSlice";
 import bookingSlice from "@/features/booking/bookingSlice";
 import filterSlice from "@/features/products/filter/filterSlice";
+import userSlice from "@/features/profile/userSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     product: productSlice,
     booking: bookingSlice,
     filter: filterSlice,
+    user: userSlice,
   },
 });
 

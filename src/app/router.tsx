@@ -9,6 +9,10 @@ import FaqPage from "@/pages/FaqPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ProductCatalogPage from "@/pages/ProductCatalogPage";
+import ProfilePage from "@/pages/ProfilePage";
+import FormAuthorization from "@/features/profile/UI/FormAuthorization/FormAuthorization";
+import FormRegistration from "@/features/profile/UI/FormRegistration/FormRegistration";
+import LoginLayout from "@/components/Layout/LoginLayout/LoginLayout";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +28,16 @@ const router = createBrowserRouter([
       { path: "/booking", element: <BookingPage /> },
       { path: "/FAQ", element: <FaqPage /> },
       { path: "/about", element: <AboutPage /> },
+      { path: "/profile", element: <ProfilePage /> },
       { path: "*", element: <NotFoundPage /> },
+      {
+        path: "/",
+        element: <LoginLayout />,
+        children: [
+          { path: "registration", element: <FormRegistration /> },
+          { path: "login", element: <FormAuthorization /> },
+        ],
+      },
     ],
   },
 ]);

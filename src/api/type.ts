@@ -40,11 +40,11 @@ export interface IBooking {
 }
 
 export interface IUser {
-  id: number;
-  name: string;
-  phone: string;
-  email?: string;
-  role: "user" | "admin";
+  id: number | null;
+  name: string | null;
+  phone: string | null;
+  email?: string | null;
+  role: "user" | "admin" | null;
 }
 
 export interface IRepair {
