@@ -47,6 +47,11 @@ export interface IUser {
   role: "user" | "admin" | null;
 }
 
+export interface IUserWithToken {
+  user: IUser;
+  token: string;
+}
+
 export interface IRepair {
   id?: number;
   userId?: number;

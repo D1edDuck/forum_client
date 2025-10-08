@@ -15,6 +15,11 @@ interface IProps {
   linkBefore: string;
   linkText: string;
   linkTo: string;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  formData: Record<string, string>;
+  loading?: boolean;
+  error?: string | null;
 }
 
 const FormLayout = ({
@@ -23,10 +28,12 @@ const FormLayout = ({
   linkBefore,
   linkText,
   linkTo,
+  formData,
+  handleChange,
+  handleSubmit,
+  error,
+  loading,
 }: IProps) => {
-  function handleSubmit() {
-    alert("Отправлено");
-  }
   return (
     <div className={s.form}>
       <h3 className={s.title}>{buttonText}</h3>
@@ -44,12 +51,14 @@ const FormLayout = ({
                 required={field.required}
                 placeholder={field.placeholder}
                 className={s.input}
+                value={formData[field.name] || ""}
+                onChange={handleChange}
               />
             </div>
           ))}
         </div>
-        <button type="submit" className={s.button}>
-          {buttonText}
+        <button type="submit" className={s.button} disabled={loading}>
+          {loading ? "Загрузка..." : buttonText}
         </button>
       </form>
       <div className={s.links}>
@@ -58,6 +67,7 @@ const FormLayout = ({
           <span className={s.link}>{linkText}</span>
         </Link>
       </div>
+      {error && <p className={s.error}>{error}</p>}
     </div>
   );
 };

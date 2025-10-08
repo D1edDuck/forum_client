@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PersonalAccount = () => {
-  const { id } = useAppSelector((state) => state.user);
+  const { token } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id === null) {
+    if (token === null) {
       navigate("/login");
     }
-  }, [id, navigate]);
+  }, [token, navigate]);
 
   return <div></div>;
 };
