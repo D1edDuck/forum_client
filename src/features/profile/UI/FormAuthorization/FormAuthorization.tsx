@@ -1,27 +1,29 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { IFormValue, inputValue, resetValue } from "../../userSlice";
 import FormLayout from "../FormLayout/FormLayout";
 import { loginUser } from "../../userThunk";
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { IFields } from "../FormRegistration/FormRegistration";
 
-const loginFields = [
+const loginFields: IFields[] = [
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
   { name: "password", type: "password", required: true, label: "Пароль" },
 ];
 
 const FormAuthorization = () => {
+  const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.user);
-  const [formData, setFormData] = useState({ phone: "", password: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const fieldName = e.target.name as keyof IFormValue;
+    dispatch(inputValue({ id: fieldName, value: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginUser({ phone: formData.phone, password: formData.password }));
+
+    dispatch(loginUser(formData));
+    dispatch(resetValue());
   };
 
   return (
@@ -34,8 +36,6 @@ const FormAuthorization = () => {
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       formData={formData}
-      loading={loading}
-      error={error}
     />
   );
 };

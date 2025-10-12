@@ -1,11 +1,18 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store";
-import FormLayout from "../FormLayout/FormLayout";
-import { registerUser } from "../../userThunk";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import FormLayout from "../FormLayout/FormLayout";
+import { IFormValue, inputValue, resetValue } from "../../userSlice";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { registerUser } from "../../userThunk";
 
-const registrationFields = [
+export interface IFields {
+  name: string;
+  type: string;
+  required: boolean;
+  label: string;
+  placeholder?: string;
+}
+
+const registrationFields: IFields[] = [
   { name: "name", type: "text", required: true, label: "Имя" },
   { name: "email", type: "email", required: false, label: "Email" },
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
@@ -13,29 +20,19 @@ const registrationFields = [
 ];
 
 const FormRegistration = () => {
+  const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.user);
-  const [formData, setFormData] = useState({
-    phone: "",
-    password: "",
-    name: "",
-    email: "",
-  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const fieldName = e.target.name as keyof IFormValue;
+    dispatch(inputValue({ id: fieldName, value: e.target.value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(
-      registerUser({
-        name: formData.name,
-        password: formData.password,
-        phone: formData.phone,
-        email: formData.email,
-      })
-    );
+
+    dispatch(registerUser(formData));
+    dispatch(resetValue());
   };
 
   return (
@@ -48,8 +45,6 @@ const FormRegistration = () => {
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       formData={formData}
-      loading={loading}
-      error={error}
     />
   );
 };

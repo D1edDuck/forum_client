@@ -1,12 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser, fetchProfile } from "./userThunk";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@/api/type";
+import { loginUser, registerUser } from "./userThunk";
+
+export interface IFormValue {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  [key: string]: string | undefined;
+}
 
 interface UserState {
   user: IUser | null;
   token: string | null;
   loading: boolean;
   error: string | null;
+  formValue: IFormValue;
 }
 
 const initialState: UserState = {
@@ -14,6 +23,12 @@ const initialState: UserState = {
   token: null,
   loading: false,
   error: null,
+  formValue: {
+    name: "",
+    password: "",
+    phone: "",
+    email: "",
+  },
 };
 
 const userSlice = createSlice({
@@ -26,50 +41,50 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
+    inputValue(
+      state,
+      action: PayloadAction<{ id: keyof IFormValue; value: string }>
+    ) {
+      const { id, value } = action.payload;
+      state.formValue[id] = value;
+    },
+    resetValue(state) {
+      state.formValue.email = "";
+      state.formValue.name = "";
+      state.formValue.password = "";
+      state.formValue.phone = "";
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-    });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload || "Ошибка логина";
-    });
-
-    builder.addCase(registerUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-    });
-    builder.addCase(registerUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload || "Ошибка регистрации";
-    });
-
-    builder.addCase(fetchProfile.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(fetchProfile.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-    });
-    builder.addCase(fetchProfile.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload || "Ошибка получения профиля";
-    });
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная Ошибка";
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная Ошибка";
+      });
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, inputValue, resetValue } = userSlice.actions;
 export default userSlice.reducer;

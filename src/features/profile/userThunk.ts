@@ -1,62 +1,42 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser, IUserWithToken } from "@/api/type";
+import { IUserWithToken } from "@/api/type";
 import { apiClient } from "@/app/apiClient";
-
-interface UserState {
-  user: IUser | null;
-  token: string | null;
-  loading: boolean;
-  error: string | null;
-}
-
-export const loginUser = createAsyncThunk<
-  IUserWithToken,
-  { phone: string; password: string },
-  { rejectValue: string }
->("users/login", async (body, thunkAPI) => {
-  try {
-    return await apiClient<IUserWithToken, typeof body>(
-      "users/login",
-      "POST",
-      body
-    );
-  } catch (err: unknown) {
-    if (err instanceof Error) return thunkAPI.rejectWithValue(err.message);
-    return thunkAPI.rejectWithValue("Неизвестная ошибка");
-  }
-});
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { IFormValue } from "./userSlice";
 
 export const registerUser = createAsyncThunk<
   IUserWithToken,
-  { phone: string; password: string; name: string; email?: string },
+  IFormValue,
   { rejectValue: string }
->("users/register", async (body, thunkAPI) => {
+>("user/register", async (data, { rejectWithValue }) => {
   try {
-    return await apiClient<IUserWithToken, typeof body>(
+    const res = await apiClient<IUserWithToken, IFormValue>(
       "users/register",
       "POST",
-      body
+      data
     );
-  } catch (err: unknown) {
-    if (err instanceof Error) return thunkAPI.rejectWithValue(err.message);
-    return thunkAPI.rejectWithValue("Неизвестная ошибка");
+    return res;
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Неизвестная ошибка";
+    return rejectWithValue(message);
   }
 });
 
-export const fetchProfile = createAsyncThunk<
-  IUser,
-  void,
-  { state: { user: UserState }; rejectValue: string }
->("users/fetchProfile", async (_, thunkAPI) => {
-  const token = thunkAPI.getState().user.token;
-  if (!token) return thunkAPI.rejectWithValue("Нет токена");
-
+export const loginUser = createAsyncThunk<
+  IUserWithToken,
+  IFormValue,
+  { rejectValue: string }
+>("user/login", async (data, { rejectWithValue }) => {
   try {
-    return await apiClient<IUser>("users/me", "GET", undefined, {
-      Authorization: `Bearer ${token}`,
-    });
-  } catch (err: unknown) {
-    if (err instanceof Error) return thunkAPI.rejectWithValue(err.message);
-    return thunkAPI.rejectWithValue("Неизвестная ошибка");
+    const res = await apiClient<IUserWithToken, IFormValue>(
+      "users/login",
+      "POST",
+      data
+    );
+    return res;
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Неизвестная ошибка";
+    return rejectWithValue(message);
   }
 });

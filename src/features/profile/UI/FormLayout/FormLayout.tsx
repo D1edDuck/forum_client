@@ -1,13 +1,7 @@
-import s from "./inedx.module.css";
+import { IFormValue } from "../../userSlice";
+import { IFields } from "../FormRegistration/FormRegistration";
+import s from "./index.module.css";
 import { Link } from "react-router-dom";
-
-interface IFields {
-  name: string;
-  type: string;
-  required: boolean;
-  label: string;
-  placeholder?: string;
-}
 
 interface IProps {
   fields: IFields[];
@@ -17,7 +11,7 @@ interface IProps {
   linkTo: string;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  formData: Record<string, string>;
+  formData: IFormValue;
   loading?: boolean;
   error?: string | null;
 }
@@ -51,7 +45,7 @@ const FormLayout = ({
                 required={field.required}
                 placeholder={field.placeholder}
                 className={s.input}
-                value={formData[field.name] || ""}
+                value={formData[field.name] ?? ""}
                 onChange={handleChange}
               />
             </div>

@@ -1,8 +1,15 @@
+import { IUser } from "@/api/type";
 import useForm from "../../hooks/useForm";
 import s from "./index.module.css";
 
-const BookingForm = () => {
-  const { name, cause, comment, email, phone, onSubmit, setValue } = useForm();
+export interface IProps {
+  user: IUser | null;
+}
+
+const BookingForm = ({ user }: IProps) => {
+  const { name, cause, comment, email, phone, onSubmit, setValue } = useForm({
+    user,
+  });
 
   return (
     <form className={s.form} onSubmit={onSubmit}>
