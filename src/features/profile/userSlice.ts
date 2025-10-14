@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@/api/type";
-import { loginUser, registerUser } from "./userThunk";
+import { loginUser, quickLogin, registerUser } from "./userThunk";
 
 export interface IFormValue {
   name: string;
@@ -80,6 +80,19 @@ const userSlice = createSlice({
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная Ошибка";
+      })
+      .addCase(quickLogin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(quickLogin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+      .addCase(quickLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Неизвестная Ошибка";
       });
