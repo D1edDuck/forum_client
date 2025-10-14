@@ -4,6 +4,7 @@ import { IFormValue, inputValue, resetValue } from "../../userSlice";
 import FormLayout from "../FormLayout/FormLayout";
 import { loginUser } from "../../userThunk";
 import { IFields } from "../FormRegistration/FormRegistration";
+import { useNavigate } from "react-router-dom";
 
 const loginFields: IFields[] = [
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
@@ -11,6 +12,7 @@ const loginFields: IFields[] = [
 ];
 
 const FormAuthorization = () => {
+  const navigate = useNavigate();
   const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
 
@@ -19,11 +21,16 @@ const FormAuthorization = () => {
     dispatch(inputValue({ id: fieldName, value: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(loginUser(formData));
-    dispatch(resetValue());
+    try {
+      await dispatch(loginUser(formData)).unwrap();
+      dispatch(resetValue());
+      navigate("/profile");
+    } catch (err) {
+      console.error("Ошибка авторизации:", err);
+    }
   };
 
   return (

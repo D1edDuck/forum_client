@@ -43,7 +43,7 @@ export interface IUser {
   id: number | null;
   name: string | null;
   phone: string | null;
-  email?: string | null;
+  email: string | null;
   role: "user" | "admin" | null;
 }
 
@@ -54,7 +54,7 @@ export interface IUserWithToken {
 
 export interface IRepair {
   id?: number;
-  userId?: number;
+  userId: number;
   cause: string;
   comment: string;
   status: "pending" | "rejected";

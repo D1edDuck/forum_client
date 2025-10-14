@@ -3,6 +3,7 @@ import FormLayout from "../FormLayout/FormLayout";
 import { IFormValue, inputValue, resetValue } from "../../userSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { registerUser } from "../../userThunk";
+import { useNavigate } from "react-router-dom";
 
 export interface IFields {
   name: string;
@@ -14,12 +15,13 @@ export interface IFields {
 
 const registrationFields: IFields[] = [
   { name: "name", type: "text", required: true, label: "Имя" },
-  { name: "email", type: "email", required: false, label: "Email" },
+  { name: "email", type: "email", required: true, label: "Email" },
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
   { name: "password", type: "password", required: true, label: "Пароль" },
 ];
 
 const FormRegistration = () => {
+  const navigate = useNavigate();
   const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
 
@@ -28,11 +30,16 @@ const FormRegistration = () => {
     dispatch(inputValue({ id: fieldName, value: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(registerUser(formData));
-    dispatch(resetValue());
+    try {
+      await dispatch(registerUser(formData)).unwrap();
+      dispatch(resetValue());
+      navigate("/profile");
+    } catch (err) {
+      console.error("Ошибка авторизации:", err);
+    }
   };
 
   return (

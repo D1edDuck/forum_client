@@ -30,13 +30,15 @@ const useForm = ({ user }: IProps) => {
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const repair: IRepair = {
-      cause,
-      comment,
-      status: "pending",
-      userId: user?.id ?? 1,
-    };
-    apiClient("repair", "POST", repair);
+    if (user && user.id !== null) {
+      const repair: IRepair = {
+        cause,
+        comment,
+        status: "pending",
+        userId: user.id,
+      };
+      apiClient("repair", "POST", repair);
+    }
   }
 
   return {

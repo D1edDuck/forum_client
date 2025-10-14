@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@/api/type";
 import { loginUser, quickLogin, registerUser } from "./userThunk";
+import Cookies from "js-cookie";
 
 export interface IFormValue {
   name: string;
@@ -40,6 +41,8 @@ const userSlice = createSlice({
       state.token = null;
       state.error = null;
       state.loading = false;
+
+      Cookies.remove("jwt");
     },
     inputValue(
       state,
