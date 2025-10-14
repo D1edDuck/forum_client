@@ -13,6 +13,7 @@ import ProfilePage from "@/pages/ProfilePage";
 import FormAuthorization from "@/features/profile/UI/FormAuthorization/FormAuthorization";
 import FormRegistration from "@/features/profile/UI/FormRegistration/FormRegistration";
 import LoginLayout from "@/components/Layout/LoginLayout/LoginLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,14 @@ const router = createBrowserRouter([
       { path: "/booking", element: <BookingPage /> },
       { path: "/FAQ", element: <FaqPage /> },
       { path: "/about", element: <AboutPage /> },
-      { path: "/profile", element: <ProfilePage /> },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "*", element: <NotFoundPage /> },
       {
         path: "/",

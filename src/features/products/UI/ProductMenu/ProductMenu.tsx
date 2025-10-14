@@ -6,7 +6,7 @@ import useResetFilters from "@/app/hooks/useResetFilters";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const ProductMenu = () => {
-  const { filterProducts, error, loading } = useAppSelector(
+  const { filterProducts, error, loading, count, name } = useAppSelector(
     (state: RootState) => state.product
   );
 
@@ -14,10 +14,10 @@ const ProductMenu = () => {
 
   return (
     <div className="mb">
-      {/* <div className="flex aic gap">
-        <h2 className={s.title}>{category?.name ?? "Категория"}</h2>
-        <p className={s.count}>{count} товаров найдено</p>
-      </div> */}
+      <div className="flex aic gap">
+        <h2 className={s.title}>{name ?? "Категория"}</h2>
+        <p className={s.count}>{count.products} товаров найдено</p>
+      </div>
 
       <LoadingError loading={loading} error={error} />
 

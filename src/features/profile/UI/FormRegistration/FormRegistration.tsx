@@ -1,9 +1,10 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import FormLayout from "../FormLayout/FormLayout";
-import { IFormValue, inputValue, resetValue } from "../../userSlice";
+import { resetValue } from "../../userSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { registerUser } from "../../userThunk";
 import { useNavigate } from "react-router-dom";
+import { useFormInput } from "../../hooks/useFormInput";
 
 export interface IFields {
   name: string;
@@ -25,10 +26,7 @@ const FormRegistration = () => {
   const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName = e.target.name as keyof IFormValue;
-    dispatch(inputValue({ id: fieldName, value: e.target.value }));
-  };
+  const { handleChange } = useFormInput();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

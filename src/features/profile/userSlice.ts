@@ -13,7 +13,8 @@ export interface IFormValue {
 
 interface UserState {
   user: IUser | null;
-  token: string | null;
+  token: string | undefined;
+  initialized: boolean;
   loading: boolean;
   error: string | null;
   formValue: IFormValue;
@@ -21,7 +22,8 @@ interface UserState {
 
 const initialState: UserState = {
   user: null,
-  token: null,
+  token: undefined,
+  initialized: false,
   loading: false,
   error: null,
   formValue: {
@@ -38,9 +40,10 @@ const userSlice = createSlice({
   reducers: {
     logout(state) {
       state.user = null;
-      state.token = null;
+      state.token = undefined;
       state.error = null;
       state.loading = false;
+      state.initialized = true;
 
       Cookies.remove("jwt");
     },
@@ -92,11 +95,13 @@ const userSlice = createSlice({
       })
       .addCase(quickLogin.fulfilled, (state, action) => {
         state.loading = false;
+        state.initialized = true;
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = Cookies.get("jwt");
       })
       .addCase(quickLogin.rejected, (state, action) => {
         state.loading = false;
+        state.initialized = true;
         state.error = action.payload || "Неизвестная Ошибка";
       });
   },

@@ -1,10 +1,11 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { IFormValue, inputValue, resetValue } from "../../userSlice";
+import { resetValue } from "../../userSlice";
 import FormLayout from "../FormLayout/FormLayout";
 import { loginUser } from "../../userThunk";
 import { IFields } from "../FormRegistration/FormRegistration";
 import { useNavigate } from "react-router-dom";
+import { useFormInput } from "../../hooks/useFormInput";
 
 const loginFields: IFields[] = [
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
@@ -16,10 +17,7 @@ const FormAuthorization = () => {
   const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName = e.target.name as keyof IFormValue;
-    dispatch(inputValue({ id: fieldName, value: e.target.value }));
-  };
+  const { handleChange } = useFormInput();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

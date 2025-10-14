@@ -3,13 +3,23 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchProducts, fetchProductsSearch } from "./productsThunks";
 
 interface IProductData {
+  id: number;
+  name: string;
   products: IProduct[];
+  count: {
+    products: number;
+  };
   filterProducts: IProduct[];
   loading: boolean;
   error: null | string;
 }
 
 const initialState: IProductData = {
+  id: 0,
+  name: "",
+  count: {
+    products: 0,
+  },
   products: [],
   filterProducts: [],
   loading: false,
@@ -37,9 +47,11 @@ const productSlice = createSlice({
       .addCase(
         fetchProducts.fulfilled,
         (state, action: PayloadAction<ICategory>) => {
-          console.log("payload:", action.payload);
           state.loading = false;
+          state.id = action.payload.id;
+          state.name = action.payload.name;
           state.products = action.payload.products;
+          state.count.products = action.payload?._count?.products ?? 0;
           state.filterProducts = action.payload.products; // сразу показываем все
         }
       )

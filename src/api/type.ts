@@ -18,7 +18,7 @@ export interface ICategory {
   id: number;
   name: string;
   products: IProduct[];
-  count?: { products: number };
+  _count?: { products: number };
 }
 
 export interface IFilter {
