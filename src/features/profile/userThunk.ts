@@ -1,5 +1,5 @@
-import { IUserWithToken } from "@/api/type";
-import { apiClient } from "@/app/apiClient";
+import { IRepair, IUserWithToken } from "@/api/type";
+import { apiClient } from "@/api/apiClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IFormValue } from "./userSlice";
 import Cookies from "js-cookie";
@@ -93,6 +93,24 @@ export const quickLogin = createAsyncThunk<
       Cookies.remove(TOKEN_KEY);
     }
 
+    return rejectWithValue(message);
+  }
+});
+
+export const repairsUser = createAsyncThunk<
+  IRepair[],
+  number,
+  { rejectValue: string }
+>("user/repair", async (user, { rejectWithValue }) => {
+  try {
+    const repairs = await apiClient<IRepair[]>("repair/me", "GET", undefined, {
+      user: user.toString(),
+    });
+
+    return repairs;
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Ошибка загрузки заявок";
     return rejectWithValue(message);
   }
 });

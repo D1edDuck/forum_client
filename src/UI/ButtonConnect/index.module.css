@@ -1,0 +1,26 @@
+.btn_connect {
+  color: var(--color-white);
+  font-size: var(--size-20);
+  font-weight: 600;
+  padding-inline: 5rem;
+  background-color: var(--color-blue);
+}
+.btn_connect :hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 12px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn_connect :active {
+  transform: translateY(-0.2rem);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.soft {
+  border-radius: 5rem;
+  padding-block: 1.8rem;
+}
+
+.hard {
+  border-radius: var(--radius-15);
+  padding-block: 1rem;
+}

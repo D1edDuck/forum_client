@@ -1,11 +1,8 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { logout } from "../../userSlice";
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import s from "./index.module.css";
 
 const PersonalAccount = () => {
   const user = useAppSelector((state) => state.user.user);
-  const dispatch = useAppDispatch();
 
   if (!user) {
     return <p>Вы не авторизированны</p>;
@@ -21,17 +18,10 @@ const PersonalAccount = () => {
         <p>Номер телефона</p>
         <p className={s.info}>{user.phone}</p>
         <hr className={s.hr} />
-        {user.email && (
-          <>
-            <p>Email</p>
-            <p className={s.info}>{user.email}</p>
-          </>
-        )}
+        <p>Email</p>
+        <p className={s.info}>{user.email || "Не указано"}</p>
       </div>
       <div className={s.btns}>
-        <button onClick={() => dispatch(logout())} className={s.log}>
-          Выйти
-        </button>
         <button className={s.edit}>Редактировать</button>
       </div>
     </div>

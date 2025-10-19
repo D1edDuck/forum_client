@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "@/api/type";
-import { loginUser, quickLogin, registerUser } from "./userThunk";
+import { IRepair, IUser } from "@/api/type";
+import { loginUser, quickLogin, registerUser, repairsUser } from "./userThunk";
 import Cookies from "js-cookie";
 
 export interface IFormValue {
@@ -18,6 +18,7 @@ interface UserState {
   loading: boolean;
   error: string | null;
   formValue: IFormValue;
+  repairs: IRepair[];
 }
 
 const initialState: UserState = {
@@ -32,6 +33,7 @@ const initialState: UserState = {
     phone: "",
     email: "",
   },
+  repairs: [],
 };
 
 const userSlice = createSlice({
@@ -43,7 +45,6 @@ const userSlice = createSlice({
       state.token = undefined;
       state.error = null;
       state.loading = false;
-      state.initialized = true;
 
       Cookies.remove("jwt");
     },
@@ -103,6 +104,18 @@ const userSlice = createSlice({
         state.loading = false;
         state.initialized = true;
         state.error = action.payload || "Неизвестная Ошибка";
+      })
+      .addCase(repairsUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(repairsUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.repairs = action.payload;
+      })
+      .addCase(repairsUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная ошибка";
       });
   },
 });

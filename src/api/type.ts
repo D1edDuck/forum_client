@@ -53,7 +53,7 @@ export interface IUserWithToken {
 }
 
 export interface IRepair {
-  id?: number;
+  id: number;
   userId: number;
   cause: string;
   comment: string;

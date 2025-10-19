@@ -2,9 +2,10 @@ import { IBooking, IRepair } from "@/api/type";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { inputValue } from "../bookingSlice";
-import { apiClient } from "@/app/apiClient";
+import { apiClient } from "@/api/apiClient";
 import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
+import { repairsUser } from "@/features/profile/userThunk";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
@@ -31,13 +32,14 @@ const useForm = ({ user }: IProps) => {
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (user && user.id !== null) {
-      const repair: IRepair = {
+      const repair: Omit<IRepair, "id"> = {
         cause,
         comment,
         status: "pending",
         userId: user.id,
       };
       apiClient("repair", "POST", repair);
+      dispatch(repairsUser(user.id));
     }
   }
 

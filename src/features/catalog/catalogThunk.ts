@@ -1,5 +1,5 @@
 import { ICatalog } from "@/api/type";
-import { apiClient } from "@/app/apiClient";
+import { apiClient } from "@/api/apiClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchCatalog = createAsyncThunk<ICatalog[], void>(

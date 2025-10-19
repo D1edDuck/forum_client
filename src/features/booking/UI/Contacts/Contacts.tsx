@@ -1,4 +1,4 @@
-import ButtonConnect from "@/components/UI/ButtonConnect/ButtonConnect";
+import ButtonConnect from "@/UI/ButtonConnect/ButtonConnect";
 import s from "./index.module.css";
 
 const Contacts = () => {

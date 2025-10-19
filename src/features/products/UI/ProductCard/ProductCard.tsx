@@ -1,5 +1,5 @@
 import s from "./index.module.css";
-import ButtonLink from "../../../../components/UI/ButtonLink/ButtonLink";
+import ButtonLink from "../../../../UI/ButtonLink/ButtonLink";
 import { IProduct } from "@/api/type";
 interface Props {
   product: IProduct;

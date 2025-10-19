@@ -1,4 +1,4 @@
-import { useFilterProduct } from "@/app/hooks/useFilterProduct";
+import { useFilterProduct } from "@/features/products/filter/hooks/useFilterProduct";
 import { RootState } from "@/app/store";
 import { useState } from "react";
 import { useAppSelector } from "@/app/hooks/useAppSelector";

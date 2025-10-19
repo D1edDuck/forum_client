@@ -1,4 +1,4 @@
-import { useOpenFilter } from "@/app/hooks/useOpenFilter";
+import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import s from "./index.module.css";
 import { PriceForm } from "./PriceForm";
 

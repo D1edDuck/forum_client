@@ -1,5 +1,5 @@
 import s from "./index.module.css";
-import { useFilterProduct } from "@/app/hooks/useFilterProduct";
+import { useFilterProduct } from "@/features/products/filter/hooks/useFilterProduct";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { resetOptions } from "../../filterSlice";
 

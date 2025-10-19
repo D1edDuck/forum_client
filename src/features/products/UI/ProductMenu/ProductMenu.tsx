@@ -1,8 +1,8 @@
 import s from "./index.module.css";
 import ProductCard from "@/features/products/UI/ProductCard/ProductCard";
-import LoadingError from "@/components/UI/LoadingError/LoadingError";
+import LoadingError from "@/UI/LoadingError/LoadingError";
 import { RootState } from "@/app/store";
-import useResetFilters from "@/app/hooks/useResetFilters";
+import useResetFilters from "@/features/products/filter/hooks/useResetFilters";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const ProductMenu = () => {

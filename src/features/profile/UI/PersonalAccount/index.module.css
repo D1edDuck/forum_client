@@ -7,6 +7,8 @@
   flex-direction: column;
   gap: 2rem;
   min-width: 20rem;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .title {
@@ -20,7 +22,7 @@
   grid-template-columns: 1fr 2fr;
   margin: 0 auto;
   align-items: center;
-  gap: 0.5rem 3rem;
+  gap: 1.5rem 3rem;
   white-space: nowrap;
 }
 
@@ -40,13 +42,6 @@
   border: none;
 }
 
-.log {
-  background-color: var(--color-red);
-  color: var(--color-white);
-  border-radius: var(--radius-10);
-  padding: 0.5rem 2rem;
-}
-
 .edit {
   background-color: var(--color-blue);
   color: var(--color-white);
@@ -56,5 +51,5 @@
 
 .btns {
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
 }

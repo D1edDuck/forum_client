@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RootState } from "@/app/store";
-import { useFilterProduct } from "../../../../app/hooks/useFilterProduct";
+import { useFilterProduct } from "./useFilterProduct";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setBrand, setStock } from "../filterSlice";

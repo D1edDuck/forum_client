@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import s from "./index.module.css";
-import { useOpenFilter } from "@/app/hooks/useOpenFilter";
+import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import FilterForm from "./FilterForm";
 import { IProduct } from "@/api/type";
 
