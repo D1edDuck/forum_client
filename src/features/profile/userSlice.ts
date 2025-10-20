@@ -24,7 +24,7 @@ interface UserState {
 const initialState: UserState = {
   user: null,
   token: undefined,
-  initialized: false,
+  initialized: true,
   loading: false,
   error: null,
   formValue: {
@@ -45,6 +45,7 @@ const userSlice = createSlice({
       state.token = undefined;
       state.error = null;
       state.loading = false;
+      state.initialized = true;
 
       Cookies.remove("jwt");
     },
@@ -93,6 +94,7 @@ const userSlice = createSlice({
       .addCase(quickLogin.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.initialized = false;
       })
       .addCase(quickLogin.fulfilled, (state, action) => {
         state.loading = false;
@@ -100,10 +102,11 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.token = Cookies.get("jwt");
       })
-      .addCase(quickLogin.rejected, (state, action) => {
+      .addCase(quickLogin.rejected, (state) => {
         state.loading = false;
         state.initialized = true;
-        state.error = action.payload || "Неизвестная Ошибка";
+        state.user = null;
+        state.token = undefined;
       })
       .addCase(repairsUser.pending, (state) => {
         state.loading = true;

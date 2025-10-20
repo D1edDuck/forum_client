@@ -16,6 +16,7 @@ import LoginLayout from "@/app/Layout/LoginLayout/LoginLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import Repairs from "@/features/profile/UI/Repairs/Repairs";
 import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccount";
+import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -58,8 +59,22 @@ const router = createBrowserRouter([
         path: "/",
         element: <LoginLayout />,
         children: [
-          { path: "registration", element: <FormRegistration /> },
-          { path: "login", element: <FormAuthorization /> },
+          {
+            path: "registration",
+            element: (
+              <PublicRoute>
+                <FormRegistration />
+              </PublicRoute>
+            ),
+          },
+          {
+            path: "login",
+            element: (
+              <PublicRoute>
+                <FormAuthorization />
+              </PublicRoute>
+            ),
+          },
         ],
       },
     ],
