@@ -7,6 +7,10 @@ const SelectMenu = () => {
 
   return (
     <div className={s.grid}>
+      {loading &&
+        Array(5)
+          .fill(0)
+          .map((_, i) => <div key={i} className={s.skeleton}></div>)}
       {!loading && !error && category.map((cat) => <LinkCategory cat={cat} />)}
     </div>
   );

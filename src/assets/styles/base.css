@@ -89,6 +89,10 @@ html {
   font-weight: 700;
 }
 
+.min-height-80 {
+  min-height: 30rem;
+}
+
 /* для кнопок */
 .primary {
   color: var(--color-blue);
