@@ -1,26 +1,39 @@
-import { filterData } from "@/features/products/productsSlice";
 import { IFilter } from "@/api/type";
-import { useAppSelector } from "../../../../app/hooks/useAppSelector";
-import { useAppDispatch } from "../../../../app/hooks/useAppDispatch";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { useParams } from "react-router-dom";
+import { fetchProductsFilter } from "../../productsThunks";
 
 export const useFilterProduct = () => {
   const dispatch = useAppDispatch();
-  const options = useAppSelector((state) => state.filter);
+  const filters = useAppSelector((state) => state.filter);
+  const { id } = useParams<{ id: string }>();
 
   const applyFilter = (customFilters?: Partial<IFilter>) => {
-    const filters = {
-      brand: customFilters?.brand ?? options.brand,
-      stock: customFilters?.stock ?? options.stock,
-      minValue: customFilters?.minValue ?? options.minValue ?? 0,
-      maxValue: customFilters?.maxValue ?? options.maxValue ?? 0,
+    if (!id) return;
+
+    const finalFilters = {
+      categoryId: id,
+      brand: customFilters?.brand ?? filters.brand ?? [],
+      stock: customFilters?.stock ?? filters.stock ?? [],
+      minValue: customFilters?.minValue ?? filters.minValue ?? 0,
+      maxValue: customFilters?.maxValue ?? filters.maxValue ?? 0,
     };
 
-    dispatch(filterData(filters)); // фильтруем продукты
+    dispatch(fetchProductsFilter(finalFilters));
   };
 
   const resetFilters = () => {
+    if (!id) return;
+
     dispatch(
-      filterData({ brand: [], stock: [], minValue: 0, maxValue: 0 }) // сброс фильтров
+      fetchProductsFilter({
+        categoryId: id,
+        brand: [],
+        stock: [],
+        minValue: 0,
+        maxValue: 0,
+      })
     );
   };
 

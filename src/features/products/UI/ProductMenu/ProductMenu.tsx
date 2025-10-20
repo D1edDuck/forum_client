@@ -3,7 +3,7 @@ import s from "./index.module.css";
 import ProductCard from "@/features/products/UI/ProductCard/ProductCard";
 
 const ProductMenu = () => {
-  const { filterProducts, loading, count, name } = useProductMenu();
+  const { products, loading, count, name } = useProductMenu();
 
   return (
     <div className="mb">
@@ -12,11 +12,11 @@ const ProductMenu = () => {
         <p className={s.count}>{count.products} товаров найдено</p>
       </div>
 
-      {filterProducts.length === 0 && !loading ? (
+      {products.length === 0 && !loading ? (
         <p className={s.list}>Продукты не найдены</p>
       ) : (
         <div className={s.grid}>
-          {filterProducts.map((p) => (
+          {products.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>

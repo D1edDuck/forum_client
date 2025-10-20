@@ -1,32 +1,37 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { fetchProductsFilter } from "../productsThunks";
+import { IFilter } from "@/api/type";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { fetchProducts } from "../productsThunks";
-import { hideLoading, showLoading } from "@/UI/Loader/loaderSlice";
 
-export const useProductCatalog = () => {
+export const useProductCatalog = (filters?: Partial<IFilter>) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
+  const {
+    brand = [],
+    stock = [],
+    minValue = 0,
+    maxValue = 0,
+    search = "",
+  } = filters || {};
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        dispatch(showLoading("Загрузка продуктов..."));
-        if (id) {
-          await dispatch(fetchProducts(id)).unwrap();
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        dispatch(hideLoading());
-      }
+    if (!id) return;
+
+    const finalFilters = {
+      categoryId: id,
+      brand,
+      stock,
+      minValue,
+      maxValue,
+      search,
     };
 
-    fetchData();
-  }, [dispatch, id]);
+    dispatch(fetchProductsFilter(finalFilters));
+  }, [dispatch, id, brand, stock, minValue, maxValue, search]);
 
-  const { products } = useAppSelector((state) => state.product);
+  const { products, loading, error } = useAppSelector((state) => state.product);
 
-  return { products };
+  return { products, loading, error };
 };
