@@ -15,6 +15,18 @@ const CardRepair = (rep: IRepair) => {
     }
   };
 
+  const formatDate = (isoString: string) => {
+    const date = new Date(isoString);
+
+    return date.toLocaleString("ru-RU", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <div className={s.card}>
       <div className={s.title}>Заявка #{rep.id}</div>
@@ -25,6 +37,9 @@ const CardRepair = (rep: IRepair) => {
 
         <span className={s.key}>Комментарий</span>
         <span className={s.value}>{rep.comment}</span>
+
+        <span className={s.key}>Дата</span>
+        <span className={s.value}>{formatDate(rep.created_at)}</span>
       </div>
 
       <div className={s.statusContainer}>

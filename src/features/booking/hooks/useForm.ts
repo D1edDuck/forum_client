@@ -6,6 +6,7 @@ import { apiClient } from "@/api/apiClient";
 import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
 import { repairsUser } from "@/features/profile/userThunk";
+import { openModal } from "@/UI/Modal/modalSlice"; // 👈 импортируем действие
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
@@ -26,20 +27,49 @@ const useForm = ({ user }: IProps) => {
   }, [user, dispatch]);
 
   function setValue(id: keyof IBooking, e: string) {
-    dispatch(inputValue({ id: id, value: e }));
+    dispatch(inputValue({ id, value: e }));
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (user && user.id !== null) {
-      const repair: Omit<IRepair, "id"> = {
+      const repair: Omit<IRepair, "id" | "created_at"> = {
         cause,
         comment,
         status: "pending",
         userId: user.id,
       };
-      apiClient("repair", "POST", repair);
-      dispatch(repairsUser(user.id));
+
+      try {
+        dispatch(
+          openModal({
+            tittle: "Отправка заявки",
+            text: "Пожалуйста, подождите...",
+            status: "pending",
+          })
+        );
+
+        await apiClient("repair", "POST", repair);
+        await dispatch(repairsUser(user.id));
+
+        dispatch(
+          openModal({
+            tittle: "Успешно!",
+            text: "Ваша заявка успешно отправлена.",
+            status: "fulfilled",
+          })
+        );
+      } catch (err) {
+        dispatch(
+          openModal({
+            tittle: "Ошибка",
+            text: "Не удалось отправить заявку. Попробуйте позже.",
+            status: "error",
+          })
+        );
+        console.log(err);
+      }
     }
   }
 

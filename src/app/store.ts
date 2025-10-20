@@ -4,6 +4,7 @@ import productSlice from "@/features/products/productsSlice";
 import bookingSlice from "@/features/booking/bookingSlice";
 import filterSlice from "@/features/products/filter/filterSlice";
 import userSlice from "@/features/profile/userSlice";
+import modalSlice from "@/UI/Modal/modalSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     booking: bookingSlice,
     filter: filterSlice,
     user: userSlice,
+    modal: modalSlice,
   },
 });
 

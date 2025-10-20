@@ -1,0 +1,110 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-gray-50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.modal {
+  width: 30rem;
+  background-color: var(--color-white);
+  border-radius: var(--radius-10);
+  border-top: 1rem solid;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.25s ease;
+}
+
+.main .modal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.error {
+  border-color: var(--color-red);
+}
+
+.fulfilled {
+  border-color: var(--color-green);
+}
+
+.pending {
+  border-color: var(--color-yellow);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--size-20);
+}
+
+.tittle {
+  font-size: var(--size-20);
+  font-weight: 700;
+}
+
+.hr {
+  border: none;
+  width: 100%;
+  height: 0.3rem;
+  border-radius: 10rem;
+  background-color: var(--color-gray-light);
+}
+
+.text {
+  font-size: var(--size-16);
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.btn {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  padding: 0.5rem 1.5rem;
+  font-size: var(--size-16);
+  border-radius: var(--radius-10);
+  transition: background-color 0.1s ease-in;
+  align-self: flex-end;
+}
+
+.btn:hover {
+  background-color: var(--color-blue-dark);
+}
+
+.header button {
+  background: none;
+  border: none;
+  font-size: var(--size-20);
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--color-gray-dark);
+  transition: color 0.1s ease;
+}
+
+.header button:hover {
+  color: var(--color-red);
+}

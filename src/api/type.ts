@@ -58,4 +58,5 @@ export interface IRepair {
   cause: string;
   comment: string;
   status: "pending" | "rejected";
+  created_at: string;
 }
