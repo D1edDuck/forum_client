@@ -4,7 +4,7 @@
   gap: 2rem;
 }
 
-@media (max-width: 370px) {
+@media (max-width: 768px) {
   .flex {
     grid-template-columns: 1fr;
   }

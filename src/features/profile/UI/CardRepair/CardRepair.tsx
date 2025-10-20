@@ -1,25 +1,37 @@
-import { IRepair } from "@/api/type";
 import s from "./index.module.css";
+import { IRepair } from "@/api/type";
 
 const CardRepair = (rep: IRepair) => {
+  const getStatusClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "pending":
+        return s.pending;
+      case "repair":
+        return s.repair;
+      case "done":
+        return s.done;
+      default:
+        return "";
+    }
+  };
+
   return (
     <div className={s.card}>
-      <h4 className={s.tittle}>Заявка #{rep.id}</h4>
-      <div className={s.flex}>
-        <div className={s.info}>
-          <p>Причина</p>
-          <p className={s.text}>{rep.cause}</p>
-        </div>
-        <hr className={s.hr} />
-        <div className={s.info}>
-          <p>Комментарий</p>
-          <p className={s.text}>{rep.comment}</p>
-        </div>
-        <hr className={s.hr} />
-        <div className={s.info}>
-          <p>Статус</p>
-          <p className={s.text}>{rep.status}</p>
-        </div>
+      <div className={s.title}>Заявка #{rep.id}</div>
+
+      <div className={s.grid}>
+        <span className={s.key}>Причина</span>
+        <span className={s.value}>{rep.cause}</span>
+
+        <span className={s.key}>Комментарий</span>
+        <span className={s.value}>{rep.comment}</span>
+      </div>
+
+      <div className={s.statusContainer}>
+        <span className={s.key}>Статус</span>
+        <span className={`${s.statusBadge} ${getStatusClass(rep.status)}`}>
+          {rep.status}
+        </span>
       </div>
     </div>
   );

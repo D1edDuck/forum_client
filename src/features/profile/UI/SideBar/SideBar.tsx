@@ -2,11 +2,34 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { logout } from "../../userSlice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    const currentPath = location.pathname;
+
+    if (path === "me") {
+      return (
+        currentPath.endsWith("/me") ||
+        (currentPath.endsWith("/profile") &&
+          !currentPath.includes("/repairs") &&
+          !currentPath.includes("/settings"))
+      );
+    }
+
+    if (path === "repairs") {
+      return currentPath.includes("/repairs");
+    }
+
+    if (path === "settings") {
+      return currentPath.includes("/settings");
+    }
+    return false;
+  };
 
   if (!user) return <p>Вы не авторизированны</p>;
 
@@ -14,16 +37,23 @@ const SideBar = () => {
     <div className={s.card}>
       <h3>{user.name}</h3>
       <div className={s.links}>
-        <hr className={s.hr} />
         <p>
-          <Link to={"me"}>Профиль</Link>
+          <Link to={"me"} className={isActive("me") ? s.active : ""}>
+            Профиль
+          </Link>
         </p>
         <hr className={s.hr} />
+
         <p>
-          <Link to={"repairs"}>Мои заявки</Link>
+          <Link to={"repairs"} className={isActive("repairs") ? s.active : ""}>
+            Мои заявки
+          </Link>
         </p>
         <hr className={s.hr} />
-        <p>Настройки</p>
+
+        <p className={isActive("settings") ? s.active : ""}>
+          <Link to={"settings"}>Настройки</Link>
+        </p>
         <hr className={s.hr} />
       </div>
       <button onClick={() => dispatch(logout())} className={s.log}>
