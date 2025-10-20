@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { fetchProductsSearch } from "../../productsThunks";
 import { setSearch } from "../filterSlice";
+import { hideLoading, showLoading } from "@/UI/Loader/loaderSlice";
 
 export const useFindProduct = () => {
   const dispatch = useAppDispatch();
@@ -13,8 +14,15 @@ export const useFindProduct = () => {
 
     if (!query.trim()) return;
 
-    dispatch(setSearch(query));
-    dispatch(fetchProductsSearch(query));
+    try {
+      dispatch(showLoading("Поиск товара.."));
+      dispatch(setSearch(query));
+      await dispatch(fetchProductsSearch(query)).unwrap();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(hideLoading());
+    }
   }
 
   return { handleSubmit, query, setQuery };

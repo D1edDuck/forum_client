@@ -4,21 +4,10 @@ import FilterList from "@/features/products/filter/UI/FilterPrice/FilterPrice";
 import FindProduct from "@/features/products/filter/UI/FindProduct/FindProduct";
 import NavigateLine from "@/UI/NavigateLine/NavigateLine";
 import TagsFilters from "@/features/products/filter/UI/TagsFilters/TagsFilters";
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
-import { fetchProducts } from "@/features/products/productsThunks";
+import { useProductCatalog } from "../hooks/useProductCatalog";
 
 const ProductCatalogPage = () => {
-  const { id } = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (id) dispatch(fetchProducts(id));
-  }, [dispatch, id]);
-
-  const { products } = useAppSelector((state) => state.product);
+  const { products } = useProductCatalog();
 
   return (
     <div className="container pb4 mb">

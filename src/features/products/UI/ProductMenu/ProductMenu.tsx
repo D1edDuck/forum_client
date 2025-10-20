@@ -1,16 +1,9 @@
+import useProductMenu from "../../hooks/useProductMenu";
 import s from "./index.module.css";
 import ProductCard from "@/features/products/UI/ProductCard/ProductCard";
-import LoadingError from "@/UI/LoadingError/LoadingError";
-import { RootState } from "@/app/store";
-import useResetFilters from "@/features/products/filter/hooks/useResetFilters";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const ProductMenu = () => {
-  const { filterProducts, error, loading, count, name } = useAppSelector(
-    (state: RootState) => state.product
-  );
-
-  useResetFilters(); // сброс фильтров
+  const { filterProducts, loading, count, name } = useProductMenu();
 
   return (
     <div className="mb">
@@ -18,8 +11,6 @@ const ProductMenu = () => {
         <h2 className={s.title}>{name ?? "Категория"}</h2>
         <p className={s.count}>{count.products} товаров найдено</p>
       </div>
-
-      <LoadingError loading={loading} error={error} />
 
       {filterProducts.length === 0 && !loading ? (
         <p className={s.list}>Продукты не найдены</p>

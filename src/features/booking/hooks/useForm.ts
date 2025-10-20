@@ -7,6 +7,7 @@ import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
 import { repairsUser } from "@/features/profile/userThunk";
 import { openModal } from "@/UI/Modal/modalSlice"; // 👈 импортируем действие
+import { hideLoading, showLoading } from "@/UI/Loader/loaderSlice";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
@@ -42,13 +43,7 @@ const useForm = ({ user }: IProps) => {
       };
 
       try {
-        dispatch(
-          openModal({
-            tittle: "Отправка заявки",
-            text: "Пожалуйста, подождите...",
-            status: "pending",
-          })
-        );
+        dispatch(showLoading("Отправка заявки..."));
 
         await apiClient("repair", "POST", repair);
         await dispatch(repairsUser(user.id));
@@ -69,6 +64,8 @@ const useForm = ({ user }: IProps) => {
           })
         );
         console.log(err);
+      } finally {
+        dispatch(hideLoading());
       }
     }
   }

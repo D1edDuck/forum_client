@@ -1,18 +1,9 @@
 import s from "./index.module.css";
 import LinkCategory from "../Link/LinkCategory";
-import { useEffect } from "react";
-import { fetchCatalog } from "../../catalogThunk";
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { useMenu } from "../../hooks/useMenu";
 
 const SelectMenu = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCatalog());
-  }, [dispatch]);
-
-  const { loading, error, category } = useAppSelector((state) => state.catalog);
+  const { loading, error, category } = useMenu();
 
   return (
     <div className={s.grid}>
