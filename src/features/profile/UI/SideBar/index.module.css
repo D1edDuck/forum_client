@@ -7,18 +7,19 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  height: 50rem;
 }
 
 .card h3 {
-  padding: 0 1.5rem;
-  margin-bottom: 2rem;
   text-align: center;
+  padding-bottom: 1rem;
   font-size: var(--size-20);
   font-weight: 700;
   color: #ffffff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 0.5rem;
   width: 90%;
   align-self: center;
 }
@@ -27,7 +28,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1rem;
+  padding: 1rem 0;
 }
 
 .links p {
@@ -36,8 +38,8 @@
 
 .links a,
 .links p {
+  padding: 1rem 1rem;
   display: block;
-  padding: 1rem 1.5rem;
   font-size: var(--size-20);
   font-weight: 600;
   color: #ced4da;
@@ -70,8 +72,7 @@
 
 .log {
   font-size: var(--size-16);
-  margin: 3rem 1.5rem 0 1.5rem;
-  padding: 0.75rem;
+  padding: 1rem 2rem;
   font-weight: 600;
   border-radius: var(--radius-15);
   background-color: var(--color-red);
@@ -82,6 +83,12 @@
   transition: background-color 0.2s;
   width: calc(100% - 3rem);
 }
+
+.border {
+  position: sticky;
+  top: 5rem;
+}
+
 .log:hover {
   background-color: #c82333;
 }
@@ -89,8 +96,6 @@
 @media (max-width: 768px) {
   .card {
     border-radius: 0;
-    padding: 0.5rem 0;
-    margin-bottom: 1.5rem;
     width: 100%;
     box-shadow: none;
     overflow-x: auto;
@@ -98,6 +103,12 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    height: fit-content;
+  }
+
+  .border {
+    top: 0;
+    border-bottom: 0.3rem solid var(--color-gray-50);
   }
 
   .card h3 {
@@ -107,14 +118,12 @@
   .links {
     flex-direction: row;
     gap: 0.5rem;
-    padding: 0 0.5rem;
     justify-content: flex-start;
   }
 
   .links a,
   .links p {
     flex-shrink: 1;
-    padding: 0.5rem 1rem;
     border-radius: 9999px;
     color: #343a40;
     background-color: #f0f0f0;
