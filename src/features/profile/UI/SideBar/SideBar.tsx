@@ -47,7 +47,7 @@ const SideBar = () => {
 
         <p>
           <Link to={"repairs"} className={isActive("repairs") ? s.active : ""}>
-            Мои заявки
+            Заявки
           </Link>
         </p>
 

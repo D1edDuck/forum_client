@@ -3,12 +3,12 @@ import s from "./index.module.css";
 import ProductCard from "@/features/products/UI/ProductCard/ProductCard";
 
 const ProductMenu = () => {
-  const { products, loading, count, name } = useProductMenu();
+  const { products, loading, count } = useProductMenu();
 
   return (
     <div className="mb">
       <div className="flex aic gap">
-        <h2 className={s.title}>{name ?? "Категория"}</h2>
+        <h2 className={s.title}>{"Категория"}</h2>
         <p className={s.count}>{count.products} товаров найдено</p>
       </div>
 

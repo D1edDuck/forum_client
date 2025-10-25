@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProductsFilter } from "../productsThunks";
 import { IFilter } from "@/api/type";
@@ -8,28 +8,34 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 export const useProductCatalog = (filters?: Partial<IFilter>) => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const {
-    brand = [],
-    stock = [],
-    minValue = 0,
-    maxValue = 0,
-    search = "",
-  } = filters || {};
+
+  const memoizedFilters = useMemo(
+    () => ({
+      brand: filters?.brand ?? [],
+      stock: filters?.stock ?? [],
+      minValue: filters?.minValue ?? 0,
+      maxValue: filters?.maxValue ?? 0,
+      search: filters?.search ?? "",
+    }),
+    [
+      filters?.brand,
+      filters?.stock,
+      filters?.minValue,
+      filters?.maxValue,
+      filters?.search,
+    ]
+  );
 
   useEffect(() => {
     if (!id) return;
 
     const finalFilters = {
       categoryId: id,
-      brand,
-      stock,
-      minValue,
-      maxValue,
-      search,
+      ...memoizedFilters,
     };
 
     dispatch(fetchProductsFilter(finalFilters));
-  }, [dispatch, id, brand, stock, minValue, maxValue, search]);
+  }, [dispatch, id, memoizedFilters]);
 
   const { products, loading, error } = useAppSelector((state) => state.product);
 
