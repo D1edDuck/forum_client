@@ -6,6 +6,7 @@ import { loginUser } from "../../userThunk";
 import { IFields } from "../FormRegistration/FormRegistration";
 import { useNavigate } from "react-router-dom";
 import { useFormInput } from "../../hooks/useFormInput";
+import { openModal } from "@/UI/Modal/modalSlice";
 
 const loginFields: IFields[] = [
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
@@ -27,6 +28,9 @@ const FormAuthorization = () => {
       dispatch(resetValue());
       navigate("/profile");
     } catch (err) {
+      dispatch(
+        openModal({ tittle: "Ошибка", status: "error", text: err as string })
+      );
       console.error("Ошибка авторизации:", err);
     }
   };

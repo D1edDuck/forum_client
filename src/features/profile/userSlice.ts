@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IRepair, IUser } from "@/api/type";
-import { loginUser, quickLogin, registerUser, repairsUser } from "./userThunk";
+import {
+  loginUser,
+  quickLogin,
+  registerUser,
+  repairAdmin,
+  repairsUser,
+} from "./userThunk";
 import Cookies from "js-cookie";
 
 export interface IFormValue {
@@ -117,6 +123,18 @@ const userSlice = createSlice({
         state.repairs = action.payload;
       })
       .addCase(repairsUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная ошибка";
+      })
+      .addCase(repairAdmin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(repairAdmin.fulfilled, (state, action) => {
+        state.loading = false;
+        state.repairs = action.payload;
+      })
+      .addCase(repairAdmin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Неизвестная ошибка";
       });

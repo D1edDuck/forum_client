@@ -2,7 +2,11 @@ import { RouterProvider } from "react-router-dom";
 import router from "./app/Routes/router";
 import { useAppDispatch } from "./app/hooks/useAppDispatch";
 import { useEffect } from "react";
-import { quickLogin, repairsUser } from "./features/profile/userThunk";
+import {
+  quickLogin,
+  repairAdmin,
+  repairsUser,
+} from "./features/profile/userThunk";
 import Cookies from "js-cookie";
 import { useAppSelector } from "./app/hooks/useAppSelector";
 
@@ -19,9 +23,11 @@ function App() {
 
   useEffect(() => {
     if (user?.id && initialized) {
-      dispatch(repairsUser(user.id));
+      if (user.role === "user") {
+        dispatch(repairsUser(user.id));
+      } else dispatch(repairAdmin());
     }
-  }, [dispatch, user?.id, initialized]);
+  }, [dispatch, user?.id, user?.role, initialized]);
 
   return <RouterProvider router={router} />;
 }
