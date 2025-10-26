@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IRepair, IUser } from "@/api/type";
-import {
-  loginUser,
-  quickLogin,
-  registerUser,
-  repairAdmin,
-  repairsUser,
-} from "./userThunk";
+import { IUser } from "@/api/type";
+import { loginUser, quickLogin, registerUser } from "./userThunk";
 import Cookies from "js-cookie";
 
 export interface IFormValue {
@@ -24,7 +18,6 @@ interface UserState {
   loading: boolean;
   error: string | null;
   formValue: IFormValue;
-  repairs: IRepair[];
 }
 
 const initialState: UserState = {
@@ -39,7 +32,6 @@ const initialState: UserState = {
     phone: "",
     email: "",
   },
-  repairs: [],
 };
 
 const userSlice = createSlice({
@@ -113,30 +105,6 @@ const userSlice = createSlice({
         state.initialized = true;
         state.user = null;
         state.token = undefined;
-      })
-      .addCase(repairsUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(repairsUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.repairs = action.payload;
-      })
-      .addCase(repairsUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Неизвестная ошибка";
-      })
-      .addCase(repairAdmin.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(repairAdmin.fulfilled, (state, action) => {
-        state.loading = false;
-        state.repairs = action.payload;
-      })
-      .addCase(repairAdmin.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Неизвестная ошибка";
       });
   },
 });

@@ -2,13 +2,13 @@ import { RouterProvider } from "react-router-dom";
 import router from "./app/Routes/router";
 import { useAppDispatch } from "./app/hooks/useAppDispatch";
 import { useEffect } from "react";
-import {
-  quickLogin,
-  repairAdmin,
-  repairsUser,
-} from "./features/profile/userThunk";
+import { quickLogin } from "./features/profile/userThunk";
 import Cookies from "js-cookie";
 import { useAppSelector } from "./app/hooks/useAppSelector";
+import {
+  repairAdmin,
+  repairsUser,
+} from "./features/profile/repairs/repairThunk";
 
 function App() {
   const dispatch = useAppDispatch();

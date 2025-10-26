@@ -2,11 +2,11 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
 import CardRepair from "../CardRepair/CardRepair";
 import fieldList from "./FieldList";
-import FilterButton from "../../Filter/UI/FilterButton/FilterButton";
-import FilterForm from "../../Filter/UI/FilterForm/FilterForm";
+import FilterButton from "../../repairs/UI/FilterButton/FilterButton";
+import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
 
 const Repairs = () => {
-  const repairs = useAppSelector((state) => state.user.repairs);
+  const repairs = useAppSelector((state) => state.repair.repairs);
   const role = useAppSelector((state) => state.user.user?.role);
 
   return (

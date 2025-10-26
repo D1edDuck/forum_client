@@ -5,9 +5,9 @@ import { inputValue } from "../bookingSlice";
 import { apiClient } from "@/api/apiClient";
 import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
-import { repairsUser } from "@/features/profile/userThunk";
-import { openModal } from "@/UI/Modal/modalSlice"; // 👈 импортируем действие
+import { openModal } from "@/UI/Modal/modalSlice";
 import { hideLoading, showLoading } from "@/UI/Loader/loaderSlice";
+import { repairsUser } from "@/features/profile/repairs/repairThunk";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
