@@ -4,6 +4,8 @@ import CardRepair from "../CardRepair/CardRepair";
 import fieldList from "./FieldList";
 import FilterButton from "../../repairs/UI/FilterButton/FilterButton";
 import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
+import TagsFilter from "../../repairs/UI/TagsFilter/TagsFilter";
+import ButtonReset from "../../repairs/UI/ButtonReset/ButtonReset";
 
 const Repairs = () => {
   const { repairs } = useAppSelector((state) => state.repair);
@@ -24,6 +26,8 @@ const Repairs = () => {
               </FilterButton>
             ))}
           </div>
+          <TagsFilter />
+          <ButtonReset />
         </>
       )}
       <div className={s.reps}>

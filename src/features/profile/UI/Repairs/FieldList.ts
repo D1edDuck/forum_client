@@ -33,8 +33,8 @@ const Date = [
 const Number = [
   {
     type: "number",
-    id: "number",
-    name: "number",
+    id: "id",
+    name: "id",
   },
 ];
 

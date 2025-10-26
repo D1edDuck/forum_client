@@ -16,5 +16,5 @@ export const useInputForm = () => {
     );
   };
 
-  return { formData, handleChange };
+  return { formData, handleChange, dispatch };
 };

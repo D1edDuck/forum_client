@@ -1,4 +1,5 @@
 import { useInputForm } from "../../hooks/useInputForm";
+import { repairFilter } from "../../repairThunk";
 import s from "./index.module.css";
 
 interface IInput {
@@ -14,7 +15,7 @@ interface IProps {
 }
 
 const FilterForm = ({ inputs }: IProps) => {
-  const { formData, handleChange } = useInputForm();
+  const { formData, handleChange, dispatch } = useInputForm();
 
   return (
     <form className={s.form}>
@@ -37,7 +38,15 @@ const FilterForm = ({ inputs }: IProps) => {
           />
         </label>
       ))}
-      <button className={s.btn}>Найти</button>
+      <button
+        className={s.btn}
+        onClick={(e) => {
+          e.preventDefault();
+          dispatch(repairFilter(formData));
+        }}
+      >
+        Найти
+      </button>
     </form>
   );
 };
