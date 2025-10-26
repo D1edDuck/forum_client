@@ -1,23 +1,42 @@
 import { IRepair } from "@/api/type";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { repairAdmin, repairsUser } from "./repairThunk";
+
+interface IValue {
+  [fieldName: string]: string | number | undefined;
+}
 
 interface IState {
   loading: boolean;
   error: string | null;
   repairs: IRepair[];
+  formValue: IValue;
 }
 
 const initialState: IState = {
   loading: false,
   error: null,
   repairs: [],
+  formValue: {},
 };
 
 const repairSlice = createSlice({
   name: "repairs",
   initialState,
-  reducers: {},
+  reducers: {
+    setValue(
+      state: IState,
+      action: PayloadAction<{
+        field: string;
+        value: string | number | undefined;
+      }>
+    ) {
+      state.formValue[action.payload.field] = action.payload.value;
+    },
+    resetForm(state: IState) {
+      state.formValue = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(repairsUser.pending, (state) => {
@@ -48,3 +67,4 @@ const repairSlice = createSlice({
 });
 
 export default repairSlice.reducer;
+export const { resetForm, setValue } = repairSlice.actions;

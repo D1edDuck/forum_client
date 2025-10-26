@@ -6,7 +6,7 @@ import FilterButton from "../../repairs/UI/FilterButton/FilterButton";
 import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
 
 const Repairs = () => {
-  const repairs = useAppSelector((state) => state.repair.repairs);
+  const { repairs } = useAppSelector((state) => state.repair);
   const role = useAppSelector((state) => state.user.user?.role);
 
   return (
