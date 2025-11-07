@@ -1,7 +1,7 @@
 import { IBooking, IRepair } from "@/api/type";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { inputValue } from "../bookingSlice";
+import { inputValue, resetValue } from "../bookingSlice";
 import { apiClient } from "@/api/apiClient";
 import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
@@ -35,7 +35,7 @@ const useForm = ({ user }: IProps) => {
     e.preventDefault();
 
     if (user && user.id !== null) {
-      const repair: Omit<IRepair, "id" | "created_at"> = {
+      const repair: Omit<IRepair, "id" | "created_at" | "user"> = {
         cause,
         comment,
         status: "pending",
@@ -51,7 +51,7 @@ const useForm = ({ user }: IProps) => {
         dispatch(
           openModal({
             tittle: "Успешно!",
-            text: "Ваша заявка успешно отправлена.",
+            text: "Ваша заявка успешно отправлена. Вам перезвонят для подтверждения заявки",
             status: "fulfilled",
           })
         );
@@ -66,6 +66,7 @@ const useForm = ({ user }: IProps) => {
         console.log(err);
       } finally {
         dispatch(hideLoading());
+        dispatch(resetValue());
       }
     }
   }

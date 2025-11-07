@@ -20,8 +20,16 @@ const bookingSlice = createSlice({
       const { id, value } = action.payload;
       state[id] = value;
     },
+
+    resetValue(state) {
+      state.name = "";
+      state.cause = "";
+      state.comment = "";
+      state.email = "";
+      state.phone = "";
+    },
   },
 });
 
 export default bookingSlice.reducer;
-export const { inputValue } = bookingSlice.actions;
+export const { inputValue, resetValue } = bookingSlice.actions;

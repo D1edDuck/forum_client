@@ -52,11 +52,18 @@ export interface IUserWithToken {
   token: string;
 }
 
+export interface IUserRep {
+  name: string;
+  phone: string;
+  email: string;
+}
+
 export interface IRepair {
   id: number;
   userId: number;
   cause: string;
   comment: string;
-  status: "pending" | "rejected";
+  status: "pending" | "fulfilled";
   created_at: string;
+  user: IUserRep;
 }

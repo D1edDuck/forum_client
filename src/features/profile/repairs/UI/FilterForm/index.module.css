@@ -1,7 +1,6 @@
 .form {
   position: absolute;
   top: 110%;
-  left: 0;
   padding: 2rem;
   background: var(--color-white);
   color: var(--color-black);
@@ -24,4 +23,12 @@
   display: flex;
   justify-content: space-between;
   gap: 3rem;
+}
+
+.left {
+  left: -100%;
+}
+
+.right {
+  left: 0;
 }
