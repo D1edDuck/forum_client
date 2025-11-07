@@ -1,5 +1,4 @@
 import { useInputForm } from "../../hooks/useInputForm";
-import { repairFilter } from "../../repairThunk";
 import s from "./index.module.css";
 
 interface IInput {
@@ -12,15 +11,25 @@ interface IInput {
 
 interface IProps {
   inputs: IInput[];
+  variant: string;
+  defaultValue?: string;
+  tittleBtn?: string;
+  formKey?: number;
 }
 
-const FilterForm = ({ inputs }: IProps) => {
-  const { formData, handleChange, dispatch } = useInputForm();
+const FilterForm = ({
+  inputs,
+  variant,
+  defaultValue,
+  tittleBtn,
+  formKey,
+}: IProps) => {
+  const { formData, handleChange } = useInputForm();
 
   return (
-    <form className={s.form}>
+    <form className={`${s.form} ${variant && s[variant]}`}>
       {inputs.map((i) => (
-        <label htmlFor={i.id} className={s.label}>
+        <label htmlFor={i.id} className={s.label} key={`${formKey}-${i.id}`}>
           {i.label}
           <input
             type={i.type}
@@ -32,21 +41,15 @@ const FilterForm = ({ inputs }: IProps) => {
                 : formData[i.name] || ""
             }
             checked={
-              i.type === "radio" ? formData[i.name] === i.value : undefined
+              i.type === "radio"
+                ? (formData[i.name] ?? defaultValue) === i.value
+                : undefined
             }
             onChange={handleChange}
           />
         </label>
       ))}
-      <button
-        className={s.btn}
-        onClick={(e) => {
-          e.preventDefault();
-          dispatch(repairFilter(formData));
-        }}
-      >
-        Найти
-      </button>
+      <button className={s.btn}>{tittleBtn || "Найти"}</button>
     </form>
   );
 };

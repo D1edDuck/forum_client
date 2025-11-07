@@ -22,7 +22,11 @@ const Repairs = () => {
           <div className={s.filter}>
             {fieldList.map((list) => (
               <FilterButton title={list.title}>
-                <FilterForm inputs={list.inputs} key={list.title} />
+                <FilterForm
+                  variant="right"
+                  inputs={list.inputs}
+                  key={list.title}
+                />
               </FilterButton>
             ))}
           </div>

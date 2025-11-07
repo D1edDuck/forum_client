@@ -48,10 +48,12 @@
 }
 
 .statusBadge {
+  position: relative;
   font-size: var(--size-16);
   font-weight: 700;
   padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
+  border-radius: 100rem;
+  border: none;
   text-transform: uppercase;
   color: #ffffff;
 
@@ -62,7 +64,12 @@
   &.repair {
     background-color: #007bff;
   }
-  &.done {
+  &.fulfilled {
     background-color: #28a745;
   }
+}
+
+.statusBadge option {
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
