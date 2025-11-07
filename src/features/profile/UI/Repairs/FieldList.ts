@@ -13,13 +13,6 @@ const Status = [
     value: "pending",
     label: "В процессе",
   },
-  {
-    type: "radio",
-    id: "all",
-    name: "status",
-    value: "all",
-    label: "Все",
-  },
 ];
 
 const Date = [

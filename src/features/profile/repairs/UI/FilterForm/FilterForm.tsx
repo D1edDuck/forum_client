@@ -15,6 +15,7 @@ interface IProps {
   defaultValue?: string;
   tittleBtn?: string;
   formKey?: number;
+  patch?: boolean;
 }
 
 const FilterForm = ({
@@ -23,32 +24,36 @@ const FilterForm = ({
   defaultValue,
   tittleBtn,
   formKey,
+  patch,
 }: IProps) => {
-  const { formData, handleChange } = useInputForm();
+  const { formData, formPatch, handleChange } = useInputForm();
+  const currentForm = patch ? formPatch : formData;
 
   return (
     <form className={`${s.form} ${variant && s[variant]}`}>
       {inputs.map((i) => (
         <label htmlFor={i.id} className={s.label} key={`${formKey}-${i.id}`}>
           {i.label}
+
           <input
             type={i.type}
             id={i.id}
             name={i.name}
             value={
               i.type === "radio"
-                ? i.value || formData[i.name]
-                : formData[i.name] || ""
+                ? i.value || currentForm[i.name]
+                : currentForm[i.name] || ""
             }
             checked={
               i.type === "radio"
-                ? (formData[i.name] ?? defaultValue) === i.value
+                ? (currentForm[i.name] ?? defaultValue) === i.value
                 : undefined
             }
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, patch)}
           />
         </label>
       ))}
+
       <button className={s.btn}>{tittleBtn || "Найти"}</button>
     </form>
   );

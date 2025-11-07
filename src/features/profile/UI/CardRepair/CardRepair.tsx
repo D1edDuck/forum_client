@@ -2,8 +2,10 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
 import { IRepair } from "@/api/type";
 import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
+import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 
 const CardRepair = (rep: IRepair) => {
+  const { open, ref, toggle } = useOpenFilter();
   const role = useAppSelector((state) => state.user.user?.role);
 
   const getStatusClass = (status: string) => {
@@ -77,23 +79,32 @@ const CardRepair = (rep: IRepair) => {
             {status.find((st) => st.value === rep.status)?.label || rep.status}
           </span>
         ) : (
-          <div className={`${s.statusBadge} ${getStatusClass(rep.status)}`}>
-            {status.find((st) => st.value === rep.status)?.label || rep.status}
-            {">"}
-            <FilterForm
-              key={`filter-${rep.id}`}
-              formKey={rep.id}
-              variant="left"
-              inputs={status.map((st) => ({
-                type: "radio",
-                id: `${st.value}-${rep.id}`,
-                name: ` $status-${rep.id}`,
-                label: st.label,
-                value: st.value,
-              }))}
-              defaultValue={rep.status}
-              tittleBtn="Изменить"
-            />
+          <div
+            className={`${s.statusBadge} ${getStatusClass(rep.status)}`}
+            ref={ref}
+          >
+            <span onClick={toggle}>
+              {status.find((st) => st.value === rep.status)?.label ||
+                rep.status}
+              {">"}
+            </span>
+            {open && (
+              <FilterForm
+                key={`filter-${rep.id}`}
+                formKey={rep.id}
+                variant="left"
+                inputs={status.map((st) => ({
+                  type: "radio",
+                  id: `${st.value}-${rep.id}`,
+                  name: ` $status-${rep.id}`,
+                  label: st.label,
+                  value: st.value,
+                }))}
+                defaultValue={rep.status}
+                tittleBtn="Изменить"
+                patch={true}
+              />
+            )}
           </div>
         )}
       </div>

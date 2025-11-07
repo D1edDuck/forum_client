@@ -11,6 +11,7 @@ interface IState {
   error: string | null;
   repairs: IRepair[];
   formValue: IValue;
+  formValuePatch: IValue;
 }
 
 const initialState: IState = {
@@ -18,6 +19,7 @@ const initialState: IState = {
   error: null,
   repairs: [],
   formValue: {},
+  formValuePatch: {},
 };
 
 const repairSlice = createSlice({
@@ -32,6 +34,15 @@ const repairSlice = createSlice({
       }>
     ) {
       state.formValue[action.payload.field] = action.payload.value;
+    },
+    setValuePatch(
+      state: IState,
+      action: PayloadAction<{
+        field: string;
+        value: string | number | undefined;
+      }>
+    ) {
+      state.formValuePatch[action.payload.field] = action.payload.value;
     },
     resetForm(state: IState) {
       state.formValue = {};
@@ -79,4 +90,4 @@ const repairSlice = createSlice({
 });
 
 export default repairSlice.reducer;
-export const { resetForm, setValue } = repairSlice.actions;
+export const { resetForm, setValue, setValuePatch } = repairSlice.actions;

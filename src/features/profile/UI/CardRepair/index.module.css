@@ -56,6 +56,7 @@
   border: none;
   text-transform: uppercase;
   color: #ffffff;
+  cursor: pointer;
 
   &.pending {
     background-color: #ffc107;
