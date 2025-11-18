@@ -39,3 +39,15 @@
   display: flex;
   gap: 2rem;
 }
+
+.filterTittle {
+  font-weight: 600;
+  font-size: var(--size-24);
+}
+
+.noSelect {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

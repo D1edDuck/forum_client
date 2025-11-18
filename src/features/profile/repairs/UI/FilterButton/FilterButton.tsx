@@ -15,7 +15,7 @@ const FilterButton: FC<IProps> = ({ title, children }) => {
         <span>{title}</span>
         <span>{open ? "▴" : "▾"}</span>
       </button>
-      {open && <>{children}</>}
+      {open && children}
     </div>
   );
 };

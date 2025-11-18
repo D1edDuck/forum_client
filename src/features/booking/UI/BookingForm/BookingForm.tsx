@@ -7,51 +7,13 @@ export interface IProps {
 }
 
 const BookingForm = ({ user }: IProps) => {
-  const { name, cause, comment, email, phone, onSubmit, setValue } = useForm({
+  const { cause, comment, onSubmit, setValue } = useForm({
     user,
   });
 
   return (
     <form className={s.form} onSubmit={onSubmit}>
-      <div className="dlex">
-        <label htmlFor="name">Имя и Фамилия</label>
-        <input
-          type="text"
-          id="name"
-          className={s.input}
-          placeholder="Имя Фамилия"
-          required
-          value={name}
-          onChange={(e) => setValue("name", e.target.value)}
-        />
-      </div>
-
-      <div className="dlex">
-        <label htmlFor="phone">Номер телефона</label>
-        <input
-          type="tel"
-          id="phone"
-          className={s.input}
-          placeholder="+7 000 000 00 00"
-          required
-          value={phone}
-          onChange={(e) => setValue("phone", e.target.value)}
-        />
-      </div>
-
-      <div className="dlex">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          className={s.input}
-          placeholder="template@domain.com"
-          value={email}
-          onChange={(e) => setValue("email", e.target.value)}
-        />
-      </div>
-
-      <div className="dlex">
+      <div className="dlex05">
         <label htmlFor="cause">Причина обращения</label>
         <select
           id="cause"
@@ -69,7 +31,7 @@ const BookingForm = ({ user }: IProps) => {
         </select>
       </div>
 
-      <div className="dlex">
+      <div className="dlex05">
         <label htmlFor="comment">Комментарий</label>
         <textarea
           name="text"
@@ -81,7 +43,10 @@ const BookingForm = ({ user }: IProps) => {
         ></textarea>
       </div>
 
-      <button className={s.button}>Отправить заявку</button>
+      <button className={s.button} disabled={!user?.id}>
+        Отправить заявку
+      </button>
+      {!user?.id && <> Необходимо войти в свой аккаунт перед заявкой</>}
     </form>
   );
 };

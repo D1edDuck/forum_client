@@ -21,17 +21,6 @@ const Contacts = () => {
             </strong>
           </p>
         </div>
-
-        <div>
-          <p>ПН - ПТ</p>
-          <p>
-            <strong>9:30 - 18:30</strong>
-          </p>
-          <p>СБ - ВС</p>
-          <p>
-            <strong>9:30 - 15:00</strong>
-          </p>
-        </div>
       </div>
 
       <div className={s.map}>

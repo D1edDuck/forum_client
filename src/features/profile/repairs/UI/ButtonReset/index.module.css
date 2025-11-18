@@ -1,0 +1,9 @@
+.btn {
+  padding: 1rem 1.5rem;
+  color: var(--color-red);
+  font-weight: 600;
+  font-size: var(--size-20);
+  border: 0.2rem solid var(--color-red);
+  border-radius: var(--radius-15);
+  align-self: start;
+}

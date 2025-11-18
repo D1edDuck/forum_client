@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
 import { IRepair } from "@/api/type";
-import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
 import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
+import FilterForm from "../FilterForm/FilterForm";
 
 const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();

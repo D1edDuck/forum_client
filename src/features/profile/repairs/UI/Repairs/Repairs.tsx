@@ -1,13 +1,16 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
-import CardRepair from "../CardRepair/CardRepair";
 import fieldList from "./FieldList";
-import FilterButton from "../../repairs/UI/FilterButton/FilterButton";
-import FilterForm from "../../repairs/UI/FilterForm/FilterForm";
-import TagsFilter from "../../repairs/UI/TagsFilter/TagsFilter";
-import ButtonReset from "../../repairs/UI/ButtonReset/ButtonReset";
+import FilterButton from "../FilterButton/FilterButton";
+import FilterForm from "../FilterForm/FilterForm";
+import TagsFilter from "../TagsFilter/TagsFilter";
+import ButtonReset from "../ButtonReset/ButtonReset";
+import CardRepair from "../CardRepair/CardRepair";
+import { repairFilter } from "../../repairThunk";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 const Repairs = () => {
+  const dispatch = useAppDispatch();
   const { repairs } = useAppSelector((state) => state.repair);
   const role = useAppSelector((state) => state.user.user?.role);
 
@@ -18,7 +21,7 @@ const Repairs = () => {
       </h3>
       {role === "admin" && (
         <>
-          <p>Фильтр заявок</p>
+          <p className={`${s.filterTittle} ${s.noSelect}`}>Фильтр заявок</p>
           <div className={s.filter}>
             {fieldList.map((list) => (
               <FilterButton title={list.title}>
@@ -26,12 +29,15 @@ const Repairs = () => {
                   variant="right"
                   inputs={list.inputs}
                   key={list.title}
+                  onSubmit={(data) => dispatch(repairFilter(data))}
                 />
               </FilterButton>
             ))}
           </div>
-          <TagsFilter />
-          <ButtonReset />
+          <div className="flex gap20">
+            <TagsFilter />
+            <ButtonReset />
+          </div>
         </>
       )}
       <div className={s.reps}>

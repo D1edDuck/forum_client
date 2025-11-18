@@ -1,8 +1,12 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setValue, setValuePatch } from "../repairSlice";
+import { IFilterData } from "../UI/FilterForm/FilterForm";
 
-export const useInputForm = () => {
+export const useInputForm = (
+  onSubmit: (data: IFilterData) => void,
+  patch?: boolean
+) => {
   const formData = useAppSelector((state) => state.repair.formValue);
   const formPatch = useAppSelector((state) => state.repair.formValuePatch);
   const dispatch = useAppDispatch();
@@ -23,6 +27,14 @@ export const useInputForm = () => {
       );
     }
   };
+  const data = patch ? formPatch : formData;
 
-  return { formData, formPatch, handleChange, dispatch };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSubmit) {
+      onSubmit(data);
+    }
+  };
+
+  return { data, handleChange, handleSubmit, dispatch };
 };

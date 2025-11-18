@@ -7,7 +7,10 @@ import { IProps } from "../UI/BookingForm/BookingForm";
 import { useEffect } from "react";
 import { openModal } from "@/UI/Modal/modalSlice";
 import { hideLoading, showLoading } from "@/UI/Loader/loaderSlice";
-import { repairsUser } from "@/features/profile/repairs/repairThunk";
+import {
+  repairAdmin,
+  repairsUser,
+} from "@/features/profile/repairs/repairThunk";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
@@ -20,10 +23,6 @@ const useForm = ({ user }: IProps) => {
       if (user.name) dispatch(inputValue({ id: "name", value: user.name }));
       if (user.email) dispatch(inputValue({ id: "email", value: user.email }));
       if (user.phone) dispatch(inputValue({ id: "phone", value: user.phone }));
-    } else {
-      dispatch(inputValue({ id: "name", value: "" }));
-      dispatch(inputValue({ id: "email", value: "" }));
-      dispatch(inputValue({ id: "phone", value: "" }));
     }
   }, [user, dispatch]);
 
@@ -46,7 +45,8 @@ const useForm = ({ user }: IProps) => {
         dispatch(showLoading("Отправка заявки..."));
 
         await apiClient("repair", "POST", repair);
-        await dispatch(repairsUser(user.id));
+        if (user.role === "user") await dispatch(repairsUser(user.id));
+        else await dispatch(repairAdmin());
 
         dispatch(
           openModal({
@@ -77,6 +77,7 @@ const useForm = ({ user }: IProps) => {
     comment,
     email,
     phone,
+    user,
     onSubmit,
     setValue,
   };

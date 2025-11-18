@@ -9,6 +9,13 @@ interface IInput {
   label?: string;
 }
 
+export interface IFilterData {
+  [key: string]: string | number | undefined;
+  status?: string;
+  date?: string;
+  id?: string;
+}
+
 interface IProps {
   inputs: IInput[];
   variant: string;
@@ -16,6 +23,7 @@ interface IProps {
   tittleBtn?: string;
   formKey?: number;
   patch?: boolean;
+  onSubmit: (data: IFilterData) => void;
 }
 
 const FilterForm = ({
@@ -25,12 +33,15 @@ const FilterForm = ({
   tittleBtn,
   formKey,
   patch,
+  onSubmit,
 }: IProps) => {
-  const { formData, formPatch, handleChange } = useInputForm();
-  const currentForm = patch ? formPatch : formData;
+  const { data, handleChange, handleSubmit } = useInputForm(onSubmit, patch);
 
   return (
-    <form className={`${s.form} ${variant && s[variant]}`}>
+    <form
+      className={`${s.form} ${variant && s[variant]}`}
+      onSubmit={handleSubmit}
+    >
       {inputs.map((i) => (
         <label htmlFor={i.id} className={s.label} key={`${formKey}-${i.id}`}>
           {i.label}
@@ -40,13 +51,11 @@ const FilterForm = ({
             id={i.id}
             name={i.name}
             value={
-              i.type === "radio"
-                ? i.value || currentForm[i.name]
-                : currentForm[i.name] || ""
+              i.type === "radio" ? i.value || data[i.name] : data[i.name] || ""
             }
             checked={
               i.type === "radio"
-                ? (currentForm[i.name] ?? defaultValue) === i.value
+                ? (data[i.name] ?? defaultValue) === i.value
                 : undefined
             }
             onChange={(e) => handleChange(e, patch)}

@@ -72,6 +72,12 @@ html {
   text-align: center;
 }
 
+.dlex05 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .mb {
   display: flex;
   flex-direction: column;

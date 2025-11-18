@@ -14,7 +14,7 @@ import FormAuthorization from "@/features/profile/UI/FormAuthorization/FormAutho
 import FormRegistration from "@/features/profile/UI/FormRegistration/FormRegistration";
 import LoginLayout from "@/app/Layout/LoginLayout/LoginLayout";
 import ProtectedRoute from "./ProtectedRoute";
-import Repairs from "@/features/profile/UI/Repairs/Repairs";
+import Repairs from "@/features/profile/repairs/UI/Repairs/Repairs";
 import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccount";
 import PublicRoute from "./PublicRoute";
 
