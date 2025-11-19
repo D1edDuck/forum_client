@@ -3,10 +3,13 @@ import s from "./index.module.css";
 import { IRepair } from "@/api/type";
 import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import FilterForm from "../FilterForm/FilterForm";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { editStatus } from "../../repairThunk";
 
 const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();
   const role = useAppSelector((state) => state.user.user?.role);
+  const dispatch = useAppDispatch();
 
   const getStatusClass = (status: string) => {
     switch (status.toLowerCase()) {
@@ -96,13 +99,16 @@ const CardRepair = (rep: IRepair) => {
                 inputs={status.map((st) => ({
                   type: "radio",
                   id: `${st.value}-${rep.id}`,
-                  name: ` $status-${rep.id}`,
+                  name: `status`,
                   label: st.label,
                   value: st.value,
                 }))}
                 defaultValue={rep.status}
                 tittleBtn="Изменить"
                 patch={true}
+                onSubmit={(data) => {
+                  dispatch(editStatus({ id: rep.id, status: data.status! }));
+                }}
               />
             )}
           </div>

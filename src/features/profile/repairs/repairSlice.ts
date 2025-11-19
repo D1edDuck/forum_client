@@ -1,6 +1,11 @@
 import { IRepair } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { repairAdmin, repairFilter, repairsUser } from "./repairThunk";
+import {
+  editStatus,
+  repairAdmin,
+  repairFilter,
+  repairsUser,
+} from "./repairThunk";
 
 export interface IValue {
   [fieldName: string]: string | number | undefined;
@@ -85,7 +90,19 @@ const repairSlice = createSlice({
       .addCase(repairFilter.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Неизвестная ошибка";
-      });
+      })
+      .addCase(
+        editStatus.fulfilled,
+        (state, action: PayloadAction<IRepair>) => {
+          const updatedRepair = action.payload;
+          const index = state.repairs.findIndex(
+            (r) => r.id === updatedRepair.id
+          );
+          if (index !== -1) {
+            state.repairs[index] = updatedRepair;
+          }
+        }
+      );
   },
 });
 

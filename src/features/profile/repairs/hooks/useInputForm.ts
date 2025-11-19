@@ -2,6 +2,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setValue, setValuePatch } from "../repairSlice";
 import { IFilterData } from "../UI/FilterForm/FilterForm";
+import { openModal } from "@/UI/Modal/modalSlice";
 
 export const useInputForm = (
   onSubmit: (data: IFilterData) => void,
@@ -33,6 +34,13 @@ export const useInputForm = (
     e.preventDefault();
     if (onSubmit) {
       onSubmit(data);
+      dispatch(
+        openModal({
+          status: "fulfilled",
+          text: `Статус заявки успешно изменен`,
+          tittle: "Успешно",
+        })
+      );
     }
   };
 

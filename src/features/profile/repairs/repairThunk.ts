@@ -96,3 +96,39 @@ export const repairFilter = createAsyncThunk<
     return rejectWithValue(message);
   }
 });
+
+export const editStatus = createAsyncThunk<
+  IRepair,
+  { id: number; status: string },
+  { rejectValue: string }
+>("repair/editStatus", async ({ id, status }, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<IRepair, { status: string }>(
+      `repair/status/${id}`,
+      "PATCH",
+      { status }
+    );
+
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+
+    if (message === "Unauthorized" || message.includes("401")) {
+      Cookies.remove(TOKEN_KEY);
+    }
+
+    return rejectWithValue(message);
+  }
+});

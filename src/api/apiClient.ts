@@ -1,6 +1,6 @@
 export async function apiClient<T, TBody = undefined>(
   endpoint: string,
-  method: "GET" | "PUT" | "DELETE" | "POST" = "GET",
+  method: "PATCH" | "GET" | "PUT" | "DELETE" | "POST" = "GET",
   body?: TBody,
   headers?: Record<string, string>
 ): Promise<T> {
