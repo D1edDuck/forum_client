@@ -33,7 +33,7 @@ const ServicePage = () => {
       <div className={`container ${s.serviceFlex} pb`}>
         <NavigateLine />
         <NavigateTabs />
-        <div className="flex jcb gap20">
+        <div className={s.flex}>
           {selected.info.map((item) => (
             <ServiceBlock key={item.title} data={item} />
           ))}

@@ -42,3 +42,13 @@
   font-weight: 800;
   font-size: var(--size-32);
 }
+
+@media (max-width: 420px) {
+  .right {
+    display: none;
+  }
+
+  .block {
+    grid-template-columns: 1fr;
+  }
+}

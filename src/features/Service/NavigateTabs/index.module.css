@@ -3,4 +3,14 @@
   padding: 0.5rem;
   border: 0.1rem solid var(--color-blue);
   justify-content: space-between;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .border {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

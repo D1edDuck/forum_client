@@ -1,5 +1,26 @@
 .serviceFlex {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .flex.jcb.gap20 {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .flex.jcb.gap20 {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
 }

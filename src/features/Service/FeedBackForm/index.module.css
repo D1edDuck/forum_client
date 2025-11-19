@@ -6,6 +6,7 @@
   font-size: var(--size-20);
   border-radius: var(--radius-15);
   padding: 3rem;
+  gap: 2rem;
 }
 
 .buttons {
@@ -31,4 +32,40 @@
 
 .title {
   font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+
+  .buttons {
+    justify-self: start;
+    align-items: flex-start;
+  }
+
+  .icons {
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .bottom {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .icons {
+    gap: 1rem;
+  }
+
+  .buttons .mb > * {
+    width: 100%;
+  }
 }
