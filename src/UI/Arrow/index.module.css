@@ -1,0 +1,79 @@
+.blockr {
+  transform: translateY(0rem);
+}
+
+.blockl {
+  transform: translateY(0rem) rotate(180deg);
+}
+
+/* 
+l - 2.5rem 
+s - 1rem
+
+w - white
+b -black
+*/
+
+.uplw {
+  width: 2.5rem;
+  height: 0.4rem;
+  background: var(--color-white);
+  border-radius: 100px;
+  transform: rotate(-35deg) translateY(1rem);
+}
+
+.downlw {
+  width: 2.5rem;
+  height: 0.4rem;
+  background: var(--color-white);
+  border-radius: 100px;
+  transform: rotate(-145deg) translateY(1rem);
+}
+
+.uplb {
+  width: 2.5rem;
+  height: 0.4rem;
+  background: var(--color-black);
+  border-radius: 100px;
+  transform: rotate(-35deg) translateY(1rem);
+}
+
+.downlb {
+  width: 2.5rem;
+  height: 0.4rem;
+  background: var(--color-black);
+  border-radius: 100px;
+  transform: rotate(-145deg) translateY(1rem);
+}
+
+.upsw {
+  width: 1.5rem;
+  height: 0.3rem;
+  background: var(--color-white);
+  border-radius: 100px;
+  transform: translateY(-0.2rem) rotate(35deg);
+}
+
+.downsw {
+  width: 1.5rem;
+  height: 0.3rem;
+  background: var(--color-white);
+  border-radius: 100px;
+  transform: translateY(0.2rem) rotate(-35deg);
+}
+
+.upsb {
+  width: 1rem;
+  height: 0.4rem;
+  background: var(--color-black);
+  border-radius: 100px;
+  transform: translateY(-0.2rem) rotate(35deg);
+}
+
+.downsb {
+  width: 1rem;
+  height: 0.4rem;
+  background: var(--color-black);
+  border-radius: 100px;
+  transform: translateY(0.2rem) rotate(-35deg);
+}

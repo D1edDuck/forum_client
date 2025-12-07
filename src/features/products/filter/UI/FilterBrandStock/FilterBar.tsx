@@ -3,6 +3,7 @@ import s from "./index.module.css";
 import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import FilterForm from "./FilterForm";
 import { IProduct } from "@/api/type";
+import Arrow from "@/UI/Arrow/Arrow";
 
 interface IProps {
   title: string;
@@ -33,7 +34,13 @@ const FilterBar = ({ title, products, variant }: IProps) => {
           onClick={toggle}
         >
           <span>{title}</span>
-          <span>{open ? "▴" : "▾"}</span>
+          <span className={s.arr}>
+            {open ? (
+              <Arrow color="w" size="s" side="l" />
+            ) : (
+              <Arrow color="w" size="s" side="r" />
+            )}
+          </span>
         </button>
 
         {open && <FilterForm toggle={toggle} names={names} variant={variant} />}

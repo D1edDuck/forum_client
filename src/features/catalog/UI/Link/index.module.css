@@ -11,3 +11,9 @@
 .loading {
   font-size: var(--size-24);
 }
+
+.arr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

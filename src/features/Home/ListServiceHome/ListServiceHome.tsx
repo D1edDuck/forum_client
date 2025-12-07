@@ -47,7 +47,7 @@ const ListServiceHome = () => {
             </p>
           </div>
           <p className={s.text}>Есть вопросы?</p>
-          <ButtonConnect title="вопрос" primary="hard" />
+          <ButtonConnect title="Связаться с нами" primary="soft" />
         </div>
       </div>
     </section>

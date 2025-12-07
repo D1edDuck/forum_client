@@ -5,3 +5,14 @@
   padding: 1rem 2rem;
   position: relative;
 }
+
+.span {
+  display: flex;
+  gap: 2rem;
+}
+
+.arr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

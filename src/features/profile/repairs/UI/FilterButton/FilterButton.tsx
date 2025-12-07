@@ -2,10 +2,11 @@ import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import { FC, ReactElement } from "react";
 import s from "./index.module.css";
 import React from "react";
+import Arrow from "@/UI/Arrow/Arrow";
 
 interface IProps {
   title: string;
-  children: ReactElement<{ toggle: () => void }>; // Указываем, что `children` должен быть компонентом с пропсом `toggle`
+  children: ReactElement<{ toggle: () => void }>;
 }
 
 const FilterButton: FC<IProps> = ({ title, children }) => {
@@ -17,9 +18,15 @@ const FilterButton: FC<IProps> = ({ title, children }) => {
 
   return (
     <div ref={ref} className={s.btn}>
-      <button onClick={toggle}>
+      <button onClick={toggle} className={s.span}>
         <span>{title}</span>
-        <span>{open ? "▴" : "▾"}</span>
+        <span className={s.arr}>
+          {open ? (
+            <Arrow size="s" color="w" side="l" />
+          ) : (
+            <Arrow size="s" color="w" side="r" />
+          )}
+        </span>
       </button>
       {open && clonedChildren}
     </div>
