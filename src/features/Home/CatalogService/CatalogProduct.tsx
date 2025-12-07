@@ -58,7 +58,7 @@ const CatalogService = () => {
             </p>
 
             <img
-              src="src/assets/img/catalog-big.png"
+              src="/img/catalog-big.png"
               alt="Каталог товаров"
               className={s.boxBigImage}
             />

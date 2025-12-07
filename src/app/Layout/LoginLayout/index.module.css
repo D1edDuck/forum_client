@@ -3,7 +3,7 @@
   border-end-end-radius: var(--radius-15);
   background:
     linear-gradient(rgba(0, 60, 255, 0.4), rgba(0, 60, 255, 0.4)),
-    url("../../../assets/img/profile-form.png") center / cover;
+    url("/img/profile-form.png") center / cover;
   padding: 3rem;
   display: flex;
   flex-direction: column;

@@ -8,7 +8,7 @@ const SvgLink: FC<IChild> = ({ name }) => {
   return (
     <div className={s.icon_contact}>
       <svg className={s.icon}>
-        <use href={`../src/assets/icons/symbol-defs.svg#icon-${name}`}></use>
+        <use href={`/icons/symbol-defs.svg#icon-${name}`}></use>
       </svg>
     </div>
   );

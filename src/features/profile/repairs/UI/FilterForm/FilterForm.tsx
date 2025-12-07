@@ -18,12 +18,13 @@ export interface IFilterData {
 
 interface IProps {
   inputs: IInput[];
-  variant: string;
+  variant: "left" | "right";
   defaultValue?: string;
   tittleBtn?: string;
   formKey?: number;
   patch?: boolean;
   onSubmit: (data: IFilterData) => void;
+  toggle?: () => void;
 }
 
 const FilterForm = ({
@@ -34,8 +35,14 @@ const FilterForm = ({
   formKey,
   patch,
   onSubmit,
+  toggle,
 }: IProps) => {
-  const { data, handleChange, handleSubmit } = useInputForm(onSubmit, patch);
+  const { data, handleChange, handleSubmit } = useInputForm(
+    onSubmit,
+    variant,
+    toggle,
+    patch
+  );
 
   return (
     <form

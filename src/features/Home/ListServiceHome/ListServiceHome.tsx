@@ -6,25 +6,25 @@ const service = {
   name: "Сервис",
   path: "service/repair",
   description: "текст про наш сервис",
-  image: "src/assets/img/card-1.png",
+  image: "/img/card-1.png",
 };
 const booking = {
   name: "Запись",
   path: "booking",
   description: "текст про наш сервис",
-  image: "src/assets/img/card-2.png",
+  image: "/img/card-2.png",
 };
 const catalog = {
   name: "Каталог",
   path: "catalog",
   description: "текст про наш сервис",
-  image: "src/assets/img/card-3.png",
+  image: "/img/card-3.png",
 };
 const about = {
   name: "О нас",
   path: "about",
   description: "текст про наш сервис",
-  image: "src/assets/img/card-4.png",
+  image: "/img/card-4.png",
 };
 
 const ListServiceHome = () => {
@@ -47,7 +47,7 @@ const ListServiceHome = () => {
             </p>
           </div>
           <p className={s.text}>Есть вопросы?</p>
-          <ButtonConnect />
+          <ButtonConnect title="вопрос" primary="hard" />
         </div>
       </div>
     </section>

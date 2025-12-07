@@ -17,30 +17,22 @@ const InfoHome = () => {
           <SvgLink name={"mop"} />
           <SvgLink name={"contacts"} />
         </div>
-        <img
-          src="src/assets/img/computer.png"
-          alt="computer"
-          className={s.comp}
-        />
-        <img
-          src="src/assets/img/laptop.png"
-          alt="laptop"
-          className={s.laptop}
-        />
+        <img src="/img/computer.png" alt="computer" className={s.comp} />
+        <img src="/img/laptop.png" alt="laptop" className={s.laptop} />
         <svg className={`${s.icon_small} ${s.printer}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-Printer"></use>
+          <use xlinkHref="/icons/symbol-defs.svg#icon-Printer"></use>
         </svg>
         <svg className={`${s.icon_small} ${s.cpu}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-CPU"></use>
+          <use xlinkHref="/icons/symbol-defs.svg#icon-CPU"></use>
         </svg>
         <svg className={`${s.icon_small} ${s.laptopIcon}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-Laptop"></use>
+          <use xlinkHref="/icons/symbol-defs.svg#icon-Laptop"></use>
         </svg>
         <svg className={`${s.icon_small} ${s.save}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-Save"></use>
+          <use xlinkHref="/icons/symbol-defs.svg#icon-Save"></use>
         </svg>
         <svg className={`${s.icon_small} ${s.display}`}>
-          <use xlinkHref="src/assets/icons/symbol-defs.svg#icon-Display"></use>
+          <use xlinkHref="/icons/symbol-defs.svg#icon-Display"></use>
         </svg>
       </div>
     </section>

@@ -24,11 +24,10 @@ const Repairs = () => {
           <p className={`${s.filterTittle} ${s.noSelect}`}>Фильтр заявок</p>
           <div className={s.filter}>
             {fieldList.map((list) => (
-              <FilterButton title={list.title}>
+              <FilterButton title={list.title} key={list.title}>
                 <FilterForm
                   variant="right"
                   inputs={list.inputs}
-                  key={list.title}
                   onSubmit={(data) => dispatch(repairFilter(data))}
                 />
               </FilterButton>
