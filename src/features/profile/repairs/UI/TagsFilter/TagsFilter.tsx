@@ -10,7 +10,11 @@ const TagsFilter = () => {
     <div className={s.box}>
       {Object.values(filters).map((value, index) => (
         <div className={s.tag} key={index}>
-          {value}
+          {value == "fulfilled"
+            ? "Готово"
+            : value == "pending"
+              ? "В процессе"
+              : value}
         </div>
       ))}
     </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
 import { IRepair } from "@/api/type";
@@ -5,11 +6,13 @@ import { useOpenFilter } from "@/features/products/filter/hooks/useOpenFilter";
 import FilterForm from "../FilterForm/FilterForm";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { editStatus } from "../../repairThunk";
+import Arrow from "@/UI/Arrow/Arrow";
 
 const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();
   const role = useAppSelector((state) => state.user.user?.role);
   const dispatch = useAppDispatch();
+  const [hidden, setHidden] = useState(false);
 
   const getStatusClass = (status: string) => {
     switch (status.toLowerCase()) {
@@ -49,9 +52,18 @@ const CardRepair = (rep: IRepair) => {
 
   return (
     <div className={s.card}>
-      <div className={s.title}>Заявка #{rep.id}</div>
+      <div className={s.title}>
+        <span>Заявка #{rep.id}</span>
+        <div className={s.arr} onClick={() => setHidden((prev) => !prev)}>
+          {hidden ? (
+            <Arrow color="b" size="s" side="l" />
+          ) : (
+            <Arrow color="b" size="s" side="r" />
+          )}
+        </div>
+      </div>
 
-      <div className={s.grid}>
+      <div className={`${s.grid} ${hidden ? s.open : s.closed}`}>
         {role === "admin" && (
           <>
             <span className={s.key}>Имя клиента</span>
@@ -86,10 +98,12 @@ const CardRepair = (rep: IRepair) => {
             className={`${s.statusBadge} ${getStatusClass(rep.status)}`}
             ref={ref}
           >
-            <span onClick={toggle}>
+            <span onClick={toggle} className={s.btn}>
               {status.find((st) => st.value === rep.status)?.label ||
                 rep.status}
-              {">"}
+              <span className={s.arr}>
+                {<Arrow color="w" size="s" side="r" />}
+              </span>
             </span>
             {open && (
               <FilterForm
