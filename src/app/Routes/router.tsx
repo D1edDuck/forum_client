@@ -5,7 +5,7 @@ import CatalogPage from "@/features/catalog/Page/CatalogPage";
 import ProductPage from "@/pages/ProductPage";
 import ServicePage from "@/features/Service/Page/ServicePage";
 import BookingPage from "@/features/booking/Page/BookingPage";
-import FaqPage from "@/pages/FaqPage";
+import FaqPage from "@/features/faq/FaqPage";
 import AboutPage from "@/pages/AboutPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ProductCatalogPage from "@/features/products/Page/ProductCatalogPage";

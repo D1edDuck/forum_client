@@ -85,6 +85,8 @@ const CardRepair = (rep: IRepair) => {
 
         <span className={s.key}>Дата</span>
         <span className={s.value}>{formatDate(rep.created_at)}</span>
+
+        <div className={s.hr}></div>
       </div>
 
       <div className={s.statusContainer}>
@@ -102,7 +104,11 @@ const CardRepair = (rep: IRepair) => {
               {status.find((st) => st.value === rep.status)?.label ||
                 rep.status}
               <span className={s.arr}>
-                {<Arrow color="w" size="s" side="r" />}
+                {open ? (
+                  <Arrow color="w" size="s" side="l" />
+                ) : (
+                  <Arrow color="w" size="s" side="r" />
+                )}
               </span>
             </span>
             {open && (
