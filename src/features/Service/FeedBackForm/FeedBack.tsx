@@ -1,6 +1,7 @@
 import SvgLink from "@/UI/SvgLink/SvgLink";
 import ButtonLink from "@/UI/ButtonLink/ButtonLink";
 import s from "./index.module.css";
+import { Link } from "react-router-dom";
 
 const FeedBack = () => {
   return (
@@ -20,7 +21,9 @@ const FeedBack = () => {
           <SvgLink name="mop" />
         </div>
         <div className={s.mb}>
-          <ButtonLink title="Оставить заявку" variant="active" />
+          <Link to={"/booking"}>
+            <ButtonLink title="Оставить заявку" variant="active" />
+          </Link>
           <ButtonLink title="Позвоните нам" variant="spooky" />
         </div>
       </div>
