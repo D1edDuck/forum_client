@@ -32,12 +32,11 @@
   padding: 1rem 0;
 }
 
-.links p {
+.links a {
   width: 100%;
 }
 
-.links a,
-.links p {
+.links a {
   padding: 1rem 1rem;
   display: block;
   font-size: var(--size-20);
@@ -48,8 +47,7 @@
   transition: all 0.2s ease;
 }
 
-.links a:hover,
-.links p:hover {
+.links a:hover {
   background-color: rgba(255, 255, 255, 0.05);
   color: #ffffff;
 }
@@ -62,8 +60,7 @@
   );
   color: #ffffff;
   font-weight: 600;
-  border-left: 5px solid var(--color-blue);
-  padding-left: 1.25rem;
+  padding-left: 3rem;
 }
 
 .hr {
@@ -87,6 +84,7 @@
 .border {
   position: sticky;
   top: 5rem;
+  z-index: 100;
 }
 
 .log:hover {
@@ -104,6 +102,7 @@
     justify-content: flex-start;
     align-items: center;
     height: fit-content;
+    padding: 0;
   }
 
   .border {
@@ -121,26 +120,26 @@
     justify-content: flex-start;
   }
 
-  .links a,
-  .links p {
+  .links a {
     flex-shrink: 1;
-    border-radius: 9999px;
+    border-radius: 1rem;
     color: #343a40;
     background-color: #f0f0f0;
     font-size: var(--size-16);
     text-align: center;
+    border: 0.3rem solid var(--color-gray-50);
   }
 
   .links .active {
-    background: #007bff;
-    color: #ffffff;
-    border-left: none;
+    background: var(--color-white);
+    color: var(--color-black);
+    border-left: 0.3rem solid var(--color-blue);
     padding-left: 1rem;
     font-weight: 600;
+    border: 0.3rem solid var(--color-blue);
   }
 
-  .links a:hover,
-  .links p:hover {
+  .links a:hover {
     background-color: var(--color-blue);
     color: #ffffff;
   }

@@ -51,7 +51,7 @@
 
 .btns {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -72,8 +72,35 @@
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
 
+.logout {
+  display: none;
+  background-color: var(--color-red);
+  color: var(--color-white, #ffffff);
+  border-radius: var(--radius-10, 8px);
+  padding: 0.75rem 1.5rem;
+  font-size: var(--size-18);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+}
+
 .edit:hover {
   background-color: #0056b3;
+}
+
+.logout:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+@media (max-width: 768px) {
+  .logout {
+    display: block;
+  }
 }
 
 @media (max-width: 500px) {
@@ -103,12 +130,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .btns {
-    justify-content: center;
-  }
-
   .edit {
-    width: 100%;
     padding: 0.75rem;
   }
 }

@@ -39,21 +39,15 @@ const SideBar = () => {
     >
       <h3>{user.name}</h3>
       <div className={s.links}>
-        <p>
-          <Link to={"me"} className={isActive("me") ? s.active : ""}>
-            Профиль
-          </Link>
-        </p>
+        <Link to={"me"} className={isActive("me") ? s.active : ""}>
+          Профиль
+        </Link>
 
-        <p>
-          <Link to={"repairs"} className={isActive("repairs") ? s.active : ""}>
-            Заявки
-          </Link>
-        </p>
+        <Link to={"repairs"} className={isActive("repairs") ? s.active : ""}>
+          Заявки
+        </Link>
 
-        <p className={isActive("settings") ? s.active : ""}>
-          <Link to={"settings"}>Настройки</Link>
-        </p>
+        <Link to={"settings"}>Настройки</Link>
       </div>
       <button onClick={() => dispatch(logout())} className={s.log}>
         Выйти
