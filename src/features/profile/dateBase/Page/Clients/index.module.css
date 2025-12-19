@@ -1,0 +1,67 @@
+.tableContainer {
+  overflow-x: auto;
+  padding: 16px;
+  font-size: var(--size-20);
+  border: 1px solid #ddd;
+  border-radius: 2rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.th {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.tr:hover {
+  background-color: var(--color-gray-50);
+}
+
+.td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.tdActions {
+  display: flex;
+  gap: 8px;
+  justify-content: space-evenly;
+  padding: 12px;
+}
+
+.editBtn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  background-color: #2980b9;
+}
+
+.deleteBtn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: #c0392b;
+}
+
+.tdEmpty {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}

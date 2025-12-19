@@ -7,6 +7,7 @@ import userSlice from "@/features/profile/userSlice";
 import modalSlice from "@/UI/Modal/modalSlice";
 import repairSlice from "@/features/profile/repairs/repairSlice";
 import loadingSlice from "@/UI/Loader/loaderSlice";
+import dbSlice from "@/features/profile/dateBase/dbSlice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     repair: repairSlice,
     modal: modalSlice,
     loading: loadingSlice,
+    db: dbSlice,
   },
 });
 

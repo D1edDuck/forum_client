@@ -28,6 +28,10 @@ const SideBar = () => {
     if (path === "settings") {
       return currentPath.includes("/settings");
     }
+
+    if (path === "datebase") {
+      return currentPath.includes("/datebase");
+    }
     return false;
   };
 
@@ -48,6 +52,15 @@ const SideBar = () => {
         </Link>
 
         <Link to={"settings"}>Настройки</Link>
+
+        {user?.role == "admin" && (
+          <Link
+            to={"datebase"}
+            className={isActive("datebase") ? s.active : ""}
+          >
+            База данных
+          </Link>
+        )}
       </div>
       <button onClick={() => dispatch(logout())} className={s.log}>
         Выйти
