@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@/api/type";
-import { loginUser, quickLogin, registerUser } from "./userThunk";
+import { editAccount, loginUser, quickLogin, registerUser } from "./userThunk";
 import Cookies from "js-cookie";
 
 export interface IFormValue {
@@ -105,6 +105,20 @@ const userSlice = createSlice({
         state.initialized = true;
         state.user = null;
         state.token = undefined;
+      })
+      .addCase(editAccount.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editAccount.fulfilled, (state, action) => {
+        state.loading = false;
+        state.initialized = true;
+        console.log(action.payload);
+        state.user = action.payload.user;
+      })
+      .addCase(editAccount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Неизвестная Ошибка";
       });
   },
 });
