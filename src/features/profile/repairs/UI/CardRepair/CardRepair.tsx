@@ -55,11 +55,7 @@ const CardRepair = (rep: IRepair) => {
       <div className={s.title} onClick={() => setHidden((prev) => !prev)}>
         <span>Заявка #{rep.id}</span>
         <div className={s.arr}>
-          {hidden ? (
-            <Arrow color="b" size="s" side="l" />
-          ) : (
-            <Arrow color="b" size="s" side="r" />
-          )}
+          <Arrow color="b" size="s" open={hidden} />
         </div>
       </div>
 
@@ -104,11 +100,7 @@ const CardRepair = (rep: IRepair) => {
               {status.find((st) => st.value === rep.status)?.label ||
                 rep.status}
               <span className={s.arr}>
-                {open ? (
-                  <Arrow color="w" size="s" side="l" />
-                ) : (
-                  <Arrow color="w" size="s" side="r" />
-                )}
+                <Arrow color="w" size="s" open={open} />
               </span>
             </span>
             {open && (

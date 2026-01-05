@@ -1,29 +1,15 @@
-.blockr {
+.block {
   transform: translateY(0rem);
-  animation: start 0.3s forwards;
 }
 
-@keyframes start {
-  0% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(0);
-  }
-}
-
-.blockl {
+.open {
   transform: rotate(180deg);
-  animation: end 0.3s forwards;
+  transition: transform 0.3s ease;
 }
 
-@keyframes end {
-  0% {
-    transform: rotate(0);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
+.close {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
 }
 
 /* 

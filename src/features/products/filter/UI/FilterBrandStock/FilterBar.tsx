@@ -35,11 +35,7 @@ const FilterBar = ({ title, products, variant }: IProps) => {
         >
           <span>{title}</span>
           <span className={s.arr}>
-            {open ? (
-              <Arrow color="w" size="s" side="l" />
-            ) : (
-              <Arrow color="w" size="s" side="r" />
-            )}
+            <Arrow color="w" size="s" open={open} />
           </span>
         </button>
 

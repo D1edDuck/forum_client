@@ -21,11 +21,7 @@ const FilterButton: FC<IProps> = ({ title, children }) => {
       <button onClick={toggle} className={s.span}>
         <span>{title}</span>
         <span className={s.arr}>
-          {open ? (
-            <Arrow size="s" color="w" side="l" />
-          ) : (
-            <Arrow size="s" color="w" side="r" />
-          )}
+          <Arrow size="s" color="w" open={open} />
         </span>
       </button>
       {open && clonedChildren}

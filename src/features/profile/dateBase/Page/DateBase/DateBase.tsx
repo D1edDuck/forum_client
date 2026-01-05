@@ -16,7 +16,7 @@ const DateBase = () => {
         <div className={s.hr}></div>
         <div className={s.link}>
           <Link to={"clients"}>Подробнее</Link>
-          <Arrow color="w" side="r" size="s" />
+          <Arrow color="w" size="s" open={false} />
         </div>
       </div>
       <div className={s.card}>
@@ -28,7 +28,7 @@ const DateBase = () => {
         <div className={s.hr}></div>
         <div className={s.link}>
           <Link to={"/profile/repairs"}>Подробнее</Link>
-          <Arrow color="w" side="r" size="s" />
+          <Arrow color="w" size="s" open={false} />
         </div>
       </div>
       <div className={s.card}>
@@ -40,7 +40,7 @@ const DateBase = () => {
         <div className={s.hr}></div>
         <div className={s.link}>
           <Link to={"/catalog"}>Подробнее</Link>
-          <Arrow color="w" side="r" size="s" />
+          <Arrow color="w" size="s" open={false} />
         </div>
       </div>
     </div>
