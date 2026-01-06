@@ -5,34 +5,34 @@ import Cookies from "js-cookie";
 
 const TOKEN_KEY = "jwt";
 
-export interface IUsersAllResponse {
+export interface IUsersAll {
   count: number;
   users: { id: string; name: string; email: string; phone: number }[];
 }
 
-export interface IUsersAllState {
-  clients: IUsersAllResponse;
+export interface IProductAll {
+  count: number;
   products: IProduct[];
+}
+
+export interface IDbAllState {
+  clients: IUsersAll;
+  products: IProductAll;
   loading: boolean;
   error: string | null;
 }
 
 export const fetchUsersAll = createAsyncThunk<
-  IUsersAllResponse,
+  IUsersAll,
   void,
   { rejectValue: string }
 >("db/fetchUsersAll", async (_, { rejectWithValue }) => {
   try {
     const token = Cookies.get(TOKEN_KEY);
     if (!token) return rejectWithValue("Нет токена");
-    const res = await apiClient<IUsersAllResponse>(
-      "users/all",
-      "GET",
-      undefined,
-      {
-        Authorization: `Bearer ${token}`,
-      }
-    );
+    const res = await apiClient<IUsersAll>("users/all", "GET", undefined, {
+      Authorization: `Bearer ${token}`,
+    });
     return res;
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -58,12 +58,12 @@ export const fetchUsersAll = createAsyncThunk<
 });
 
 export const fetchProductsAll = createAsyncThunk<
-  IProduct[],
+  IProductAll,
   void,
   { rejectValue: string }
 >("db/fetchProductsAll", async (_, { rejectWithValue }) => {
   try {
-    const res = await apiClient<IProduct[]>("products", "GET");
+    const res = await apiClient<IProductAll>("products", "GET");
     return res;
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProductsAll, fetchUsersAll, IUsersAllState } from "./dbThunks";
+import { fetchProductsAll, fetchUsersAll, IDbAllState } from "./dbThunks";
 
-const initialState: IUsersAllState = {
+const initialState: IDbAllState = {
   clients: { count: 0, users: [] },
-  products: [],
+  products: { count: 0, products: [] },
   loading: false,
   error: null,
 };

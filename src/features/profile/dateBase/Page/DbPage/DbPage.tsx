@@ -22,7 +22,7 @@ const DbPage = () => {
       case "repair":
         return repairs;
       case "product":
-        return products;
+        return products.products;
       default:
         return [];
     }
