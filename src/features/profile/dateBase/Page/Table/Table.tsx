@@ -1,66 +1,61 @@
 import { formatDate } from "@/app/hooks/formatDate";
-import useClients from "../../hooks/useClients";
 import s from "./index.module.css";
 
-const Table = () => {
-  const {
-    // users: {
-    //   clients: { users },
-    // },
-    // repairs: users,
-    products: users,
-  } = useClients();
+type TableProps<T extends { id: string | number }> = {
+  data: T[];
+};
 
-  const head = Object.keys(users[0]);
+function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
+  if (!data || data.length === 0) {
+    return <p className={s.tdEmpty}>Нет данных</p>;
+  }
+
+  const head = Object.keys(data[0]) as (keyof T)[];
+
   return (
     <div className={s.tableContainer}>
       <table className={s.table}>
         <thead>
           <tr>
-            {head.map((h) => {
-              h = h.toLocaleUpperCase();
-              return <th className={s.th}>{h}</th>;
-            })}
+            {head.map((h) => (
+              <th key={String(h)} className={s.th}>
+                {String(h).toUpperCase()}
+              </th>
+            ))}
+            <th className={s.th}>ACTIONS</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className={s.tr}>
-              {Object.entries(user).map(([key, value]) => (
-                <td className={s.td} key={key}>
+          {data.map((d) => (
+            <tr key={d.id} className={s.tr}>
+              {Object.entries(d).map(([key, value]) => (
+                <td key={key} className={s.td}>
                   {(() => {
                     if (typeof value === "object" && value !== null) {
                       return Object.values(value)
-                        .filter((val) => typeof val !== "object")
+                        .filter((v) => typeof v !== "object")
+                        .map(String)
                         .join(" / ");
                     }
 
-                    if (key.includes("created")) {
-                      return formatDate(value);
+                    if (key.toLowerCase().includes("created")) {
+                      return formatDate(String(value));
                     }
 
                     return String(value);
                   })()}
                 </td>
               ))}
-
               <td className={s.tdActions}>
                 <button className={s.editBtn}>Edit</button>
                 <button className={s.deleteBtn}>Delete</button>
               </td>
             </tr>
           ))}
-          {users.length === 0 && (
-            <tr>
-              <td colSpan={4} className={s.tdEmpty}>
-                Нет данных
-              </td>
-            </tr>
-          )}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default Table;

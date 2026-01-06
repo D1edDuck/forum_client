@@ -18,7 +18,7 @@ import Repairs from "@/features/profile/repairs/UI/Repairs/Repairs";
 import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccount";
 import PublicRoute from "./PublicRoute";
 import DateBase from "@/features/profile/dateBase/Page/DateBase/DateBase";
-import Clients from "@/features/profile/dateBase/Page/Table/Table";
+import DbPage from "@/features/profile/dateBase/Page/DbPage/DbPage";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             path: "datebase",
             element: <DateBase />,
           },
-          { path: "datebase/clients", element: <Clients /> },
+          { path: "datebase/:type", element: <DbPage /> },
         ],
       },
       { path: "*", element: <NotFoundPage /> },
