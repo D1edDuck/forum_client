@@ -6,6 +6,11 @@ import { IValue } from "./repairSlice";
 
 const TOKEN_KEY = "jwt";
 
+export interface IRepairAll {
+  count: number;
+  repairs: IRepair[];
+}
+
 export const repairsUser = createAsyncThunk<
   IRepair[],
   number,
@@ -25,7 +30,7 @@ export const repairsUser = createAsyncThunk<
 });
 
 export const repairAdmin = createAsyncThunk<
-  IRepair[],
+  IRepairAll,
   void,
   { rejectValue: string }
 >("repair/getAdmin", async (_, { rejectWithValue }) => {
@@ -33,7 +38,7 @@ export const repairAdmin = createAsyncThunk<
     const token = Cookies.get(TOKEN_KEY);
     if (!token) return rejectWithValue("Нет токена");
 
-    const res = await apiClient<IRepair[]>("repair", "GET", undefined, {
+    const res = await apiClient<IRepairAll>("repair", "GET", undefined, {
       Authorization: `Bearer ${token}`,
     });
 

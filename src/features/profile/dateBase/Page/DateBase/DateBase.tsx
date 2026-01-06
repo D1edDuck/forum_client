@@ -4,14 +4,20 @@ import Arrow from "@/UI/Arrow/Arrow";
 import useClients from "../../hooks/useClients";
 
 const DateBase = () => {
-  const { users, products } = useClients();
+  const {
+    users: {
+      clients: { count: countU },
+    },
+    products: { count: countP },
+    repairs: { count: countR },
+  } = useClients();
   return (
     <div className={s.flex}>
       <div className={s.card}>
         <div className={s.box}>
           <p className={s.logo}>logo</p>
           <p className={s.title}>Клиенты</p>
-          <p className={s.count}>{users.clients.count}</p>
+          <p className={s.count}>{countU}</p>
         </div>
         <div className={s.hr}></div>
         <div className={s.link}>
@@ -23,7 +29,7 @@ const DateBase = () => {
         <div className={s.box}>
           <p className={s.logo}>logo</p>
           <p className={s.title}>Заявки</p>
-          <p className={s.count}>37462</p>
+          <p className={s.count}>{countR}</p>
         </div>
         <div className={s.hr}></div>
         <div className={s.link}>
@@ -35,7 +41,7 @@ const DateBase = () => {
         <div className={s.box}>
           <p className={s.logo}>logo</p>
           <p className={s.title}>Каталог</p>
-          <p className={s.count}>{products.count}</p>
+          <p className={s.count}>{countP}</p>
         </div>
         <div className={s.hr}></div>
         <div className={s.link}>

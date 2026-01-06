@@ -6,7 +6,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 const useClients = () => {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.db);
-  const repairs = useAppSelector((state) => state.repair.repairs);
+  const repairs = useAppSelector((state) => state.repair);
   const products = useAppSelector((state) => state.db.products);
 
   useEffect(() => {

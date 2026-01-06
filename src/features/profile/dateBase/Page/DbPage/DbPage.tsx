@@ -20,7 +20,7 @@ const DbPage = () => {
       case "client":
         return users.clients.users;
       case "repair":
-        return repairs;
+        return repairs.repairs;
       case "product":
         return products.products;
       default:

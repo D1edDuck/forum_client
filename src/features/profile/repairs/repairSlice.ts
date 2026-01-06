@@ -17,6 +17,7 @@ interface IState {
   repairs: IRepair[];
   formValue: IValue;
   formValuePatch: IValue;
+  count: number;
 }
 
 const initialState: IState = {
@@ -25,6 +26,7 @@ const initialState: IState = {
   repairs: [],
   formValue: {},
   formValuePatch: {},
+  count: 0,
 };
 
 const repairSlice = createSlice({
@@ -73,7 +75,8 @@ const repairSlice = createSlice({
       })
       .addCase(repairAdmin.fulfilled, (state, action) => {
         state.loading = false;
-        state.repairs = action.payload;
+        state.repairs = action.payload.repairs;
+        state.count = action.payload.count;
       })
       .addCase(repairAdmin.rejected, (state, action) => {
         state.loading = false;
