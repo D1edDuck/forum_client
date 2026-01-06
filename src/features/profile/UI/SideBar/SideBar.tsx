@@ -38,9 +38,7 @@ const SideBar = () => {
   if (!user) return <p>Вы не авторизированны</p>;
 
   return (
-    <div
-      className={`${s.card} ${location.pathname === "/profile/repairs" ? s.border : ""}`}
-    >
+    <div className={`${s.card} ${s.border}`}>
       <h3>{user.name}</h3>
       <div className={s.links}>
         <Link to={"me"} className={isActive("me") ? s.active : ""}>

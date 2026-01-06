@@ -7,6 +7,7 @@ import FilterForm from "../FilterForm/FilterForm";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { editStatus } from "../../repairThunk";
 import Arrow from "@/UI/Arrow/Arrow";
+import { formatDate } from "@/app/hooks/formatDate";
 
 const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();
@@ -37,18 +38,6 @@ const CardRepair = (rep: IRepair) => {
       label: "Готово",
     },
   ];
-
-  const formatDate = (isoString: string) => {
-    const date = new Date(isoString);
-
-    return date.toLocaleString("ru-RU", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
 
   return (
     <div className={s.card}>

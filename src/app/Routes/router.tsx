@@ -18,7 +18,7 @@ import Repairs from "@/features/profile/repairs/UI/Repairs/Repairs";
 import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccount";
 import PublicRoute from "./PublicRoute";
 import DateBase from "@/features/profile/dateBase/Page/DateBase/DateBase";
-import Clients from "@/features/profile/dateBase/Page/Clients/Clients";
+import Clients from "@/features/profile/dateBase/Page/Table/Table";
 
 const router = createBrowserRouter([
   {

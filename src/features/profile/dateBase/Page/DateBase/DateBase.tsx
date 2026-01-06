@@ -4,7 +4,7 @@ import Arrow from "@/UI/Arrow/Arrow";
 import useClients from "../../hooks/useClients";
 
 const DateBase = () => {
-  const clients = useClients();
+  const { users: clients } = useClients();
   return (
     <div className={s.flex}>
       <div className={s.card}>

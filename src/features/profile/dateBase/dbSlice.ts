@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUsersAll, IUsersAllState } from "./dbThunks";
+import { fetchProductsAll, fetchUsersAll, IUsersAllState } from "./dbThunks";
 
 const initialState: IUsersAllState = {
   clients: { count: 0, users: [] },
+  products: [],
   loading: false,
   error: null,
 };
@@ -16,15 +17,26 @@ export const dbSlice = createSlice({
       .addCase(fetchUsersAll.pending, (state) => {
         state.loading = true;
         state.error = null;
-        console.log(initialState);
       })
       .addCase(fetchUsersAll.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Ошибка при загрузке данных";
       })
       .addCase(fetchUsersAll.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.clients = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchProductsAll.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductsAll.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Ошибка при загрузке данных";
+      })
+      .addCase(fetchProductsAll.fulfilled, (state, action) => {
+        state.products = action.payload;
         state.loading = false;
         state.error = null;
       });
