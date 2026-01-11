@@ -72,7 +72,6 @@ export const repairFilter = createAsyncThunk<
   { rejectValue: string }
 >("repair/filter", async (filter, { rejectWithValue }) => {
   try {
-    console.log(filter);
     const res = await apiClient<IRepair[], IValue>(
       "repair/filter",
       "POST",
@@ -114,6 +113,41 @@ export const editStatus = createAsyncThunk<
       "PATCH",
       { status }
     );
+
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+
+    if (message === "Unauthorized" || message.includes("401")) {
+      Cookies.remove(TOKEN_KEY);
+    }
+
+    return rejectWithValue(message);
+  }
+});
+
+export const createRepair = createAsyncThunk<
+  IRepair,
+  Omit<IRepair, "id" | "created_at" | "user">,
+  { rejectValue: string }
+>("repair/create", async (repairData, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<
+      IRepair,
+      Omit<IRepair, "id" | "created_at" | "user">
+    >("repair", "POST", repairData);
 
     return res;
   } catch (error: unknown) {

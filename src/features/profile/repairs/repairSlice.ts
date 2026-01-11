@@ -1,6 +1,7 @@
 import { IRepair } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  createRepair,
   editStatus,
   repairAdmin,
   repairFilter,
@@ -104,6 +105,12 @@ const repairSlice = createSlice({
           if (index !== -1) {
             state.repairs[index] = updatedRepair;
           }
+        }
+      )
+      .addCase(
+        createRepair.fulfilled,
+        (state, action: PayloadAction<IRepair>) => {
+          state.repairs.push(action.payload);
         }
       );
   },

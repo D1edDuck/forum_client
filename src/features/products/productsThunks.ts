@@ -27,6 +27,14 @@ export const fetchProductsSearch = createAsyncThunk<IProduct[], string>(
   }
 );
 
+export const createProduct = createAsyncThunk<IProduct, Partial<IProduct>>(
+  "products/createProduct",
+  async (productData) => {  
+    const res = await apiClient<IProduct, Partial<IProduct>>("products", "POST", productData);
+    return res;
+  }
+);
+
 export const fetchProductsFilter = createAsyncThunk<
   IProductsResponse,
   IFilterWithCategory

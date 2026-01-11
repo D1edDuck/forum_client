@@ -1,0 +1,96 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.area {
+  min-height: 120px;
+  padding-top: 8px;
+  resize: vertical;
+}
+
+.card {
+  width: 600px;
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e6e6e6;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+}
+
+.input {
+  height: 42px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+  width: 100% !important;
+}
+
+.input:focus {
+  border-color: #2d4fff;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.primary {
+  background: #2d4fff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.primary:hover {
+  background: #1e38cc;
+}
+
+.secondary {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.secondary:hover {
+  background: #c0392b;
+}

@@ -19,7 +19,7 @@ import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccou
 import PublicRoute from "./PublicRoute";
 import DateBase from "@/features/profile/dateBase/Page/DateBase/DateBase";
 import DbPage from "@/features/profile/dateBase/Page/DbPage/DbPage";
-
+import AddPage from "@/features/profile/dateBase/Page/AddPage/AddPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +58,7 @@ const router = createBrowserRouter([
             path: "datebase",
             element: <DateBase />,
           },
+          { path: "add/:type", element: <AddPage /> },
           { path: "datebase/:type", element: <DbPage /> },
         ],
       },

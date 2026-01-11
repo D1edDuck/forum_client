@@ -2,6 +2,7 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useEffect } from "react";
 import { fetchProductsAll, fetchUsersAll } from "../dbThunks";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { repairAdmin } from "../../repairs/repairThunk";
 
 const useClients = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ const useClients = () => {
   useEffect(() => {
     dispatch(fetchUsersAll());
     dispatch(fetchProductsAll());
+    dispatch(repairAdmin());
   }, [dispatch]);
 
   return { users, repairs, products };

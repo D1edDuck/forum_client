@@ -53,3 +53,33 @@
 .hr {
   border-bottom: 0.3rem dashed rgba(114, 114, 114, 1);
 }
+
+.more {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plus {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+}
+
+.vert,
+.horiz {
+  position: absolute;
+  background-color: var(--color-white);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.vert {
+  width: 0.2rem;
+  height: 2rem;
+}
+
+.horiz {
+  width: 2rem;
+  height: 0.2rem;
+}

@@ -1,6 +1,7 @@
 import { ICategory, IProduct } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  createProduct,
   fetchProducts,
   fetchProductsFilter,
   fetchProductsSearch,
@@ -82,6 +83,24 @@ const productSlice = createSlice({
       .addCase(fetchProductsFilter.rejected, (state, action) => {
         state.loading = false;
         state.error = (action.error.message as string) || "Ошибка фильтрации";
+      });
+
+    builder
+      .addCase(createProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        createProduct.fulfilled,
+        (state, action: PayloadAction<IProduct>) => {
+          state.loading = false;
+          state.products.push(action.payload);
+        }
+      )
+      .addCase(createProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error =
+          (action.error.message as string) || "Ошибка создания продукта";
       });
   },
 });
