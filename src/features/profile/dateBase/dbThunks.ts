@@ -1,5 +1,5 @@
 import { apiClient } from "@/api/apiClient";
-import { IProduct } from "@/api/type";
+import { IClient, IProduct } from "@/api/type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
@@ -7,7 +7,7 @@ const TOKEN_KEY = "jwt";
 
 export interface IUsersAll {
   count: number;
-  users: { id: string; name: string; email: string; phone: number }[];
+  users: IClient[];
 }
 
 export interface IProductAll {

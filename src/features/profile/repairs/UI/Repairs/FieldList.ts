@@ -31,10 +31,16 @@ const Number = [
   },
 ];
 
-const fieldList = [
-  { title: "Статус", inputs: Status },
-  { title: "Дата", inputs: Date },
-  { title: "Номер", inputs: Number },
+interface IFieldList {
+  title: string;
+  inputs: typeof Status | typeof Date | typeof Number;
+  variant: "left" | "right";
+}
+
+const fieldList: IFieldList[] = [
+  { title: "Статус", inputs: Status, variant: "right" },
+  { title: "Дата", inputs: Date, variant: "right" },
+  { title: "Номер", inputs: Number, variant: "left" },
 ];
 
 export default fieldList;

@@ -72,6 +72,7 @@ export const repairFilter = createAsyncThunk<
   { rejectValue: string }
 >("repair/filter", async (filter, { rejectWithValue }) => {
   try {
+    console.log(filter);
     const res = await apiClient<IRepair[], IValue>(
       "repair/filter",
       "POST",

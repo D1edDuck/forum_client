@@ -67,3 +67,10 @@ export interface IRepair {
   created_at: string;
   user: IUserRep;
 }
+
+export interface IClient {
+  id: string;
+  name: string;
+  email: string;
+  phone: number;
+}

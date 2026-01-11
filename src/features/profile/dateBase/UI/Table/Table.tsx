@@ -1,7 +1,7 @@
 import { formatDate } from "@/app/hooks/formatDate";
 import s from "./index.module.css";
 
-type TableProps<T extends { id: string | number }> = {
+type TableProps<T> = {
   data: T[];
 };
 
@@ -22,7 +22,7 @@ function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
                 {String(h).toUpperCase()}
               </th>
             ))}
-            <th className={s.th}>ACTIONS</th>
+            {/* <th className={s.th}>ACTIONS</th> */}
           </tr>
         </thead>
         <tbody>
@@ -46,10 +46,10 @@ function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
                   })()}
                 </td>
               ))}
-              <td className={s.tdActions}>
+              {/* <td className={s.tdActions}>
                 <button className={s.editBtn}>Edit</button>
                 <button className={s.deleteBtn}>Delete</button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

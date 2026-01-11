@@ -26,7 +26,7 @@ const Repairs = () => {
             {fieldList.map((list) => (
               <FilterButton title={list.title} key={list.title}>
                 <FilterForm
-                  variant="right"
+                  variant={list.variant || "right"}
                   inputs={list.inputs}
                   onSubmit={(data) => dispatch(repairFilter(data))}
                 />

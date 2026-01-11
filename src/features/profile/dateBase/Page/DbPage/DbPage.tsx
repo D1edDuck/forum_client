@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import useClients from "../../hooks/useClients";
-import Table from "../Table/Table";
-import { IProduct, IRepair } from "@/api/type";
+import Table from "../../UI/Table/Table";
+import { IClient, IProduct, IRepair } from "@/api/type";
+import s from "./index.module.css";
 
 type TableType = "client" | "repair" | "product";
 
@@ -11,11 +12,7 @@ const DbPage = () => {
 
   const tableType: TableType = type ?? "client";
 
-  const tableData: Array<
-    | { id: string; name: string; email: string; phone: number }
-    | IRepair
-    | IProduct
-  > = (() => {
+  const tableData: Array<IClient | IRepair | IProduct> = (() => {
     switch (tableType) {
       case "client":
         return users.clients.users;
@@ -28,7 +25,16 @@ const DbPage = () => {
     }
   })();
 
-  return <Table data={tableData} />;
+  return (
+    <div className={`${s.content} gap dlex`}>
+      <div className={`${s.header} dlex gap`}>
+        <h2 className={s.title}>
+          {tableType.charAt(0).toUpperCase() + tableType.slice(1)}s
+        </h2>
+      </div>
+      <Table data={tableData} />
+    </div>
+  );
 };
 
 export default DbPage;
