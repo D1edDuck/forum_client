@@ -2,6 +2,7 @@ import { ICatalog } from "@/api/type";
 import { FormDataMap, FormType } from "../../Page/AddPage/AddPage";
 import formConfig from "./fieldList";
 import s from "./index.module.css";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 interface IProps<T extends FormType> {
   type: T;
@@ -14,6 +15,7 @@ const AddForm = <T extends FormType>({
   onSubmit,
   categories,
 }: IProps<T>) => {
+  const loading = useAppSelector((state) => state.db.loading);
   const fields = formConfig[type].map((f) => {
     if (f.name === "categoryId" && categories) {
       return {
@@ -26,6 +28,7 @@ const AddForm = <T extends FormType>({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     const formData = new FormData(e.currentTarget);
     const data = {} as FormDataMap[T];
 
@@ -58,6 +61,7 @@ const AddForm = <T extends FormType>({
     });
 
     onSubmit(data);
+    form.reset();
   };
 
   return (
@@ -125,8 +129,8 @@ const AddForm = <T extends FormType>({
           })}
 
           <div className={s.actions}>
-            <button type="submit" className={s.primary}>
-              Создать
+            <button type="submit" disabled={loading} className={s.primary}>
+              {loading ? "Загрузка..." : "Добавить"}
             </button>
             <button type="button" className={s.secondary}>
               Отмена
