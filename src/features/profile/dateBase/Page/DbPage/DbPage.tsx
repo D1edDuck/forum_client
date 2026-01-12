@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom";
 import useClients from "../../hooks/useClients";
 import Table from "../../UI/Table/Table";
-import { IClient, IProduct, IRepair } from "@/api/type";
+import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
 import s from "./index.module.css";
 
-type TableType = "client" | "repair" | "product";
+type TableType = "client" | "repair" | "product" | "category";
 
 const DbPage = () => {
-  const { users, repairs, products } = useClients();
+  const { users, repairs, products, category } = useClients();
   const { type } = useParams<{ type: TableType }>();
 
   const tableType: TableType = type ?? "client";
 
-  const tableData: Array<IClient | IRepair | IProduct> = (() => {
+  const tableData: Array<IClient | IRepair | IProduct | ICatalog> = (() => {
     switch (tableType) {
       case "client":
         return users.clients.users;
@@ -20,6 +20,8 @@ const DbPage = () => {
         return repairs.repairs;
       case "product":
         return products.products;
+      case "category":
+        return category.category;
       default:
         return [];
     }

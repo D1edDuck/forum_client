@@ -10,6 +10,7 @@ const DateBase = () => {
     },
     products: { count: countP },
     repairs: { count: countR },
+    category: { count: countC },
   } = useClients();
 
   const cards = [
@@ -30,6 +31,12 @@ const DateBase = () => {
       count: countP,
       link: "product",
       add: "/profile/add/product",
+    },
+    {
+      title: "Категории",
+      count: countC,
+      link: "category",
+      add: "/profile/add/category",
     },
   ];
   return (

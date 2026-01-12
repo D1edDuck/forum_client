@@ -1,6 +1,6 @@
 import { ICatalog } from "@/api/type";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCatalog } from "./catalogThunk";
+import { createCategory, fetchCatalog } from "./catalogThunk";
 
 interface IState {
   category: ICatalog[];
@@ -31,6 +31,18 @@ const catalogSlice = createSlice({
       .addCase(fetchCatalog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? "Неизвестная ошибка";
+      })
+      .addCase(createCategory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.category.push(action.payload);
+      })
+      .addCase(createCategory.rejected, (state, action) => {
+        state.error = action.error.message ?? "Неизвестная ошибка";
+        state.loading = false;
       });
   },
 });

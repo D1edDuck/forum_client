@@ -1,5 +1,5 @@
 import { apiClient } from "@/api/apiClient";
-import { IClient, IProduct } from "@/api/type";
+import { ICatalog, IClient, IProduct } from "@/api/type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
@@ -15,9 +15,15 @@ export interface IProductAll {
   products: IProduct[];
 }
 
+export interface ICategoryAll {
+  count: number;
+  category: ICatalog[];
+}
+
 export interface IDbAllState {
   clients: IUsersAll;
   products: IProductAll;
+  category: ICategoryAll;
   loading: boolean;
   error: string | null;
 }
@@ -82,6 +88,33 @@ export const fetchProductsAll = createAsyncThunk<
 
     if (message === "Unauthorized" || message.includes("401")) {
       Cookies.remove(TOKEN_KEY);
+    }
+
+    return rejectWithValue(message);
+  }
+});
+
+export const fetchCategoryAll = createAsyncThunk<
+  ICategoryAll,
+  void,
+  { rejectValue: string }
+>("db/categoryAll", async (_, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<ICategoryAll>("category/count", "GET");
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
     }
 
     return rejectWithValue(message);

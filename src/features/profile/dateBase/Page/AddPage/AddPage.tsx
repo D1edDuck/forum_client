@@ -1,6 +1,6 @@
 import AddForm from "../../UI/AddForm/AddForm";
 import { useParams } from "react-router-dom";
-import { IProduct, IRepair } from "@/api/type";
+import { ICatalog, IProduct, IRepair } from "@/api/type";
 import { registerUser } from "@/features/profile/userThunk";
 import { IFormValue } from "@/features/profile/userSlice";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
@@ -8,14 +8,15 @@ import { createProduct } from "@/features/products/productsThunks";
 import { createRepair } from "@/features/profile/repairs/repairThunk";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useEffect } from "react";
-import { fetchCatalog } from "@/features/catalog/catalogThunk";
+import { createCategory, fetchCatalog } from "@/features/catalog/catalogThunk";
 
-export type FormType = "product" | "repair" | "user";
+export type FormType = "product" | "repair" | "user" | "category";
 
 export type FormDataMap = {
   product: IProduct;
   repair: IRepair;
   user: IFormValue;
+  category: ICatalog;
 };
 
 const AddPage = () => {
@@ -48,6 +49,9 @@ const AddPage = () => {
         break;
       case "user":
         dispatch(registerUser(data as IFormValue));
+        break;
+      case "category":
+        dispatch(createCategory(data as Omit<ICatalog, "id">));
         break;
     }
   };

@@ -45,6 +45,11 @@ const formConfig = {
       options: [],
     },
   ],
+
+  category: [
+    { name: "name", label: "Название", type: "text", required: true },
+    { name: "slug", label: "ссылка", type: "text", required: true },
+  ],
 } as const;
 
 export default formConfig;
