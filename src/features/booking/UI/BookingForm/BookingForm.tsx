@@ -2,15 +2,17 @@ import { IUser } from "@/api/type";
 import useForm from "../../hooks/useForm";
 import s from "./index.module.css";
 import { Link } from "react-router-dom";
+import { causes } from "./causes";
 
 export interface IProps {
   user: IUser | null;
 }
 
 const BookingForm = ({ user }: IProps) => {
-  const { cause, comment, onSubmit, setValue } = useForm({
-    user,
-  });
+  const { cause, comment, onSubmit, setValue, setCauseParams, urlCause } =
+    useForm({
+      user,
+    });
 
   return (
     <div className={s.block}>
@@ -33,14 +35,17 @@ const BookingForm = ({ user }: IProps) => {
             defaultValue=""
             className={s.input}
             required
-            onChange={(e) => setValue("cause", e.target.value)}
-            value={cause}
+            onChange={(e) => {
+              setValue("cause", e.target.value);
+              setCauseParams({ cause: e.target.value });
+            }}
+            value={urlCause || cause}
           >
-            <option value="" disabled>
-              Выберите причину
-            </option>
-            <option value="repair">Ремонт компьютера</option>
-            <option value="cartridge">Заправка картриджа</option>
+            {causes.map((c) => (
+              <option value={c.value} disabled={c.disabled}>
+                {c.text}
+              </option>
+            ))}
           </select>
         </div>
 

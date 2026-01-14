@@ -11,12 +11,16 @@ import {
   repairAdmin,
   repairsUser,
 } from "@/features/profile/repairs/repairThunk";
+import { useSearchParams } from "react-router-dom";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
   const { name, comment, email, phone, cause } = useAppSelector(
     (state) => state.booking
   );
+
+  const [causeParams, setCauseParams] = useSearchParams();
+  const urlCause = causeParams.get("cause") || "";
 
   useEffect(() => {
     if (user) {
@@ -80,6 +84,9 @@ const useForm = ({ user }: IProps) => {
     user,
     onSubmit,
     setValue,
+    causeParams,
+    setCauseParams,
+    urlCause,
   };
 };
 

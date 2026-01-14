@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { editStatus } from "../../repairThunk";
 import Arrow from "@/UI/Arrow/Arrow";
 import { formatDate } from "@/app/hooks/formatDate";
+import { causes } from "@/features/booking/UI/BookingForm/causes";
 
 const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();
@@ -63,7 +64,9 @@ const CardRepair = (rep: IRepair) => {
         )}
 
         <span className={s.key}>Причина</span>
-        <span className={s.value}>{rep.cause}</span>
+        <span className={s.value}>
+          {causes.find((c) => c.value === rep.cause)?.text}
+        </span>
 
         <span className={s.key}>Комментарий</span>
         <span className={s.value}>{rep.comment}</span>
