@@ -120,3 +120,87 @@ export const fetchCategoryAll = createAsyncThunk<
     return rejectWithValue(message);
   }
 });
+
+export const deletedProduct = createAsyncThunk<
+  { id: number },
+  { id: number },
+  { rejectValue: string }
+>("db/deletedProduct", async ({ id }, { rejectWithValue }) => {
+  try {
+    console.log(id);
+    await apiClient<void>(`products/${id}`, "DELETE", undefined);
+    return { id };
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+
+    return rejectWithValue(message);
+  }
+});
+
+export const deletedUser = createAsyncThunk<
+  { id: number },
+  { id: number },
+  { rejectValue: string }
+>("db/deletedUser", async ({ id }, { rejectWithValue }) => {
+  try {
+    console.log(id);
+    await apiClient<void>(`users/${id}`, "DELETE", undefined);
+    return { id };
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+
+    return rejectWithValue(message);
+  }
+});
+
+export const deletedCategory = createAsyncThunk<
+  { id: number },
+  { id: number },
+  { rejectValue: string }
+>("db/deletedCategory", async ({ id }, { rejectWithValue }) => {
+  try {
+    console.log(id);
+    await apiClient<void>(`category/${id}`, "DELETE", undefined);
+    return { id };
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (
+      typeof error === "object" &&
+      error !== null &&
+      "response" in error
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+
+    return rejectWithValue(message);
+  }
+});

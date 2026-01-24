@@ -18,7 +18,7 @@ const useClients = () => {
     dispatch(fetchCategoryAll());
   }, [dispatch]);
 
-  return { users, repairs, products, category };
+  return { users, repairs, products, category, dispatch };
 };
 
 export default useClients;

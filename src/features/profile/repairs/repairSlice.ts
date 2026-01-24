@@ -2,6 +2,7 @@ import { IRepair } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   createRepair,
+  deletedRepairs,
   editStatus,
   repairAdmin,
   repairFilter,
@@ -112,7 +113,18 @@ const repairSlice = createSlice({
         (state, action: PayloadAction<IRepair>) => {
           state.repairs.push(action.payload);
         }
-      );
+      )
+      .addCase(deletedRepairs.fulfilled, (state, action) => {
+        state.repairs = state.repairs.filter(
+          (repair) => repair.id !== action.payload.id
+        );
+      })
+      .addCase(deletedRepairs.rejected, (state, action) => {
+        state.error = action.payload || "Ошибка при удалении ремонта";
+      })
+      .addCase(deletedRepairs.pending, (state) => {
+        state.error = null;
+      });
   },
 });
 

@@ -3,9 +3,13 @@ import s from "./index.module.css";
 
 type TableProps<T> = {
   data: T[];
+  handleDelete?: (id: number) => void;
 };
 
-function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
+function Table<T extends { id: number | string }>({
+  data,
+  handleDelete,
+}: TableProps<T>) {
   if (!data || data.length === 0) {
     return <p className={s.tdEmpty}>Нет данных</p>;
   }
@@ -22,7 +26,7 @@ function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
                 {String(h).toUpperCase()}
               </th>
             ))}
-            {/* <th className={s.th}>ACTIONS</th> */}
+            <th className={s.th}>ACTIONS</th>
           </tr>
         </thead>
         <tbody>
@@ -58,10 +62,15 @@ function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
                   })()}
                 </td>
               ))}
-              {/* <td className={s.tdActions}>
+              <td className={s.tdActions}>
                 <button className={s.editBtn}>Edit</button>
-                <button className={s.deleteBtn}>Delete</button>
-              </td> */}
+                <button
+                  className={s.deleteBtn}
+                  onClick={() => handleDelete && handleDelete(d.id as number)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

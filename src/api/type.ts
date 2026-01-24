@@ -70,7 +70,7 @@ export interface IRepair {
 }
 
 export interface IClient {
-  id: string;
+  id: number;
   name: string;
   email: string;
   phone: number;

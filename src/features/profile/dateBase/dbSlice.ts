@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deletedCategory,
+  deletedProduct,
+  deletedUser,
   fetchCategoryAll,
   fetchProductsAll,
   fetchUsersAll,
@@ -58,6 +61,39 @@ export const dbSlice = createSlice({
         state.category = action.payload;
         state.error = null;
         state.loading = false;
+      })
+      .addCase(deletedProduct.fulfilled, (state, action) => {
+        state.products.products = state.products.products.filter(
+          (product) => product.id !== action.payload.id
+        );
+      })
+      .addCase(deletedProduct.rejected, (state, action) => {
+        state.error = action.payload || "Ошибка при удалении продукта";
+      })
+      .addCase(deletedProduct.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(deletedCategory.fulfilled, (state, action) => {
+        state.category.category = state.category.category.filter(
+          (cat) => cat.id !== action.payload.id
+        );
+      })
+      .addCase(deletedCategory.rejected, (state, action) => {
+        state.error = action.payload || "Ошибка при удалении категории";
+      })
+      .addCase(deletedCategory.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(deletedUser.fulfilled, (state, action) => {
+        state.clients.users = state.clients.users.filter(
+          (user) => user.id !== action.payload.id
+        );
+      })
+      .addCase(deletedUser.rejected, (state, action) => {
+        state.error = action.payload || "Ошибка при удалении пользователя";
+      })
+      .addCase(deletedUser.pending, (state) => {
+        state.error = null;
       });
   },
 });
