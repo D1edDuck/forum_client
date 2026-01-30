@@ -29,8 +29,14 @@ export const fetchProductsSearch = createAsyncThunk<IProduct[], string>(
 
 export const createProduct = createAsyncThunk<IProduct, Partial<IProduct>>(
   "products/createProduct",
-  async (productData) => {  
-    const res = await apiClient<IProduct, Partial<IProduct>>("products", "POST", productData);
+  async (productData) => {
+    const fd = new FormData();
+    Object.entries(productData).forEach(([key, value]) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (value !== undefined) fd.append(key, value as any);
+    });
+
+    const res = await apiClient<IProduct, FormData>("products", "POST", fd);
     return res;
   }
 );

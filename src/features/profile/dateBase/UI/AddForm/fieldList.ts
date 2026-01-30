@@ -36,6 +36,13 @@ const formConfig = {
       placeholder: "Описание товара",
     },
     { name: "price", label: "Цена", type: "number", required: true },
+    {
+      name: "image",
+      label: "Фото Товара",
+      type: "file",
+      required: true,
+      accept: "image/*",
+    },
     { name: "stock", label: "Количество", type: "number", required: true },
     {
       name: "categoryId",

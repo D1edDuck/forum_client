@@ -35,7 +35,7 @@ const ServicePage = () => {
         <NavigateTabs />
         <div className={s.flex}>
           {selected.info.map((item) => (
-            <ServiceBlock key={item.title} data={item} path={selected.name} />
+            <ServiceBlock key={item.title} data={item} path={item.cause} />
           ))}
         </div>
         <FeedBack />

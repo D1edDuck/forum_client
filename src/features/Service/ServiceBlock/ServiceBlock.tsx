@@ -9,15 +9,21 @@ const ServiceBlock: FC<Props> = ({ data, path }) => {
   return (
     <div className={s.cardBlock}>
       <h1 className={s.titleBlock}>{data.title}</h1>
-      <img src={data.img} alt={data.title} className={s.imgBlock} />
-      {data.description.map((item, idx) => (
-        <p key={idx}>{item}</p>
-      ))}
-      <ButtonLink
-        title="Оставить заявку"
-        variant="active"
-        path={`/booking/?cause=${path}`}
-      ></ButtonLink>
+
+      <div className={s.text}>
+        <img src={data.img} alt={data.title} className={s.imgBlock} />
+        {data.description.map((item, idx) => (
+          <p key={idx}>{item}</p>
+        ))}
+      </div>
+
+      <div className={s.btn}>
+        <ButtonLink
+          title="Оставить заявку"
+          variant="active"
+          path={`/booking/?cause=${path}`}
+        ></ButtonLink>
+      </div>
     </div>
   );
 };

@@ -12,6 +12,11 @@
   min-width: 600px;
 }
 
+.link {
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
 .th {
   padding: 12px;
   text-align: center;

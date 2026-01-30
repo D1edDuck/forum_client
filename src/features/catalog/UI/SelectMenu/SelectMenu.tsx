@@ -11,7 +11,9 @@ const SelectMenu = () => {
         Array(5)
           .fill(0)
           .map((_, i) => <div key={i} className={s.skeleton}></div>)}
-      {!loading && !error && category.map((cat) => <LinkCategory cat={cat} />)}
+      {!loading &&
+        !error &&
+        category.map((cat) => <LinkCategory cat={cat} key={cat.id} />)}
     </div>
   );
 };

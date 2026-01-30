@@ -15,9 +15,9 @@ const FilterPrice = ({ title }: IProps) => {
       <div className={s.filter}>
         <div className="flex gap" onClick={toggle}>
           <p>{title}</p>
-          <p className={s.arr}>
+          <div className={s.arr}>
             <Arrow color="w" size="s" open={open} />
-          </p>
+          </div>
         </div>
         {open && <PriceForm onSubmit={toggle} />}
       </div>

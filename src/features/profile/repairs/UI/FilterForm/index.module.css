@@ -38,6 +38,6 @@
 }
 
 .form input[type="number"],
-input[type="text"] {
+.form input[type="text"] {
   width: 100px;
 }

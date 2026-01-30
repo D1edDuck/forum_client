@@ -2,6 +2,7 @@ export interface Info {
   title: string;
   img: string;
   description: string[];
+  cause: string;
 }
 
 export interface ServiceI {
@@ -24,6 +25,7 @@ export const services: ServiceI[] = [
           "Сетевая настройка и защита данных.",
         ],
         img: "/img/repair-1.png",
+        cause: "repair-PC",
       },
       {
         title: "Ремонт Ноутбуков",
@@ -35,6 +37,7 @@ export const services: ServiceI[] = [
           "Восстановление данных и установка программного обеспечения.",
         ],
         img: "/img/repair-2.png",
+        cause: "repair-notebook",
       },
       {
         title: "Ремонт принтеров",
@@ -46,6 +49,7 @@ export const services: ServiceI[] = [
           "Калибровка цвета и тестовая печать.",
         ],
         img: "/img/repair-3.png",
+        cause: "repair-printer",
       },
     ],
   },
@@ -63,6 +67,7 @@ export const services: ServiceI[] = [
           "Сетевая настройка и защита данных.",
         ],
         img: "/img/repair-1.png",
+        cause: "cleaning",
       },
     ],
   },
@@ -80,6 +85,7 @@ export const services: ServiceI[] = [
           "Сетевая настройка и защита данных.",
         ],
         img: "/img/repair-1.png",
+        cause: "refilling",
       },
     ],
   },
@@ -97,6 +103,7 @@ export const services: ServiceI[] = [
           "Сетевая настройка и защита данных.",
         ],
         img: "/img/repair-1.png",
+        cause: "consultation",
       },
     ],
   },
@@ -114,6 +121,7 @@ export const services: ServiceI[] = [
           "Сетевая настройка и защита данных.",
         ],
         img: "/img/repair-1.png",
+        cause: "modernization",
       },
     ],
   },

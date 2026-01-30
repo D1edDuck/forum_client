@@ -5,10 +5,21 @@ interface Props {
   product: IProduct;
 }
 
+const API_URL = import.meta.env.VITE_API_URL_IMAGE;
+
 const ProductCard = ({ product }: Props) => {
   return (
     <article className={s.card}>
-      <div className={s.img} />
+      <img
+        className={s.img}
+        src={
+          product.imageUrl
+            ? `${API_URL}${product.imageUrl}`
+            : `${API_URL}/uploads/products/xxx.png`
+        }
+        alt={product.name}
+        loading="lazy"
+      />
       <div className={s.content}>
         <h3 className={s.price}>{product.price} ₽</h3>
         <p className={s.desc}>

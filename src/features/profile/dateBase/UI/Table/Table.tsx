@@ -42,6 +42,18 @@ function Table<T extends { id: number | string }>({ data }: TableProps<T>) {
                       return formatDate(String(value));
                     }
 
+                    if (key === "imageUrl") {
+                      return (
+                        <a
+                          href={`${import.meta.env.VITE_API_URL_IMAGE}${value}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${value ? s.link : ""}`}
+                        >
+                          {value ? "Смотреть фото" : "No Image"}
+                        </a>
+                      );
+                    }
                     return String(value);
                   })()}
                 </td>
