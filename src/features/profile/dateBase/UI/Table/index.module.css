@@ -1,73 +1,127 @@
+/* index.module.css для таблицы */
 .tableContainer {
-  padding: 16px;
-  font-size: var(--size-20);
-  border: 1px solid #ddd;
-  border-radius: 2rem;
-  overflow: scroll;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  background: white;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: "Inter", sans-serif;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
-}
-
-.link {
-  color: var(--color-blue);
-  text-decoration: none;
+  font-size: 14px;
 }
 
 .th {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--color-gray-light);
-}
-
-.tr:hover {
-  background-color: var(--color-gray-50);
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #1e293b;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.05em;
 }
 
 .td {
-  padding: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.tr:hover .td {
+  background-color: #f8fafc;
+}
+
+.tdEmpty {
+  padding: 48px;
   text-align: center;
-  border-bottom: 1px solid var(--color-gray-light);
+  color: #64748b;
+  background: white;
+  border-radius: 16px;
+  font-size: 15px;
+}
+
+.link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }
 
 .tdActions {
   display: flex;
   gap: 8px;
-  justify-content: space-evenly;
-  padding: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.editBtn,
+.deleteBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btnIcon {
+  font-size: 14px;
 }
 
 .editBtn {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #bfdbfe;
 }
 
 .editBtn:hover {
-  background-color: #2980b9;
+  background: #dbeafe;
+  border-color: #3b82f6;
+  transform: translateY(-1px);
 }
 
 .deleteBtn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
 }
 
 .deleteBtn:hover {
-  background-color: #c0392b;
+  background: #fee2e2;
+  border-color: #ef4444;
+  transform: translateY(-1px);
 }
 
-.tdEmpty {
-  text-align: center;
-  padding: 20px;
-  color: #888;
+/* Адаптивность */
+@media (max-width: 768px) {
+  .tdActions {
+    flex-direction: column;
+  }
+
+  .editBtn,
+  .deleteBtn {
+    width: 100%;
+    justify-content: center;
+  }
 }

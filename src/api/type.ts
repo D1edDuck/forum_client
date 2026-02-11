@@ -64,7 +64,7 @@ export interface IRepair {
   userId: number;
   cause: string;
   comment: string;
-  status: "pending" | "fulfilled";
+  status: "active" | "archived";
   created_at: string;
   user: IUserRep;
 }

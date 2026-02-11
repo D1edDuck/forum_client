@@ -35,33 +35,57 @@ const SideBar = () => {
     return false;
   };
 
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const navItems = [
+    { path: "me", label: "Профиль", icon: "👤", adminOnly: false },
+    { path: "repairs", label: "Заявки", icon: "🔧", adminOnly: false },
+    { path: "settings", label: "Настройки", icon: "⚙️", adminOnly: false },
+    { path: "datebase", label: "База данных", icon: "🗄️", adminOnly: true },
+  ];
+
   if (!user) return <p>Вы не авторизированны</p>;
 
   return (
     <div className={`${s.card} ${s.border}`}>
-      <h3>{user.name}</h3>
-      <div className={s.links}>
-        <Link to={"me"} className={isActive("me") ? s.active : ""}>
-          Профиль
-        </Link>
-
-        <Link to={"repairs"} className={isActive("repairs") ? s.active : ""}>
-          Заявки
-        </Link>
-
-        <Link to={"settings"}>Настройки</Link>
-
-        {user?.role == "admin" && (
-          <Link
-            to={"datebase"}
-            className={isActive("datebase") ? s.active : ""}
-          >
-            База данных
-          </Link>
-        )}
+      <div className={s.userHeader}>
+        <div className={s.avatar}>{getInitials(user.name as string)}</div>
+        <div className={s.userInfo}>
+          <h3 className={s.userName}>{user.name}</h3>
+          <span className={s.userRole}>
+            {user.role === "admin" ? "Администратор" : "Пользователь"}
+          </span>
+        </div>
       </div>
-      <button onClick={() => dispatch(logout())} className={s.log}>
-        Выйти
+
+      <div className={s.links}>
+        {navItems.map(({ path, label, icon, adminOnly }) => {
+          if (adminOnly && user.role !== "admin") return null;
+
+          return (
+            <div key={path} className={s.linkItem}>
+              <Link to={path} className={isActive(path) ? s.active : ""}>
+                <span className={s.linkIcon}>{icon}</span>
+                <span>{label}</span>
+                {adminOnly && user.role === "admin" && (
+                  <span className={s.adminBadge}>Admin</span>
+                )}
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+
+      <button onClick={() => dispatch(logout())} className={s.logoutBtn}>
+        <span>Выйти</span>
+        <span className={s.logoutIcon}>→</span>
       </button>
     </div>
   );
