@@ -6,25 +6,25 @@ const service = {
   name: "Сервис",
   path: "service/repair",
   description: "текст про наш сервис",
-  image: "/img/card-1.png",
+  image: "img/card-1.png",
 };
 const booking = {
   name: "Запись",
   path: "booking",
   description: "текст про наш сервис",
-  image: "/img/card-2.png",
+  image: "img/card-2.png",
 };
 const catalog = {
   name: "Каталог",
   path: "catalog",
   description: "текст про наш сервис",
-  image: "/img/card-3.png",
+  image: "img/card-3.png",
 };
 const about = {
   name: "О нас",
   path: "about",
   description: "текст про наш сервис",
-  image: "/img/card-4.png",
+  image: "img/card-4.png",
 };
 
 const ListServiceHome = () => {

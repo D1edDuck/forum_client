@@ -1,7 +1,8 @@
 .flex {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
   font-family: "Inter", sans-serif;
 }
 
@@ -117,7 +118,7 @@
 .link p {
   text-decoration: none;
   color: #475569;
-  font-size: 14px;
+  font-size: var(--size-16);
   font-weight: 500;
   transition: all 0.2s ease;
   position: relative;
@@ -207,7 +208,7 @@
 
 @media (max-width: 1200px) {
   .flex {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 

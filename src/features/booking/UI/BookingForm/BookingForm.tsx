@@ -43,7 +43,7 @@ const BookingForm = ({ user }: IProps) => {
           >
             {causes.map((c) => (
               <option value={c.value} disabled={c.disabled}>
-                {c.text}
+                {c.label}
               </option>
             ))}
           </select>

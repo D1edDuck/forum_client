@@ -8,6 +8,7 @@ import ButtonReset from "../ButtonReset/ButtonReset";
 import CardRepair from "../CardRepair/CardRepair";
 import { repairFilter } from "../../repairThunk";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { Link } from "react-router-dom";
 
 const Repairs = () => {
   const dispatch = useAppDispatch();
@@ -43,7 +44,14 @@ const Repairs = () => {
         {repairs.length ? (
           repairs.map((rep, idx) => <CardRepair key={idx} {...rep} />)
         ) : (
-          <div className={s.not}>Заявок нет</div>
+          <div className={s.not}>
+            <p>Заявок нет</p>
+            {role === "user" && (
+              <div>
+                <Link to={"/booking"}>Оставить заявку</Link>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

@@ -41,7 +41,7 @@ const FilterForm = ({
     onSubmit,
     variant,
     toggle,
-    patch
+    patch,
   );
 
   return (

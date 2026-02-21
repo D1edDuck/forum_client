@@ -64,7 +64,7 @@ export interface IRepair {
   userId: number;
   cause: string;
   comment: string;
-  status: "active" | "archived";
+  status: RepairStatus;
   created_at: string;
   user: IUserRep;
 }
@@ -75,3 +75,10 @@ export interface IClient {
   email: string;
   phone: number;
 }
+
+export type RepairStatus =
+  | "active"
+  | "archive"
+  | "pending"
+  | "rejected"
+  | "fulfilled";

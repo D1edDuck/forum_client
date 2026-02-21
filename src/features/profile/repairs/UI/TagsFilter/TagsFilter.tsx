@@ -14,7 +14,13 @@ const TagsFilter = () => {
             ? "Готово"
             : value == "pending"
               ? "В процессе"
-              : value}
+              : value == "active"
+                ? "В ремонте"
+                : value == "rejected"
+                  ? "Отклонено"
+                  : value == "archive"
+                    ? "Архив"
+                    : value}
         </div>
       ))}
     </div>

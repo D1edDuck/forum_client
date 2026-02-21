@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-content: space-between;
 }
 
 .not {
@@ -50,4 +51,23 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+.not {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.not div {
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-15);
+  outline: 0.2rem solid var(--color-blue);
+  color: var(--color-blue);
+}
+
+.not div:hover {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  transition: all 0.3s ease;
 }

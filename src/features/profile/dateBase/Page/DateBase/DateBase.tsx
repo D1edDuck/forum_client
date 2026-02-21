@@ -59,14 +59,14 @@ const DateBase = () => {
           <div className={s.more}>
             <div>
               <Link to={link} className={s.link}>
-                <span>Подробнее</span>
+                <p>Подробнее</p>
                 <Arrow color="w" size="s" open={false} />
               </Link>
             </div>
 
             <div>
               <Link to={add} className={s.link}>
-                <span>Создать</span>
+                <p>Создать</p>
                 <div className={s.plus}>
                   <span className={s.vert}></span>
                   <span className={s.horiz}></span>

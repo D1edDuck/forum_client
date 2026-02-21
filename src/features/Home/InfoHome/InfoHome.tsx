@@ -17,8 +17,8 @@ const InfoHome = () => {
           <SvgLink name={"mop"} />
           <SvgLink name={"contacts"} />
         </div>
-        <img src="/img/computer.png" alt="computer" className={s.comp} />
-        <img src="/img/laptop.png" alt="laptop" className={s.laptop} />
+        <img src="img/computer.png" alt="computer" className={s.comp} />
+        <img src="img/laptop.png" alt="laptop" className={s.laptop} />
         <svg className={`${s.icon_small} ${s.printer}`}>
           <use xlinkHref="/icons/symbol-defs.svg#icon-Printer"></use>
         </svg>

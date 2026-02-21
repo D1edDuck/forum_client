@@ -16,7 +16,7 @@ import { useSearchParams } from "react-router-dom";
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
   const { name, comment, email, phone, cause } = useAppSelector(
-    (state) => state.booking
+    (state) => state.booking,
   );
 
   const [causeParams, setCauseParams] = useSearchParams();
@@ -41,7 +41,7 @@ const useForm = ({ user }: IProps) => {
       const repair: Omit<IRepair, "id" | "created_at" | "user"> = {
         cause,
         comment,
-        status: "pending",
+        status: "active",
         userId: user.id,
       };
 
@@ -57,7 +57,7 @@ const useForm = ({ user }: IProps) => {
             tittle: "Успешно!",
             text: "Ваша заявка успешно отправлена. Вам перезвонят для подтверждения заявки",
             status: "fulfilled",
-          })
+          }),
         );
       } catch (err) {
         dispatch(
@@ -65,7 +65,7 @@ const useForm = ({ user }: IProps) => {
             tittle: "Ошибка",
             text: "Не удалось отправить заявку. Попробуйте позже.",
             status: "error",
-          })
+          }),
         );
         console.log(err);
       } finally {

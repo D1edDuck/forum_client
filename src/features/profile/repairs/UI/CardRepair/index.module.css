@@ -79,14 +79,19 @@
     background-color: #ffc107;
     color: #343a40;
   }
-  &.repair {
-    background-color: #007bff;
-  }
   &.fulfilled {
     background-color: #28a745;
   }
+  &.active {
+    background-color: #17a2b8;
+  }
+  &.archive {
+    background-color: #6c757d;
+  }
+  &.rejected {
+    background-color: #dc3545;
+  }
 }
-
 .statusBadge option {
   background-color: var(--color-white);
   color: var(--color-black);
@@ -110,11 +115,17 @@
     box-shadow: 0 6px 6px #ffc1077e;
     color: #343a40;
   }
-  &.repair {
-    box-shadow: 0 6px 6px #007bff7a;
-  }
   &.fulfilled {
     box-shadow: 0 6px 6px 1px #28a7467f;
+  }
+  &.active {
+    box-shadow: 0 6px 6px #17a2b87f;
+  }
+  &.archive {
+    box-shadow: 0 6px 6px #6c757d7f;
+  }
+  &.rejected {
+    box-shadow: 0 6px 6px #dc35457f;
   }
 }
 

@@ -1,9 +1,7 @@
 .content {
   overflow-x: auto;
-  padding: 24px 32px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 0 1rem;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
 }
 
 .header {

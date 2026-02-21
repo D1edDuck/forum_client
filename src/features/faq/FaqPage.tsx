@@ -29,13 +29,15 @@ const FaqPage = () => {
         <div className={s.hr}></div>
         {question.map((q, i) => (
           <>
-            <div className={s.block}>
+            <div
+              className={s.block}
+              onClick={() => (ans === i ? setAns(null) : setAns(i))}
+            >
               <span className={s.quest}>{q}</span>
               <button
                 className={`${s.close} ${i === ans ? s.active : ""}`}
                 aria-expanded={i === ans}
                 aria-controls={`faq-answer-${i}`}
-                onClick={() => (ans === i ? setAns(null) : setAns(i))}
               />
             </div>
             <div

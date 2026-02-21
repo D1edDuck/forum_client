@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import useClients from "../../hooks/useClients";
 import Table from "../../UI/Table/Table";
-import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
+import { ICatalog, IClient, IProduct, IRepair, RepairStatus } from "@/api/type";
 import s from "./index.module.css";
 import { deletedCategory, deletedProduct, deletedUser } from "../../dbThunks";
 import { deletedRepairs } from "@/features/profile/repairs/repairThunk";
@@ -13,9 +13,7 @@ const DbPage = () => {
   const { users, repairs, products, category, dispatch } = useClients();
   const { type } = useParams<{ type: TableType }>();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterStatus, setFilterStatus] = useState<
-    "all" | "active" | "archived"
-  >("all");
+  const [filterStatus, setFilterStatus] = useState<RepairStatus | "all">("all");
 
   const tableType: TableType = type ?? "client";
 
@@ -136,10 +134,6 @@ const DbPage = () => {
             <span>➕</span>
             Добавить
           </button>
-          <button className={s.actionButton}>
-            <span>📥</span>
-            Экспорт
-          </button>
         </div>
       </div>
 
@@ -169,8 +163,8 @@ const DbPage = () => {
             Активные
           </button>
           <button
-            className={`${s.filterButton} ${filterStatus === "archived" ? s.active : ""}`}
-            onClick={() => setFilterStatus("archived")}
+            className={`${s.filterButton} ${filterStatus === "archive" ? s.active : ""}`}
+            onClick={() => setFilterStatus("archive")}
           >
             Архив
           </button>

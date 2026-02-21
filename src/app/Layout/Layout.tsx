@@ -7,7 +7,7 @@ const Layout = () => {
   return (
     <div>
       <Header />
-      <div className="min-height-30">
+      <div className="min-height-80">
         <ScrollToTop />
         <Outlet />
       </div>
