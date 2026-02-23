@@ -16,7 +16,7 @@ const LinkCategory = ({ cat }: IProps) => {
           <Arrow color="w" size="l" open={false} />
         </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 
