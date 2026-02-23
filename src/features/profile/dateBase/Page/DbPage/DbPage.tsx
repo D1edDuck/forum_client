@@ -13,9 +13,6 @@ const DbPage = () => {
   const { users, repairs, products, category, dispatch } = useClients();
   const { type } = useParams<{ type: TableType }>();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterStatus, setFilterStatus] = useState<
-    "all" | "active" | "archived"
-  >("all");
 
   const tableType: TableType = type ?? "client";
 
@@ -53,17 +50,8 @@ const DbPage = () => {
       });
     }
 
-    if (filterStatus !== "all") {
-      data = data.filter((item) => {
-        if ("status" in item && typeof item.status === "string") {
-          return item.status === filterStatus;
-        }
-        return false;
-      });
-    }
-
     return data;
-  }, [tableData, searchQuery, filterStatus]);
+  }, [tableData, searchQuery]);
 
   const getTableTitle = () => {
     const titles = {
@@ -115,9 +103,7 @@ const DbPage = () => {
   return (
     <div className={s.content}>
       <div className={s.header}>
-        <h2 className={s.title} data-count={filteredData.length}>
-          {getTableTitle()}
-        </h2>
+        <h2 className={s.title}>{getTableTitle()}</h2>
 
         <div className={s.tableStats}>
           <span className={s.statItem}>
@@ -125,27 +111,33 @@ const DbPage = () => {
             <span className={s.statLabel}>Всего:</span>
             <span className={s.statValue}>{tableData.length}</span>
           </span>
-          <span className={s.statItem}>
-            <span className={s.statLabel}>Отображается:</span>
-            <span className={s.statValue}>{filteredData.length}</span>
-          </span>
+          {filteredData.length !== tableData.length && (
+            <span className={s.statItem}>
+              <span className={s.statDot}></span>
+              <span className={s.statLabel}>Найдено:</span>
+              <span className={s.statValue}>{filteredData.length}</span>
+            </span>
+          )}
         </div>
 
         <div className={s.tableActions}>
-          <button className={`${s.actionButton} ${s.primary}`}>
-            <span>➕</span>
-            Добавить
-          </button>
-          <button className={s.actionButton}>
-            <span>📥</span>
-            Экспорт
-          </button>
+          <button className={`${s.actionButton} ${s.primary}`}>Добавить</button>
+          <button className={s.actionButton}>Экспорт</button>
         </div>
       </div>
 
       <div className={s.tableControls}>
         <div className={s.searchBox}>
-          <span className={s.searchIcon}>🔍</span>
+          <svg
+            className={s.searchIcon}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
           <input
             type="text"
             className={s.searchInput}
@@ -153,27 +145,6 @@ const DbPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </div>
-
-        <div className={s.filterGroup}>
-          <button
-            className={`${s.filterButton} ${filterStatus === "all" ? s.active : ""}`}
-            onClick={() => setFilterStatus("all")}
-          >
-            Все
-          </button>
-          <button
-            className={`${s.filterButton} ${filterStatus === "active" ? s.active : ""}`}
-            onClick={() => setFilterStatus("active")}
-          >
-            Активные
-          </button>
-          <button
-            className={`${s.filterButton} ${filterStatus === "archived" ? s.active : ""}`}
-            onClick={() => setFilterStatus("archived")}
-          >
-            Архив
-          </button>
         </div>
       </div>
 
@@ -191,7 +162,6 @@ const DbPage = () => {
           <p className={s.emptyStateText}>{emptyState.text}</p>
           {!searchQuery && (
             <button className={s.emptyStateButton}>
-              <span>➕</span>
               Добавить {getTableTitle().slice(0, -1)}
             </button>
           )}
@@ -200,7 +170,6 @@ const DbPage = () => {
               className={s.emptyStateButton}
               onClick={() => setSearchQuery("")}
             >
-              <span>🗑</span>
               Очистить поиск
             </button>
           )}

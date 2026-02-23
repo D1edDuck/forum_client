@@ -1,53 +1,405 @@
 .block {
-  border: 1px solid #e0e0e0;
-  border-radius: var(--radius-15);
-  padding: 2rem;
-  font-size: var(--size-20);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  min-width: 20rem;
-  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  padding: 3rem;
+  position: relative;
+  overflow: visible;
+  animation: slideIn 0.4s ease;
+  box-shadow: var(--shadow-md);
 }
 
 .title {
-  text-align: center;
-  font-size: var(--size-24);
-  font-weight: 700;
-  padding-bottom: 1rem;
-  border-bottom: 0.2rem solid var(--color-gray-light);
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  letter-spacing: -0.02em;
 }
 
-.reps {
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.not {
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--size-32);
-  color: var(--color-gray-light);
-  font-weight: 600;
-}
-
-.filter {
-  display: flex;
-  gap: 2rem;
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-telegram);
+  border-radius: 2px;
 }
 
 .filterTittle {
+  font-size: 1.8rem;
   font-weight: 600;
-  font-size: var(--size-24);
+  color: var(--text-secondary);
+  margin: 2rem 0 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .noSelect {
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-15);
+  position: relative;
+}
+
+.filter > * {
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+
+.reps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+  max-height: 1000px;
+  overflow-y: auto;
+  padding-right: 1rem;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-blue) var(--bg-tertiary);
+}
+
+.reps::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reps::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+.reps::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 3px;
+}
+
+.reps::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue-hover);
+}
+
+.scrollInfo {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-primary);
+  border-radius: 100px;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.scrollIndicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.scrollDot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  box-shadow: 0 0 10px var(--accent-blue);
+  animation: pulse 2s infinite;
+}
+
+.scrollText {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.scrollCount {
+  background: var(--accent-blue);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 100px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-accent);
+}
+
+.scrollHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px dashed var(--border-primary);
+  border-radius: var(--radius-15);
+  color: var(--text-tertiary);
+  font-size: 1.4rem;
+}
+
+.scrollHint span:first-child {
+  color: var(--accent-blue);
+  font-size: 1.8rem;
+}
+
+.not {
+  text-align: center;
+  padding: 6rem 2rem;
+  font-size: 2rem;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-15);
+  width: 100%;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.not::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(43, 107, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.not::after {
+  content: "🔧";
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reps > *:not(.scrollInfo):not(.scrollHint) {
+  animation: fadeIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.reps > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+.reps > *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+.reps > *:nth-child(4) {
+  animation-delay: 0.15s;
+}
+.reps > *:nth-child(5) {
+  animation-delay: 0.2s;
+}
+.reps > *:nth-child(6) {
+  animation-delay: 0.25s;
+}
+.reps > *:nth-child(7) {
+  animation-delay: 0.3s;
+}
+.reps > *:nth-child(8) {
+  animation-delay: 0.35s;
+}
+.reps > *:nth-child(9) {
+  animation-delay: 0.4s;
+}
+.reps > *:nth-child(10) {
+  animation-delay: 0.45s;
+}
+
+@media (max-width: 992px) {
+  .block {
+    padding: 2.5rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter > * {
+    width: 100%;
+  }
+
+  .filterTittle {
+    font-size: 1.6rem;
+  }
+
+  .reps {
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .block {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .title::after {
+    width: 60px;
+    height: 3px;
+    bottom: -0.8rem;
+  }
+
+  .filter {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .filterTittle {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .reps {
+    gap: 1.5rem;
+    max-height: 400px;
+  }
+
+  .scrollInfo {
+    padding: 0.8rem 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  .scrollCount {
+    padding: 0.2rem 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .not {
+    padding: 4rem 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .not::after {
+    font-size: 3rem;
+  }
+
+  .scrollHint {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .block {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .title::after {
+    width: 50px;
+    height: 2px;
+  }
+
+  .filter {
+    padding: 0.8rem;
+  }
+
+  .filterTittle {
+    font-size: 1.4rem;
+  }
+
+  .reps {
+    gap: 1rem;
+    max-height: 350px;
+  }
+
+  .scrollInfo {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .scrollIndicator {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .not {
+    padding: 3rem 1rem;
+    font-size: 1.6rem;
+  }
+
+  .not::after {
+    font-size: 2.5rem;
+  }
+
+  .scrollHint {
+    font-size: 1.2rem;
+    padding: 0.6rem;
+  }
 }

@@ -5,24 +5,33 @@ import FindProduct from "@/features/products/filter/UI/FindProduct/FindProduct";
 import NavigateLine from "@/UI/NavigateLine/NavigateLine";
 import TagsFilters from "@/features/products/filter/UI/TagsFilters/TagsFilters";
 import { useProductCatalog } from "../hooks/useProductCatalog";
+import s from "./index.module.css";
 
 const ProductCatalogPage = () => {
   const { products } = useProductCatalog();
 
   return (
-    <div className="container pb4 mb">
-      <NavigateLine />
+    <div className={s.page}>
+      <div className={`container ${s.content}`}>
+        <NavigateLine />
 
-      <div className="flex gap">
-        <FilterList title="Цена" />
-        <FilterBar title="Бренд" products={products} variant="brand" />
-        <FilterBar title="В наличии" products={products} variant="stock" />
-        <FindProduct />
+        <div className={s.header}>
+          <h1 className={s.title}>Каталог продуктов</h1>
+        </div>
+
+        <div className={s.filterWrapper}>
+          <div className={s.filterRow}>
+            <FilterList title="Цена" />
+            <FilterBar title="Бренд" products={products} variant="brand" />
+            <FilterBar title="В наличии" products={products} variant="stock" />
+            <FindProduct />
+          </div>
+        </div>
+
+        <TagsFilters />
+
+        <ProductMenu />
       </div>
-
-      <TagsFilters />
-
-      <ProductMenu />
     </div>
   );
 };

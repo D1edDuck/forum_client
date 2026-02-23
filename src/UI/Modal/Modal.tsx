@@ -21,12 +21,12 @@ const Modal = () => {
       <div className={`${s.modal} ${modalStatus}`}>
         <div className={s.header}>
           <h3 className={s.tittle}>{data.tittle}</h3>
-          <button onClick={() => dispatch(toggleEvent())}>X</button>
+          <button onClick={() => dispatch(toggleEvent())}>✕</button>
         </div>
         <hr className={s.hr} />
         <div className={s.text}>{data.text}</div>
         <button className={s.btn} onClick={() => dispatch(toggleEvent())}>
-          Ок
+          OK
         </button>
       </div>
     </div>

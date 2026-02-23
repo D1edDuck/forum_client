@@ -39,15 +39,15 @@ const FilterForm = ({
 }: IProps) => {
   const { data, handleChange, handleSubmit } = useInputForm(
     onSubmit,
-    variant,
     toggle,
-    patch
+    patch,
   );
 
   return (
     <form
       className={`${s.form} ${variant && s[variant]}`}
       onSubmit={handleSubmit}
+      onClick={(e) => e.stopPropagation()}
     >
       {inputs.map((i) => (
         <label htmlFor={i.id} className={s.label} key={`${formKey}-${i.id}`}>
@@ -66,11 +66,18 @@ const FilterForm = ({
                 : undefined
             }
             onChange={(e) => handleChange(e, patch)}
+            onClick={(e) => e.stopPropagation()}
           />
         </label>
       ))}
 
-      <button className={s.btn}>{tittleBtn || "Найти"}</button>
+      <button
+        className={s.btn}
+        type="submit"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {tittleBtn || "Найти"}
+      </button>
     </form>
   );
 };

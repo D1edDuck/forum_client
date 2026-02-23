@@ -3,12 +3,15 @@ import type { Info } from "@/api/mockProducts";
 import s from "./index.module.css";
 import ButtonLink from "@/UI/ButtonLink/ButtonLink";
 
-type Props = { data: Info; path: string };
+type Props = {
+  data: Info;
+  path: string;
+};
 
 const ServiceBlock: FC<Props> = ({ data, path }) => {
   return (
     <div className={s.cardBlock}>
-      <h1 className={s.titleBlock}>{data.title}</h1>
+      <h2 className={s.titleBlock}>{data.title}</h2>
 
       <div className={s.text}>
         <img src={data.img} alt={data.title} className={s.imgBlock} />
@@ -20,9 +23,10 @@ const ServiceBlock: FC<Props> = ({ data, path }) => {
       <div className={s.btn}>
         <ButtonLink
           title="Оставить заявку"
-          variant="active"
+          variant="primary"
+          size="medium"
           path={`/booking/?cause=${path}`}
-        ></ButtonLink>
+        />
       </div>
     </div>
   );

@@ -4,12 +4,12 @@
 
 .open {
   transform: rotate(180deg);
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .close {
   transform: rotate(0deg);
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 /* 
@@ -17,13 +17,13 @@ l - 2.5rem
 s - 1rem
 
 w - white
-b -black
+b - black
 */
 
 .uplw {
   width: 2.5rem;
   height: 0.4rem;
-  background: var(--color-white);
+  background: var(--text-primary);
   border-radius: 100px;
   transform: rotate(-35deg) translateY(1rem);
 }
@@ -31,7 +31,7 @@ b -black
 .downlw {
   width: 2.5rem;
   height: 0.4rem;
-  background: var(--color-white);
+  background: var(--text-primary);
   border-radius: 100px;
   transform: rotate(-145deg) translateY(1rem);
 }
@@ -39,7 +39,7 @@ b -black
 .uplb {
   width: 2.5rem;
   height: 0.4rem;
-  background: var(--color-black);
+  background: var(--text-secondary);
   border-radius: 100px;
   transform: rotate(-35deg) translateY(1rem);
 }
@@ -47,7 +47,7 @@ b -black
 .downlb {
   width: 2.5rem;
   height: 0.4rem;
-  background: var(--color-black);
+  background: var(--text-secondary);
   border-radius: 100px;
   transform: rotate(-145deg) translateY(1rem);
 }
@@ -55,7 +55,7 @@ b -black
 .upsw {
   width: 1.5rem;
   height: 0.3rem;
-  background: var(--color-white);
+  background: var(--text-primary);
   border-radius: 100px;
   transform: translateY(-0.2rem) rotate(35deg);
 }
@@ -63,7 +63,7 @@ b -black
 .downsw {
   width: 1.5rem;
   height: 0.3rem;
-  background: var(--color-white);
+  background: var(--text-primary);
   border-radius: 100px;
   transform: translateY(0.2rem) rotate(-35deg);
 }
@@ -71,7 +71,7 @@ b -black
 .upsb {
   width: 1.5rem;
   height: 0.4rem;
-  background: var(--color-black);
+  background: var(--text-secondary);
   border-radius: 100px;
   transform: translateY(-0.2rem) rotate(35deg);
 }
@@ -79,7 +79,37 @@ b -black
 .downsb {
   width: 1.5rem;
   height: 0.4rem;
-  background: var(--color-black);
+  background: var(--text-secondary);
   border-radius: 100px;
   transform: translateY(0.2rem) rotate(-35deg);
+}
+
+.block:hover .uplw,
+.block:hover .downlw,
+.block:hover .upsw,
+.block:hover .downsw {
+  background: var(--accent-blue);
+  transition: background var(--transition-fast);
+}
+
+.block:hover .uplb,
+.block:hover .downlb,
+.block:hover .upsb,
+.block:hover .downsb {
+  background: var(--accent-blue);
+  transition: background var(--transition-fast);
+}
+
+.open .uplw,
+.open .downlw,
+.open .upsw,
+.open .downsw {
+  background: var(--accent-blue);
+}
+
+.open .uplb,
+.open .downlb,
+.open .upsb,
+.open .downsb {
+  background: var(--accent-blue);
 }

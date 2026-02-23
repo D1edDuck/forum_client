@@ -1,44 +1,131 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { lazy } from "react";
 import Layout from "@/app/Layout/Layout";
-import HomePage from "@/features/Home/Page/HomePage";
-import CatalogPage from "@/features/catalog/Page/CatalogPage";
-import ProductPage from "@/pages/ProductPage";
-import ServicePage from "@/features/Service/Page/ServicePage";
-import BookingPage from "@/features/booking/Page/BookingPage";
-import FaqPage from "@/features/faq/FaqPage";
-import AboutPage from "@/pages/AboutPage";
-import NotFoundPage from "@/pages/NotFoundPage";
-import ProductCatalogPage from "@/features/products/Page/ProductCatalogPage";
-import ProfilePage from "@/app/Layout/ProfileLayout/ProfilePage";
-import FormAuthorization from "@/features/profile/UI/FormAuthorization/FormAuthorization";
-import FormRegistration from "@/features/profile/UI/FormRegistration/FormRegistration";
-import LoginLayout from "@/app/Layout/LoginLayout/LoginLayout";
 import ProtectedRoute from "./ProtectedRoute";
-import Repairs from "@/features/profile/repairs/UI/Repairs/Repairs";
-import PersonalAccount from "@/features/profile/UI/PersonalAccount/PersonalAccount";
 import PublicRoute from "./PublicRoute";
-import DateBase from "@/features/profile/dateBase/Page/DateBase/DateBase";
-import DbPage from "@/features/profile/dateBase/Page/DbPage/DbPage";
-import AddPage from "@/features/profile/dateBase/Page/AddPage/AddPage";
+import SuspenseWrapper from "./SuspenseWrapper";
+
+const HomePage = lazy(() => import("@/features/Home/Page/HomePage"));
+const CatalogPage = lazy(() => import("@/features/catalog/Page/CatalogPage"));
+const ProductPage = lazy(() => import("@/pages/ProductPage"));
+const ServicePage = lazy(() => import("@/features/Service/Page/ServicePage"));
+const BookingPage = lazy(() => import("@/features/booking/Page/BookingPage"));
+const FaqPage = lazy(() => import("@/features/faq/FaqPage"));
+const AboutPage = lazy(() => import("@/pages/About/AboutPage"));
+const ProductCatalogPage = lazy(
+  () => import("@/features/products/Page/ProductCatalogPage"),
+);
+const ProfilePage = lazy(
+  () => import("@/app/Layout/ProfileLayout/ProfilePage"),
+);
+const FormAuthorization = lazy(
+  () => import("@/features/profile/UI/FormAuthorization/FormAuthorization"),
+);
+const FormRegistration = lazy(
+  () => import("@/features/profile/UI/FormRegistration/FormRegistration"),
+);
+const LoginLayout = lazy(() => import("@/app/Layout/LoginLayout/LoginLayout"));
+const Repairs = lazy(
+  () => import("@/features/profile/repairs/UI/Repairs/Repairs"),
+);
+const PersonalAccount = lazy(
+  () => import("@/features/profile/UI/PersonalAccount/PersonalAccount"),
+);
+const DateBase = lazy(
+  () => import("@/features/profile/dateBase/Page/DateBase/DateBase"),
+);
+const DbPage = lazy(
+  () => import("@/features/profile/dateBase/Page/DbPage/DbPage"),
+);
+const AddPage = lazy(
+  () => import("@/features/profile/dateBase/Page/AddPage/AddPage"),
+);
+const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: "/catalog", element: <CatalogPage /> },
-      { path: "/catalog/:id/:slug", element: <ProductCatalogPage /> },
-      { path: "/product", element: <ProductPage /> },
-      { path: "/service/:name", element: <ServicePage /> },
-      { path: "/service", element: <ServicePage /> },
-      { path: "/booking", element: <BookingPage /> },
-      { path: "/FAQ", element: <FaqPage /> },
-      { path: "/about", element: <AboutPage /> },
+      {
+        index: true,
+        element: (
+          <SuspenseWrapper>
+            <HomePage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/catalog",
+        element: (
+          <SuspenseWrapper>
+            <CatalogPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/catalog/:id/:slug",
+        element: (
+          <SuspenseWrapper>
+            <ProductCatalogPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/product",
+        element: (
+          <SuspenseWrapper>
+            <ProductPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/service/:name",
+        element: (
+          <SuspenseWrapper>
+            <ServicePage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/service",
+        element: (
+          <SuspenseWrapper>
+            <ServicePage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/booking",
+        element: (
+          <SuspenseWrapper>
+            <BookingPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/FAQ",
+        element: (
+          <SuspenseWrapper>
+            <FaqPage />
+          </SuspenseWrapper>
+        ),
+      },
+      {
+        path: "/about",
+        element: (
+          <SuspenseWrapper>
+            <AboutPage />
+          </SuspenseWrapper>
+        ),
+      },
       {
         path: "/profile",
         element: (
           <ProtectedRoute>
-            <ProfilePage />
+            <SuspenseWrapper>
+              <ProfilePage />
+            </SuspenseWrapper>
           </ProtectedRoute>
         ),
         children: [
@@ -48,30 +135,70 @@ const router = createBrowserRouter([
           },
           {
             path: "repairs",
-            element: <Repairs />,
+            element: (
+              <SuspenseWrapper>
+                <Repairs />
+              </SuspenseWrapper>
+            ),
           },
           {
             path: "me",
-            element: <PersonalAccount />,
+            element: (
+              <SuspenseWrapper>
+                <PersonalAccount />
+              </SuspenseWrapper>
+            ),
           },
           {
             path: "datebase",
-            element: <DateBase />,
+            element: (
+              <SuspenseWrapper>
+                <DateBase />
+              </SuspenseWrapper>
+            ),
           },
-          { path: "add/:type", element: <AddPage /> },
-          { path: "datebase/:type", element: <DbPage /> },
+          {
+            path: "add/:type",
+            element: (
+              <SuspenseWrapper>
+                <AddPage />
+              </SuspenseWrapper>
+            ),
+          },
+          {
+            path: "datebase/:type",
+            element: (
+              <SuspenseWrapper>
+                <DbPage />
+              </SuspenseWrapper>
+            ),
+          },
         ],
       },
-      { path: "*", element: <NotFoundPage /> },
+      {
+        path: "*",
+        element: (
+          <SuspenseWrapper>
+            <NotFoundPage />
+          </SuspenseWrapper>
+        ),
+      },
+
       {
         path: "/",
-        element: <LoginLayout />,
+        element: (
+          <SuspenseWrapper>
+            <LoginLayout />
+          </SuspenseWrapper>
+        ),
         children: [
           {
             path: "registration",
             element: (
               <PublicRoute>
-                <FormRegistration />
+                <SuspenseWrapper>
+                  <FormRegistration />
+                </SuspenseWrapper>
               </PublicRoute>
             ),
           },
@@ -79,7 +206,9 @@ const router = createBrowserRouter([
             path: "login",
             element: (
               <PublicRoute>
-                <FormAuthorization />
+                <SuspenseWrapper>
+                  <FormAuthorization />
+                </SuspenseWrapper>
               </PublicRoute>
             ),
           },

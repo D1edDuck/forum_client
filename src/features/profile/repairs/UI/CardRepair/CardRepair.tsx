@@ -14,7 +14,7 @@ const CardRepair = (rep: IRepair) => {
   const { open, ref, toggle } = useOpenFilter();
   const role = useAppSelector((state) => state.user.user?.role);
   const dispatch = useAppDispatch();
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const getStatusClass = (status: string) => {
     switch (status.toLowerCase()) {
@@ -42,14 +42,14 @@ const CardRepair = (rep: IRepair) => {
 
   return (
     <div className={s.card}>
-      <div className={s.title} onClick={() => setHidden((prev) => !prev)}>
+      <div className={s.title} onClick={() => setHidden(!hidden)}>
         <span>Заявка #{rep.id}</span>
         <div className={s.arr}>
-          <Arrow color="b" size="s" open={hidden} />
+          <Arrow color="b" size="s" open={!hidden} />
         </div>
       </div>
 
-      <div className={`${s.grid} ${hidden ? s.open : s.closed}`}>
+      <div className={`${s.grid} ${!hidden ? s.open : s.closed}`}>
         {role === "admin" && (
           <>
             <span className={s.key}>Имя клиента</span>
@@ -65,16 +65,14 @@ const CardRepair = (rep: IRepair) => {
 
         <span className={s.key}>Причина</span>
         <span className={s.value}>
-          {causes.find((c) => c.value === rep.cause)?.text}
+          {causes.find((c) => c.value === rep.cause)?.text || rep.cause}
         </span>
 
         <span className={s.key}>Комментарий</span>
-        <span className={s.value}>{rep.comment}</span>
+        <span className={s.value}>{rep.comment || "Нет комментария"}</span>
 
         <span className={s.key}>Дата</span>
         <span className={s.value}>{formatDate(rep.created_at)}</span>
-
-        <div className={s.hr}></div>
       </div>
 
       <div className={s.statusContainer}>
@@ -96,24 +94,27 @@ const CardRepair = (rep: IRepair) => {
               </span>
             </span>
             {open && (
-              <FilterForm
-                key={`filter-${rep.id}`}
-                formKey={rep.id}
-                variant="left"
-                inputs={status.map((st) => ({
-                  type: "radio",
-                  id: `${st.value}-${rep.id}`,
-                  name: `status`,
-                  label: st.label,
-                  value: st.value,
-                }))}
-                defaultValue={rep.status}
-                tittleBtn="Изменить"
-                patch={true}
-                onSubmit={(data) => {
-                  dispatch(editStatus({ id: rep.id, status: data.status! }));
-                }}
-              />
+              <div className={s.cardForm}>
+                <FilterForm
+                  key={`filter-${rep.id}`}
+                  formKey={rep.id}
+                  variant="right"
+                  inputs={status.map((st) => ({
+                    type: "radio",
+                    id: `${st.value}-${rep.id}`,
+                    name: `status`,
+                    label: st.label,
+                    value: st.value,
+                  }))}
+                  defaultValue={rep.status}
+                  tittleBtn="Изменить"
+                  patch={true}
+                  onSubmit={(data) => {
+                    dispatch(editStatus({ id: rep.id, status: data.status! }));
+                    toggle();
+                  }}
+                />
+              </div>
             )}
           </div>
         )}

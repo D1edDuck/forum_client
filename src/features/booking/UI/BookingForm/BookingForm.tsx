@@ -24,11 +24,12 @@ const BookingForm = ({ user }: IProps) => {
           </Link>
         </div>
       )}
+
       <form
         className={`${s.form} ${!user?.id ? s.filter : ""}`}
         onSubmit={onSubmit}
       >
-        <div className="dlex05">
+        <div>
           <label htmlFor="cause">Причина обращения</label>
           <select
             id="cause"
@@ -41,15 +42,18 @@ const BookingForm = ({ user }: IProps) => {
             }}
             value={urlCause || cause}
           >
-            {causes.map((c) => (
-              <option value={c.value} disabled={c.disabled}>
+            <option value="" disabled>
+              Выберите причину обращения
+            </option>
+            {causes.map((c, index) => (
+              <option key={index} value={c.value} disabled={c.disabled}>
                 {c.text}
               </option>
             ))}
           </select>
         </div>
 
-        <div className="dlex05">
+        <div>
           <label htmlFor="comment">Комментарий</label>
           <textarea
             name="text"
@@ -58,10 +62,10 @@ const BookingForm = ({ user }: IProps) => {
             className={`${s.input} ${s.area}`}
             value={comment}
             onChange={(e) => setValue("comment", e.target.value)}
-          ></textarea>
+          />
         </div>
 
-        <button className={s.button} disabled={!user?.id}>
+        <button className={s.button} type="submit" disabled={!user?.id}>
           Отправить заявку
         </button>
       </form>

@@ -6,9 +6,8 @@ import { openModal } from "@/UI/Modal/modalSlice";
 
 export const useInputForm = (
   onSubmit: (data: IFilterData) => void,
-  variant: "left" | "right",
   toggle?: () => void,
-  patch?: boolean
+  patch?: boolean,
 ) => {
   const formData = useAppSelector((state) => state.repair.formValue);
   const formPatch = useAppSelector((state) => state.repair.formValuePatch);
@@ -16,7 +15,7 @@ export const useInputForm = (
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    patch: boolean | undefined
+    patch: boolean | undefined,
   ) => {
     const { name, value } = e.target;
     if (patch) {
@@ -26,7 +25,7 @@ export const useInputForm = (
         setValue({
           field: name,
           value: value,
-        })
+        }),
       );
     }
   };
@@ -36,13 +35,13 @@ export const useInputForm = (
     e.preventDefault();
     if (onSubmit) {
       onSubmit(data);
-      if (variant == "left")
+      if (patch)
         dispatch(
           openModal({
             status: "fulfilled",
             text: `Статус заявки успешно изменен`,
             tittle: "Успешно",
-          })
+          }),
         );
     }
     if (toggle) toggle();

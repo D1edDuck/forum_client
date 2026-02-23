@@ -1,56 +1,135 @@
+import { useEffect, useRef } from "react";
 import ButtonConnect from "../../../UI/ButtonConnect/ButtonConnect";
 import ServiceCard from "../../Service/ServiceCard/ServiceCard";
 import s from "./index.module.css";
 
-const service = {
+export interface ServiceInfo {
+  name: string;
+  path: string;
+  description: string;
+  image: string;
+  icon: string;
+  stats: string;
+}
+
+const service: ServiceInfo = {
   name: "Сервис",
   path: "service/repair",
-  description: "текст про наш сервис",
+  description: "Профессиональный ремонт любой сложности",
   image: "/img/card-1.png",
+  icon: "🔧",
+  stats: "1500+ ремонтов",
 };
-const booking = {
+
+const booking: ServiceInfo = {
   name: "Запись",
   path: "booking",
-  description: "текст про наш сервис",
+  description: "Удобная онлайн-запись на ремонт",
   image: "/img/card-2.png",
+  icon: "📅",
+  stats: "24/7 бронирование",
 };
-const catalog = {
+
+const catalog: ServiceInfo = {
   name: "Каталог",
   path: "catalog",
-  description: "текст про наш сервис",
+  description: "Комплектующие и периферия",
   image: "/img/card-3.png",
+  icon: "📦",
+  stats: "5000+ товаров",
 };
-const about = {
+
+const about: ServiceInfo = {
   name: "О нас",
   path: "about",
-  description: "текст про наш сервис",
+  description: "15 лет опыта и 5000+ клиентов",
   image: "/img/card-4.png",
+  icon: "⭐",
+  stats: "98% довольных",
 };
 
 const ListServiceHome = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(s.visible);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={s.section}>
-      <div className="container pb mb">
-        <h2 className={s.title}>Список наших услуг</h2>
+    <section ref={sectionRef} className={s.section}>
+      <div className={s.decorDot} />
+      <div className={s.decorDot} />
+
+      <div className="container">
+        <h2 className={s.title}>Наши услуги</h2>
+
         <div className={`grid ${s.gridCart}`}>
           <ServiceCard info={service} />
           <ServiceCard info={booking} />
           <ServiceCard info={catalog} />
           <ServiceCard info={about} />
         </div>
+
+        <div className={s.stats}>
+          <div className={s.statItem}>
+            <div className={s.statValue}>15+</div>
+            <div className={s.statLabel}>лет опыта</div>
+          </div>
+          <div className={s.statItem}>
+            <div className={s.statValue}>5000+</div>
+            <div className={s.statLabel}>клиентов</div>
+          </div>
+          <div className={s.statItem}>
+            <div className={s.statValue}>98%</div>
+            <div className={s.statLabel}>довольных</div>
+          </div>
+        </div>
+
+        <div className={s.divider} />
+
         <div className={`grid aic ${s.grid}`}>
           <div className={s.glass}>
             <p className={s.text}>
-              Обращаясь в наш сервисный центр, вы можете быть уверенны в
-              успешном восстановлении работоспособности вашего ноутбука или
-              компьютера.
+              Обращаясь в наш сервисный центр, вы можете быть уверены в успешном
+              восстановлении работоспособности вашего ноутбука или компьютера.
+              Гарантия на все виды работ до 3 лет.
             </p>
           </div>
-          <p className={s.text}>Есть вопросы?</p>
+
+          <p className={s.text}>
+            Есть вопросы?
+            <br />
+            <span
+              style={{
+                color: "var(--accent-blue)",
+                fontSize: "2.4rem",
+                fontWeight: 700,
+              }}
+            >
+              Спросите нас!
+            </span>
+          </p>
+
           <ButtonConnect title="Связаться с нами" primary="soft" />
         </div>
       </div>
     </section>
   );
 };
+
 export default ListServiceHome;

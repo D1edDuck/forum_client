@@ -27,20 +27,20 @@ const FilterBar = ({ title, products, variant }: IProps) => {
 
   return (
     <div className={s.block} ref={ref}>
-      <div className={s.filter}>
-        <button
-          type="button"
-          className="flex gap items-center"
-          onClick={toggle}
-        >
+      <div className={`${s.filter} ${open ? s.open : ""}`} onClick={toggle}>
+        <button type="button">
           <span>{title}</span>
           <span className={s.arr}>
             <Arrow color="w" size="s" open={open} />
           </span>
         </button>
-
-        {open && <FilterForm toggle={toggle} names={names} variant={variant} />}
       </div>
+
+      {open && (
+        <div className={s.formContainer}>
+          <FilterForm toggle={toggle} names={names} variant={variant} />
+        </div>
+      )}
     </div>
   );
 };

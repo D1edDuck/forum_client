@@ -16,7 +16,11 @@ const FilterForm = ({ toggle, names, variant }: IProps) => {
   return (
     <div className={s.form}>
       <ul className={s.ul}>
-        {names.length === 0 && <li className={s.item}>Нет опций</li>}
+        {names.length === 0 && (
+          <li className={s.item}>
+            <span className={s.text}>Нет опций</span>
+          </li>
+        )}
 
         {names.map((name, idx) => {
           const safeId = `filter-${variant}-${idx}`;

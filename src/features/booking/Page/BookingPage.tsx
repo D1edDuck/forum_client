@@ -8,12 +8,14 @@ const BookingPage = () => {
   const user = useAppSelector((state) => state.user.user);
 
   return (
-    <div className="container mb pb">
-      <NavigateLine />
-      <h2 className="title">Оставить заявку на услугу</h2>
-      <div className={s.BookingPage}>
-        <BookingForm user={user} />
-        <Contacts />
+    <div className={s.page}>
+      <div className={s.container}>
+        <NavigateLine />
+        <h1 className={s.title}>Оставить заявку на услугу</h1>
+        <div className={s.bookingPage}>
+          <BookingForm user={user} />
+          <Contacts />
+        </div>
       </div>
     </div>
   );

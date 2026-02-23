@@ -1,26 +1,289 @@
 .btn_connect {
-  color: var(--color-white);
-  font-size: var(--size-20);
+  position: relative;
+  padding: 1.4rem 3.2rem;
+  border: none;
+  border-radius: 100px;
+  font-size: 1.6rem;
   font-weight: 600;
-  padding-inline: 5rem;
-  background-color: var(--color-blue);
-}
-.btn_connect :hover {
-  transform: translateY(-0.4rem);
-  box-shadow: 0 12px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.btn_connect :active {
-  transform: translateY(-0.2rem);
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
-}
-
-.soft {
-  border-radius: 5rem;
-  padding-block: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  isolation: isolate;
+  white-space: nowrap;
+  min-width: 180px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .hard {
-  border-radius: var(--radius-15);
-  padding-block: 1rem;
+  background: var(--gradient-telegram);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.hard::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s ease,
+    height 0.6s ease;
+  z-index: -1;
+}
+
+.hard:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.hard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.hard:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.soft {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.soft::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-telegram);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: -1;
+}
+
+.soft:hover {
+  border-color: transparent;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.soft:hover::before {
+  opacity: 1;
+}
+
+.soft:active {
+  transform: translateY(0);
+}
+
+.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.loading .spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+  margin-right: 0.8rem;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.btn_connect:hover .icon {
+  transform: translateX(3px) scale(1.1);
+}
+
+.small {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  min-width: 140px;
+}
+
+.large {
+  padding: 1.8rem 4rem;
+  font-size: 1.8rem;
+  min-width: 220px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--accent-blue);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(43, 107, 255, 0.2);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.gradientBorder {
+  position: relative;
+  background: transparent;
+  border: none;
+  z-index: 1;
+}
+
+.gradientBorder::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-telegram);
+  border-radius: 102px;
+  z-index: -1;
+}
+
+.gradientBorder::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-tertiary);
+  border-radius: 100px;
+  z-index: -1;
+  transition: opacity var(--transition-fast);
+}
+
+.gradientBorder:hover::after {
+  opacity: 0;
+}
+
+.gradientBorder:hover {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .btn_connect {
+    padding: 1.2rem 2.4rem;
+    font-size: 1.5rem;
+    min-width: 160px;
+  }
+
+  .small {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.3rem;
+    min-width: 120px;
+  }
+
+  .large {
+    padding: 1.5rem 3rem;
+    font-size: 1.6rem;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn_connect {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    min-width: 140px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .soft {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .soft:hover {
+    background: transparent;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn_connect {
+  animation: slideIn 0.3s ease;
+}
+
+.btn_connect:disabled,
+.btn_connect.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.iconLeft {
+  flex-direction: row-reverse;
+}
+
+.iconLeft .icon {
+  margin-right: 0;
+  margin-left: 0.5rem;
 }

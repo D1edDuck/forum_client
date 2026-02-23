@@ -54,13 +54,15 @@ const DateBase = () => {
             <p className={s.count}>{count}</p>
           </div>
 
-          <div className={s.hr} />
+          <hr className={s.hr} />
 
           <div className={s.more}>
             <div>
               <Link to={link} className={s.link}>
                 <span>Подробнее</span>
-                <Arrow color="w" size="s" open={false} />
+                <div className={s.arr}>
+                  <Arrow color="w" size="s" open={false} />
+                </div>
               </Link>
             </div>
 

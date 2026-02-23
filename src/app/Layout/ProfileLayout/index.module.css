@@ -1,12 +1,170 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 2rem 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(43, 107, 255, 0.03) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.03) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: 3.6rem;
+  font-weight: 800;
+  margin: 3rem 0 4rem;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100px;
+  height: 4px;
+  background: var(--gradient-telegram);
+  border-radius: 2px;
+}
+
 .flex {
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 2rem;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
   position: relative;
 }
 
+/* Анимация появления */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.flex > *:first-child {
+  animation: slideInLeft 0.4s ease forwards;
+}
+
+.flex > *:last-child {
+  animation: slideInRight 0.4s ease 0.2s forwards;
+  opacity: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .title {
+    font-size: 3.2rem;
+  }
+
+  .flex {
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .title::after {
+    width: 80px;
+    height: 3px;
+    bottom: -0.8rem;
+  }
+
   .flex {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .flex > *:last-child {
+    animation: slideInRight 0.4s ease forwards;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .title::after {
+    width: 60px;
+    height: 2px;
+  }
+
+  .flex {
+    gap: 1.5rem;
   }
 }

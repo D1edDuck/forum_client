@@ -13,7 +13,7 @@ const ServicePage = () => {
 
   const selected: ServiceI | undefined = useMemo(
     () => services.find((item) => item.name === name),
-    [name]
+    [name],
   );
 
   if (!selected) {
@@ -29,10 +29,12 @@ const ServicePage = () => {
   }
 
   return (
-    <section>
-      <div className={`container ${s.serviceFlex} pb`}>
+    <section className={s.serviceFlex}>
+      <div className={`container dlex mb pb`}>
         <NavigateLine />
+        <p className={s.title}>Список наших услуг</p>
         <NavigateTabs />
+
         <div className={s.flex}>
           {selected.info.map((item) => (
             <ServiceBlock key={item.title} data={item} path={item.cause} />

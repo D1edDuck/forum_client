@@ -10,17 +10,24 @@ interface IProps {
 const FilterPrice = ({ title }: IProps) => {
   const { open, toggle, ref } = useOpenFilter();
 
+  const handleFormClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className={s.block} ref={ref}>
-      <div className={s.filter}>
-        <div className="flex gap" onClick={toggle}>
-          <p>{title}</p>
-          <div className={s.arr}>
-            <Arrow color="w" size="s" open={open} />
-          </div>
+      <div className={`${s.filter} ${open ? s.open : ""}`} onClick={toggle}>
+        <span>{title}</span>
+        <div className={s.arr}>
+          <Arrow size="s" color="w" open={open} />
         </div>
-        {open && <PriceForm onSubmit={toggle} />}
       </div>
+
+      {open && (
+        <div className={s.formContainer} onClick={handleFormClick}>
+          <PriceForm onSubmit={toggle} />
+        </div>
+      )}
     </div>
   );
 };

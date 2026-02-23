@@ -1,23 +1,271 @@
+/* index.module.css */
+
+.menu {
+  padding: 2rem 0;
+  position: relative;
+  z-index: 1;
+}
+
 .title {
-  font-size: var(--size-32);
+  font-size: 2.8rem;
   font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-telegram);
+  border-radius: 2px;
+}
+
+.count {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid var(--border-primary);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.flex {
+  position: relative;
+  z-index: 2; /* Увеличил с -1 до 2 */
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin: 3rem 0;
+  position: relative;
+  z-index: 2; /* Добавил z-index */
 }
 
-.count {
-  font-size: var(--size-16);
-  opacity: 70%;
+/* Стили для форм фильтров - они должны быть выше */
+:global(.formContainer) {
+  z-index: 9999 !important;
 }
 
-.find {
-  font-size: var(--size-20);
+:global(.filterForm) {
+  z-index: 10000 !important;
+}
+
+/* На мобилках когда форма фиксированная */
+@media (max-width: 1150px) {
+  :global(.formContainer) {
+    z-index: 100 !important; /* Чуть выше контента */
+  }
+}
+
+@media (max-width: 480px) {
+  :global(.formContainer) {
+    z-index: 99999 !important; /* Максимальный на мобилках */
+  }
 }
 
 .list {
-  font-size: var(--size-24);
+  text-align: center;
+  padding: 6rem 2rem;
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.list::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(43, 107, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  margin: 3rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--border-primary);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 2rem;
+}
+
+.loader p {
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid > * {
+  animation: slideUp 0.4s ease forwards;
+  opacity: 0;
+}
+
+.grid > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.grid > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.grid > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.grid > *:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.grid > *:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.grid > *:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.grid > *:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.grid > *:nth-child(8) {
+  animation-delay: 0.4s;
+}
+.grid > *:nth-child(9) {
+  animation-delay: 0.45s;
+}
+.grid > *:nth-child(10) {
+  animation-delay: 0.5s;
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .count {
+    margin-left: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .list {
+    padding: 4rem 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .loader {
+    padding: 4rem 1.5rem;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .title::after {
+    width: 40px;
+    height: 2px;
+    bottom: -0.8rem;
+  }
+
+  .count {
+    font-size: 1.3rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .list {
+    padding: 3rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .loader p {
+    font-size: 1.4rem;
+  }
 }

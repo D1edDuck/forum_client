@@ -1,6 +1,7 @@
 import s from "./index.module.css";
 import ButtonLink from "../../../../UI/ButtonLink/ButtonLink";
 import { IProduct } from "@/api/type";
+
 interface Props {
   product: IProduct;
 }
@@ -27,7 +28,7 @@ const ProductCard = ({ product }: Props) => {
           <br />В наличии {product.stock}
         </p>
       </div>
-      <ButtonLink title="О товаре" variant="aboutProduct" />
+      <ButtonLink title="О товаре" variant="secondary" size="medium" />
     </article>
   );
 };

@@ -13,7 +13,7 @@ const LinkCategory = ({ cat }: IProps) => {
       <div>{cat.name}</div>
       <div className={s.arr}>
         <Link to={`${cat.id}/${cat.slug}`}>
-          {<Arrow color="w" size="l" open={false} />}
+          <Arrow color="w" size="l" open={false} />
         </Link>
       </div>
     </div>

@@ -5,8 +5,8 @@ const CatalogService = () => {
   const boxCommon = `${s.box}`;
 
   return (
-    <section>
-      <div className={`container pb mb`}>
+    <section className={s.section}>
+      <div className="container pb mb">
         <h2 className={s.title}>Каталог товаров</h2>
         <div className={s.grid}>
           <Link to={"/catalog/1/computers"}>

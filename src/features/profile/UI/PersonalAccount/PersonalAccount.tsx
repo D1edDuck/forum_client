@@ -7,7 +7,11 @@ const PersonalAccount = () => {
     useEditAccount();
 
   if (!user) {
-    return <p>Вы не авторизированны</p>;
+    return (
+      <div className={s.block}>
+        <p className={s.info}>Вы не авторизованы</p>
+      </div>
+    );
   }
 
   return (
@@ -22,23 +26,25 @@ const PersonalAccount = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Введите имя и фамилию"
           />
         ) : (
-          <p className={s.info}>{user.name}</p>
+          <p className={s.info}>{user.name || "Не указано"}</p>
         )}
 
         <hr className={s.hr} />
         <p>Номер телефона</p>
         {edit ? (
           <input
-            type="text"
+            type="tel"
             className={s.input}
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            placeholder="Введите номер телефона"
           />
         ) : (
-          <p className={s.info}>{user.phone}</p>
+          <p className={s.info}>{user.phone || "Не указано"}</p>
         )}
 
         <hr className={s.hr} />
@@ -50,9 +56,10 @@ const PersonalAccount = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Введите email"
           />
         ) : (
-          <p className={s.info}>{user.email}</p>
+          <p className={s.info}>{user.email || "Не указано"}</p>
         )}
       </div>
 

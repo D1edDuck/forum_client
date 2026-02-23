@@ -112,7 +112,6 @@ function Table<T extends { id: number }>({
                   onClick={() => handleEdit(row)}
                   aria-label={`Редактировать запись ${row.id}`}
                 >
-                  <span className={s.btnIcon}>✎</span>
                   Изменить
                 </button>
                 <button
@@ -120,7 +119,6 @@ function Table<T extends { id: number }>({
                   onClick={() => handleDelete?.(row.id)}
                   aria-label={`Удалить запись ${row.id}`}
                 >
-                  <span className={s.btnIcon}>🗑</span>
                   Удалить
                 </button>
               </td>

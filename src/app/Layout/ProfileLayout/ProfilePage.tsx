@@ -5,10 +5,10 @@ import s from "./index.module.css";
 
 const ProfilePage = () => {
   return (
-    <div>
-      <div className="container pb fled mb">
+    <div className={s.page}>
+      <div className={s.container}>
         <NavigateLine />
-        <h2 className="title">Личный кабинет</h2>
+        <h2 className={s.title}>Личный кабинет</h2>
         <div className={s.flex}>
           <SideBar />
           <Outlet />

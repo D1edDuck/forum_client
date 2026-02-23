@@ -1,42 +1,38 @@
+import { Link } from "react-router-dom";
 import s from "./index.module.css";
-import ButtonLink from "../../../UI/ButtonLink/ButtonLink";
+import { ServiceInfo } from "@/features/Home/ListServiceHome/ListServiceHome";
 
-interface IInfo {
-  path: string;
-  name: string;
-  description: string;
-  image?: string;
-}
-
-interface IProps {
-  info: IInfo;
-}
-
-const ServiceCard = ({ info }: IProps) => {
-  const { path, name, description, image } = info;
+const ServiceCard = ({ info }: { info: ServiceInfo }) => {
   return (
-    <article className={s.card} tabIndex={0} aria-labelledby={`title-${path}`}>
-      <div className={s.media}>
-        <img
-          className={s.image}
-          src={
-            image ??
-            "https://avatars.mds.yandex.net/i?id=125a409c6a33eb90e3edb2543a912fd2838481b8-16307997-images-thumbs&n=13"
-          }
-          alt={name}
-          loading="lazy"
-        />
+    <Link to={`/${info.path}`} className={s.card}>
+      <div className={s.imageWrapper}>
+        <img src={info.image} alt={info.name} className={s.image} />
+        <div className={s.overlay}>
+          <span className={s.icon}>{info.icon}</span>
+        </div>
       </div>
 
       <div className={s.content}>
-        <h3 id={`title-${path}`} className={s.title}>
-          {name}
-        </h3>
-        <p className={s.desc}>{description}</p>
-
-        <ButtonLink path={path} title={name} variant="blue_small" />
+        <h3 className={s.title}>{info.name}</h3>
+        <p className={s.description}>{info.description}</p>
+        {info.stats && (
+          <div className={s.stats}>
+            <span>{info.stats}</span>
+          </div>
+        )}
       </div>
-    </article>
+
+      <div className={s.arrow}>
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M5 12h14M12 5l7 7-7 7"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+          />
+        </svg>
+      </div>
+    </Link>
   );
 };
 

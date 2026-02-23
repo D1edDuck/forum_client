@@ -1,48 +1,178 @@
+/* index.module.css */
+
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
-  font-size: var(--size-16);
-  font-weight: 600;
-  gap: 1rem;
-  background: #fff;
-  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-15);
   overflow: hidden;
+  transition: all var(--transition-normal);
+  height: 100%;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-telegram);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+  transform-origin: left;
+  z-index: 2;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
 }
 
 .img {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 1;
   object-fit: cover;
-  background: #f4f4f4;
-  border-radius: 2rem;
-  border: 1px solid var(--color-blue);
+  background: var(--bg-tertiary);
+  transition: transform var(--transition-normal);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.card:hover .img {
+  transform: scale(1.05);
 }
 
 .content {
+  padding: 2rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  flex: 1 1 auto;
-}
-
-.desc {
-  margin: 0;
-  color: #333;
-  font-weight: 400;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: 1rem;
 }
 
 .price {
-  font-size: var(--size-24);
+  font-size: 2.4rem;
   font-weight: 700;
+  color: var(--accent-blue);
   margin: 0;
+  line-height: 1.2;
+}
+
+.desc {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.desc br {
+  display: none;
+}
+
+.card :global(.btn-link) {
+  margin: 0 2rem 2rem 2rem;
+  width: calc(100% - 4rem);
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  transition: all var(--transition-fast);
+}
+
+.card :global(.btn-link):hover {
+  background: var(--gradient-telegram);
+  border-color: transparent;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@media (max-width: 1200px) {
+  .price {
+    font-size: 2.2rem;
+  }
+
+  .desc {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .content {
+    padding: 1.8rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .card :global(.btn-link) {
+    margin: 0 1.8rem 1.8rem 1.8rem;
+    width: calc(100% - 3.6rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 1.5rem;
+  }
+
+  .price {
+    font-size: 1.8rem;
+  }
+
+  .desc {
+    font-size: 1.3rem;
+  }
+
+  .card :global(.btn-link) {
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    width: calc(100% - 3rem);
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .desc {
+    font-size: 1.2rem;
+  }
+
+  .card :global(.btn-link) {
+    margin: 0 1.2rem 1.2rem 1.2rem;
+    width: calc(100% - 2.4rem);
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
 }

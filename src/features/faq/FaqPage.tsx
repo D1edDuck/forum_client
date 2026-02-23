@@ -11,45 +11,46 @@ const question = [
 ];
 
 const answer = [
-  "Диагностика бесплатная. Приносите свою технику и мы предложим варианты ремонта",
-  "Ваши данные мы оставляем при переустановках ПО на накопительные диски. Мы отвечаем за сохранность и конфиденциальность",
-  "Компьютер - приносите Ваш системный блок и на этом достаточно, все подключим и проверем. Ноутбук - протрите его снаружи тряпкой от пыли и грязи, приносите с собой зарядное устройство",
-  "Мы принимаем оплату как наличкой, банковскими картами так и переводом",
-  "Работаем с оригинальными и проверенными аналогами. Оригинал дороже, но имеет свою гарантию; аналог — чуть дешевле, но тоже проверен нами. Перед заменой мы согласуем вариант и стоимость с вами.",
+  "Диагностика бесплатная. Приносите свою технику и мы предложим варианты ремонта. В случае согласия на ремонт, стоимость диагностики включается в общую стоимость работ.",
+  "Ваши данные мы сохраняем при переустановках ПО на накопительные диски. Мы гарантируем полную сохранность и конфиденциальность ваших данных. При необходимости можем сделать резервную копию.",
+  "Компьютер - приносите ваш системный блок и этого достаточно, все подключим и проверим. Ноутбук - протрите его снаружи от пыли и грязи, обязательно приносите с собой зарядное устройство.",
+  "Мы принимаем оплату наличными, банковскими картами (Visa, MasterCard, МИР), а также переводом на карту. Для юридических лиц предоставляем все закрывающие документы.",
+  "Работаем с оригинальными и проверенными аналогами. Оригинал дороже, но имеет официальную гарантию; аналог — чуть дешевле, но тоже проверен нашими специалистами. Перед заменой мы обязательно согласуем вариант и стоимость с вами.",
 ];
 
 const FaqPage = () => {
   const [ans, setAns] = useState<number | null>(null);
 
   return (
-    <div className="container pb mp dlex gap">
-      <NavigateLine />
-      <h3 className={s.tittle}>Вопросы & Ответы</h3>
-      <div className={s.box}>
-        <div className={s.hr}></div>
-        {question.map((q, i) => (
-          <>
-            <div className={s.block}>
-              <span className={s.quest}>{q}</span>
-              <button
-                className={`${s.close} ${i === ans ? s.active : ""}`}
-                aria-expanded={i === ans}
-                aria-controls={`faq-answer-${i}`}
-                onClick={() => (ans === i ? setAns(null) : setAns(i))}
-              />
+    <div className={s.page}>
+      <div className={"container"}>
+        <NavigateLine />
+        <h3 className={s.tittle}>Вопросы & Ответы</h3>
+        <div className={s.box}>
+          <div className={s.hr}></div>
+          {question.map((q, i) => (
+            <div key={i}>
+              <div className={s.block}>
+                <span className={s.quest}>{q}</span>
+                <button
+                  className={`${s.close} ${i === ans ? s.active : ""}`}
+                  aria-expanded={i === ans}
+                  aria-controls={`faq-answer-${i}`}
+                  onClick={() => (ans === i ? setAns(null) : setAns(i))}
+                />
+              </div>
+              <div
+                id={`faq-answer-${i}`}
+                className={`${s.ans} ${i === ans ? s.open : s.closed}`}
+                role="region"
+                aria-hidden={i === ans ? "false" : "true"}
+              >
+                {answer[i]}
+              </div>
+              <div className={s.hr}></div>
             </div>
-            <div
-              id={`faq-answer-${i}`}
-              className={`${s.ans} ${i === ans ? s.open : s.closed}`}
-              role="region"
-              aria-hidden={i === ans ? "false" : "true"}
-            >
-              {answer[i]}
-            </div>
-
-            <div className={s.hr}></div>
-          </>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

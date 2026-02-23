@@ -4,8 +4,8 @@ import s from "./index.module.css";
 
 const LoginLayout = () => {
   return (
-    <div>
-      <div className="container mb pb">
+    <div className={s.page}>
+      <div className={s.container}>
         <NavigateLine />
         <h2 className={s.title}>Личный кабинет</h2>
         <div className={s.block}>
@@ -13,7 +13,7 @@ const LoginLayout = () => {
             <Outlet />
           </div>
           <div className={s.right}>
-            <p className={s.forum}>Форум</p>
+            <p className={s.forum}>Форум.ру</p>
             <p className={s.service}>Сервисный центр</p>
           </div>
         </div>

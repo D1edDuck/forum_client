@@ -54,7 +54,7 @@ const SideBar = () => {
   if (!user) return <p>Вы не авторизированны</p>;
 
   return (
-    <div className={`${s.card} ${s.border}`}>
+    <div className={s.card}>
       <div className={s.userHeader}>
         <div className={s.avatar}>{getInitials(user.name as string)}</div>
         <div className={s.userInfo}>

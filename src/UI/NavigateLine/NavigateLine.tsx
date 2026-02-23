@@ -11,7 +11,7 @@ const NavigateLine: React.FC = () => {
     const numeric = /^\d+$/.test(seg);
     const uuid =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-        seg
+        seg,
       );
     return numeric || uuid;
   };
@@ -25,7 +25,7 @@ const NavigateLine: React.FC = () => {
 
   return (
     <div className={`flex gap ${s.navigate}`}>
-      <Link to="/">Home</Link>
+      <Link to="/">Главная</Link>
 
       {segments.map((seg, i) => {
         const path = "/" + segments.slice(0, i + 1).join("/");

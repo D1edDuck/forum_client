@@ -1,16 +1,15 @@
 import s from "./index.module.css";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const Loader = () => {
-  const { isLoading, text } = useAppSelector((state) => state.loading);
-
-  if (!isLoading) return null;
-
   return (
     <div className={s.overlay}>
       <div className={s.loader}>
-        <div className={s.spinner}></div>
-        <span className={s.text}>{text}</span>
+        <div className={s.spinner} />
+        <div className={s.logo}>Форум.ру</div>
+        <div className={s.progress}>
+          <div className={s.progressBar} />
+        </div>
+        <div className={s.text}>Загрузка...</div>
       </div>
     </div>
   );

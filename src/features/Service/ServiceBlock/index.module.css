@@ -1,79 +1,185 @@
 .cardBlock {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  padding: 3rem;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-20);
-  font-size: var(--size-16);
-  width: 38rem;
-  flex-shrink: 0;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background-color: var(--color-white);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+}
+
+.cardBlock::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-telegram);
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+  transform-origin: left;
+}
+
+.cardBlock:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardBlock:hover::before {
+  transform: scaleX(1);
+}
+
+.titleBlock {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.titleBlock::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-telegram);
+  border-radius: 2px;
 }
 
 .text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-20);
+  flex: 1;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.imgBlock {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-15);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-primary);
+  transition: all var(--transition-normal);
+}
+
+.cardBlock:hover .imgBlock {
+  border-color: var(--accent-blue);
+  transform: scale(1.02);
+}
+
+.text p {
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.text p::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .btn {
   margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  justify-content: flex-end;
 }
 
-.cardBlock:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+.btn :global(.btn-link) {
+  min-width: 180px;
 }
 
-.titleBlock {
-  font-size: var(--size-24);
-  font-weight: 700;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.imgBlock {
-  border-radius: var(--radius-15);
-  width: 100%;
-  height: 24rem;
-  object-fit: cover;
-  background: var(--color-black);
+.cardBlock {
+  animation: fadeIn 0.5s ease forwards;
 }
 
-.cardBlock p {
-  line-height: 1.6;
-  color: #333;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
   .cardBlock {
-    width: 100%;
-    padding: 1.2rem;
-    gap: 1rem;
+    padding: 2.5rem;
   }
-  .imgBlock {
-    height: 20rem;
-  }
+
   .titleBlock {
-    font-size: 2rem;
+    font-size: 2.4rem;
+  }
+
+  .imgBlock {
+    height: 180px;
+  }
+
+  .text {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .cardBlock {
-    width: 100%;
-    padding: 1rem;
-    gap: 0.8rem;
+    padding: 2rem;
   }
-  .imgBlock {
-    height: 16rem;
-  }
+
   .titleBlock {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
   }
-  .cardBlock p {
+
+  .imgBlock {
+    height: 160px;
+  }
+
+  .text {
+    font-size: 1.4rem;
+  }
+
+  .btn :global(.btn-link) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBlock {
+    padding: 1.5rem;
+  }
+
+  .titleBlock {
+    font-size: 2rem;
+  }
+
+  .imgBlock {
+    height: 140px;
+  }
+
+  .text p {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .text p::before {
     font-size: 1.6rem;
   }
 }

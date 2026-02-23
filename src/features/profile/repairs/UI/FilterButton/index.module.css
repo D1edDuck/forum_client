@@ -1,20 +1,62 @@
 .btn {
-  background: var(--color-blue);
-  color: var(--color-white);
-  border-radius: var(--radius-15);
-  padding: 1rem 2rem;
   position: relative;
-  font-size: var(--size-16);
-  /* z-index: 80; */
+  width: fit-content;
 }
 
 .span {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 100px;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 1rem;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.span:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.span:hover .arr svg {
+  color: var(--accent-blue);
 }
 
 .arr {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  transition: transform var(--transition-normal);
+}
+
+.arr svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: currentColor;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+@media (max-width: 1150px) {
+  .btn {
+    width: 100%;
+  }
+
+  .span {
+    width: 100%;
+    justify-content: space-between;
+  }
 }

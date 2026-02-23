@@ -1,3 +1,133 @@
 .navigate {
-  font-size: var(--size-16);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+}
+
+.navigate a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.navigate a:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  background: rgba(43, 107, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.navigate a:first-child {
+  background: var(--gradient-telegram);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.8rem;
+}
+
+.navigate a:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.navigate span:not([aria-current]) {
+  color: var(--text-tertiary);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0 0.2rem;
+}
+
+.navigate span[aria-current="page"] {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 100px;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.navigate > * {
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.navigate > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.navigate > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.navigate > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.navigate > *:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.navigate > *:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.navigate > *:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.navigate > *:nth-child(7) {
+  animation-delay: 0.35s;
+}
+
+@media (max-width: 768px) {
+  .navigate {
+    padding: 1rem 0;
+    gap: 0.8rem;
+  }
+
+  .navigate a,
+  .navigate span[aria-current="page"] {
+    font-size: 1.4rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .navigate span:not([aria-current]) {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navigate {
+    gap: 0.5rem;
+  }
+
+  .navigate a,
+  .navigate span[aria-current="page"] {
+    font-size: 1.3rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .navigate span:not([aria-current]) {
+    font-size: 1.3rem;
+  }
 }

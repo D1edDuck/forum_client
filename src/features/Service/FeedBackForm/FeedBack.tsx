@@ -22,9 +22,13 @@ const FeedBack = () => {
         </div>
         <div className={s.mb}>
           <Link to={"/booking"}>
-            <ButtonLink title="Оставить заявку" variant="active" />
+            <ButtonLink
+              title="Оставить заявку"
+              variant="primary"
+              size="medium"
+            />
           </Link>
-          <ButtonLink title="Позвоните нам" variant="spooky" />
+          <ButtonLink title="Позвоните нам" variant="secondary" size="medium" />
         </div>
       </div>
     </div>

@@ -5,15 +5,15 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const TagsFilters = () => {
   const { brand, stock, minValue, maxValue, search } = useAppSelector(
-    (state: RootState) => state.filter
+    (state: RootState) => state.filter,
   );
 
   const renderStockTag = (name: string, i: number) => {
     const label =
       name === "Да" ? "В наличии" : name === "Нет" ? "Нет в наличии" : name;
     return (
-      <div key={i} className={s.tag}>
-        {label}
+      <div key={`stock-${i}`} className={`${s.tag} ${s.stock}`}>
+        <span>{label}</span>
       </div>
     );
   };
@@ -28,19 +28,32 @@ const TagsFilters = () => {
     return null;
 
   return (
-    <div className="flex gap">
+    <div className={s.container}>
       {brand.map((name, i) => (
-        <div key={`brand-${i}`} className={s.tag}>
-          {name}
+        <div key={`brand-${i}`} className={`${s.tag} ${s.brand}`}>
+          <span>{name}</span>
         </div>
       ))}
 
       {stock.map((name, i) => renderStockTag(name, i))}
 
-      {minValue !== 0 && <div className={s.tag}>{minValue} ₽</div>}
-      {maxValue !== 0 && <div className={s.tag}>{maxValue} ₽</div>}
+      {minValue !== 0 && (
+        <div className={`${s.tag} ${s.price}`}>
+          <span>от {minValue} ₽</span>
+        </div>
+      )}
 
-      {search !== "" && <div className={s.tag}>{search}</div>}
+      {maxValue !== 0 && (
+        <div className={`${s.tag} ${s.price}`}>
+          <span>до {maxValue} ₽</span>
+        </div>
+      )}
+
+      {search !== "" && (
+        <div className={`${s.tag} ${s.search}`}>
+          <span>Поиск: {search}</span>
+        </div>
+      )}
 
       <ResetFilters />
     </div>

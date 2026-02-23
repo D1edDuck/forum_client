@@ -13,22 +13,31 @@ const Footer = () => {
           <p>Суббота - Воскресенье</p>
           <p>9:30 - 15:00</p>
         </div>
+
         <div>
           <hr className={s.hr} />
         </div>
+
         <div>
-          <p className={s.accent}>
-            +7 (926) 36 4 42 04б <br /> +7 (925) 4 42 04 44{" "}
+          <p className={s.accent}>+7 (926) 364 42 04</p>
+          <p>+7 (925) 442 04 44</p>
+          <p className={s.accent} style={{ marginTop: "2rem" }}>
+            Адрес
           </p>
-          <p>Россия, г. Волоколамск, ул.Парковая, дом 15 </p>
-          <p>forumcom@bk.ru </p>
+          <p>Россия, г. Волоколамск</p>
+          <p>ул. Парковая, дом 15</p>
+          <p className={s.accent} style={{ marginTop: "2rem" }}>
+            Email
+          </p>
+          <p>forumcom@bk.ru</p>
         </div>
+
         <div className={s.map}>
-          {/* <iframe
+          <iframe
             className={s.frame}
             src="https://yandex.ru/map-widget/v1/?um=constructor%3A91677008f39a4178d5bba2b4ed40a45ae78c19e10b929179352d0f211580bc8d&amp;source=constructor"
             title="Yandex Map"
-          ></iframe> */}
+          ></iframe>
         </div>
       </div>
     </footer>

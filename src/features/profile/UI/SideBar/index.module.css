@@ -1,93 +1,71 @@
 .card {
-  background: linear-gradient(165deg, #0f172a 0%, #1e293b 100%);
-  color: #f1f5f9;
-  border-radius: 28px;
-  padding: 28px 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
   height: fit-content;
-  min-height: 560px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 24px;
-  z-index: 100;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 320px;
+  animation: slideIn 0.4s ease;
 }
 
 .userHeader {
-  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 0 24px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 24px;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: var(--gradient-telegram);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 2.4rem;
+  font-weight: 700;
   color: white;
-  box-shadow: 0 12px 20px -8px rgba(59, 130, 246, 0.4);
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-fast);
 }
 
 .card:hover .avatar {
-  transform: scale(1.05);
+  transform: scale(1.05) rotate(5deg);
 }
 
 .userInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  flex: 1;
 }
 
 .userName {
-  font-size: 22px;
+  font-size: 2rem;
   font-weight: 700;
-  color: white;
-  margin: 0;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #e2e8f0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .userRole {
-  font-size: 13px;
-  font-weight: 600;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.05);
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.3rem;
+  color: var(--text-secondary);
 }
 
 .links {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0 16px;
-  flex: 1;
+  gap: 0.8rem;
+  margin-bottom: 2.5rem;
 }
 
 .linkItem {
@@ -97,268 +75,110 @@
 .linkItem a {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
-  border-radius: 18px;
-  font-size: 16px;
+  gap: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--radius-15);
+  color: var(--text-secondary);
+  font-size: 1.6rem;
   font-weight: 500;
-  color: #cbd5e1;
   text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
+  background: var(--bg-tertiary);
+  border: 1px solid transparent;
 }
 
-.linkIcon {
-  font-size: 20px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-}
-
-.linkItem a:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  transform: translateX(8px);
-}
-
-.linkItem a:hover .linkIcon {
-  transform: scale(1.1);
-}
-
-.linkItem a.active {
-  background: linear-gradient(90deg, #3b82f6, #2563eb);
-  color: white;
-  box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.3);
-}
-
-.linkItem a.active::before {
+.linkItem a::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 4px;
-  background: white;
-  border-radius: 0 4px 4px 0;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  background: var(--gradient-telegram);
+  transform: scaleY(0);
+  transition: transform var(--transition-fast);
 }
 
-.linkItem a.active .linkIcon {
-  color: white;
+.linkItem a:hover {
+  background: var(--bg-accent);
+  border-color: var(--border-primary);
+  transform: translateX(5px);
+  color: var(--text-primary);
+}
+
+.linkItem a:hover::before {
+  transform: scaleY(1);
+}
+
+.linkItem a.active {
+  background: var(--bg-accent);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.linkItem a.active::before {
+  transform: scaleY(1);
+  background: var(--accent-blue);
+}
+
+.linkIcon {
+  font-size: 2rem;
+  min-width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .adminBadge {
   margin-left: auto;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 4px 10px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  background: var(--accent-purple);
   color: white;
-  letter-spacing: 0.03em;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .logoutBtn {
-  width: calc(100% - 48px);
-  margin: 16px 24px 24px;
-  padding: 16px 24px;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1.5px solid rgba(239, 68, 68, 0.3);
-  border-radius: 18px;
-  color: #fecaca;
-  font-size: 16px;
-  font-weight: 600;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-15);
+  color: var(--text-secondary);
+  font-size: 1.6rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.25s ease;
-  backdrop-filter: blur(4px);
-}
-
-.logoutIcon {
-  font-size: 18px;
-  transition: transform 0.25s ease;
+  transition: all var(--transition-fast);
+  margin-top: 1rem;
 }
 
 .logoutBtn:hover {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: white;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--accent-red);
+  color: var(--accent-red);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -8px #ef4444;
+}
+
+.logoutBtn:active {
+  transform: translateY(0);
+}
+
+.logoutIcon {
+  font-size: 2rem;
+  transition: transform var(--transition-fast);
 }
 
 .logoutBtn:hover .logoutIcon {
-  transform: translateX(4px);
-}
-
-@media (max-width: 768px) {
-  .card {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: auto;
-    min-height: auto;
-    height: auto;
-    max-width: 100%;
-    border-radius: 24px 24px 0 0;
-    padding: 12px 16px;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(12px);
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.2);
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    z-index: 1000;
-  }
-
-  .userHeader {
-    display: none;
-  }
-
-  .mobileMenuToggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .mobileMenuToggle.active {
-    background: #3b82f6;
-  }
-
-  .links {
-    flex-direction: row;
-    padding: 0;
-    gap: 8px;
-    overflow-x: auto;
-    flex: 1;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    justify-content: flex-start;
-    margin: 0;
-  }
-
-  .links::-webkit-scrollbar {
-    display: none;
-  }
-
-  .linkItem {
-    flex-shrink: 0;
-    width: auto;
-  }
-
-  .linkItem a {
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 100px;
-    color: #cbd5e1;
-    font-size: 14px;
-    font-weight: 500;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .linkItem a.active {
-    background: #3b82f6;
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-  }
-
-  .linkItem a.active::before {
-    display: none;
-  }
-
-  .linkIcon {
-    font-size: 16px;
-    width: 20px;
-    height: 20px;
-  }
-
-  .adminBadge {
-    display: none;
-  }
-
-  .logoutBtn {
-    width: auto;
-    margin: 0;
-    padding: 12px 20px;
-    background: rgba(239, 68, 68, 0.15);
-    border-radius: 100px;
-    flex-shrink: 0;
-  }
-
-  .logoutText {
-    display: none;
-  }
-
-  .logoutBtn span:first-child {
-    display: none;
-  }
-
-  .logoutIcon {
-    margin: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    padding: 10px 12px;
-  }
-
-  .linkItem a {
-    padding: 10px 16px;
-    font-size: 13px;
-  }
-
-  .linkIcon {
-    font-size: 14px;
-  }
-
-  .logoutBtn {
-    padding: 10px 16px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .card {
-    max-width: 280px;
-    padding: 24px 0;
-  }
-
-  .userName {
-    font-size: 20px;
-  }
-
-  .avatar {
-    width: 64px;
-    height: 64px;
-    font-size: 28px;
-  }
-
-  .linkItem a {
-    padding: 12px 16px;
-    font-size: 15px;
-  }
+  transform: translateX(5px);
 }
 
 @keyframes slideIn {
@@ -372,46 +192,147 @@
   }
 }
 
-.linkItem {
-  animation: slideIn 0.3s ease-out forwards;
-}
+@media (max-width: 992px) {
+  .card {
+    padding: 2rem;
+  }
 
-.linkItem:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.linkItem:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.linkItem:nth-child(3) {
-  animation-delay: 0.15s;
-}
-.linkItem:nth-child(4) {
-  animation-delay: 0.2s;
-}
+  .avatar {
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+  }
 
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
+  .userName {
+    font-size: 1.8rem;
+  }
+
+  .userRole {
+    font-size: 1.2rem;
+    padding: 0.3rem 1rem;
+  }
+
+  .linkItem a {
+    padding: 1rem 1.2rem;
+    font-size: 1.5rem;
+  }
+
+  .linkIcon {
+    font-size: 1.8rem;
+    min-width: 2.2rem;
+  }
+
+  .logoutBtn {
+    padding: 1rem 1.2rem;
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .userHeader {
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 1.8rem;
+  }
+
+  .userName {
+    font-size: 1.6rem;
+  }
+
+  .userRole {
+    font-size: 1.1rem;
+    padding: 0.2rem 0.8rem;
+  }
+
   .links {
-    scrollbar-width: thin;
-    scrollbar-color: #3b82f6 rgba(255, 255, 255, 0.1);
+    gap: 0.6rem;
+    margin-bottom: 2rem;
   }
 
-  .links::-webkit-scrollbar {
-    display: block;
-    height: 3px;
+  .linkItem a {
+    padding: 0.9rem 1rem;
+    font-size: 1.4rem;
   }
 
-  .links::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 3px;
+  .linkIcon {
+    font-size: 1.6rem;
+    min-width: 2rem;
   }
 
-  .links::-webkit-scrollbar-thumb {
-    background: #3b82f6;
-    border-radius: 3px;
+  .adminBadge {
+    font-size: 1rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .logoutBtn {
+    padding: 0.9rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .logoutIcon {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.2rem;
+    border-radius: var(--radius-15);
+  }
+
+  .userHeader {
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .avatar {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.6rem;
+  }
+
+  .userName {
+    font-size: 1.4rem;
+  }
+
+  .userRole {
+    font-size: 1rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .linkItem a {
+    padding: 0.8rem;
+    font-size: 1.3rem;
+    gap: 0.8rem;
+  }
+
+  .linkIcon {
+    font-size: 1.4rem;
+    min-width: 1.8rem;
+  }
+
+  .adminBadge {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .logoutBtn {
+    padding: 0.8rem;
+    font-size: 1.3rem;
+  }
+
+  .logoutIcon {
+    font-size: 1.6rem;
   }
 }

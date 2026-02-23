@@ -1,16 +1,195 @@
-.border {
-  border-radius: 1.5rem;
-  padding: 0.5rem;
-  border: 0.1rem solid var(--color-blue);
-  justify-content: space-between;
+.container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-20);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(43, 107, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.wrapper {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper > * {
+  flex: 0 1 auto;
+}
+
+.wrapper > *:global(.btn-link) {
+  transition: all var(--transition-fast);
+  position: relative;
+  background: transparent;
+  border: 1px solid var(--border-primary);
+  color: var(--text-secondary);
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wrapper > *:global(.btn-link):hover {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: rgba(43, 107, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.wrapper > *:global(.btn-link).active {
+  background: var(--gradient-telegram);
+  border-color: transparent;
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.wrapper > *:global(.btn-link).active:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.scrollWrapper {
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-blue) var(--border-primary);
+  padding: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollWrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollWrapper::-webkit-scrollbar-track {
+  background: var(--border-primary);
+  border-radius: 4px;
+}
+
+.scrollWrapper::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 4px;
+}
+
+.scrollWrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue-hover);
+}
+
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.scrollButton:hover {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.scrollButton.left {
+  left: 0.5rem;
+}
+
+.scrollButton.right {
+  right: 0.5rem;
+}
+
+.scrollButton svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wrapper > * {
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.wrapper > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.wrapper > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wrapper > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.wrapper > *:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.wrapper > *:nth-child(5) {
+  animation-delay: 0.25s;
 }
 
 @media (max-width: 768px) {
-  .border {
-    flex-direction: column;
-    gap: 0.5rem;
+  .container {
+    padding: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .wrapper > *:global(.btn-link) {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .wrapper > *:global(.btn-link) {
+    padding: 0.7rem 1.4rem;
+    font-size: 1.3rem;
   }
 }

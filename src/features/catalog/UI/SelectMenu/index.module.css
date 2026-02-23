@@ -5,7 +5,113 @@
 }
 
 .skeleton {
-  height: 40px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-15);
+  padding: 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  animation: pulse 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.skeleton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-telegram);
+  opacity: 0.1;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.skeleton > div:first-child {
+  width: 120px;
+  height: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 100px;
+  border: 1px solid var(--border-primary);
+}
+
+.skeleton > div:last-child {
+  width: 4rem;
+  height: 4rem;
+  background: var(--bg-secondary);
+  border-radius: 50%;
+  border: 1px solid var(--border-primary);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    left: 200%;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skeleton {
+    padding: 1.5rem 2rem;
+    height: 70px;
+  }
+
+  .skeleton > div:first-child {
+    width: 100px;
+    height: 1.8rem;
+  }
+
+  .skeleton > div:last-child {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skeleton {
+    padding: 1.2rem 1.5rem;
+    height: 60px;
+  }
+
+  .skeleton > div:first-child {
+    width: 80px;
+    height: 1.6rem;
+  }
+
+  .skeleton > div:last-child {
+    width: 3rem;
+    height: 3rem;
+  }
 }

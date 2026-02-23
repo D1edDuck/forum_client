@@ -38,8 +38,8 @@ interface IFieldList {
 }
 
 const fieldList: IFieldList[] = [
-  { title: "Статус", inputs: Status, variant: "right" },
-  { title: "Дата", inputs: Date, variant: "right" },
+  { title: "Статус", inputs: Status, variant: "left" },
+  { title: "Дата", inputs: Date, variant: "left" },
   { title: "Номер", inputs: Number, variant: "left" },
 ];
 
