@@ -9,6 +9,7 @@ import CardRepair from "../CardRepair/CardRepair";
 import { repairFilter } from "../../repairThunk";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Repairs = () => {
   const dispatch = useAppDispatch();

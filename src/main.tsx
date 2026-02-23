@@ -10,5 +10,5 @@ createRoot(document.getElementById("root")!).render(
       <App />
       <Modal />
     </Provider>
-  </StrictMode>,
+  </>,
 );
