@@ -11,7 +11,28 @@ const Status = [
     id: "pending",
     name: "status",
     value: "pending",
-    label: "В процессе",
+    label: "Ожидание",
+  },
+  {
+    type: "radio",
+    id: "active",
+    name: "status",
+    value: "active",
+    label: "В работе",
+  },
+  {
+    type: "radio",
+    id: "archive",
+    name: "status",
+    value: "archive",
+    label: "Архивные",
+  },
+  {
+    type: "radio",
+    id: "rejected",
+    name: "status",
+    value: "rejected",
+    label: "Отклоненные",
   },
 ];
 

@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
 import useClients from "../../hooks/useClients";
 import Table from "../../UI/Table/Table";
-import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
+import { ICatalog, IClient, IProduct, IRepair, RepairStatus } from "@/api/type";
 import s from "./index.module.css";
 import { deletedCategory, deletedProduct, deletedUser } from "../../dbThunks";
 import { deletedRepairs } from "@/features/profile/repairs/repairThunk";

@@ -65,7 +65,14 @@ const Repairs = () => {
             </div>
           </>
         ) : (
-          <div className={s.not}>Заявок нет</div>
+          <div className={s.not}>
+            <p>Заявок нет</p>
+            {role === "user" && (
+              <div>
+                <Link to={"/booking"}>Оставить заявку</Link>
+              </div>
+            )}
+          </div>
         )}
       </div>
     </div>

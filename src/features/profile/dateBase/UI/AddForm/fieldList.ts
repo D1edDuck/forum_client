@@ -1,3 +1,5 @@
+import { causes } from "@/features/booking/UI/BookingForm/causes";
+
 const formConfig = {
   repair: [
     {
@@ -5,10 +7,7 @@ const formConfig = {
       label: "Причина обращения",
       type: "select",
       required: true,
-      options: [
-        { label: "Ремонт компьютера", value: "repair" },
-        { label: "Заправка картриджа", value: "cartridge" },
-      ],
+      options: causes,
     },
     {
       name: "comment",

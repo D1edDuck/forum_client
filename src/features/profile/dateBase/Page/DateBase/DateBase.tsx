@@ -68,7 +68,7 @@ const DateBase = () => {
 
             <div>
               <Link to={add} className={s.link}>
-                <span>Создать</span>
+                <p>Создать</p>
                 <div className={s.plus}>
                   <span className={s.vert}></span>
                   <span className={s.horiz}></span>

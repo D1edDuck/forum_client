@@ -20,10 +20,14 @@ const CardRepair = (rep: IRepair) => {
     switch (status.toLowerCase()) {
       case "pending":
         return s.pending;
-      case "repair":
-        return s.repair;
+      case "active":
+        return s.active;
       case "fulfilled":
         return s.fulfilled;
+      case "rejected":
+        return s.rejected;
+      case "archive":
+        return s.archive;
       default:
         return "";
     }
@@ -37,6 +41,18 @@ const CardRepair = (rep: IRepair) => {
     {
       value: "fulfilled",
       label: "Готово",
+    },
+    {
+      value: "active",
+      label: "В ремонте",
+    },
+    {
+      value: "rejected",
+      label: "Отклонено",
+    },
+    {
+      value: "archive",
+      label: "Архив",
     },
   ];
 
@@ -65,7 +81,7 @@ const CardRepair = (rep: IRepair) => {
 
         <span className={s.key}>Причина</span>
         <span className={s.value}>
-          {causes.find((c) => c.value === rep.cause)?.text || rep.cause}
+          {causes.find((c) => c.value === rep.cause)?.label}
         </span>
 
         <span className={s.key}>Комментарий</span>

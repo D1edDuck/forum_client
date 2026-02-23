@@ -25,10 +25,6 @@ const SideBar = () => {
       return currentPath.includes("/repairs");
     }
 
-    if (path === "settings") {
-      return currentPath.includes("/settings");
-    }
-
     if (path === "datebase") {
       return currentPath.includes("/datebase");
     }
@@ -47,7 +43,6 @@ const SideBar = () => {
   const navItems = [
     { path: "me", label: "Профиль", icon: "👤", adminOnly: false },
     { path: "repairs", label: "Заявки", icon: "🔧", adminOnly: false },
-    { path: "settings", label: "Настройки", icon: "⚙️", adminOnly: false },
     { path: "datebase", label: "База данных", icon: "🗄️", adminOnly: true },
   ];
 

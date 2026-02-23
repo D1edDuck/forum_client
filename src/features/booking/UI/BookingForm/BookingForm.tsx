@@ -42,12 +42,9 @@ const BookingForm = ({ user }: IProps) => {
             }}
             value={urlCause || cause}
           >
-            <option value="" disabled>
-              Выберите причину обращения
-            </option>
-            {causes.map((c, index) => (
-              <option key={index} value={c.value} disabled={c.disabled}>
-                {c.text}
+            {causes.map((c) => (
+              <option value={c.value} disabled={c.disabled}>
+                {c.label}
               </option>
             ))}
           </select>

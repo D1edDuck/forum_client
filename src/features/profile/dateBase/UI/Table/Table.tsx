@@ -2,13 +2,14 @@ import { formatDate } from "@/app/hooks/formatDate";
 import s from "./index.module.css";
 import ModalForm from "../ModalForm/ModalForm";
 import useModalForm from "../../hooks/useModalForm";
+import { IUserRep } from "@/api/type";
 
-type TableProps<T extends { id: number }> = {
+type TableProps<T extends { id: number; user?: IUserRep }> = {
   data: T[];
   handleDelete?: (id: number) => void;
 };
 
-function Table<T extends { id: number }>({
+function Table<T extends { id: number; user?: IUserRep }>({
   data,
   handleDelete,
 }: TableProps<T>) {
@@ -82,6 +83,8 @@ function Table<T extends { id: number }>({
     return String(value);
   };
 
+  console.log(data[0]?.user);
+
   return (
     <div className={s.tableContainer}>
       <table className={s.table}>
@@ -95,7 +98,7 @@ function Table<T extends { id: number }>({
                   .replace(/_/g, " ")}
               </th>
             ))}
-            <th className={s.th}>Действия</th>
+            {data[0]?.user && <th className={s.th}>Действия</th>}
           </tr>
         </thead>
         <tbody>
