@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import ButtonConnect from "../../../UI/ButtonConnect/ButtonConnect";
 import ServiceCard from "../../Service/ServiceCard/ServiceCard";
 import s from "./index.module.css";
+import { Link } from "react-router-dom";
 
 export interface ServiceInfo {
   name: string;
@@ -121,11 +122,12 @@ const ListServiceHome = () => {
                 fontWeight: 700,
               }}
             >
-              Спросите нас!
+              <Link to="/booking">Спросите нас!</Link>
             </span>
           </p>
-
-          <ButtonConnect title="Связаться с нами" primary="soft" />
+          <Link to="/booking">
+            <ButtonConnect title="Связаться с нами" primary="soft" />
+          </Link>
         </div>
       </div>
     </section>

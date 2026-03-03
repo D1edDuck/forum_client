@@ -1,5 +1,3 @@
-/* index.module.css */
-
 .section {
   position: relative;
   padding: 8rem 0;
@@ -71,6 +69,9 @@
   padding: 2rem;
   transition: all var(--transition-normal);
   border: 1px solid var(--border-primary);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .box::before {
@@ -80,9 +81,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    transparent 80%
+  );
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.6;
   transition: opacity var(--transition-normal);
 }
 
@@ -93,7 +99,7 @@
 }
 
 .box:hover::before {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .box p {
@@ -106,34 +112,32 @@
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   transform: translateY(0);
   transition: transform var(--transition-fast);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-8);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .box:hover p {
   transform: translateY(-5px);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .boxImage1 {
   background-image: url("/img/catalog-1.png");
-  background-size: cover;
-  background-position: center;
 }
 
 .boxImage2 {
   background-image: url("/img/catalog-2.png");
-  background-size: cover;
-  background-position: center;
 }
 
 .boxImage3 {
   background-image: url("/img/catalog-3.png");
-  background-size: cover;
-  background-position: center;
 }
 
 .boxImage4 {
   background-image: url("/img/catalog-4.png");
-  background-size: cover;
-  background-position: center;
 }
 
 .boxBig {
@@ -142,12 +146,10 @@
   background: var(--gradient-dark);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-20);
-  padding: 3rem;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 35rem 1fr;
   min-height: 400px;
   transition: all var(--transition-normal);
 }
@@ -159,33 +161,49 @@
 }
 
 .boxBigText {
+  padding-left: 3rem;
+  padding-block: 3rem;
   position: relative;
   z-index: 2;
   font-size: 1.8rem;
   line-height: 1.6;
   color: var(--text-secondary);
   max-width: 60%;
-  margin-bottom: 2rem;
+  box-sizing: border-box;
 }
 
 .boxBigImage {
-  position: absolute;
+  grid-column: 2;
+  grid-row: span 2;
   bottom: 0;
   right: 0;
-  width: 50%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.8;
   transition: transform var(--transition-normal);
   pointer-events: none;
+  z-index: 1;
 }
 
 .boxBig:hover .boxBigImage {
   transform: scale(1.05) translateX(-10px);
 }
 
-.arrow {
+.arrowLink {
   position: relative;
+  z-index: 3;
+  align-self: flex-start;
+  margin-top: auto;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.arrowBox {
+  padding-left: 3rem;
+  padding-bottom: 3rem;
+}
+
+.arrow {
   z-index: 2;
   width: 60px;
   height: 60px;
@@ -263,10 +281,18 @@
 
   .boxBig {
     grid-column: span 3;
+    aspect-ratio: 16/9;
+    min-height: auto;
   }
 
   .boxBigText {
-    max-width: 50%;
+    max-width: 55%;
+    padding-right: 45%;
+    font-size: 1.7rem;
+  }
+
+  .boxBigImage {
+    width: 45%;
   }
 }
 
@@ -276,16 +302,27 @@
   }
 
   .boxBig {
-    grid-column: span 2;
+    /* grid-column: span 2; */
+    aspect-ratio: 16/9;
+    padding: 2.5rem;
   }
 
   .boxBigText {
     max-width: 100%;
+    padding-right: 40%;
     font-size: 1.6rem;
+  }
+
+  .boxBigImage {
+    width: 40%;
   }
 
   .title {
     font-size: 3.2rem;
+  }
+
+  .box {
+    aspect-ratio: 4/3;
   }
 }
 
@@ -299,8 +336,20 @@
     gap: 1.5rem;
   }
 
+  .box {
+    aspect-ratio: 16/9;
+    min-height: 200px;
+    padding: 1.5rem;
+  }
+
+  .box p {
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+  }
+
   .boxBig {
-    grid-column: span 1;
+    /* grid-column: span 1; */
+    /* aspect-ratio: auto; */
     min-height: 300px;
     padding: 2rem;
   }
@@ -308,10 +357,22 @@
   .boxBigText {
     font-size: 1.5rem;
     max-width: 100%;
+    padding-right: 0;
+    margin-bottom: 1.5rem;
   }
 
   .boxBigImage {
-    width: 40%;
+    position: relative;
+    width: 50%;
+    margin-top: 1rem;
+    align-self: flex-end;
+    bottom: auto;
+    right: auto;
+  }
+
+  .boxBig {
+    display: flex;
+    flex-direction: column;
   }
 
   .title {
@@ -324,19 +385,31 @@
     height: 3px;
     bottom: -1rem;
   }
-
-  .box {
-    aspect-ratio: 16/9;
-  }
 }
 
 @media (max-width: 480px) {
+  .box {
+    /* aspect-ratio: 2/1; */
+    padding: 1.2rem;
+  }
+
   .box p {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .boxBig {
+    min-height: 250px;
+    padding: 1.5rem;
   }
 
   .boxBigText {
     font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .boxBigImage {
+    width: 45%;
   }
 
   .arrow {
@@ -347,5 +420,9 @@
   .arrow_clip {
     width: 20px;
     height: 20px;
+  }
+
+  .title {
+    font-size: 2.4rem;
   }
 }

@@ -62,11 +62,13 @@ const CatalogService = () => {
               alt="Каталог товаров"
               className={s.boxBigImage}
             />
-            <Link to={"/catalog"}>
-              <div className={s.arrow}>
-                <div className={s.arrow_clip}></div>
-              </div>
-            </Link>
+            <div className={s.arrowBox}>
+              <Link to={"/catalog"}>
+                <div className={s.arrow}>
+                  <div className={s.arrow_clip}></div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

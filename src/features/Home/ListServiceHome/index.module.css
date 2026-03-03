@@ -173,7 +173,7 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--text-primary);
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 
 .grid :global(.btn-connect) {

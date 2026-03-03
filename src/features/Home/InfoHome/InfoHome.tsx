@@ -2,6 +2,7 @@ import SvgLink from "@/UI/SvgLink/SvgLink";
 import ButtonConnect from "../../../UI/ButtonConnect/ButtonConnect";
 import s from "./index.module.css";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const InfoHome = () => {
   const sectionRef = useRef(null);
@@ -61,7 +62,9 @@ const InfoHome = () => {
           </div>
 
           <div className={s.actions}>
-            <ButtonConnect title="Связаться с нами" primary="soft" />
+            <Link to="/booking">
+              <ButtonConnect title="Связаться с нами" primary="soft" />
+            </Link>
             <button className={s.secondaryButton}>
               <span>Наши работы</span>
             </button>
@@ -70,9 +73,20 @@ const InfoHome = () => {
           <div className={s.socialLinks}>
             <span className={s.socialText}>Мы в соцсетях</span>
             <div className={s.socialIcons}>
-              <SvgLink name={"tg"} />
-              <SvgLink name={"vk"} />
-              <SvgLink name={"discord"} />
+              <a
+                href="https://t.me/avofe"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SvgLink name={"telegram"} />
+              </a>
+              <a
+                href="https://github.com/D1edDuck/forum_client"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SvgLink name={"github"} />
+              </a>
             </div>
           </div>
         </div>
@@ -116,7 +130,6 @@ const InfoHome = () => {
         </div>
       </div>
 
-      {/* Декоративные элементы */}
       <div className={s.gradientOrb} />
       <div className={s.gradientOrb2} />
     </section>
