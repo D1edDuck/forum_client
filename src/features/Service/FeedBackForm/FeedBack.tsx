@@ -17,8 +17,8 @@ const FeedBack = () => {
       </div>
       <div className={`${s.buttons} ${s.mb}`}>
         <div className={s.icons}>
-          <SvgLink name="contacts" />
-          <SvgLink name="mop" />
+          <SvgLink name="contacts" size="large" />
+          <SvgLink name="mop" size="large" />
         </div>
         <div className={s.mb}>
           <Link to={"/booking"}>

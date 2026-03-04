@@ -220,8 +220,8 @@
 }
 
 .socialIcon {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
@@ -478,10 +478,6 @@
 
   .statDivider {
     display: none;
-  }
-
-  .actions {
-    flex-direction: column;
   }
 
   .primaryButton,

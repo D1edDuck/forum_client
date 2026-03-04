@@ -86,10 +86,10 @@
 }
 
 @media (max-width: 768px) {
-  .gridCart {
+  /* .gridCart {
     grid-template-columns: 1fr;
     gap: 2rem;
-  }
+  } */
 
   .title {
     font-size: 3rem;

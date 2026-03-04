@@ -1,5 +1,4 @@
 :root {
-  /* Основные цвета - темная тема (как в Telegram) */
   --bg-primary: #0f0f0f; /* Глубокий черный фон */
   --bg-secondary: #1a1a1a; /* Карточки, блоки */
   --bg-tertiary: #242424; /* Элементы поверх карточек */
@@ -28,7 +27,6 @@
   --gradient-telegram: linear-gradient(135deg, #2b6bff 0%, #3f7aff 100%);
   --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
 
-  /* Размеры - оставим ваши */
   --radius-10: 1rem;
   --radius-15: 1.5rem;
   --radius-20: 2rem;

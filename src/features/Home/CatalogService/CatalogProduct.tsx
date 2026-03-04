@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import s from "./index.module.css";
+import Arrow from "@/UI/Arrow/Arrow";
 
 const CatalogService = () => {
   const boxCommon = `${s.box}`;
@@ -57,15 +58,10 @@ const CatalogService = () => {
               параметрам.
             </p>
 
-            <img
-              src="/img/catalog-big.png"
-              alt="Каталог товаров"
-              className={s.boxBigImage}
-            />
             <div className={s.arrowBox}>
               <Link to={"/catalog"}>
                 <div className={s.arrow}>
-                  <div className={s.arrow_clip}></div>
+                  <Arrow color="w" open={false} size="l" />
                 </div>
               </Link>
             </div>

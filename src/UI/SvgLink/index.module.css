@@ -1,11 +1,4 @@
-.icon {
-  width: 3.2rem;
-  height: 3.2rem;
-}
-
 .icon_contact {
-  width: 6rem;
-  height: 6rem;
   background: #2d36de;
   border-radius: 100%;
   display: flex;
@@ -14,6 +7,36 @@
   transition: 0.3s;
   -webkit-animation: up 3s;
   animation: up 3s;
+}
+
+.icon_small {
+  width: 3rem;
+  height: 3rem;
+}
+
+.icon_small svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.icon_large {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+
+.icon_large svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.icon_big {
+  width: 6rem;
+  height: 6rem;
+}
+
+.icon_big svg {
+  width: 4rem;
+  height: 4rem;
 }
 
 .icon_contact:hover {

@@ -1,14 +1,10 @@
-.block {
-  transform: translateY(0rem);
-}
-
 .open {
-  transform: rotate(180deg);
+  transform: rotate(180deg) translateX(-0.45rem);
   transition: transform var(--transition-normal);
 }
 
 .close {
-  transform: rotate(0deg);
+  transform: rotate(0deg) translateX(-0.45rem);
   transition: transform var(--transition-normal);
 }
 
@@ -22,7 +18,7 @@ b - black
 
 .uplw {
   width: 2.5rem;
-  height: 0.4rem;
+  height: 0.45rem;
   background: var(--text-primary);
   border-radius: 100px;
   transform: rotate(-35deg) translateY(1rem);
@@ -30,7 +26,7 @@ b - black
 
 .downlw {
   width: 2.5rem;
-  height: 0.4rem;
+  height: 0.45rem;
   background: var(--text-primary);
   border-radius: 100px;
   transform: rotate(-145deg) translateY(1rem);
@@ -38,7 +34,7 @@ b - black
 
 .uplb {
   width: 2.5rem;
-  height: 0.4rem;
+  height: 0.45rem;
   background: var(--text-secondary);
   border-radius: 100px;
   transform: rotate(-35deg) translateY(1rem);
@@ -46,7 +42,7 @@ b - black
 
 .downlb {
   width: 2.5rem;
-  height: 0.4rem;
+  height: 0.45rem;
   background: var(--text-secondary);
   border-radius: 100px;
   transform: rotate(-145deg) translateY(1rem);

@@ -52,7 +52,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-rows: 1fr;
   gap: 2rem;
   position: relative;
   z-index: 2;
@@ -60,7 +62,7 @@
 
 .box {
   position: relative;
-  aspect-ratio: 1;
+  height: 100%;
   border-radius: var(--radius-15);
   overflow: hidden;
   cursor: pointer;
@@ -114,7 +116,7 @@
   transition: transform var(--transition-fast);
   background: rgba(0, 0, 0, 0.25);
   padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-10);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -141,17 +143,22 @@
 }
 
 .boxBig {
-  grid-column: span 2;
-  grid-row: span 2;
-  background: var(--gradient-dark);
+  grid-column: 3/5;
+  grid-row: 1/3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  background-image: url("/img/catalog-big.png");
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-20);
   position: relative;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 35rem 1fr;
-  min-height: 400px;
   transition: all var(--transition-normal);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem;
 }
 
 .boxBig:hover {
@@ -161,28 +168,18 @@
 }
 
 .boxBigText {
-  padding-left: 3rem;
-  padding-block: 3rem;
   position: relative;
   z-index: 2;
   font-size: 1.8rem;
   line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 60%;
+  color: var(--text-primary);
   box-sizing: border-box;
-}
-
-.boxBigImage {
-  grid-column: 2;
-  grid-row: span 2;
-  bottom: 0;
-  right: 0;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
-  transition: transform var(--transition-normal);
-  pointer-events: none;
-  z-index: 1;
+  transition: transform var(--transition-fast);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-10);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .boxBig:hover .boxBigImage {
@@ -199,8 +196,8 @@
 }
 
 .arrowBox {
-  padding-left: 3rem;
-  padding-bottom: 3rem;
+  display: flex;
+  justify-content: end;
 }
 
 .arrow {
@@ -208,7 +205,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: var(--accent-blue);
+  background: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,14 +216,7 @@
 
 .arrow:hover {
   transform: scale(1.1) rotate(90deg);
-  background: var(--accent-blue-hover);
-}
-
-.arrow_clip {
-  width: 24px;
-  height: 24px;
-  background: white;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: var(--bg-accent);
 }
 
 @keyframes float {
@@ -276,53 +266,27 @@
 
 @media (max-width: 1200px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 
   .boxBig {
-    grid-column: span 3;
-    aspect-ratio: 16/9;
-    min-height: auto;
-  }
-
-  .boxBigText {
-    max-width: 55%;
-    padding-right: 45%;
-    font-size: 1.7rem;
-  }
-
-  .boxBigImage {
-    width: 45%;
+    grid-column: 2/ -1;
+    grid-row: 2/-1;
   }
 }
 
 @media (max-width: 992px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .boxBig {
-    /* grid-column: span 2; */
-    aspect-ratio: 16/9;
-    padding: 2.5rem;
-  }
-
-  .boxBigText {
-    max-width: 100%;
-    padding-right: 40%;
-    font-size: 1.6rem;
-  }
-
-  .boxBigImage {
-    width: 40%;
-  }
-
   .title {
     font-size: 3.2rem;
   }
 
-  .box {
-    aspect-ratio: 4/3;
+  .grid {
+    grid-template-columns: 2fr 2fr 1fr 2fr;
+  }
+
+  .boxBig {
+    grid-column: 3/5;
+    grid-row: 1/3;
   }
 }
 
@@ -331,15 +295,12 @@
     padding: 4rem 0;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .boxBig {
+    grid-column: 2;
   }
 
-  .box {
-    aspect-ratio: 16/9;
-    min-height: 200px;
-    padding: 1.5rem;
+  .grid {
+    grid-template-columns: 1fr 1fr;
   }
 
   .box p {
@@ -347,32 +308,8 @@
     padding: 0.5rem 1rem;
   }
 
-  .boxBig {
-    /* grid-column: span 1; */
-    /* aspect-ratio: auto; */
-    min-height: 300px;
-    padding: 2rem;
-  }
-
   .boxBigText {
     font-size: 1.5rem;
-    max-width: 100%;
-    padding-right: 0;
-    margin-bottom: 1.5rem;
-  }
-
-  .boxBigImage {
-    position: relative;
-    width: 50%;
-    margin-top: 1rem;
-    align-self: flex-end;
-    bottom: auto;
-    right: auto;
-  }
-
-  .boxBig {
-    display: flex;
-    flex-direction: column;
   }
 
   .title {
@@ -388,19 +325,9 @@
 }
 
 @media (max-width: 480px) {
-  .box {
-    /* aspect-ratio: 2/1; */
-    padding: 1.2rem;
-  }
-
   .box p {
     font-size: 1.6rem;
     padding: 0.4rem 0.8rem;
-  }
-
-  .boxBig {
-    min-height: 250px;
-    padding: 1.5rem;
   }
 
   .boxBigText {
@@ -408,21 +335,23 @@
     margin-bottom: 1rem;
   }
 
-  .boxBigImage {
-    width: 45%;
-  }
-
   .arrow {
     width: 50px;
     height: 50px;
   }
 
-  .arrow_clip {
-    width: 20px;
-    height: 20px;
-  }
-
   .title {
     font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 391px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2, 20rem);
+  }
+
+  .boxBig {
+    display: none;
   }
 }

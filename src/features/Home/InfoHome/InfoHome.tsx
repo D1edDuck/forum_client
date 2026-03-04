@@ -34,7 +34,7 @@ const InfoHome = () => {
 
           <h1 className={s.title}>
             <span className={s.titleGradient}>Форум.ру</span>
-            <span className={s.titleSub}>— ремонтируем технику с душой</span>
+            <span className={s.titleSub}>ремонтируем технику с душой</span>
           </h1>
 
           <p className={s.description}>
@@ -63,11 +63,11 @@ const InfoHome = () => {
 
           <div className={s.actions}>
             <Link to="/booking">
-              <ButtonConnect title="Связаться с нами" primary="soft" />
+              <ButtonConnect title="Связаться с нами" primary="hard" />
             </Link>
-            <button className={s.secondaryButton}>
-              <span>Наши работы</span>
-            </button>
+            <Link to={"/about"}>
+              <ButtonConnect title="О нас" primary="soft" />
+            </Link>
           </div>
 
           <div className={s.socialLinks}>
@@ -78,14 +78,14 @@ const InfoHome = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SvgLink name={"telegram"} />
+                <SvgLink name={"telegram"} size="large" />
               </a>
               <a
                 href="https://github.com/D1edDuck/forum_client"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SvgLink name={"github"} />
+                <SvgLink name={"github"} size="large" />
               </a>
             </div>
           </div>
