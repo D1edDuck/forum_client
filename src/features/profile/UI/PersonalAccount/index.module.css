@@ -31,13 +31,12 @@
 .grid {
   display: grid;
   grid-template-columns: 150px 1fr;
-  gap: 1.5rem 2rem;
+  gap: 1rem;
   align-items: center;
-  margin-bottom: 3rem;
+  font-size: 1.8rem;
 }
 
-.grid > p {
-  font-size: 1.8rem;
+.gridText {
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -46,7 +45,6 @@
   font-size: 1.6rem;
   color: var(--text-primary);
   font-weight: 500;
-  padding: 0.5rem 0;
 }
 
 .input {
@@ -86,7 +84,7 @@
     transparent 100%
   );
   border: none;
-  margin: 0.5rem 0;
+  margin: 0.1rem 0;
 }
 
 .btns {
@@ -124,7 +122,7 @@
 .logout {
   background: var(--bg-tertiary);
   color: var(--text-primary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--accent-red);
   border-radius: 100px;
   padding: 1.2rem 2.5rem;
   font-size: 1.5rem;
@@ -147,7 +145,6 @@
   transform: translateY(0);
 }
 
-/* Анимация */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -159,7 +156,6 @@
   }
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .block {
     padding: 2.5rem;
@@ -187,11 +183,6 @@
     font-size: 1.5rem;
   }
 
-  .btns {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .edit,
   .logout {
     padding: 1rem;
@@ -212,10 +203,6 @@
     width: 40px;
     height: 2px;
     bottom: -0.6rem;
-  }
-
-  .info {
-    font-size: 1.4rem;
   }
 
   .input {

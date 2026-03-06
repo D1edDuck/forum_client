@@ -110,23 +110,26 @@ const ListServiceHome = () => {
               техники.
             </p>
           </div>
-
-          <p className={s.text}>
-            Есть вопросы?
-            <br />
-            <span
-              style={{
-                color: "var(--accent-blue)",
-                fontSize: "2.4rem",
-                fontWeight: 700,
-              }}
-            >
-              <Link to="/booking">Спросите нас!</Link>
-            </span>
-          </p>
-          <Link to="/booking">
-            <ButtonConnect title="Связаться с нами" primary="soft" />
-          </Link>
+          <div className={s.feedback}>
+            <p className={s.text}>
+              Есть вопросы?
+              <br />
+              <span
+                style={{
+                  color: "var(--accent-blue)",
+                  fontSize: "2.4rem",
+                  fontWeight: 700,
+                }}
+              >
+                <Link to="/booking">Спросите нас!</Link>
+              </span>
+            </p>
+            <p className={s.btn}>
+              <Link to="/booking">
+                <ButtonConnect title="Связаться с нами" primary="soft" />
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </section>

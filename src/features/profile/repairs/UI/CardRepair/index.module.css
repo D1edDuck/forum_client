@@ -15,7 +15,6 @@
   border-color: var(--accent-blue);
   transform: translateX(5px);
   box-shadow: var(--shadow-md);
-  z-index: 10;
 }
 
 .card:hover::before {
@@ -62,7 +61,6 @@
 .grid.open {
   max-height: 1000px;
   opacity: 1;
-  margin-top: 1rem;
   pointer-events: all;
 }
 
@@ -73,11 +71,14 @@
   pointer-events: none;
 }
 
+.openCard {
+  z-index: 100;
+}
+
 .key {
   font-size: 1.5rem;
   color: var(--text-secondary);
   font-weight: 500;
-  padding: 0.5rem 0;
   white-space: nowrap;
 }
 
@@ -152,6 +153,24 @@
   border: 1px solid var(--accent-green);
 }
 
+.active {
+  background: rgba(34, 132, 197, 0.1);
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+}
+
+.archive {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.rejected {
+  background: rgba(197, 67, 34, 0.1);
+  color: var(--accent-red);
+  border: 1px solid var(--accent-red);
+}
+
 .btn {
   display: flex;
   align-items: center;
@@ -171,10 +190,6 @@
   transition: transform var(--transition-normal);
   display: flex;
   align-items: center;
-}
-
-.btn:hover .arr {
-  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
@@ -203,20 +218,9 @@
     width: 100%;
   }
 
-  .statusContainer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .statusBadge {
-    width: 100%;
-    justify-content: center;
-  }
-
   .btn {
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 

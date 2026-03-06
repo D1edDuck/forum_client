@@ -41,9 +41,9 @@ const SideBar = () => {
   };
 
   const navItems = [
-    { path: "me", label: "Профиль", icon: "👤", adminOnly: false },
-    { path: "repairs", label: "Заявки", icon: "🔧", adminOnly: false },
-    { path: "datebase", label: "База данных", icon: "🗄️", adminOnly: true },
+    { path: "me", label: "Профиль", adminOnly: false },
+    { path: "repairs", label: "Заявки", adminOnly: false },
+    { path: "datebase", label: "База данных", adminOnly: true },
   ];
 
   if (!user) return <p>Вы не авторизированны</p>;
@@ -61,13 +61,12 @@ const SideBar = () => {
       </div>
 
       <div className={s.links}>
-        {navItems.map(({ path, label, icon, adminOnly }) => {
+        {navItems.map(({ path, label, adminOnly }) => {
           if (adminOnly && user.role !== "admin") return null;
 
           return (
             <div key={path} className={s.linkItem}>
               <Link to={path} className={isActive(path) ? s.active : ""}>
-                <span className={s.linkIcon}>{icon}</span>
                 <span>{label}</span>
                 {adminOnly && user.role === "admin" && (
                   <span className={s.adminBadge}>Admin</span>

@@ -55,13 +55,13 @@ const Number = [
 interface IFieldList {
   title: string;
   inputs: typeof Status | typeof Date | typeof Number;
-  variant: "left" | "right";
+  variant: "left" | "right" | "center";
 }
 
 const fieldList: IFieldList[] = [
   { title: "Статус", inputs: Status, variant: "left" },
-  { title: "Дата", inputs: Date, variant: "left" },
-  { title: "Номер", inputs: Number, variant: "left" },
+  { title: "Дата", inputs: Date, variant: "center" },
+  { title: "Номер", inputs: Number, variant: "right" },
 ];
 
 export default fieldList;

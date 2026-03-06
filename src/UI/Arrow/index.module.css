@@ -49,35 +49,35 @@ b - black
 }
 
 .upsw {
-  width: 1.5rem;
+  width: 1.2rem;
   height: 0.3rem;
   background: var(--text-primary);
   border-radius: 100px;
-  transform: translateY(-0.2rem) rotate(35deg);
+  transform: translateY(-0.15rem) rotate(35deg);
 }
 
 .downsw {
-  width: 1.5rem;
+  width: 1.2rem;
   height: 0.3rem;
   background: var(--text-primary);
   border-radius: 100px;
-  transform: translateY(0.2rem) rotate(-35deg);
+  transform: translateY(0.15rem) rotate(-35deg);
 }
 
 .upsb {
-  width: 1.5rem;
-  height: 0.4rem;
+  width: 1.2rem;
+  height: 0.3rem;
   background: var(--text-secondary);
   border-radius: 100px;
-  transform: translateY(-0.2rem) rotate(35deg);
+  transform: translateY(-0.15rem) rotate(35deg);
 }
 
 .downsb {
-  width: 1.5rem;
-  height: 0.4rem;
+  width: 1.2rem;
+  height: 0.3rem;
   background: var(--text-secondary);
   border-radius: 100px;
-  transform: translateY(0.2rem) rotate(-35deg);
+  transform: translateY(0.15rem) rotate(-35deg);
 }
 
 .block:hover .uplw,

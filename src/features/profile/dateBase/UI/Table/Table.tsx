@@ -83,7 +83,7 @@ function Table<T extends { id: number; user?: IUserRep }>({
     return String(value);
   };
 
-  console.log(data[0]?.user);
+  console.log(data[0]);
 
   return (
     <div className={s.tableContainer}>
@@ -109,22 +109,24 @@ function Table<T extends { id: number; user?: IUserRep }>({
                   {renderCellValue(column, row[column])}
                 </td>
               ))}
-              <td className={s.tdActions}>
-                <button
-                  className={s.editBtn}
-                  onClick={() => handleEdit(row)}
-                  aria-label={`Редактировать запись ${row.id}`}
-                >
-                  Изменить
-                </button>
-                <button
-                  className={s.deleteBtn}
-                  onClick={() => handleDelete?.(row.id)}
-                  aria-label={`Удалить запись ${row.id}`}
-                >
-                  Удалить
-                </button>
-              </td>
+              {data[0]?.user && (
+                <td className={s.tdActions}>
+                  <button
+                    className={s.editBtn}
+                    onClick={() => handleEdit(row)}
+                    aria-label={`Редактировать запись ${row.id}`}
+                  >
+                    Изменить
+                  </button>
+                  <button
+                    className={s.deleteBtn}
+                    onClick={() => handleDelete?.(row.id)}
+                    aria-label={`Удалить запись ${row.id}`}
+                  >
+                    Удалить
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

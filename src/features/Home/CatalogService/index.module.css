@@ -345,13 +345,14 @@
   }
 }
 
-@media (max-width: 391px) {
+@media (max-width: 600px) {
   .grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(2, 20rem);
   }
 
   .boxBig {
-    display: none;
+    grid-column: 1/ -1;
+    grid-row: 3/ -1;
   }
 }

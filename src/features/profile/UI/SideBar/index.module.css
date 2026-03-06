@@ -35,10 +35,6 @@
   transition: transform var(--transition-fast);
 }
 
-.card:hover .avatar {
-  transform: scale(1.05) rotate(5deg);
-}
-
 .userInfo {
   flex: 1;
 }
@@ -89,18 +85,6 @@
   border: 1px solid transparent;
 }
 
-.linkItem a::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--gradient-telegram);
-  transform: scaleY(0);
-  transition: transform var(--transition-fast);
-}
-
 .linkItem a:hover {
   background: var(--bg-accent);
   border-color: var(--border-primary);
@@ -117,19 +101,6 @@
   border-color: var(--accent-blue);
   color: var(--accent-blue);
   box-shadow: var(--shadow-sm);
-}
-
-.linkItem a.active::before {
-  transform: scaleY(1);
-  background: var(--accent-blue);
-}
-
-.linkIcon {
-  font-size: 2rem;
-  min-width: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .adminBadge {
@@ -151,7 +122,7 @@
   justify-content: space-between;
   padding: 1.2rem 1.5rem;
   background: var(--bg-tertiary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--accent-red);
   border-radius: var(--radius-15);
   color: var(--text-secondary);
   font-size: 1.6rem;

@@ -30,7 +30,7 @@ const InfoHome = () => {
     <section ref={sectionRef} className={s.hero}>
       <div className={`container ${s.container}`}>
         <div className={s.content}>
-          <div className={s.badge}> Сервисный центр</div>
+          <div className={s.badge}>Сервисный центр</div>
 
           <h1 className={s.title}>
             <span className={s.titleGradient}>Форум.ру</span>
@@ -38,7 +38,7 @@ const InfoHome = () => {
           </h1>
 
           <p className={s.description}>
-            Профессиональный ремонт и продажа компьютерной техники
+            Профессиональный ремонт компьютерной техники
             <br />
             <span className={s.highlight}>Бесплатная диагностика</span> и
             гарантия до 3 лет

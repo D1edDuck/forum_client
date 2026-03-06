@@ -18,7 +18,7 @@ const PersonalAccount = () => {
     <div className={s.block}>
       <h3 className={s.title}>Мой профиль</h3>
       <div className={s.grid}>
-        <p>Имя Фамилия</p>
+        <p className={s.gridText}>Имя Фамилия</p>
         {edit ? (
           <input
             type="text"
@@ -33,7 +33,7 @@ const PersonalAccount = () => {
         )}
 
         <hr className={s.hr} />
-        <p>Номер телефона</p>
+        <p className={s.gridText}>Номер телефона</p>
         {edit ? (
           <input
             type="tel"
@@ -48,7 +48,7 @@ const PersonalAccount = () => {
         )}
 
         <hr className={s.hr} />
-        <p>Email</p>
+        <p className={s.gridText}>Email</p>
         {edit ? (
           <input
             type="email"

@@ -16,6 +16,9 @@ const TagsFilter = () => {
   const getDisplayValue = (key: string, value: any) => {
     if (value === "fulfilled") return "Готово";
     if (value === "pending") return "В процессе";
+    if (value === "archive") return "Архив";
+    if (value === "rejected") return "Отказ";
+    if (value === "active") return "Активные";
     if (key === "date") return new Date(value).toLocaleDateString("ru-RU");
     return value;
   };

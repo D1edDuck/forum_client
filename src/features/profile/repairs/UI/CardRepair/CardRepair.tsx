@@ -57,7 +57,7 @@ const CardRepair = (rep: IRepair) => {
   ];
 
   return (
-    <div className={s.card}>
+    <div className={`${s.card}  ${open && s.openCard}`}>
       <div className={s.title} onClick={() => setHidden(!hidden)}>
         <span>Заявка #{rep.id}</span>
         <div className={s.arr}>

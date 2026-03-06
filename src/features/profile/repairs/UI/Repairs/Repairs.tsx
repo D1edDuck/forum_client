@@ -16,6 +16,7 @@ const Repairs = () => {
   const { repairs } = useAppSelector((state) => state.repair);
   const role = useAppSelector((state) => state.user.user?.role);
   const repsRef = useRef<HTMLDivElement>(null);
+  const filters = useAppSelector((state) => state.repair.formValue);
 
   return (
     <div className={s.block}>
@@ -38,11 +39,12 @@ const Repairs = () => {
               </FilterButton>
             ))}
           </div>
-
-          <div>
-            <TagsFilter />
-            <ButtonReset />
-          </div>
+          {Object.keys(filters).length !== 0 && (
+            <div className={s.tagBox}>
+              <TagsFilter />
+              <ButtonReset />
+            </div>
+          )}
         </>
       )}
 
@@ -51,7 +53,6 @@ const Repairs = () => {
           <>
             <div className={s.scrollInfo}>
               <div className={s.scrollIndicator}>
-                <span className={s.scrollDot}></span>
                 <span className={s.scrollText}>Всего заявок:</span>
               </div>
               <span className={s.scrollCount}>{repairs.length}</span>

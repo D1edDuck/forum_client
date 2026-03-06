@@ -5,21 +5,23 @@ import { ServiceInfo } from "@/features/Home/ListServiceHome/ListServiceHome";
 const ServiceCard = ({ info }: { info: ServiceInfo }) => {
   return (
     <Link to={`/${info.path}`} className={s.card}>
-      <div className={s.imageWrapper}>
-        <img src={info.image} alt={info.name} className={s.image} />
-        <div className={s.overlay}>
-          <span className={s.icon}>{info.icon}</span>
-        </div>
-      </div>
-
-      <div className={s.content}>
-        <h3 className={s.title}>{info.name}</h3>
-        <p className={s.description}>{info.description}</p>
-        {info.stats && (
-          <div className={s.stats}>
-            <span>{info.stats}</span>
+      <div className={s.box}>
+        <div className={s.imageWrapper}>
+          <img src={info.image} alt={info.name} className={s.image} />
+          <div className={s.overlay}>
+            <span className={s.icon}>{info.icon}</span>
           </div>
-        )}
+        </div>
+
+        <div className={s.content}>
+          <h3 className={s.title}>{info.name}</h3>
+          <p className={s.description}>{info.description}</p>
+          {info.stats && (
+            <div className={s.stats}>
+              <span>{info.stats}</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={s.arrow}>

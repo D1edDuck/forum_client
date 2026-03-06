@@ -15,13 +15,13 @@ export const registerUser = createAsyncThunk<
     const res = await apiClient<IUserWithToken, IFormValue>(
       "users/register",
       "POST",
-      data
+      data,
     );
 
     Cookies.set(TOKEN_KEY, res.token, {
       expires: 2,
-      secure: true,
-      sameSite: "Strict",
+      secure: false,
+      sameSite: "Lax",
       path: "/",
     });
 
@@ -42,12 +42,12 @@ export const loginUser = createAsyncThunk<
     const res = await apiClient<IUserWithToken, IFormValue>(
       "users/login",
       "POST",
-      data
+      data,
     );
 
     Cookies.set(TOKEN_KEY, res.token, {
       expires: 2,
-      secure: true,
+      secure: false,
       sameSite: "Strict",
       path: "/",
     });

@@ -18,7 +18,7 @@ export interface IFilterData {
 
 interface IProps {
   inputs: IInput[];
-  variant: "left" | "right";
+  variant: "left" | "right" | "center";
   defaultValue?: string;
   tittleBtn?: string;
   formKey?: number;

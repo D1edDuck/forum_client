@@ -182,6 +182,16 @@
   z-index: 1;
 }
 
+.feedback {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.btn {
+  align-content: center;
+}
+
 @media (max-width: 992px) {
   .grid {
     grid-template-columns: 1fr;
@@ -415,7 +425,6 @@
   }
 
   .stats {
-    flex-direction: column;
     gap: 2rem;
   }
 }
