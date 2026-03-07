@@ -25,7 +25,7 @@ function App() {
     if (user?.id && initialized) {
       if (user.role === "user") {
         dispatch(repairsUser(user.id));
-      } else dispatch(repairAdmin());
+      } else if (user.role === "admin") dispatch(repairAdmin());
     }
   }, [dispatch, user?.id, user?.role, initialized]);
 

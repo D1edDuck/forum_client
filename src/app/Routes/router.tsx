@@ -123,9 +123,7 @@ const router = createBrowserRouter([
         path: "/profile",
         element: (
           <ProtectedRoute>
-            <SuspenseWrapper>
-              <ProfilePage />
-            </SuspenseWrapper>
+            <ProfilePage />
           </ProtectedRoute>
         ),
         children: [
