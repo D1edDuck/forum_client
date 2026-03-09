@@ -127,7 +127,6 @@ export const deletedProduct = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedProduct", async ({ id }, { rejectWithValue }) => {
   try {
-    console.log(id);
     await apiClient<void>(`products/${id}`, "DELETE", undefined);
     return { id };
   } catch (error: unknown) {
@@ -155,7 +154,6 @@ export const deletedUser = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedUser", async ({ id }, { rejectWithValue }) => {
   try {
-    console.log(id);
     await apiClient<void>(`users/${id}`, "DELETE", undefined);
     return { id };
   } catch (error: unknown) {
@@ -183,7 +181,6 @@ export const deletedCategory = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedCategory", async ({ id }, { rejectWithValue }) => {
   try {
-    console.log(id);
     await apiClient<void>(`category/${id}`, "DELETE", undefined);
     return { id };
   } catch (error: unknown) {

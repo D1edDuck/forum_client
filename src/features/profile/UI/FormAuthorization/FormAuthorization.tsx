@@ -1,12 +1,10 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { resetValue } from "../../userSlice";
 import FormLayout from "../FormLayout/FormLayout";
-import { loginUser } from "../../userThunk";
 import { IFields } from "../FormRegistration/FormRegistration";
 import { useNavigate } from "react-router-dom";
-import { useFormInput } from "../../hooks/useFormInput";
-import { openModal } from "@/UI/Modal/modalSlice";
+import { inputValue, resetValue, validateForm } from "../../userSlice";
+import { loginUser } from "../../userThunk";
 
 const loginFields: IFields[] = [
   { name: "phone", type: "tel", required: true, label: "Номер телефона" },
@@ -15,24 +13,33 @@ const loginFields: IFields[] = [
 
 const FormAuthorization = () => {
   const navigate = useNavigate();
-  const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
 
-  const { handleChange } = useFormInput();
+  const { formValue, loading, error, validationErrors, isFormValid } =
+    useAppSelector((state) => state.user);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch(inputValue({ id: name, value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      await dispatch(loginUser(formData)).unwrap();
-      dispatch(resetValue());
-      navigate("/profile");
-    } catch (err) {
-      dispatch(
-        openModal({ tittle: "Ошибка", status: "error", text: err as string })
-      );
-      console.error("Ошибка авторизации:", err);
+    dispatch(validateForm("login"));
+
+    if (isFormValid) {
+      dispatch(loginUser(formValue)).then((res) => {
+        if (res.type === "user/login/fulfilled") {
+          dispatch(resetValue());
+          navigate("/profile");
+        }
+      });
     }
+  };
+
+  const getFieldError = (fieldName: string) => {
+    return validationErrors.find((err) => err.field === fieldName)?.message;
   };
 
   return (
@@ -42,9 +49,13 @@ const FormAuthorization = () => {
       linkBefore="Нет аккаунта?"
       linkText="Регистрация"
       linkTo="/registration"
-      handleSubmit={handleSubmit}
+      formData={formValue}
       handleChange={handleChange}
-      formData={formData}
+      handleSubmit={handleSubmit}
+      loading={loading}
+      error={error}
+      getFieldError={getFieldError}
+      isFormValid={isFormValid}
     />
   );
 };

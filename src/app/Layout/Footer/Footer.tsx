@@ -31,14 +31,6 @@ const Footer = () => {
           </p>
           <p>forumcom@bk.ru</p>
         </div>
-
-        <div className={s.map}>
-          <iframe
-            className={s.frame}
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A91677008f39a4178d5bba2b4ed40a45ae78c19e10b929179352d0f211580bc8d&amp;source=constructor"
-            title="Yandex Map"
-          ></iframe>
-        </div>
       </div>
     </footer>
   );

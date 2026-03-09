@@ -1,8 +1,6 @@
 import AddForm from "../../UI/AddForm/AddForm";
 import { useParams } from "react-router-dom";
 import { ICatalog, IProduct, IRepair } from "@/api/type";
-import { registerUser } from "@/features/profile/userThunk";
-import { IFormValue } from "@/features/profile/userSlice";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { createProduct } from "@/features/products/productsThunks";
 import { createRepair } from "@/features/profile/repairs/repairThunk";
@@ -10,12 +8,11 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useEffect } from "react";
 import { createCategory, fetchCatalog } from "@/features/catalog/catalogThunk";
 
-export type FormType = "product" | "repair" | "user" | "category";
+export type FormType = "product" | "repair" | "category";
 
 export type FormDataMap = {
   product: IProduct;
   repair: IRepair;
-  user: IFormValue;
   category: ICatalog;
 };
 
@@ -39,16 +36,12 @@ const AddPage = () => {
         dispatch(createProduct(data as IProduct));
         break;
       case "repair":
-        console.log(data);
         dispatch(
           createRepair({
             ...data,
             userId,
-          } as Omit<IRepair, "id" | "created_at" | "user">)
+          } as Omit<IRepair, "id" | "created_at" | "user">),
         );
-        break;
-      case "user":
-        dispatch(registerUser(data as IFormValue));
         break;
       case "category":
         dispatch(createCategory(data as Omit<ICatalog, "id">));

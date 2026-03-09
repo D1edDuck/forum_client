@@ -3,6 +3,7 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { editAccount } from "../userThunk";
 import { IFormValue } from "../userSlice";
+import { openModal } from "@/UI/Modal/modalSlice";
 
 const useEditAccount = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -20,9 +21,30 @@ const useEditAccount = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSave = () => {
-    dispatch(editAccount(formData as Partial<IFormValue>));
-    setEdit(false);
+  const handleSave = async () => {
+    try {
+      const result = await dispatch(
+        editAccount(formData as Partial<IFormValue>),
+      ).unwrap();
+
+      setEdit(false);
+
+      dispatch(
+        openModal({
+          tittle: "Успех",
+          status: "fulfilled",
+          text: `Данные успешно обновлены: ${result}`,
+        }),
+      );
+    } catch (error) {
+      dispatch(
+        openModal({
+          tittle: "Ошибка",
+          status: "error",
+          text: `${error}`,
+        }),
+      );
+    }
   };
 
   return {

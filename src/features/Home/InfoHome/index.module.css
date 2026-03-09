@@ -1,3 +1,10 @@
+.hero,
+.section {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -39,12 +46,10 @@
   color: var(--text-secondary);
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
-  animation: slideUp 0.5s ease forwards;
 }
 
 .title {
   margin-bottom: 2rem;
-  animation: slideUp 0.6s ease forwards;
 }
 
 .titleGradient {
@@ -72,7 +77,6 @@
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 3rem;
-  animation: slideUp 0.7s ease forwards;
 }
 
 .highlight {
@@ -98,7 +102,6 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 4rem;
-  animation: slideUp 0.8s ease forwards;
 }
 
 .statItem {
@@ -128,7 +131,6 @@
   display: flex;
   gap: 2rem;
   margin-bottom: 4rem;
-  animation: slideUp 0.9s ease forwards;
 }
 
 .primaryButton {
@@ -143,26 +145,6 @@
   transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
-}
-
-.primaryButton::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.6s,
-    height 0.6s;
-}
-
-.primaryButton:hover::before {
-  width: 300px;
-  height: 300px;
 }
 
 .primaryButton:hover {
@@ -206,7 +188,6 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  animation: slideUp 1s ease forwards;
 }
 
 .socialText {
@@ -263,7 +244,6 @@
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.15;
-  animation: pulse 4s ease-in-out infinite;
 }
 
 .computerImg {
@@ -271,7 +251,6 @@
   width: 80%;
   max-width: 500px;
   height: auto;
-  animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
 }
 
@@ -282,7 +261,6 @@
   width: 40%;
   max-width: 250px;
   height: auto;
-  animation: float 5s ease-in-out infinite reverse;
   filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
 }
 
@@ -298,7 +276,6 @@
   justify-content: center;
   color: var(--text-secondary);
   backdrop-filter: blur(10px);
-  animation: float 3s ease-in-out infinite;
   z-index: 10;
 }
 
@@ -311,31 +288,26 @@
 .floatingIcon.printer {
   top: 20%;
   left: 10%;
-  animation-delay: 0s;
 }
 
 .floatingIcon.cpu {
   top: 30%;
   right: 15%;
-  animation-delay: 0.5s;
 }
 
 .floatingIcon.laptopIcon {
   bottom: 30%;
   left: 5%;
-  animation-delay: 1s;
 }
 
 .floatingIcon.save {
   bottom: 20%;
   right: 20%;
-  animation-delay: 1.5s;
 }
 
 .floatingIcon.display {
   top: 15%;
   left: 25%;
-  animation-delay: 2s;
 }
 
 .floatingIcon:hover {
@@ -357,7 +329,6 @@
   );
   border-radius: 50%;
   z-index: 1;
-  animation: rotate 20s linear infinite;
 }
 
 .gradientOrb2 {
@@ -373,49 +344,6 @@
   );
   border-radius: 50%;
   z-index: 1;
-  animation: rotate 15s linear infinite reverse;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 0.15;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.25;
-    transform: scale(1.1);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 @media (max-width: 1024px) {

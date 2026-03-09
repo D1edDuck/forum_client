@@ -17,13 +17,6 @@ const formConfig = {
     },
   ],
 
-  user: [
-    { name: "name", label: "Имя", type: "text", required: true },
-    { name: "email", label: "Email", type: "email", required: true },
-    { name: "phone", label: "Номер телефона", type: "tel", required: true },
-    { name: "password", label: "Пароль", type: "password", required: true },
-  ],
-
   product: [
     { name: "name", label: "Название", type: "text", required: true },
     { name: "brand", label: "Бренд", type: "text", required: true },

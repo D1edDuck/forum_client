@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function useModalForm<T extends { id: number | string }>() {
+function useModalForm<T>() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editItem, setEditItem] = useState<T | null>(null);
 

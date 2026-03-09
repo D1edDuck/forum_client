@@ -301,7 +301,13 @@ function ModalForm<T extends { id: number | string }>({
                       typeof item[typedKey] === "number" ? "number" : "text"
                     }
                     defaultValue={formatValueForInput(value)}
-                    disabled={key === "id"}
+                    disabled={
+                      key === "id" ||
+                      key === "userId" ||
+                      key === "created_at" ||
+                      key === "user" ||
+                      key === "categoryId"
+                    }
                     onChange={(e) =>
                       handleInputChange(typedKey, e.target.value)
                     }

@@ -2,14 +2,13 @@ import { formatDate } from "@/app/hooks/formatDate";
 import s from "./index.module.css";
 import ModalForm from "../ModalForm/ModalForm";
 import useModalForm from "../../hooks/useModalForm";
-import { IUserRep } from "@/api/type";
 
-type TableProps<T extends { id: number; user?: IUserRep }> = {
+type TableProps<T extends { id: number; email?: string }> = {
   data: T[];
   handleDelete?: (id: number) => void;
 };
 
-function Table<T extends { id: number; user?: IUserRep }>({
+function Table<T extends { id: number; email?: string }>({
   data,
   handleDelete,
 }: TableProps<T>) {
@@ -83,8 +82,6 @@ function Table<T extends { id: number; user?: IUserRep }>({
     return String(value);
   };
 
-  console.log(data[0]);
-
   return (
     <div className={s.tableContainer}>
       <table className={s.table}>
@@ -98,7 +95,7 @@ function Table<T extends { id: number; user?: IUserRep }>({
                   .replace(/_/g, " ")}
               </th>
             ))}
-            {data[0]?.user && <th className={s.th}>Действия</th>}
+            {!data[0]?.email && <th className={s.th}>Действия</th>}
           </tr>
         </thead>
         <tbody>
@@ -109,7 +106,7 @@ function Table<T extends { id: number; user?: IUserRep }>({
                   {renderCellValue(column, row[column])}
                 </td>
               ))}
-              {data[0]?.user && (
+              {!data[0]?.email && (
                 <td className={s.tdActions}>
                   <button
                     className={s.editBtn}

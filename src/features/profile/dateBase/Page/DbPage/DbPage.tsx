@@ -121,7 +121,6 @@ const DbPage = () => {
         </div>
 
         <div className={s.tableActions}>
-          <button className={`${s.actionButton} ${s.primary}`}>Добавить</button>
           <button className={s.actionButton}>Экспорт</button>
         </div>
       </div>

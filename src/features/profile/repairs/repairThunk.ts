@@ -75,7 +75,7 @@ export const repairFilter = createAsyncThunk<
     const res = await apiClient<IRepair[], IValue>(
       "repair/filter",
       "POST",
-      filter
+      filter,
     );
 
     return res;
@@ -111,7 +111,7 @@ export const editStatus = createAsyncThunk<
     const res = await apiClient<IRepair, { status: string }>(
       `repair/status/${id}`,
       "PATCH",
-      { status }
+      { status },
     );
 
     return res;
@@ -179,7 +179,6 @@ export const deletedRepairs = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedRepairs", async ({ id }, { rejectWithValue }) => {
   try {
-    console.log(id);
     await apiClient<void>(`repair/${id}`, "DELETE", undefined);
     return { id };
   } catch (error: unknown) {

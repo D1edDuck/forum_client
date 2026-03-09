@@ -1,3 +1,19 @@
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form {
+  animation: slideUp 0.4s ease forwards;
+  width: 80%;
+}
+
 .title {
   font-size: 2.4rem;
   font-weight: 700;
@@ -26,6 +42,16 @@
   transition: color var(--transition-fast);
 }
 
+.required {
+  color: #dc3545;
+  margin-left: 4px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
 .input {
   width: 100%;
   height: 5rem;
@@ -37,6 +63,10 @@
   color: var(--text-primary);
   transition: all var(--transition-fast);
   outline: none;
+}
+
+.passwordInput {
+  padding-right: 5rem !important;
 }
 
 .input:focus {
@@ -52,9 +82,53 @@
   color: var(--text-tertiary);
 }
 
-.input:focus + .label,
-.input:hover + .label {
-  color: var(--accent-blue);
+.input.error {
+  border-color: #dc3545;
+}
+
+.input.error:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.eyeButton {
+  position: absolute;
+  right: -6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  z-index: 2;
+}
+
+.eyeButton svg {
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+.serverError {
+  color: #dc3545;
+  background: #fff3f3;
+  border-radius: 100px;
+  padding: 1.2rem;
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .button {
@@ -132,42 +206,14 @@
   width: 100%;
 }
 
-.error {
-  margin-top: 2rem;
-  padding: 1.2rem;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid var(--accent-red);
-  border-radius: 100px;
-  color: var(--accent-red);
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-/* Анимации */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form {
-  animation: slideUp 0.4s ease forwards;
-}
-
-/* Адаптивность */
 @media (max-width: 768px) {
-  .form {
-    padding: 2.5rem;
-  }
-
   .title {
     font-size: 2.2rem;
     margin-bottom: 2rem;
+  }
+
+  .eyeButton {
+    right: -0.5rem;
   }
 
   .input {
@@ -187,10 +233,6 @@
 }
 
 @media (max-width: 480px) {
-  .form {
-    padding: 2rem;
-  }
-
   .title {
     font-size: 2rem;
   }
@@ -204,6 +246,10 @@
     font-size: 1.4rem;
   }
 
+  .passwordInput {
+    padding-right: 4.5rem;
+  }
+
   .button {
     height: 4.5rem;
     font-size: 1.4rem;
@@ -214,7 +260,20 @@
     gap: 0.5rem;
   }
 
-  .error {
+  .eyeButton {
+    right: -0.5rem;
+  }
+
+  .eyeButton svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .errorMessage {
+    font-size: 1.1rem;
+  }
+
+  .serverError {
     padding: 1rem;
     font-size: 1.3rem;
   }

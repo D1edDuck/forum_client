@@ -9,14 +9,14 @@ interface IProps {
 
 const LinkCategory = ({ cat }: IProps) => {
   return (
-    <div className={s.category} key={cat.id}>
-      <div>{cat.name}</div>
-      <div className={s.arr}>
-        <Link to={`${cat.id}/${cat.slug}`}>
+    <Link to={`${cat.id}/${cat.slug}`}>
+      <div className={s.category} key={cat.id}>
+        <div>{cat.name}</div>
+        <div className={s.arr}>
           <Arrow color="w" size="l" open={false} />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,55 +1,101 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
-import FormLayout from "../FormLayout/FormLayout";
-import { resetValue } from "../../userSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { registerUser } from "../../userThunk";
 import { useNavigate } from "react-router-dom";
-import { useFormInput } from "../../hooks/useFormInput";
+import { inputValue, resetValue, validateForm } from "../../userSlice";
+import { registerUser } from "../../userThunk";
+import FormLayout from "../FormLayout/FormLayout";
 
 export interface IFields {
   name: string;
-  type: string;
-  required: boolean;
   label: string;
+  type: string;
+  required?: boolean;
   placeholder?: string;
 }
 
-const registrationFields: IFields[] = [
-  { name: "name", type: "text", required: true, label: "Имя" },
-  { name: "email", type: "email", required: true, label: "Email" },
-  { name: "phone", type: "tel", required: true, label: "Номер телефона" },
-  { name: "password", type: "password", required: true, label: "Пароль" },
-];
-
 const FormRegistration = () => {
-  const navigate = useNavigate();
-  const formData = useAppSelector((state) => state.user.formValue);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const { handleChange } = useFormInput();
+  const { formValue, loading, error, validationErrors, isFormValid } =
+    useAppSelector((state) => state.user);
+
+  const fields: IFields[] = [
+    {
+      name: "email",
+      label: "Email",
+      type: "email",
+      required: true,
+      placeholder: "example@mail.com",
+    },
+    {
+      name: "password",
+      label: "Пароль",
+      type: "password",
+      required: true,
+      placeholder: "********",
+    },
+    {
+      name: "confirmPassword",
+      label: "Подтверждение пароля",
+      type: "password",
+      required: true,
+      placeholder: "********",
+    },
+    {
+      name: "name",
+      label: "Имя и фамилия",
+      type: "text",
+      required: true,
+      placeholder: "Иван Иванов",
+    },
+    {
+      name: "phone",
+      label: "Телефон",
+      type: "tel",
+      required: true,
+      placeholder: "+7 (999) 999-99-99",
+    },
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch(inputValue({ id: name, value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      await dispatch(registerUser(formData)).unwrap();
-      dispatch(resetValue());
-      navigate("/profile");
-    } catch (err) {
-      console.error("Ошибка авторизации:", err);
+    dispatch(validateForm("register"));
+
+    if (isFormValid) {
+      dispatch(registerUser(formValue)).then((res) => {
+        if (res.type === "user/registerUser/fulfilled") {
+          dispatch(resetValue());
+          navigate("/profile");
+        }
+      });
     }
+  };
+
+  const getFieldError = (fieldName: string) => {
+    return validationErrors.find((err) => err.field === fieldName)?.message;
   };
 
   return (
     <FormLayout
-      fields={registrationFields}
+      fields={fields}
       buttonText="Зарегистрироваться"
-      linkBefore="Есть аккаунт?"
+      linkBefore="Уже есть аккаунт?"
       linkText="Войти"
       linkTo="/login"
-      handleSubmit={handleSubmit}
+      formData={formValue}
       handleChange={handleChange}
-      formData={formData}
+      handleSubmit={handleSubmit}
+      loading={loading}
+      error={error}
+      getFieldError={getFieldError}
+      isFormValid={isFormValid}
     />
   );
 };

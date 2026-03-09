@@ -3,19 +3,28 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import ScrollToTop from "@/app/hooks/ScrollToTop";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { useMemo } from "react";
 
 const Layout = () => {
   const { initialized } = useAppSelector((state) => state.user);
+
+  const memoizedHeader = useMemo(() => <Header />, []);
+  const memoizedFooter = useMemo(() => <Footer />, []);
+
+  const mainContent = useMemo(() => {
+    return initialized ? <Outlet /> : null;
+  }, [initialized]);
+
   return (
     <div
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
-      <Header />
+      {memoizedHeader}
       <main style={{ flex: 1, minHeight: "80vh" }}>
         <ScrollToTop />
-        {initialized ? <Outlet /> : null}
+        {mainContent}
       </main>
-      <Footer />
+      {memoizedFooter}
     </div>
   );
 };
