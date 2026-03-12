@@ -7,6 +7,12 @@
   background: var(--bg-primary);
 }
 
+.mb {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .title {
   font-size: var(--size-36);
   color: var(--text-primary);

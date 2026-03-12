@@ -1,12 +1,10 @@
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import s from "./index.module.css";
-import { useAppDispatch } from "@/app/hooks/useAppDispatch";
-import { logout } from "../../userSlice";
+
 import { Link, useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const user = useAppSelector((state) => state.user.user);
-  const dispatch = useAppDispatch();
   const location = useLocation();
 
   const isActive = (path: string) => {
@@ -76,11 +74,6 @@ const SideBar = () => {
           );
         })}
       </div>
-
-      <button onClick={() => dispatch(logout())} className={s.logoutBtn}>
-        <span>Выйти</span>
-        <span className={s.logoutIcon}>→</span>
-      </button>
     </div>
   );
 };

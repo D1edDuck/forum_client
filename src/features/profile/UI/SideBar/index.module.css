@@ -61,7 +61,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 2.5rem;
 }
 
 .linkItem {
@@ -115,43 +114,6 @@
   letter-spacing: 0.05em;
 }
 
-.logoutBtn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 1.5rem;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--accent-red);
-  border-radius: var(--radius-15);
-  color: var(--text-secondary);
-  font-size: 1.6rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  margin-top: 1rem;
-}
-
-.logoutBtn:hover {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: var(--accent-red);
-  color: var(--accent-red);
-  transform: translateY(-2px);
-}
-
-.logoutBtn:active {
-  transform: translateY(0);
-}
-
-.logoutIcon {
-  font-size: 2rem;
-  transition: transform var(--transition-fast);
-}
-
-.logoutBtn:hover .logoutIcon {
-  transform: translateX(5px);
-}
-
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -192,11 +154,6 @@
     font-size: 1.8rem;
     min-width: 2.2rem;
   }
-
-  .logoutBtn {
-    padding: 1rem 1.2rem;
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -227,7 +184,6 @@
 
   .links {
     gap: 0.6rem;
-    margin-bottom: 2rem;
   }
 
   .linkItem a {
@@ -243,15 +199,6 @@
   .adminBadge {
     font-size: 1rem;
     padding: 0.2rem 0.6rem;
-  }
-
-  .logoutBtn {
-    padding: 0.9rem 1rem;
-    font-size: 1.4rem;
-  }
-
-  .logoutIcon {
-    font-size: 1.8rem;
   }
 }
 
@@ -296,14 +243,5 @@
   .adminBadge {
     font-size: 0.9rem;
     padding: 0.2rem 0.4rem;
-  }
-
-  .logoutBtn {
-    padding: 0.8rem;
-    font-size: 1.3rem;
-  }
-
-  .logoutIcon {
-    font-size: 1.6rem;
   }
 }

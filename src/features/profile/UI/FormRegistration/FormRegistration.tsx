@@ -1,7 +1,12 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useNavigate } from "react-router-dom";
-import { inputValue, resetValue, validateForm } from "../../userSlice";
+import {
+  inputTerms,
+  inputValue,
+  resetValue,
+  validateForm,
+} from "../../userSlice";
 import { registerUser } from "../../userThunk";
 import FormLayout from "../FormLayout/FormLayout";
 
@@ -17,7 +22,7 @@ const FormRegistration = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { formValue, loading, error, validationErrors, isFormValid } =
+  const { formValue, loading, error, validationErrors, isFormValid, terms } =
     useAppSelector((state) => state.user);
 
   const fields: IFields[] = [
@@ -60,22 +65,36 @@ const FormRegistration = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    dispatch(inputValue({ id: name, value }));
+    dispatch(
+      inputValue({
+        id: name,
+        value: value,
+      }),
+    );
+  };
+
+  const termsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(inputTerms(e.target.checked));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(validateForm("register"));
-
-    if (isFormValid) {
-      dispatch(registerUser(formValue)).then((res) => {
-        if (res.type === "user/registerUser/fulfilled") {
-          dispatch(resetValue());
-          navigate("/profile");
-        }
-      });
-    }
+    console.log(terms, isFormValid);
+    setTimeout(() => {
+      if (isFormValid && terms) {
+        const { ...dataToSend } = formValue;
+        dispatch(registerUser(dataToSend)).then((res) => {
+          if (res.type === "user/registerUser/fulfilled") {
+            dispatch(resetValue());
+            navigate("/profile");
+          }
+        });
+      } else {
+        console.log("Форма невалидна или не приняты условия");
+      }
+    }, 100);
   };
 
   const getFieldError = (fieldName: string) => {
@@ -96,6 +115,8 @@ const FormRegistration = () => {
       error={error}
       getFieldError={getFieldError}
       isFormValid={isFormValid}
+      terms={terms}
+      termsChange={termsChange}
     />
   );
 };

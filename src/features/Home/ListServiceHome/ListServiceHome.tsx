@@ -9,25 +9,22 @@ export interface ServiceInfo {
   path: string;
   description: string;
   image: string;
-  icon: string;
   stats: string;
 }
 
 const service: ServiceInfo = {
   name: "Сервис",
   path: "service/repair",
-  description: "Профессиональный ремонт любой сложности",
+  description: "Профессиональный ремонт ",
   image: "/img/card-1.png",
-  icon: "🔧",
   stats: "1500+ ремонтов",
 };
 
 const booking: ServiceInfo = {
   name: "Запись",
   path: "booking",
-  description: "Удобная онлайн-запись на ремонт",
+  description: "Удобная онлайн-запись",
   image: "/img/card-2.png",
-  icon: "📅",
   stats: "24/7 бронирование",
 };
 
@@ -36,7 +33,6 @@ const catalog: ServiceInfo = {
   path: "catalog",
   description: "Комплектующие и периферия",
   image: "/img/card-3.png",
-  icon: "📦",
   stats: "5000+ товаров",
 };
 
@@ -45,7 +41,6 @@ const about: ServiceInfo = {
   path: "about",
   description: "15 лет опыта и 5000+ клиентов",
   image: "/img/card-4.png",
-  icon: "⭐",
   stats: "98% довольных",
 };
 
@@ -111,22 +106,15 @@ const ListServiceHome = () => {
             </p>
           </div>
           <div className={s.feedback}>
-            <p className={s.text}>
-              Есть вопросы?
-              <br />
-              <span
-                style={{
-                  color: "var(--accent-blue)",
-                  fontSize: "2.4rem",
-                  fontWeight: 700,
-                }}
-              >
+            <div className={s.text}>
+              <span>Есть вопросы?</span>
+              <span>
                 <Link to="/booking">Спросите нас!</Link>
               </span>
-            </p>
+            </div>
             <p className={s.btn}>
               <Link to="/booking">
-                <ButtonConnect title="Связаться с нами" primary="soft" />
+                <ButtonConnect title="Написать" primary="soft" />
               </Link>
             </p>
           </div>

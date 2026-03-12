@@ -36,7 +36,7 @@ const ButtonLink: FC<path> = ({
 
   if (path) {
     return (
-      <div>
+      <div className={s.box}>
         <NavLink className={buttonClasses} to={path} onClick={onClick}>
           {loading && <span className={s.spinner} />}
           {title}
@@ -46,7 +46,7 @@ const ButtonLink: FC<path> = ({
   }
 
   return (
-    <div>
+    <div className={s.box}>
       <button
         className={buttonClasses}
         onClick={onClick}

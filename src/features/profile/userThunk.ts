@@ -100,33 +100,38 @@ export const quickLogin = createAsyncThunk<
 export const editAccount = createAsyncThunk<
   Omit<IUserWithToken, "token">,
   Partial<IFormValue>,
-  { rejectValue: string }
+  {
+    rejectValue: {
+      message: string;
+      errors?: Array<{ field: string; message: string }>;
+    };
+  }
 >("user/edit", async (data, { rejectWithValue }) => {
   try {
     const res = await apiClient<
       Omit<IUserWithToken, "token">,
       Partial<IFormValue>
     >(`users/edit/${data.id}`, "PATCH", data);
+
     return res;
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
+    let errors = undefined;
 
-    if (error instanceof Error) {
-      message = error.message;
-    } else if (
-      typeof error === "object" &&
-      error !== null &&
-      "response" in error
-    ) {
+    if (typeof error === "object" && error !== null && "response" in error) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
+
       message = err.response?.data?.message || message;
+      errors = err.response?.data?.errors;
+    } else if (error instanceof Error) {
+      message = error.message;
     }
 
     if (message === "Unauthorized" || message.includes("401")) {
       Cookies.remove(TOKEN_KEY);
     }
 
-    return rejectWithValue(message);
+    return rejectWithValue({ message, errors });
   }
 });

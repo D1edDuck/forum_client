@@ -37,10 +37,6 @@
   z-index: 6;
 }
 
-.title:hover {
-  color: var(--accent-blue);
-}
-
 .arr {
   display: flex;
   align-items: center;
@@ -155,7 +151,6 @@
 
 .active {
   background: rgba(34, 132, 197, 0.1);
-  color: var(--accent-blue);
   border: 1px solid var(--accent-blue);
 }
 

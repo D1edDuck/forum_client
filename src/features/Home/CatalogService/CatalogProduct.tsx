@@ -7,7 +7,7 @@ const CatalogService = () => {
 
   return (
     <section className={s.section}>
-      <div className="container pb mb">
+      <div className="container mb">
         <h2 className={s.title}>Каталог товаров</h2>
         <div className={s.grid}>
           <Link to={"/catalog/1/computers"}>

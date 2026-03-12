@@ -33,7 +33,6 @@ const BookingForm = ({ user }: IProps) => {
           <label htmlFor="cause">Причина обращения</label>
           <select
             id="cause"
-            defaultValue=""
             className={s.input}
             required
             onChange={(e) => {
@@ -43,7 +42,11 @@ const BookingForm = ({ user }: IProps) => {
             value={urlCause || cause}
           >
             {causes.map((c) => (
-              <option value={c.value} disabled={c.disabled}>
+              <option
+                value={c.value}
+                disabled={c.disabled}
+                key={`option-${c.value}`}
+              >
                 {c.label}
               </option>
             ))}

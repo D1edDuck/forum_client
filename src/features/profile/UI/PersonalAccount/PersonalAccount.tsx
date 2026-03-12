@@ -1,10 +1,19 @@
 import s from "./index.module.css";
 import { logout } from "../../userSlice";
 import useEditAccount from "../../hooks/useEditAccount";
+import { formatPhoneNumber } from "@/app/hooks/formatPhone";
 
 const PersonalAccount = () => {
-  const { dispatch, edit, setEdit, formData, handleChange, handleSave, user } =
-    useEditAccount();
+  const {
+    dispatch,
+    edit,
+    setEdit,
+    formData,
+    handleChange,
+    handleSave,
+    handleCancel,
+    user,
+  } = useEditAccount();
 
   if (!user) {
     return (
@@ -44,7 +53,9 @@ const PersonalAccount = () => {
             placeholder="Введите номер телефона"
           />
         ) : (
-          <p className={s.info}>{user.phone || "Не указано"}</p>
+          <p className={s.info}>
+            {formatPhoneNumber(user.phone) || "Не указано"}
+          </p>
         )}
 
         <hr className={s.hr} />
@@ -69,7 +80,7 @@ const PersonalAccount = () => {
             <button className={s.edit} onClick={handleSave}>
               Сохранить
             </button>
-            <button className={s.logout} onClick={() => setEdit(false)}>
+            <button className={s.logout} onClick={handleCancel}>
               Отмена
             </button>
           </>

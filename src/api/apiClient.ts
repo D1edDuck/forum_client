@@ -21,13 +21,20 @@ export async function apiClient<T, TBody = undefined>(
   const responseData = isJson ? await res.json() : await res.text();
 
   if (!res.ok) {
-    if (isJson && responseData.message) {
-      throw new Error(responseData.message);
-    }
-    if (isJson) {
-      throw new Error(JSON.stringify(responseData));
-    }
-    throw new Error(responseData || `Ошибка запроса: ${res.status}`);
+    const error = new Error(
+      isJson && responseData.message
+        ? responseData.message
+        : `Ошибка запроса: ${res.status}`,
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (error as any).response = {
+      data: responseData,
+      status: res.status,
+      statusText: res.statusText,
+    };
+
+    throw error;
   }
 
   return responseData as T;

@@ -252,6 +252,7 @@
   max-width: 500px;
   height: auto;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+  animation: float 6s ease-in-out infinite;
 }
 
 .laptopImg {
@@ -262,6 +263,7 @@
   max-width: 250px;
   height: auto;
   filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+  animation: float 5s ease-in-out infinite reverse;
 }
 
 .floatingIcon {
@@ -277,37 +279,43 @@
   color: var(--text-secondary);
   backdrop-filter: blur(10px);
   z-index: 10;
+  animation: float 3s ease-in-out infinite;
 }
 
 .floatingIcon svg {
   width: 4rem;
   height: 4rem;
-  fill: currentColor;
+  fill: red;
 }
 
 .floatingIcon.printer {
   top: 20%;
   left: 10%;
+  animation-delay: 0s;
 }
 
 .floatingIcon.cpu {
   top: 30%;
   right: 15%;
+  animation-delay: 0.5s;
 }
 
 .floatingIcon.laptopIcon {
   bottom: 30%;
   left: 5%;
+  animation-delay: 1s;
 }
 
 .floatingIcon.save {
   bottom: 20%;
   right: 20%;
+  animation-delay: 1.5s;
 }
 
 .floatingIcon.display {
   top: 15%;
   left: 25%;
+  animation-delay: 2s;
 }
 
 .floatingIcon:hover {
@@ -449,5 +457,15 @@
 
   .badge {
     font-size: 1.4rem;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
   }
 }

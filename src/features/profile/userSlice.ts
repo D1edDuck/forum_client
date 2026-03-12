@@ -8,11 +8,12 @@ export interface IFormValue {
   email: string;
   phone: string;
   password: string;
+  confirmPassword: string;
   [key: string]: string | undefined;
 }
 
 interface ValidationError {
-  field: keyof IFormValue;
+  field: string;
   message: string;
 }
 
@@ -23,8 +24,9 @@ interface UserState {
   loading: boolean;
   error: string | null;
   formValue: IFormValue;
-  validationErrors: ValidationError[];
+  validationErrors: Array<{ field: string; message: string }>;
   isFormValid: boolean;
+  terms?: boolean;
 }
 
 const initialState: UserState = {
@@ -38,9 +40,11 @@ const initialState: UserState = {
     password: "",
     phone: "+7",
     email: "",
+    confirmPassword: "",
   },
   validationErrors: [],
   isFormValid: false,
+  terms: false,
 };
 
 const userSlice = createSlice({
@@ -53,6 +57,12 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
       state.initialized = true;
+      state.terms = false;
+      state.formValue.email = "";
+      state.formValue.name = "";
+      state.formValue.password = "";
+      state.formValue.phone = "";
+      state.formValue.confirmPassword = "";
       Cookies.remove("jwt");
     },
 
@@ -65,15 +75,24 @@ const userSlice = createSlice({
 
       validateField(state, id, value);
     },
+
+    inputTerms(state, action: PayloadAction<boolean>) {
+      state.terms = action.payload;
+
+      validateField(state, "terms", action.payload);
+    },
+
     resetValue(state) {
       state.formValue = {
         name: "",
         email: "",
         phone: "+7",
         password: "",
+        confirmPassword: "",
       };
       state.validationErrors = [];
       state.isFormValid = false;
+      state.terms = false;
     },
 
     clearValidationErrors(state) {
@@ -149,7 +168,8 @@ const userSlice = createSlice({
       })
       .addCase(editAccount.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Неизвестная Ошибка";
+        state.error = action.payload?.message || "Неизвестная Ошибка";
+        state.validationErrors = action.payload?.errors || [];
       });
   },
 });
@@ -243,8 +263,8 @@ function validatePhone(phone: string): {
 
 function validateField(
   state: UserState,
-  field: keyof IFormValue,
-  value: string,
+  field: keyof IFormValue | "terms",
+  value: string | boolean,
 ) {
   state.validationErrors = state.validationErrors.filter(
     (e) => e.field !== field,
@@ -252,91 +272,107 @@ function validateField(
 
   let error: ValidationError | null = null;
 
-  switch (field) {
-    case "email":
-      if (!value) {
-        error = { field, message: "Email обязателен" };
-      } else {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-          error = { field, message: "Неверный формат email" };
+  if (field === "terms") {
+    if (typeof value !== "boolean") {
+      error = { field, message: "Некорректное значение согласия" };
+    } else if (!value) {
+      error = {
+        field,
+        message: "Необходимо принять условия пользовательского соглашения",
+      };
+    }
+  } else {
+    switch (field) {
+      case "email":
+        if (typeof value !== "string" || !value) {
+          error = { field, message: "Email обязателен" };
+        } else {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            error = { field, message: "Неверный формат email" };
+          }
         }
-      }
-      break;
+        break;
 
-    case "password":
-      if (!value) {
-        error = { field, message: "Пароль обязателен" };
-      } else {
-        const strength = checkPasswordStrength(value);
+      case "password":
+        if (typeof value !== "string" || !value) {
+          error = { field, message: "Пароль обязателен" };
+        } else {
+          const strength = checkPasswordStrength(value);
 
-        if (value.length < PASSWORD_REQUIREMENTS.minLength) {
-          error = {
-            field,
-            message: `Пароль должен быть минимум ${PASSWORD_REQUIREMENTS.minLength} символов`,
-          };
-        } else if (!strength.requirements.uppercase) {
-          error = {
-            field,
-            message: "Пароль должен содержать хотя бы одну заглавную букву",
-          };
-        } else if (!strength.requirements.lowercase) {
-          error = {
-            field,
-            message: "Пароль должен содержать хотя бы одну строчную букву",
-          };
-        } else if (!strength.requirements.numbers) {
-          error = {
-            field,
-            message: "Пароль должен содержать хотя бы одну цифру",
-          };
+          if (value.length < PASSWORD_REQUIREMENTS.minLength) {
+            error = {
+              field,
+              message: `Пароль должен быть минимум ${PASSWORD_REQUIREMENTS.minLength} символов`,
+            };
+          } else if (!strength.requirements.uppercase) {
+            error = {
+              field,
+              message:
+                "Пароль должен содержать хотя бы одну заглавную букву (ENG)",
+            };
+          } else if (!strength.requirements.lowercase) {
+            error = {
+              field,
+              message:
+                "Пароль должен содержать хотя бы одну строчную букву (ENG)",
+            };
+          } else if (!strength.requirements.numbers) {
+            error = {
+              field,
+              message: "Пароль должен содержать хотя бы одну цифру",
+            };
+          }
         }
-      }
-      break;
+        break;
 
-    case "name":
-      if (!value) {
-        error = { field, message: "Имя обязательно" };
-      } else if (value.length < 2) {
-        error = { field, message: "Имя должно содержать минимум 2 символа" };
-      } else if (value.length > 50) {
-        error = { field, message: "Имя не должно превышать 50 символов" };
-      } else if (!/^[a-zA-Zа-яА-Я\s-]+$/.test(value)) {
-        error = {
-          field,
-          message: "Имя может содержать только буквы, пробелы и дефис",
-        };
-      }
-      break;
-
-    case "phone":
-      if (!value) {
-        error = { field, message: "Телефон обязателен" };
-      } else {
-        const phoneValidation = validatePhone(value);
-        state.formValue.phone = phoneValidation.formatted;
-
-        if (!phoneValidation.isValid) {
+      case "name":
+        if (typeof value !== "string" || !value) {
+          error = { field, message: "Имя обязательно" };
+        } else if (value.length < 2) {
+          error = { field, message: "Имя должно содержать минимум 2 символа" };
+        } else if (value.length > 50) {
+          error = { field, message: "Имя не должно превышать 50 символов" };
+        } else if (!/^[a-zA-Zа-яА-Я\s-]+$/.test(value)) {
           error = {
             field,
-            message: phoneValidation.error || "Неверный формат телефона",
+            message: "Имя может содержать только буквы, пробелы и дефис",
           };
         }
-      }
-      break;
+        break;
+
+      case "phone":
+        if (typeof value !== "string" || !value) {
+          error = { field, message: "Телефон обязателен" };
+        } else {
+          const phoneValidation = validatePhone(value);
+          state.formValue.phone = phoneValidation.formatted;
+
+          if (!phoneValidation.isValid) {
+            error = {
+              field,
+              message: phoneValidation.error || "Неверный формат телефона",
+            };
+          }
+        }
+        break;
+
+      case "confirmPassword":
+        break;
+    }
   }
 
   if (error) {
     state.validationErrors.push(error);
   }
 
+  // Проверка совпадения паролей (всегда строки)
   if (field === "confirmPassword" || field === "password") {
     const password = state.formValue.password;
     const confirm = state.formValue.confirmPassword;
 
     state.validationErrors = state.validationErrors.filter(
-      (e) =>
-        e.field !== "confirmPassword" || e.message !== "Пароли не совпадают",
+      (e) => e.field !== "confirmPassword",
     );
 
     if (password && confirm && password !== confirm) {
@@ -349,7 +385,6 @@ function validateField(
 
   state.isFormValid = state.validationErrors.length === 0;
 }
-
 function validateAllFields(state: UserState, formType: string) {
   state.validationErrors = [];
 
@@ -435,6 +470,13 @@ function validateAllFields(state: UserState, formType: string) {
         message: "Пароли не совпадают",
       });
     }
+
+    if (!state.terms) {
+      state.validationErrors.push({
+        field: "terms",
+        message: "Необходимо принять условия пользовательского соглашения",
+      });
+    }
   }
 
   if (formType === "login") {
@@ -461,5 +503,6 @@ export const {
   resetValue,
   clearValidationErrors,
   validateForm,
+  inputTerms,
 } = userSlice.actions;
 export default userSlice.reducer;

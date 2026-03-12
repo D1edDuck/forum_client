@@ -2,8 +2,13 @@ import { useState } from "react";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { editAccount } from "../userThunk";
-import { IFormValue } from "../userSlice";
+import { IFormValue, resetValue } from "../userSlice";
 import { openModal } from "@/UI/Modal/modalSlice";
+
+type ErrorWithMessage = {
+  message: string;
+  errors?: Array<{ field: string; message: string }>;
+};
 
 const useEditAccount = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -21,29 +26,58 @@ const useEditAccount = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleCancel = () => {
+    setEdit(false);
+    dispatch(resetValue());
+  };
+
   const handleSave = async () => {
     try {
-      const result = await dispatch(
-        editAccount(formData as Partial<IFormValue>),
-      ).unwrap();
+      await dispatch(editAccount(formData as Partial<IFormValue>)).unwrap();
 
       setEdit(false);
-
       dispatch(
         openModal({
           tittle: "Успех",
           status: "fulfilled",
-          text: `Данные успешно обновлены: ${result}`,
+          text: `Данные успешно обновлены`,
         }),
       );
     } catch (error) {
-      dispatch(
-        openModal({
-          tittle: "Ошибка",
-          status: "error",
-          text: `${error}`,
-        }),
-      );
+      const typedError = error as ErrorWithMessage;
+
+      if (typedError.errors && Array.isArray(typedError.errors)) {
+        const errorsMap: Record<string, string> = {};
+        typedError.errors.forEach((err) => {
+          errorsMap[err.field] = err.message;
+        });
+
+        const errorMessages = Object.values(errorsMap).join("\n  ");
+
+        dispatch(
+          openModal({
+            tittle: "Ошибка валидации",
+            status: "error",
+            text: errorMessages || "Ошибка валидации",
+          }),
+        );
+      } else if (typedError.message) {
+        dispatch(
+          openModal({
+            tittle: "Ошибка",
+            status: "error",
+            text: typedError.message,
+          }),
+        );
+      } else {
+        dispatch(
+          openModal({
+            tittle: "Ошибка",
+            status: "error",
+            text: "Неизвестная ошибка",
+          }),
+        );
+      }
     }
   };
 
@@ -53,6 +87,7 @@ const useEditAccount = () => {
     formData,
     handleChange,
     handleSave,
+    handleCancel,
     dispatch,
     user,
   };

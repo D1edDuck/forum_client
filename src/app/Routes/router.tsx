@@ -4,6 +4,7 @@ import Layout from "@/app/Layout/Layout";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import SuspenseWrapper from "./SuspenseWrapper";
+import TermsPage from "@/pages/terms/TermsPage";
 
 const HomePage = lazy(() => import("@/features/Home/Page/HomePage"));
 const CatalogPage = lazy(() => import("@/features/catalog/Page/CatalogPage"));
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           </SuspenseWrapper>
         ),
       },
+      { path: "/terms", element: <TermsPage /> },
       {
         path: "/catalog",
         element: (

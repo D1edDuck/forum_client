@@ -55,7 +55,7 @@ const useForm = ({ user }: IProps) => {
         dispatch(
           openModal({
             tittle: "Успешно!",
-            text: "Ваша заявка успешно отправлена. Вам перезвонят для подтверждения заявки",
+            text: "Вам перезвонят для подтверждения заявки",
             status: "fulfilled",
           }),
         );
@@ -63,11 +63,10 @@ const useForm = ({ user }: IProps) => {
         dispatch(
           openModal({
             tittle: "Ошибка",
-            text: "Не удалось отправить заявку. Попробуйте позже.",
+            text: `Не удалось отправить заявку. Попробуйте позже. ${err}`,
             status: "error",
           }),
         );
-        console.log(err);
       } finally {
         dispatch(hideLoading());
         dispatch(resetValue());

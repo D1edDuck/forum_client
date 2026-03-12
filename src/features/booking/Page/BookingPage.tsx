@@ -13,8 +13,8 @@ const BookingPage = () => {
         <NavigateLine />
         <h1 className={s.title}>Оставить заявку на услугу</h1>
         <div className={s.bookingPage}>
-          <BookingForm user={user} />
-          <Contacts />
+          <BookingForm user={user} key={`Booking-${user?.id}`} />
+          <Contacts key={`Contacts=${user?.id}`} />
         </div>
       </div>
     </div>

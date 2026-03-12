@@ -176,6 +176,10 @@
     margin: 1.5rem 0;
   }
 
+  .wrapper {
+    flex-direction: column;
+  }
+
   .wrapper > *:global(.btn-link) {
     padding: 0.8rem 1.6rem;
     font-size: 1.4rem;

@@ -18,6 +18,8 @@ interface IProps {
   validationErrors?: Record<string, string>;
   getFieldError?: (fieldName: string) => string | undefined;
   isFormValid?: boolean;
+  terms?: boolean;
+  termsChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormLayout = ({
@@ -33,6 +35,8 @@ const FormLayout = ({
   loading,
   getFieldError,
   isFormValid,
+  terms,
+  termsChange,
 }: IProps) => {
   const [showPasswords, setShowPasswords] = useState<Record<string, boolean>>(
     {},
@@ -120,6 +124,32 @@ const FormLayout = ({
             );
           })}
         </div>
+        {terms !== undefined && (
+          <div className={s.checkboxWrapper}>
+            <label className={s.checkboxLabel}>
+              <input
+                type="checkbox"
+                className={`${s.checkbox} ${getFieldError?.("terms") ? s.error : ""}`}
+                name="terms"
+                id="terms"
+                required
+                checked={terms}
+                onChange={termsChange}
+                disabled={loading}
+              />
+              <span className={s.checkboxText}>
+                Я принимаю условия{" "}
+                <Link to="/terms" target="_blank" className={s.termsLink}>
+                  пользовательского соглашения
+                </Link>
+                <span className={s.required}>*</span>
+              </span>
+            </label>
+            {getFieldError?.("terms") && (
+              <span className={s.errorMessage}>{getFieldError("terms")}</span>
+            )}
+          </div>
+        )}
         {error && <p className={s.errorMessage}>{error}</p>}
         <button
           type="submit"

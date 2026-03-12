@@ -30,7 +30,7 @@ const ServicePage = () => {
 
   return (
     <section className={s.serviceFlex}>
-      <div className={`container dlex mb pb`}>
+      <div className={`container dlex ${s.mb} pb`}>
         <NavigateLine />
         <p className={s.title}>Список наших услуг</p>
         <NavigateTabs />
