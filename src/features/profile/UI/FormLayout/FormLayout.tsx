@@ -1,8 +1,9 @@
-import { IFormValue } from "../../userSlice";
+import { IFormValue, resetValue } from "../../userSlice";
 import { IFields } from "../FormRegistration/FormRegistration";
 import s from "./index.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 
 interface IProps {
   fields: IFields[];
@@ -54,6 +55,10 @@ const FormLayout = ({
       fieldType === "password" || fieldName.toLowerCase().includes("password")
     );
   };
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(resetValue());
+  }, [dispatch]);
 
   return (
     <div className={s.form}>

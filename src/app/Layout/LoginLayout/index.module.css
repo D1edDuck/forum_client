@@ -86,18 +86,6 @@
   position: relative;
 }
 
-.block::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--gradient-telegram);
-  opacity: 0.3;
-  z-index: 1;
-}
-
 .form {
   display: flex;
   align-items: center;
@@ -106,6 +94,7 @@
   background: var(--bg-secondary);
   position: relative;
   z-index: 2;
+  margin: 0 auto;
 }
 
 .right {

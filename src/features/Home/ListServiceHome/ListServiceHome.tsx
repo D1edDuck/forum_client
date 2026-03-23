@@ -10,6 +10,7 @@ export interface ServiceInfo {
   description: string;
   image: string;
   stats: string;
+  icon?: React.ReactNode;
 }
 
 const service: ServiceInfo = {
@@ -97,26 +98,27 @@ const ListServiceHome = () => {
         </div>
 
         <div className={s.divider} />
-
-        <div className={`grid aic ${s.grid}`}>
-          <div className={s.glass}>
-            <p className={s.text}>
-              Вы можете быть уверены в восстановлении работоспособности вашей
-              техники.
-            </p>
-          </div>
-          <div className={s.feedback}>
-            <div className={s.text}>
-              <span>Есть вопросы?</span>
-              <span>
-                <Link to="/booking">Спросите нас!</Link>
-              </span>
+        <div className={s.feed}>
+          <div className={`grid aic ${s.grid}`}>
+            <div className={s.glass}>
+              <p className={s.text}>
+                Вы можете быть уверены в восстановлении работоспособности вашей
+                техники.
+              </p>
             </div>
-            <p className={s.btn}>
-              <Link to="/booking">
-                <ButtonConnect title="Написать" primary="soft" />
-              </Link>
-            </p>
+            <div className={s.feedback}>
+              <div className={s.text}>
+                <span>Есть вопросы?</span>
+                <span>
+                  <Link to="/booking">Спросите нас!</Link>
+                </span>
+              </div>
+              <p className={s.btn}>
+                <Link to="/booking">
+                  <ButtonConnect title="Написать" primary="soft" />
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

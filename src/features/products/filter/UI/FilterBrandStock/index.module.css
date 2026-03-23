@@ -1,5 +1,3 @@
-/* index.module.css - для FilterBrandStock */
-
 .block {
   position: relative;
   width: fit-content;
@@ -278,7 +276,6 @@
   }
 }
 
-/* Стили для скролла */
 .form::-webkit-scrollbar {
   width: 4px;
 }

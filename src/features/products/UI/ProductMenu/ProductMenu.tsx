@@ -16,7 +16,7 @@ const ProductMenu = () => {
 
   return (
     <div className={s.menu}>
-      <div className={`flex aic gap ${s.flex}`}>
+      <div className={`flex aic gap20 ${s.flex}`}>
         <h2 className={s.title}>Категория</h2>
         <p className={s.count}>{count.products} товаров найдено</p>
       </div>
