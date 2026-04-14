@@ -112,6 +112,7 @@ export const editStatus = createAsyncThunk<
       `repair/status/${id}`,
       "PATCH",
       { status },
+      { Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}` },
     );
 
     return res;
@@ -179,7 +180,9 @@ export const deletedRepairs = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedRepairs", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`repair/${id}`, "DELETE", undefined);
+    await apiClient<void>(`repair/${id}`, "DELETE", undefined, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";

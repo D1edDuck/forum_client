@@ -1,6 +1,9 @@
 import { ICategory, IFilter, IProduct } from "@/api/type";
 import { apiClient } from "@/api/apiClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
+
+const TOKEN_KEY = "jwt";
 
 interface IFilterWithCategory extends Omit<IFilter, "loading" | "error"> {
   categoryId: string;
@@ -16,7 +19,7 @@ export const fetchProducts = createAsyncThunk<ICategory, string>(
   async (id) => {
     const res = await apiClient<ICategory>(`category/${id}`);
     return res;
-  }
+  },
 );
 
 export const fetchProductsSearch = createAsyncThunk<IProduct[], string>(
@@ -24,7 +27,7 @@ export const fetchProductsSearch = createAsyncThunk<IProduct[], string>(
   async (q) => {
     const res = await apiClient<IProduct[]>(`products/search?q=${q}`);
     return res;
-  }
+  },
 );
 
 export const createProduct = createAsyncThunk<IProduct, Partial<IProduct>>(
@@ -36,9 +39,11 @@ export const createProduct = createAsyncThunk<IProduct, Partial<IProduct>>(
       if (value !== undefined) fd.append(key, value as any);
     });
 
-    const res = await apiClient<IProduct, FormData>("products", "POST", fd);
+    const res = await apiClient<IProduct, FormData>("products", "POST", fd, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
     return res;
-  }
+  },
 );
 
 export const fetchProductsFilter = createAsyncThunk<
@@ -55,7 +60,7 @@ export const fetchProductsFilter = createAsyncThunk<
   if (filter.maxValue) params.append("maxValue", filter.maxValue.toString());
 
   const res = await apiClient<IProductsResponse>(
-    `products/filter?${params.toString()}`
+    `products/filter?${params.toString()}`,
   );
   return res;
 });

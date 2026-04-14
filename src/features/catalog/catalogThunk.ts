@@ -1,13 +1,16 @@
 import { ICatalog } from "@/api/type";
 import { apiClient } from "@/api/apiClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
+
+const TOKEN_KEY = "jwt";
 
 export const fetchCatalog = createAsyncThunk<ICatalog[], void>(
   "catalog/fetchCatalog",
   async () => {
     const res = await apiClient<ICatalog[]>(`category`);
     return res;
-  }
+  },
 );
 
 export const createCategory = createAsyncThunk<
@@ -16,10 +19,14 @@ export const createCategory = createAsyncThunk<
   { rejectValue: string }
 >("db/createCategory", async (data, { rejectWithValue }) => {
   try {
+    const token = Cookies.get(TOKEN_KEY);
+    if (!token) return rejectWithValue("Нет токена");
+
     const res = await apiClient<ICatalog, Omit<ICatalog, "id">>(
       "category",
       "POST",
-      data
+      data,
+      { Authorization: `Bearer ${token}` },
     );
     return res;
   } catch (error: unknown) {

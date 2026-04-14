@@ -111,7 +111,9 @@ export const editAccount = createAsyncThunk<
     const res = await apiClient<
       Omit<IUserWithToken, "token">,
       Partial<IFormValue>
-    >(`users/edit/${data.id}`, "PATCH", data);
+    >(`users/edit/${data.id}`, "PATCH", data, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
 
     return res;
   } catch (error: unknown) {

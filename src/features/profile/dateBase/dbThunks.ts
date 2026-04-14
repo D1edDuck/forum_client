@@ -127,7 +127,9 @@ export const deletedProduct = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedProduct", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`products/${id}`, "DELETE", undefined);
+    await apiClient<void>(`products/${id}`, "DELETE", undefined, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -154,7 +156,9 @@ export const deletedUser = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedUser", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`users/${id}`, "DELETE", undefined);
+    await apiClient<void>(`users/${id}`, "DELETE", undefined, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -181,7 +185,9 @@ export const deletedCategory = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedCategory", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`category/${id}`, "DELETE", undefined);
+    await apiClient<void>(`category/${id}`, "DELETE", undefined, {
+      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
+    });
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";

@@ -5,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import SuspenseWrapper from "./SuspenseWrapper";
 import TermsPage from "@/pages/terms/TermsPage";
+import { RoleCheck } from "./RoleCheck";
 
 const HomePage = lazy(() => import("@/features/Home/Page/HomePage"));
 const CatalogPage = lazy(() => import("@/features/catalog/Page/CatalogPage"));
@@ -152,25 +153,31 @@ const router = createBrowserRouter([
           {
             path: "datebase",
             element: (
-              <SuspenseWrapper>
-                <DateBase />
-              </SuspenseWrapper>
+              <RoleCheck>
+                <SuspenseWrapper>
+                  <DateBase />
+                </SuspenseWrapper>
+              </RoleCheck>
             ),
           },
           {
             path: "add/:type",
             element: (
-              <SuspenseWrapper>
-                <AddPage />
-              </SuspenseWrapper>
+              <RoleCheck>
+                <SuspenseWrapper>
+                  <AddPage />
+                </SuspenseWrapper>
+              </RoleCheck>
             ),
           },
           {
             path: "datebase/:type",
             element: (
-              <SuspenseWrapper>
-                <DbPage />
-              </SuspenseWrapper>
+              <RoleCheck>
+                <SuspenseWrapper>
+                  <DbPage />
+                </SuspenseWrapper>
+              </RoleCheck>
             ),
           },
         ],
