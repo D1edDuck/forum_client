@@ -29,7 +29,8 @@ const SideBar = () => {
     return false;
   };
 
-  const getInitials = (name: string) => {
+  const getInitials = (name: string | null) => {
+    if (!name) return "??";
     return name
       .split(" ")
       .map((word) => word[0])
@@ -49,7 +50,7 @@ const SideBar = () => {
   return (
     <div className={s.card}>
       <div className={s.userHeader}>
-        <div className={s.avatar}>{getInitials(user.name as string)}</div>
+        <div className={s.avatar}>{getInitials(user.name)}</div>
         <div className={s.userInfo}>
           <h3 className={s.userName}>{user.name}</h3>
           <span className={s.userRole}>

@@ -1,10 +1,8 @@
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { useNavigate } from "react-router-dom";
 import {
   inputTerms,
   inputValue,
-  resetValue,
   validateForm,
 } from "../../userSlice";
 import { registerUser } from "../../userThunk";
@@ -20,7 +18,6 @@ export interface IFields {
 
 const FormRegistration = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const { formValue, loading, error, validationErrors, isFormValid, terms } =
     useAppSelector((state) => state.user);
@@ -81,20 +78,20 @@ const FormRegistration = () => {
     e.preventDefault();
 
     dispatch(validateForm("register"));
-    console.log(terms, isFormValid);
-    setTimeout(() => {
-      if (isFormValid && terms) {
-        const { ...dataToSend } = formValue;
-        dispatch(registerUser(dataToSend)).then((res) => {
-          if (res.type === "user/registerUser/fulfilled") {
-            dispatch(resetValue());
-            navigate("/profile");
-          }
-        });
-      } else {
-        console.log("Форма невалидна или не приняты условия");
-      }
-    }, 100);
+
+    if (loading) return;
+
+    const hasRequired =
+      formValue.email &&
+      formValue.password &&
+      formValue.name &&
+      formValue.phone &&
+      formValue.password === formValue.confirmPassword &&
+      terms;
+
+    if (hasRequired) {
+      await dispatch(registerUser(formValue));
+    }
   };
 
   const getFieldError = (fieldName: string) => {

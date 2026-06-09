@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useMemo, useCallback } from "react";
 import useClients from "../../hooks/useClients";
 import Table from "../../UI/Table/Table";
 import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
@@ -10,6 +10,7 @@ import { deletedRepairs } from "@/features/profile/repairs/repairThunk";
 type TableType = "client" | "repair" | "product" | "category";
 
 const DbPage = () => {
+  const navigate = useNavigate();
   const { users, repairs, products, category, dispatch } = useClients();
   const { type } = useParams<{ type: TableType }>();
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,6 +53,17 @@ const DbPage = () => {
 
     return data;
   }, [tableData, searchQuery]);
+
+  const handleExport = useCallback(() => {
+    const json = JSON.stringify(filteredData, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${tableType}_export.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [filteredData, tableType]);
 
   const getTableTitle = () => {
     const titles = {
@@ -121,7 +133,7 @@ const DbPage = () => {
         </div>
 
         <div className={s.tableActions}>
-          <button className={s.actionButton}>Экспорт</button>
+          <button className={s.actionButton} onClick={handleExport}>Экспорт</button>
         </div>
       </div>
 
@@ -160,7 +172,10 @@ const DbPage = () => {
           <h3 className={s.emptyStateTitle}>{emptyState.title}</h3>
           <p className={s.emptyStateText}>{emptyState.text}</p>
           {!searchQuery && (
-            <button className={s.emptyStateButton}>
+            <button
+              className={s.emptyStateButton}
+              onClick={() => navigate(`/profile/add/${type}`)}
+            >
               Добавить {getTableTitle().slice(0, -1)}
             </button>
           )}

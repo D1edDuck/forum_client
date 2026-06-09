@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk<
 
     Cookies.set(TOKEN_KEY, res.token, {
       expires: 2,
-      secure: false,
+      secure: import.meta.env.PROD,
       sameSite: "Lax",
       path: "/",
     });
@@ -47,7 +47,7 @@ export const loginUser = createAsyncThunk<
 
     Cookies.set(TOKEN_KEY, res.token, {
       expires: 2,
-      secure: false,
+      secure: import.meta.env.PROD,
       sameSite: "Strict",
       path: "/",
     });

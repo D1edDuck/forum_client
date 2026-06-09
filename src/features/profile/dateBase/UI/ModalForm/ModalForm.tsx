@@ -21,6 +21,7 @@ function ModalForm<T extends { id: number | string }>({
   const [formData, setFormData] = useState<FormData<T>>(item);
   const [imagePreview, setImagePreview] = useState<Record<string, string>>({});
   const [uploading, setUploading] = useState<Record<string, boolean>>({});
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [currentImageField, setCurrentImageField] = useState<string | null>(
     null,
@@ -59,13 +60,15 @@ function ModalForm<T extends { id: number | string }>({
     const file = e.target.files?.[0];
     if (!file || !currentImageField || !onImageUpload) return;
 
+    setError(null);
+
     if (!file.type.startsWith("image/")) {
-      alert("Пожалуйста, выберите изображение");
+      setError("Пожалуйста, выберите изображение");
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      alert("Размер файла не должен превышать 5MB");
+      setError("Размер файла не должен превышать 5MB");
       return;
     }
 
@@ -82,9 +85,8 @@ function ModalForm<T extends { id: number | string }>({
         ...prev,
         [typedKey]: imageUrl as T[keyof T],
       }));
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Ошибка при загрузке изображения");
+    } catch {
+      setError("Ошибка при загрузке изображения");
       setImagePreview((prev) => {
         const newPrev = { ...prev };
         delete newPrev[currentImageField];
@@ -162,6 +164,18 @@ function ModalForm<T extends { id: number | string }>({
     return "элемента";
   };
 
+  const sanitizeImageUrl = (url: string): string | null => {
+    try {
+      const parsed = new URL(url, window.location.origin);
+      if (parsed.protocol === "javascript:" || parsed.protocol === "data:") {
+        return null;
+      }
+      return url;
+    } catch {
+      return url.startsWith("/") || url.startsWith("http") ? url : null;
+    }
+  };
+
   const formatLabel = (key: string): string => {
     return key
       .replace(/([A-Z])/g, " $1")
@@ -208,11 +222,12 @@ function ModalForm<T extends { id: number | string }>({
             const typedKey = key as keyof T;
 
             if (isImageField(key)) {
-              const imageUrl =
+              const rawUrl =
                 imagePreview[key] ||
                 (typeof value === "string" && value
                   ? `${import.meta.env.VITE_API_URL_IMAGE}${value}`
                   : null);
+              const imageUrl = rawUrl ? sanitizeImageUrl(rawUrl) : null;
 
               return (
                 <div key={key} className={s.inputGroup}>
@@ -324,6 +339,8 @@ function ModalForm<T extends { id: number | string }>({
               </div>
             );
           })}
+
+          {error && <div className={s.errorMessage}>{error}</div>}
 
           <div className={s.modalActions}>
             <button type="button" onClick={closeEdit} className={s.cancelBtn}>

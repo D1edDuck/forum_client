@@ -58,8 +58,8 @@ const Repairs = () => {
               <span className={s.scrollCount}>{repairs.length}</span>
             </div>
 
-            {repairs.map((rep, idx) => (
-              <CardRepair key={idx} {...rep} />
+            {repairs.map((rep) => (
+              <CardRepair key={rep.id} {...rep} />
             ))}
 
             <div className={s.scrollHint}>

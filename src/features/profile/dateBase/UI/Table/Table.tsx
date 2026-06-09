@@ -132,8 +132,7 @@ function Table<T extends { id: number; email?: string }>({
         <ModalForm<T>
           closeEdit={closeEdit}
           item={editItem}
-          onSave={(updatedItem) => {
-            console.log("Saved:", updatedItem);
+          onSave={(_updatedItem) => {
             closeEdit();
           }}
         />

@@ -2,6 +2,7 @@ import { ICategory, IProduct } from "@/api/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   createProduct,
+  fetchProductById,
   fetchProducts,
   fetchProductsFilter,
   fetchProductsSearch,
@@ -10,11 +11,14 @@ import {
 
 interface IProductData {
   products: IProduct[];
+  currentProduct: IProduct | null;
   count: {
     products: number;
   };
   loading: boolean;
+  currentLoading: boolean;
   error: null | string;
+  currentError: null | string;
 }
 
 const initialState: IProductData = {
@@ -22,8 +26,11 @@ const initialState: IProductData = {
     products: 0,
   },
   products: [],
+  currentProduct: null,
   loading: false,
+  currentLoading: false,
   error: null,
+  currentError: null,
 };
 
 const productSlice = createSlice({
@@ -101,6 +108,25 @@ const productSlice = createSlice({
         state.loading = false;
         state.error =
           (action.error.message as string) || "Ошибка создания продукта";
+      });
+
+    builder
+      .addCase(fetchProductById.pending, (state) => {
+        state.currentLoading = true;
+        state.currentError = null;
+        state.currentProduct = null;
+      })
+      .addCase(
+        fetchProductById.fulfilled,
+        (state, action: PayloadAction<IProduct>) => {
+          state.currentLoading = false;
+          state.currentProduct = action.payload;
+        },
+      )
+      .addCase(fetchProductById.rejected, (state, action) => {
+        state.currentLoading = false;
+        state.currentError =
+          (action.payload as string) || "Ошибка загрузки товара";
       });
   },
 });

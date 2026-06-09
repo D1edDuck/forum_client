@@ -15,9 +15,11 @@ import { useSearchParams } from "react-router-dom";
 
 const useForm = ({ user }: IProps) => {
   const dispatch = useAppDispatch();
-  const { name, comment, email, phone, cause } = useAppSelector(
-    (state) => state.booking,
-  );
+  const name = useAppSelector((state) => state.booking.name);
+  const comment = useAppSelector((state) => state.booking.comment);
+  const email = useAppSelector((state) => state.booking.email);
+  const phone = useAppSelector((state) => state.booking.phone);
+  const cause = useAppSelector((state) => state.booking.cause);
 
   const [causeParams, setCauseParams] = useSearchParams();
   const urlCause = causeParams.get("cause") || "";
@@ -45,10 +47,12 @@ const useForm = ({ user }: IProps) => {
         userId: user.id,
       };
 
+      const controller = new AbortController();
+
       try {
         dispatch(showLoading("Отправка заявки..."));
 
-        await apiClient("repair", "POST", repair);
+        await apiClient("repair", "POST", repair, undefined, controller.signal);
         if (user.role === "user") await dispatch(repairsUser(user.id));
         else await dispatch(repairAdmin());
 
@@ -60,10 +64,11 @@ const useForm = ({ user }: IProps) => {
           }),
         );
       } catch (err) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
         dispatch(
           openModal({
             tittle: "Ошибка",
-            text: `Не удалось отправить заявку. Попробуйте позже. ${err}`,
+            text: "Не удалось отправить заявку. Попробуйте позже.",
             status: "error",
           }),
         );

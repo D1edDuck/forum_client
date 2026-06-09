@@ -21,7 +21,7 @@ export interface ValidationRule {
     | "maxLength"
     | "match"
     | "custom";
-  value?: any;
+  value?: unknown;
   message?: string;
   matchField?: string;
 }

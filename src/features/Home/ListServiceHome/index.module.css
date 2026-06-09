@@ -50,6 +50,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .gridCart {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 480px) {
   .text {
     font-size: 1.6rem;

@@ -75,7 +75,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/product",
+        path: "/product/:id",
         element: (
           <SuspenseWrapper>
             <ProductPage />
@@ -92,11 +92,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/service",
-        element: (
-          <SuspenseWrapper>
-            <ServicePage />
-          </SuspenseWrapper>
-        ),
+        element: <Navigate to="/service/repair" replace />,
       },
       {
         path: "/booking",
@@ -183,15 +179,6 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "*",
-        element: (
-          <SuspenseWrapper>
-            <NotFoundPage />
-          </SuspenseWrapper>
-        ),
-      },
-
-      {
         path: "/",
         element: (
           <SuspenseWrapper>
@@ -220,6 +207,14 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: "*",
+        element: (
+          <SuspenseWrapper>
+            <NotFoundPage />
+          </SuspenseWrapper>
+        ),
       },
     ],
   },

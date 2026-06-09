@@ -39,13 +39,18 @@ const ProductCard = ({ product }: Props) => {
         </span>
       </div>
       <div className={s.content}>
-        <h3 className={s.price}>{product.price.toLocaleString()} ₽</h3>
+        <h3 className={s.price}>{(product.price ?? 0).toLocaleString()} ₽</h3>
         <h4 className={s.name}>{product.name}</h4>
         <p className={s.desc}>
           {product.description || "Описание отсутствует"}
         </p>
         <div className={s.buttonWrapper}>
-          <ButtonLink title="О товаре" variant="secondary" size="medium" />
+          <ButtonLink
+            title="О товаре"
+            variant="secondary"
+            size="medium"
+            path={`/product/${product.id}`}
+          />
         </div>
       </div>
     </article>

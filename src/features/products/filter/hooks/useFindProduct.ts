@@ -18,8 +18,8 @@ export const useFindProduct = () => {
       dispatch(showLoading("Поиск товара.."));
       dispatch(setSearch(query));
       await dispatch(fetchProductsSearch(query)).unwrap();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      // ошибка уже обрабатывается в слайсе
     } finally {
       dispatch(hideLoading());
     }

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { ICatalog } from "@/api/type";
 import { FormDataMap, FormType } from "../../Page/AddPage/AddPage";
 import formConfig from "./fieldList";
@@ -18,6 +19,7 @@ const AddForm = <T extends FormType>({
   onSubmit,
   categories,
 }: IProps<T>) => {
+  const navigate = useNavigate();
   const loading = useAppSelector((state) => state.db.loading);
 
   const fields = formConfig[type].map((f) => {
@@ -168,7 +170,11 @@ const AddForm = <T extends FormType>({
             <button type="submit" disabled={loading} className={s.primary}>
               {loading ? "Загрузка..." : "Добавить"}
             </button>
-            <button type="button" className={s.secondary}>
+            <button
+              type="button"
+              className={s.secondary}
+              onClick={() => navigate(-1)}
+            >
               Отмена
             </button>
           </div>

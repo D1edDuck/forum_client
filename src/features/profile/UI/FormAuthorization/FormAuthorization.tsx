@@ -2,8 +2,7 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import FormLayout from "../FormLayout/FormLayout";
 import { IFields } from "../FormRegistration/FormRegistration";
-import { useNavigate } from "react-router-dom";
-import { inputValue, resetValue, validateForm } from "../../userSlice";
+import { inputValue, validateForm } from "../../userSlice";
 import { loginUser } from "../../userThunk";
 
 const loginFields: IFields[] = [
@@ -12,7 +11,6 @@ const loginFields: IFields[] = [
 ];
 
 const FormAuthorization = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { formValue, loading, error, validationErrors, isFormValid } =
@@ -28,13 +26,10 @@ const FormAuthorization = () => {
 
     dispatch(validateForm("login"));
 
-    if (isFormValid) {
-      dispatch(loginUser(formValue)).then((res) => {
-        if (res.type === "user/login/fulfilled") {
-          dispatch(resetValue());
-          navigate("/profile");
-        }
-      });
+    if (loading) return;
+
+    if (formValue.phone && formValue.password) {
+      await dispatch(loginUser(formValue));
     }
   };
 

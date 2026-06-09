@@ -213,6 +213,18 @@
   }
 }
 
+@media (max-width: 360px) {
+  .filterWrapper {
+    padding: 0.5rem;
+    margin: 1rem 0;
+    gap: 1rem;
+  }
+
+  .filterRow {
+    gap: 0.6rem;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -6,7 +6,7 @@ const SelectMenu = () => {
   const { loading, error, category } = useMenu();
 
   return (
-    <div className={s.grid}>
+    <div className={s.grid} role="navigation" aria-label="Категории товаров">
       {loading &&
         Array(5)
           .fill(0)

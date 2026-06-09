@@ -32,7 +32,7 @@ const ServicePage = () => {
     <section className={s.serviceFlex}>
       <div className={`container dlex ${s.mb} pb`}>
         <NavigateLine />
-        <p className={s.title}>Список наших услуг</p>
+        <h1 className={s.title}>Список наших услуг</h1>
         <NavigateTabs />
 
         <div className={s.flex}>

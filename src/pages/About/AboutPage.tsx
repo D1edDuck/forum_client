@@ -62,7 +62,7 @@ const AboutPage = () => {
             </ul>
           </div>
           <div className={s.aboutImage}>
-            <img src="/img/card-1.png" alt="Наша мастерская" />
+            <img src="/img/card-1.png" alt="Наша мастерская" loading="lazy" />
           </div>
         </div>
 

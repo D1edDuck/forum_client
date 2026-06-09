@@ -46,6 +46,18 @@ export const createProduct = createAsyncThunk<IProduct, Partial<IProduct>>(
   },
 );
 
+export const fetchProductById = createAsyncThunk<IProduct, number>(
+  "products/fetchProductById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await apiClient<IProduct>(`products/${id}`);
+      return res;
+    } catch {
+      return rejectWithValue("Товар не найден");
+    }
+  },
+);
+
 export const fetchProductsFilter = createAsyncThunk<
   IProductsResponse,
   IFilterWithCategory

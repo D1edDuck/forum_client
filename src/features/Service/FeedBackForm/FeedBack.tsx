@@ -28,7 +28,12 @@ const FeedBack = () => {
               size="medium"
             />
           </Link>
-          <ButtonLink title="Позвоните нам" variant="secondary" size="medium" />
+          <ButtonLink
+            title="Позвоните нам"
+            variant="secondary"
+            size="medium"
+            onClick={() => window.open("tel:+78000000000")}
+          />
         </div>
       </div>
     </div>

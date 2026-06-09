@@ -96,10 +96,16 @@ const InfoHome = () => {
             <div className={s.imageGlow} />
             <img
               src="/img/computer.png"
-              alt="computer"
+              alt="Компьютер в ремонте"
               className={s.computerImg}
+              loading="lazy"
             />
-            <img src="/img/laptop.png" alt="laptop" className={s.laptopImg} />
+            <img
+              src="/img/laptop.png"
+              alt="Ноутбук на диагностике"
+              className={s.laptopImg}
+              loading="lazy"
+            />
 
             <div className={`${s.floatingIcon} ${s.printer}`}>
               <svg>

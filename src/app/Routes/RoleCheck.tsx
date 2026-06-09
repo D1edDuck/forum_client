@@ -1,21 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { JSX, useEffect, useState } from "react";
+import { JSX, useRef } from "react";
 
 export const RoleCheck = ({ children }: { children: JSX.Element }) => {
   const { user, initialized } = useAppSelector((state) => state.user);
   const location = useLocation();
+  const everInitialized = useRef(initialized);
 
-  const [isReady, setIsReady] = useState(false);
+  if (initialized) everInitialized.current = true;
 
-  useEffect(() => {
-    if (initialized) {
-      const timer = setTimeout(() => setIsReady(true), 50);
-      return () => clearTimeout(timer);
-    }
-  }, [initialized]);
-
-  if (!isReady) return null;
+  if (!everInitialized.current) return null;
 
   if (user?.role !== "admin") {
     return <Navigate to={location.state?.from || "/profile/me"} replace />;
@@ -23,3 +17,5 @@ export const RoleCheck = ({ children }: { children: JSX.Element }) => {
 
   return children;
 };
+
+export default RoleCheck;

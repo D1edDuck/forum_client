@@ -1,24 +1,22 @@
-import { Navigate } from "react-router-dom";
+import { JSX, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { JSX, useEffect, useState } from "react";
 
 export const PublicRoute = ({ children }: { children: JSX.Element }) => {
   const { token, initialized } = useAppSelector((state) => state.user);
-  const [isReady, setIsReady] = useState(false);
+  const navigate = useNavigate();
+  const everInitialized = useRef(initialized);
+
+  if (initialized) everInitialized.current = true;
 
   useEffect(() => {
-    if (initialized) {
-      const timer = setTimeout(() => setIsReady(true), 50);
-      return () => clearTimeout(timer);
+    if (everInitialized.current && token) {
+      navigate("/profile/me", { replace: true });
     }
-  }, [initialized]);
+  }, [token, navigate]);
 
-  if (!isReady) {
+  if (!everInitialized.current) {
     return null;
-  }
-
-  if (token) {
-    return <Navigate to="/profile/me" replace />;
   }
 
   return children;
