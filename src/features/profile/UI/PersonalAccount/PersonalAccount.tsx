@@ -1,5 +1,5 @@
 import s from "./index.module.css";
-import { logout } from "../../userSlice";
+import { logoutUser } from "../../userThunk";
 import useEditAccount from "../../hooks/useEditAccount";
 import { formatPhoneNumber } from "@/app/hooks/formatPhone";
 
@@ -89,7 +89,7 @@ const PersonalAccount = () => {
             <button className={s.edit} onClick={() => setEdit(true)}>
               Редактировать
             </button>
-            <button onClick={() => dispatch(logout())} className={s.logout}>
+            <button onClick={() => dispatch(logoutUser())} className={s.logout}>
               Выйти
             </button>
           </>

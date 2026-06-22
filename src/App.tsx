@@ -3,7 +3,6 @@ import router from "./app/Routes/router";
 import { useAppDispatch } from "./app/hooks/useAppDispatch";
 import { useEffect } from "react";
 import { quickLogin } from "./features/profile/userThunk";
-import Cookies from "js-cookie";
 import { useAppSelector } from "./app/hooks/useAppSelector";
 import {
   repairAdmin,
@@ -15,10 +14,7 @@ function App() {
   const { user, initialized } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    const token = Cookies.get("jwt");
-    if (token) {
-      dispatch(quickLogin());
-    }
+    dispatch(quickLogin());
   }, [dispatch]);
 
   useEffect(() => {

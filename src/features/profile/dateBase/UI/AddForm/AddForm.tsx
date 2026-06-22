@@ -3,13 +3,14 @@ import { ICatalog } from "@/api/type";
 import { FormDataMap, FormType } from "../../Page/AddPage/AddPage";
 import formConfig from "./fieldList";
 import s from "./index.module.css";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
 import React from "react";
 
 interface IProps<T extends FormType> {
   type: T;
   onSubmit: (data: FormDataMap[T]) => void;
   categories?: ICatalog[];
+  loading?: boolean;
+  error?: string | null;
 }
 
 type FieldValue = string | number | File;
@@ -18,9 +19,12 @@ const AddForm = <T extends FormType>({
   type,
   onSubmit,
   categories,
+  loading = false,
+  error = null,
 }: IProps<T>) => {
   const navigate = useNavigate();
-  const loading = useAppSelector((state) => state.db.loading);
+  const formRef = React.useRef<HTMLFormElement>(null);
+  const prevLoading = React.useRef(false);
 
   const fields = formConfig[type].map((f) => {
     if (f.name === "categoryId" && categories) {
@@ -33,6 +37,14 @@ const AddForm = <T extends FormType>({
   });
 
   const [preview, setPreview] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (prevLoading.current && !loading && !error) {
+      formRef.current?.reset();
+      setPreview(null);
+    }
+    prevLoading.current = loading;
+  }, [loading, error]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -71,8 +83,6 @@ const AddForm = <T extends FormType>({
     });
 
     onSubmit(data);
-    form.reset();
-    setPreview(null);
   };
 
   return (
@@ -80,7 +90,7 @@ const AddForm = <T extends FormType>({
       <div className={s.card}>
         <h2 className={s.title}>{type}</h2>
 
-        <form className={s.form} onSubmit={handleSubmit}>
+        <form className={s.form} onSubmit={handleSubmit} ref={formRef}>
           {fields.map((f) => {
             if (f.type === "select") {
               return (
@@ -165,6 +175,8 @@ const AddForm = <T extends FormType>({
               </div>
             );
           })}
+
+          {error && <p className={s.error}>{error}</p>}
 
           <div className={s.actions}>
             <button type="submit" disabled={loading} className={s.primary}>

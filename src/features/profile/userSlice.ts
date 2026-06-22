@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@/api/type";
-import { editAccount, loginUser, quickLogin, registerUser } from "./userThunk";
-import Cookies from "js-cookie";
+import { editAccount, loginUser, logoutUser, quickLogin, registerUser } from "./userThunk";
 
 export interface IFormValue {
   name: string;
@@ -32,7 +31,7 @@ interface UserState {
 const initialState: UserState = {
   user: null,
   token: undefined,
-  initialized: true,
+  initialized: false,
   loading: false,
   error: null,
   formValue: {
@@ -51,7 +50,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout(state) {
+    clearUser(state) {
       state.user = null;
       state.token = undefined;
       state.error = null;
@@ -63,7 +62,6 @@ const userSlice = createSlice({
       state.formValue.password = "";
       state.formValue.phone = "";
       state.formValue.confirmPassword = "";
-      Cookies.remove("jwt");
     },
 
     inputValue(
@@ -148,7 +146,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.initialized = true;
         state.user = action.payload.user;
-        state.token = Cookies.get("jwt");
+        state.token = action.payload.token;
       })
       .addCase(quickLogin.rejected, (state) => {
         state.loading = false;
@@ -170,6 +168,14 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload?.message || "Неизвестная Ошибка";
         state.validationErrors = action.payload?.errors || [];
+      })
+
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.token = undefined;
+        state.error = null;
+        state.loading = false;
+        state.initialized = true;
       });
   },
 });
@@ -498,7 +504,7 @@ function validateAllFields(state: UserState, formType: string) {
 }
 
 export const {
-  logout,
+  clearUser,
   inputValue,
   resetValue,
   clearValidationErrors,

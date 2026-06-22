@@ -1,10 +1,7 @@
 import { apiClient } from "@/api/apiClient";
 import { IRepair } from "@/api/type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 import { IValue } from "./repairSlice";
-
-const TOKEN_KEY = "jwt";
 
 export interface IRepairAll {
   count: number;
@@ -15,12 +12,9 @@ export const repairsUser = createAsyncThunk<
   IRepair[],
   number,
   { rejectValue: string }
->("repair/get", async (user, { rejectWithValue }) => {
+>("repair/get", async (_user, { rejectWithValue }) => {
   try {
-    const repairs = await apiClient<IRepair[]>("repair/me", "GET", undefined, {
-      user: user.toString(),
-    });
-
+    const repairs = await apiClient<IRepair[]>("repair/me");
     return repairs;
   } catch (error) {
     const message =
@@ -35,13 +29,7 @@ export const repairAdmin = createAsyncThunk<
   { rejectValue: string }
 >("repair/getAdmin", async (_, { rejectWithValue }) => {
   try {
-    const token = Cookies.get(TOKEN_KEY);
-    if (!token) return rejectWithValue("Нет токена");
-
-    const res = await apiClient<IRepairAll>("repair", "GET", undefined, {
-      Authorization: `Bearer ${token}`,
-    });
-
+    const res = await apiClient<IRepairAll>("repair");
     return res;
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -53,13 +41,8 @@ export const repairAdmin = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -89,13 +72,8 @@ export const repairFilter = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -112,7 +90,6 @@ export const editStatus = createAsyncThunk<
       `repair/status/${id}`,
       "PATCH",
       { status },
-      { Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}` },
     );
 
     return res;
@@ -126,13 +103,8 @@ export const editStatus = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -161,13 +133,8 @@ export const createRepair = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -180,9 +147,7 @@ export const deletedRepairs = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedRepairs", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`repair/${id}`, "DELETE", undefined, {
-      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
-    });
+    await apiClient<void>(`repair/${id}`, "DELETE");
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -194,7 +159,6 @@ export const deletedRepairs = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }

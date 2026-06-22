@@ -30,7 +30,7 @@ const catalogSlice = createSlice({
       })
       .addCase(fetchCatalog.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ?? "Неизвестная ошибка";
+        state.error = (action.payload as string) ?? action.error.message ?? "Неизвестная ошибка";
       })
       .addCase(createCategory.pending, (state) => {
         state.loading = true;
@@ -41,7 +41,7 @@ const catalogSlice = createSlice({
         state.category.push(action.payload);
       })
       .addCase(createCategory.rejected, (state, action) => {
-        state.error = action.error.message ?? "Неизвестная ошибка";
+        state.error = (action.payload as string) ?? action.error.message ?? "Неизвестная ошибка";
         state.loading = false;
       });
   },

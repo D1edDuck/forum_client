@@ -1,15 +1,17 @@
 import { ICatalog } from "@/api/type";
 import { apiClient } from "@/api/apiClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 
-const TOKEN_KEY = "jwt";
-
-export const fetchCatalog = createAsyncThunk<ICatalog[], void>(
+export const fetchCatalog = createAsyncThunk<ICatalog[], void, { rejectValue: string }>(
   "catalog/fetchCatalog",
-  async () => {
-    const res = await apiClient<ICatalog[]>(`category`);
-    return res;
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await apiClient<ICatalog[]>(`category`);
+      return res;
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Неизвестная ошибка";
+      return rejectWithValue(message);
+    }
   },
 );
 
@@ -19,14 +21,10 @@ export const createCategory = createAsyncThunk<
   { rejectValue: string }
 >("db/createCategory", async (data, { rejectWithValue }) => {
   try {
-    const token = Cookies.get(TOKEN_KEY);
-    if (!token) return rejectWithValue("Нет токена");
-
     const res = await apiClient<ICatalog, Omit<ICatalog, "id">>(
       "category",
       "POST",
       data,
-      { Authorization: `Bearer ${token}` },
     );
     return res;
   } catch (error: unknown) {
@@ -39,7 +37,6 @@ export const createCategory = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }

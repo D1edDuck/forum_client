@@ -1,12 +1,3 @@
-import Cookies from "js-cookie";
-
-const TOKEN_KEY = "jwt";
-
-function handleUnauthorized() {
-  Cookies.remove(TOKEN_KEY);
-  window.location.href = "/login";
-}
-
 export async function apiClient<T, TBody = undefined>(
   endpoint: string,
   method: "PATCH" | "GET" | "PUT" | "DELETE" | "POST" = "GET",
@@ -24,10 +15,12 @@ export async function apiClient<T, TBody = undefined>(
     },
     body: isFormData ? body : body ? JSON.stringify(body) : undefined,
     signal,
+    credentials: "include",
   });
 
-  if (res.status === 401) {
-    handleUnauthorized();
+  const isPublicEndpoint = endpoint === "users/login" || endpoint === "users/register";
+
+  if (res.status === 401 && !isPublicEndpoint) {
     throw new Error("Сессия истекла. Войдите снова.");
   }
 

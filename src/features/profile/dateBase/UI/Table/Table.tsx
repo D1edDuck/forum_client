@@ -6,11 +6,13 @@ import useModalForm from "../../hooks/useModalForm";
 type TableProps<T extends { id: number; email?: string }> = {
   data: T[];
   handleDelete?: (id: number) => void;
+  onUpdate?: (updatedItem: T) => void | Promise<void>;
 };
 
 function Table<T extends { id: number; email?: string }>({
   data,
   handleDelete,
+  onUpdate,
 }: TableProps<T>) {
   const { isModalOpen, handleEdit, closeEdit, editItem } = useModalForm<T>();
 
@@ -132,9 +134,7 @@ function Table<T extends { id: number; email?: string }>({
         <ModalForm<T>
           closeEdit={closeEdit}
           item={editItem}
-          onSave={(_updatedItem) => {
-            closeEdit();
-          }}
+          onSave={onUpdate}
         />
       )}
     </div>

@@ -1,9 +1,6 @@
 import { apiClient } from "@/api/apiClient";
-import { ICatalog, IClient, IProduct } from "@/api/type";
+import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
-
-const TOKEN_KEY = "jwt";
 
 export interface IUsersAll {
   count: number;
@@ -34,11 +31,7 @@ export const fetchUsersAll = createAsyncThunk<
   { rejectValue: string }
 >("db/fetchUsersAll", async (_, { rejectWithValue }) => {
   try {
-    const token = Cookies.get(TOKEN_KEY);
-    if (!token) return rejectWithValue("Нет токена");
-    const res = await apiClient<IUsersAll>("users/all", "GET", undefined, {
-      Authorization: `Bearer ${token}`,
-    });
+    const res = await apiClient<IUsersAll>("users/all", "GET");
     return res;
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -50,13 +43,8 @@ export const fetchUsersAll = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -81,13 +69,8 @@ export const fetchProductsAll = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
-    }
-
-    if (message === "Unauthorized" || message.includes("401")) {
-      Cookies.remove(TOKEN_KEY);
     }
 
     return rejectWithValue(message);
@@ -112,7 +95,6 @@ export const fetchCategoryAll = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }
@@ -127,9 +109,7 @@ export const deletedProduct = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedProduct", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`products/${id}`, "DELETE", undefined, {
-      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
-    });
+    await apiClient<void>(`products/${id}`, "DELETE");
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -141,7 +121,6 @@ export const deletedProduct = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }
@@ -156,9 +135,7 @@ export const deletedUser = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedUser", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`users/${id}`, "DELETE", undefined, {
-      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
-    });
+    await apiClient<void>(`users/delete/${id}`, "DELETE");
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -170,7 +147,6 @@ export const deletedUser = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }
@@ -185,9 +161,7 @@ export const deletedCategory = createAsyncThunk<
   { rejectValue: string }
 >("db/deletedCategory", async ({ id }, { rejectWithValue }) => {
   try {
-    await apiClient<void>(`category/${id}`, "DELETE", undefined, {
-      Authorization: `Bearer ${Cookies.get(TOKEN_KEY)}`,
-    });
+    await apiClient<void>(`category/${id}`, "DELETE");
     return { id };
   } catch (error: unknown) {
     let message = "Неизвестная ошибка";
@@ -199,11 +173,106 @@ export const deletedCategory = createAsyncThunk<
       error !== null &&
       "response" in error
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const err = error as any;
       message = err.response?.data?.message || message;
     }
 
+    return rejectWithValue(message);
+  }
+});
+
+export const updateUser = createAsyncThunk<
+  IClient,
+  { id: number; data: Partial<IClient> },
+  { rejectValue: string }
+>("db/updateUser", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<IClient, Partial<IClient>>(
+      `users/edit/${id}`,
+      "PATCH",
+      data,
+    );
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === "object" && error !== null && "response" in error) {
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+    return rejectWithValue(message);
+  }
+});
+
+export const updateProduct = createAsyncThunk<
+  IProduct,
+  { id: number; data: Partial<IProduct> },
+  { rejectValue: string }
+>("db/updateProduct", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<IProduct, Partial<IProduct>>(
+      `products/${id}`,
+      "PUT",
+      data,
+    );
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === "object" && error !== null && "response" in error) {
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+    return rejectWithValue(message);
+  }
+});
+
+export const updateCategory = createAsyncThunk<
+  ICatalog,
+  { id: number; data: Partial<ICatalog> },
+  { rejectValue: string }
+>("db/updateCategory", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<ICatalog, Partial<ICatalog>>(
+      `category/${id}`,
+      "PATCH",
+      data,
+    );
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === "object" && error !== null && "response" in error) {
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+    return rejectWithValue(message);
+  }
+});
+
+export const updateRepair = createAsyncThunk<
+  IRepair,
+  { id: number; data: Partial<IRepair> },
+  { rejectValue: string }
+>("db/updateRepair", async ({ id, data }, { rejectWithValue }) => {
+  try {
+    const res = await apiClient<IRepair, Partial<IRepair>>(
+      `repair/status/${id}`,
+      "PATCH",
+      data,
+    );
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === "object" && error !== null && "response" in error) {
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
     return rejectWithValue(message);
   }
 });

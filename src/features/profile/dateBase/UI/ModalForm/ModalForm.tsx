@@ -8,7 +8,7 @@ type FormData<T> = {
 interface IProps<T extends { id: number | string }> {
   item: T;
   closeEdit: () => void;
-  onSave?: (updatedItem: T) => void;
+  onSave?: (updatedItem: T) => void | Promise<void>;
   onImageUpload?: (file: File, id: number | string) => Promise<string>;
 }
 
@@ -146,10 +146,10 @@ function ModalForm<T extends { id: number | string }>({
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (onSave) {
-      onSave(formData);
+      await onSave(formData);
     }
     closeEdit();
   };

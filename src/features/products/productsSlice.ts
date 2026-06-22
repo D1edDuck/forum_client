@@ -54,7 +54,7 @@ const productSlice = createSlice({
       )
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
-        state.error = (action.payload as string) || "Ошибка загрузки";
+        state.error = (action.payload as string) ?? action.error.message ?? "Ошибка загрузки";
       });
 
     builder
@@ -71,7 +71,7 @@ const productSlice = createSlice({
       )
       .addCase(fetchProductsSearch.rejected, (state, action) => {
         state.loading = false;
-        state.error = (action.payload as string) || "Ошибка загрузки";
+        state.error = (action.payload as string) ?? action.error.message ?? "Ошибка загрузки";
       });
 
     builder
@@ -89,7 +89,7 @@ const productSlice = createSlice({
       )
       .addCase(fetchProductsFilter.rejected, (state, action) => {
         state.loading = false;
-        state.error = (action.error.message as string) || "Ошибка фильтрации";
+        state.error = (action.payload as string) ?? action.error.message ?? "Ошибка фильтрации";
       });
 
     builder
@@ -106,8 +106,7 @@ const productSlice = createSlice({
       )
       .addCase(createProduct.rejected, (state, action) => {
         state.loading = false;
-        state.error =
-          (action.error.message as string) || "Ошибка создания продукта";
+        state.error = (action.payload as string) ?? action.error.message ?? "Ошибка создания продукта";
       });
 
     builder

@@ -7,6 +7,9 @@ import {
   fetchProductsAll,
   fetchUsersAll,
   IDbAllState,
+  updateCategory,
+  updateProduct,
+  updateUser,
 } from "./dbThunks";
 
 const initialState: IDbAllState = {
@@ -61,6 +64,24 @@ export const dbSlice = createSlice({
         state.category = action.payload;
         state.error = null;
         state.loading = false;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const idx = state.clients.users.findIndex(
+          (u) => u.id === action.payload.id,
+        );
+        if (idx !== -1) state.clients.users[idx] = action.payload;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const idx = state.products.products.findIndex(
+          (p) => p.id === action.payload.id,
+        );
+        if (idx !== -1) state.products.products[idx] = action.payload;
+      })
+      .addCase(updateCategory.fulfilled, (state, action) => {
+        const idx = state.category.category.findIndex(
+          (c) => c.id === action.payload.id,
+        );
+        if (idx !== -1) state.category.category[idx] = action.payload;
       })
       .addCase(deletedProduct.fulfilled, (state, action) => {
         state.products.products = state.products.products.filter(

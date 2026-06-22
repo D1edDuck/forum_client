@@ -21,6 +21,9 @@ const AddPage = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector((state) => state.user.user?.id);
   const categories = useAppSelector((state) => state.catalog.category);
+  const catalogState = useAppSelector((state) => state.catalog);
+  const productState = useAppSelector((state) => state.products);
+  const repairState = useAppSelector((state) => state.repairs);
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -29,6 +32,17 @@ const AddPage = () => {
   }, [dispatch, categories.length]);
 
   if (!type) return <div>Тип не указан</div>;
+
+  const { loading, error } = (() => {
+    switch (type) {
+      case "product":
+        return { loading: productState.loading, error: productState.error };
+      case "repair":
+        return { loading: repairState.loading, error: repairState.error };
+      case "category":
+        return { loading: catalogState.loading, error: catalogState.error };
+    }
+  })();
 
   const handleSubmit = <T extends FormType>(data: FormDataMap[T]) => {
     switch (type) {
@@ -50,7 +64,13 @@ const AddPage = () => {
   };
 
   return (
-    <AddForm type={type} onSubmit={handleSubmit} categories={categories} />
+    <AddForm
+      type={type}
+      onSubmit={handleSubmit}
+      categories={categories}
+      loading={loading}
+      error={error}
+    />
   );
 };
 export default AddPage;

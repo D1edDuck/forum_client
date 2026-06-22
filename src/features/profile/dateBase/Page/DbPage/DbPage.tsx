@@ -4,8 +4,17 @@ import useClients from "../../hooks/useClients";
 import Table from "../../UI/Table/Table";
 import { ICatalog, IClient, IProduct, IRepair } from "@/api/type";
 import s from "./index.module.css";
-import { deletedCategory, deletedProduct, deletedUser } from "../../dbThunks";
+import {
+  deletedCategory,
+  deletedProduct,
+  deletedUser,
+  updateCategory,
+  updateProduct,
+  updateUser,
+} from "../../dbThunks";
 import { deletedRepairs } from "@/features/profile/repairs/repairThunk";
+import { editStatus } from "@/features/profile/repairs/repairThunk";
+import ConfirmModal from "@/UI/ConfirmModal/ConfirmModal";
 
 type TableType = "client" | "repair" | "product" | "category";
 
@@ -14,6 +23,7 @@ const DbPage = () => {
   const { users, repairs, products, category, dispatch } = useClients();
   const { type } = useParams<{ type: TableType }>();
   const [searchQuery, setSearchQuery] = useState("");
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
 
   const tableType: TableType = type ?? "client";
 
@@ -36,8 +46,42 @@ const DbPage = () => {
     client: (id: number) => dispatch(deletedUser({ id })),
     repair: (id: number) => dispatch(deletedRepairs({ id })),
     product: (id: number) => dispatch(deletedProduct({ id })),
-    category: (id: number) => dispatch(deletedCategory({ id })),
+    category: (id: number) => setConfirmDeleteId(id),
   };
+
+  const updateActions: Record<TableType, (item: any) => Promise<void>> = {
+    client: async (item: IClient) => {
+      await dispatch(
+        updateUser({ id: item.id, data: item as Partial<IClient> }),
+      ).unwrap();
+    },
+    product: async (item: IProduct) => {
+      await dispatch(
+        updateProduct({ id: item.id, data: item as Partial<IProduct> }),
+      ).unwrap();
+    },
+    category: async (item: ICatalog) => {
+      await dispatch(
+        updateCategory({ id: item.id, data: item as Partial<ICatalog> }),
+      ).unwrap();
+    },
+    repair: async (item: IRepair) => {
+      await dispatch(
+        editStatus({ id: item.id, status: item.status }),
+      ).unwrap();
+    },
+  };
+
+  const handleConfirmDelete = useCallback(() => {
+    if (confirmDeleteId) {
+      dispatch(deletedCategory({ id: confirmDeleteId }));
+      setConfirmDeleteId(null);
+    }
+  }, [confirmDeleteId, dispatch]);
+
+  const handleCancelDelete = useCallback(() => {
+    setConfirmDeleteId(null);
+  }, []);
 
   const filteredData = useMemo(() => {
     let data = [...tableData];
@@ -164,6 +208,7 @@ const DbPage = () => {
           <Table
             data={filteredData}
             handleDelete={(id) => actions[tableType](id)}
+            onUpdate={(item) => updateActions[tableType](item)}
           />
         </div>
       ) : (
@@ -189,6 +234,14 @@ const DbPage = () => {
           )}
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={confirmDeleteId !== null}
+        title="Удаление категории"
+        message="Вы уверены, что хотите удалить категорию? Все товары внутри неё будут безвозвратно удалены."
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </div>
   );
 };

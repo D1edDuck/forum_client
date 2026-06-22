@@ -108,12 +108,21 @@ const repairSlice = createSlice({
           }
         }
       )
+      .addCase(createRepair.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(
         createRepair.fulfilled,
         (state, action: PayloadAction<IRepair>) => {
+          state.loading = false;
           state.repairs.push(action.payload);
         }
       )
+      .addCase(createRepair.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Ошибка при создании ремонта";
+      })
       .addCase(deletedRepairs.fulfilled, (state, action) => {
         state.repairs = state.repairs.filter(
           (repair) => repair.id !== action.payload.id
