@@ -213,7 +213,7 @@ export const uploadProductImage = createAsyncThunk<
   try {
     const fd = new FormData();
     fd.append("image", file);
-    const res = await apiClient<{ imageUrl: string }>(
+    const res = await apiClient<{ imageUrl: string }, FormData>(
       `products/${id}/image`,
       "POST",
       fd,
