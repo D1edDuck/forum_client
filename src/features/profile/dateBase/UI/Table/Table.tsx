@@ -7,12 +7,14 @@ type TableProps<T extends { id: number; email?: string }> = {
   data: T[];
   handleDelete?: (id: number) => void;
   onUpdate?: (updatedItem: T) => void | Promise<void>;
+  onImageUpload?: (file: File, id: number | string) => Promise<string>;
 };
 
 function Table<T extends { id: number; email?: string }>({
   data,
   handleDelete,
   onUpdate,
+  onImageUpload,
 }: TableProps<T>) {
   const { isModalOpen, handleEdit, closeEdit, editItem } = useModalForm<T>();
 
@@ -135,6 +137,7 @@ function Table<T extends { id: number; email?: string }>({
           closeEdit={closeEdit}
           item={editItem}
           onSave={onUpdate}
+          onImageUpload={onImageUpload}
         />
       )}
     </div>

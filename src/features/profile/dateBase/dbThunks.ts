@@ -205,6 +205,32 @@ export const updateUser = createAsyncThunk<
   }
 });
 
+export const uploadProductImage = createAsyncThunk<
+  { imageUrl: string },
+  { id: number; file: File },
+  { rejectValue: string }
+>("db/uploadProductImage", async ({ id, file }, { rejectWithValue }) => {
+  try {
+    const fd = new FormData();
+    fd.append("image", file);
+    const res = await apiClient<{ imageUrl: string }>(
+      `products/${id}/image`,
+      "POST",
+      fd,
+    );
+    return res;
+  } catch (error: unknown) {
+    let message = "Неизвестная ошибка";
+    if (error instanceof Error) {
+      message = error.message;
+    } else if (typeof error === "object" && error !== null && "response" in error) {
+      const err = error as any;
+      message = err.response?.data?.message || message;
+    }
+    return rejectWithValue(message);
+  }
+});
+
 export const updateProduct = createAsyncThunk<
   IProduct,
   { id: number; data: Partial<IProduct> },

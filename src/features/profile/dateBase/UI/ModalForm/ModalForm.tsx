@@ -1,5 +1,6 @@
 import s from "./index.module.css";
 import { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
 
 type FormData<T> = {
   [K in keyof T]: T[K];
@@ -176,6 +177,15 @@ function ModalForm<T extends { id: number | string }>({
     }
   };
 
+  const READ_ONLY_KEYS = new Set([
+    "id",
+    "userId",
+    "created_at",
+    "user",
+    "category",
+    "password",
+  ]);
+
   const formatLabel = (key: string): string => {
     return key
       .replace(/([A-Z])/g, " $1")
@@ -201,7 +211,7 @@ function ModalForm<T extends { id: number | string }>({
     return String(value);
   };
 
-  return (
+  const modalContent = (
     <div className={s.overlay} onClick={closeEdit}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <h3>Редактирование {getEntityName(item)}</h3>
@@ -218,7 +228,9 @@ function ModalForm<T extends { id: number | string }>({
             style={{ display: "none" }}
           />
 
-          {Object.entries(formData).map(([key, value]) => {
+          {Object.entries(formData)
+            .filter(([key]) => !READ_ONLY_KEYS.has(key))
+            .map(([key, value]) => {
             const typedKey = key as keyof T;
 
             if (isImageField(key)) {
@@ -362,6 +374,8 @@ function ModalForm<T extends { id: number | string }>({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 export default ModalForm;

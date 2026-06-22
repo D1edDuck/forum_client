@@ -174,24 +174,22 @@
 }
 
 .featureItem {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
   color: var(--text-primary);
+  padding-left: 2rem;
+  position: relative;
 }
 
-.featureIcon {
-  width: 3rem;
-  height: 3rem;
-  background: rgba(43, 107, 255, 0.1);
+.featureItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-blue);
-  font-size: 1.8rem;
+  background: var(--accent-blue);
 }
 
 .aboutImage {
@@ -284,26 +282,6 @@
   transform: translateY(-5px);
   border-color: var(--accent-blue);
   box-shadow: var(--shadow-lg);
-}
-
-.advantageIcon {
-  width: 6rem;
-  height: 6rem;
-  background: rgba(43, 107, 255, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 2rem;
-  font-size: 3rem;
-  color: var(--accent-blue);
-  transition: all var(--transition-normal);
-}
-
-.advantageCard:hover .advantageIcon {
-  background: var(--accent-blue);
-  color: white;
-  transform: scale(1.1);
 }
 
 .advantageTitle {

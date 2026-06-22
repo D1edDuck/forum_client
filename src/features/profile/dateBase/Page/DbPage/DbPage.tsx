@@ -11,6 +11,7 @@ import {
   updateCategory,
   updateProduct,
   updateUser,
+  uploadProductImage,
 } from "../../dbThunks";
 import { deletedRepairs } from "@/features/profile/repairs/repairThunk";
 import { editStatus } from "@/features/profile/repairs/repairThunk";
@@ -82,6 +83,16 @@ const DbPage = () => {
   const handleCancelDelete = useCallback(() => {
     setConfirmDeleteId(null);
   }, []);
+
+  const handleImageUpload = useCallback(
+    async (file: File, id: number | string) => {
+      const result = await dispatch(
+        uploadProductImage({ id: Number(id), file }),
+      ).unwrap();
+      return result.imageUrl;
+    },
+    [dispatch],
+  );
 
   const filteredData = useMemo(() => {
     let data = [...tableData];
@@ -209,6 +220,7 @@ const DbPage = () => {
             data={filteredData}
             handleDelete={(id) => actions[tableType](id)}
             onUpdate={(item) => updateActions[tableType](item)}
+            onImageUpload={tableType === "product" ? handleImageUpload : undefined}
           />
         </div>
       ) : (

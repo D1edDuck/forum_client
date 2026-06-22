@@ -3,7 +3,7 @@ import { JSX, useRef } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { token, initialized } = useAppSelector((state) => state.user);
+  const { user, initialized } = useAppSelector((state) => state.user);
   const everInitialized = useRef(initialized);
 
   if (initialized) everInitialized.current = true;
@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return null;
   }
 
-  if (!token) {
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
