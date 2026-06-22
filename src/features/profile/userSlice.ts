@@ -166,8 +166,7 @@ const userSlice = createSlice({
       })
       .addCase(editAccount.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || "Неизвестная Ошибка";
-        state.validationErrors = action.payload?.errors || [];
+        state.error = (action.payload as string) || "Неизвестная Ошибка";
       })
 
       .addCase(logoutUser.fulfilled, (state) => {

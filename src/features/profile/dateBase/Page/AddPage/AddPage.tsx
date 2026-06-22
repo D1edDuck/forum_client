@@ -22,8 +22,8 @@ const AddPage = () => {
   const userId = useAppSelector((state) => state.user.user?.id);
   const categories = useAppSelector((state) => state.catalog.category);
   const catalogState = useAppSelector((state) => state.catalog);
-  const productState = useAppSelector((state) => state.products);
-  const repairState = useAppSelector((state) => state.repairs);
+  const productState = useAppSelector((state) => state.product);
+  const repairState = useAppSelector((state) => state.repair);
 
   useEffect(() => {
     if (categories.length === 0) {

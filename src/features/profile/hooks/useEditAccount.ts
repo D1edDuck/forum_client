@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { editAccount } from "../userThunk";
-import { IFormValue, resetValue } from "../userSlice";
+import { resetValue } from "../userSlice";
 import { openModal } from "@/UI/Modal/modalSlice";
 
 type ErrorWithMessage = {
@@ -33,7 +33,8 @@ const useEditAccount = () => {
 
   const handleSave = async () => {
     try {
-      await dispatch(editAccount(formData as Partial<IFormValue>)).unwrap();
+      const { id, ...data } = formData;
+      await dispatch(editAccount({ id: Number(id), data })).unwrap();
 
       setEdit(false);
       dispatch(
