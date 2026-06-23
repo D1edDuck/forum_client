@@ -25,6 +25,12 @@ const useForm = ({ user }: IProps) => {
   const urlCause = causeParams.get("cause") || "";
 
   useEffect(() => {
+    if (urlCause) {
+      dispatch(inputValue({ id: "cause", value: urlCause }));
+    }
+  }, [urlCause, dispatch]);
+
+  useEffect(() => {
     if (user) {
       if (user.name) dispatch(inputValue({ id: "name", value: user.name }));
       if (user.email) dispatch(inputValue({ id: "email", value: user.email }));
